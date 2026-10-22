@@ -10,6 +10,10 @@ const PENDING = fixture("assessment-pending.json");
 const COMPLETE = fixture("assessment-complete.json");
 const OUTCOME = fixture("assessment-outcome.json");
 const LIST = fixture("assessment-list.json");
+const ENDPOINTS = fixture("webhook-endpoint-list.json");
+const CREATED = fixture("webhook-endpoint-created.json");
+const SENT = fixture("webhook-test-assessment-updated.json");
+const ENDPOINT = CREATED.endpoint.endpoint_id;
 const INTEGRATION = fixture("integration-auth0.json");
 const INTEGRATION_ROTATED = fixture("integration-auth0-rotated.json");
 const INTEGRATIONS = fixture("integration-list.json");
@@ -19,12 +23,17 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{1
 const TOOLS = [
   "create_assessment",
   "create_integration",
+  "create_webhook_endpoint",
   "delete_integration",
+  "delete_webhook_endpoint",
   "get_assessment",
   "list_integrations",
+  "list_webhook_endpoints",
   "query_assessments",
   "record_outcome",
   "rotate_integration_secret",
+  "rotate_webhook_signing_key",
+  "send_webhook_test_event",
   "wait_for_assessment",
 ];
 
@@ -40,6 +49,10 @@ function fakeAPI() {
       if (req.method === "POST" && req.path === "/v1/assessments") return { status: 202, headers: { "retry-after": "1" }, body: PENDING };
       if (req.method === "POST" && req.path === "/v1/assessments/query") return { body: LIST };
       if (req.method === "POST" && req.path === `/v1/assessments/${ID}/outcomes`) return { status: 201, body: OUTCOME };
+      if (req.method === "GET" && req.path === "/v1/webhooks") return { body: ENDPOINTS };
+      if (req.method === "POST" && req.path === "/v1/webhooks") return { status: 201, body: CREATED };
+      if (req.method === "POST" && req.path === `/v1/webhooks/${ENDPOINT}/test`) return { status: 202, body: SENT };
+      if (req.method === "DELETE" && req.path === `/v1/webhooks/${ENDPOINT}`) return { status: 204 };
       if (req.method === "POST" && req.path === "/v1/integrations") return { status: 201, body: INTEGRATION };
       if (req.method === "GET" && req.path === "/v1/integrations") return { body: INTEGRATIONS };
       if (req.method === "POST" && req.path === `/v1/integrations/${INT_ID}/rotate`) return { body: INTEGRATION_ROTATED };
@@ -68,24 +81,62 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     await api?.close();
   });
 
-  test("exposes the assessment and integration tools, and not key rotation", async () => {
+  test("exposes the assessment, webhook endpoint and integration tools, and not API key rotation", async () => {
     const { tools } = await client.listTools();
     assert.deepEqual(tools.map((t) => t.name).sort(), TOOLS);
-    assert.ok(!tools.some((t) => /key/i.test(t.name)));
+    assert.ok(!tools.some((t) => /api_key|rotate_key/i.test(t.name)));
     const readOnly = Object.fromEntries(tools.map((t) => [t.name, t.annotations?.readOnlyHint === true]));
     assert.deepEqual(readOnly, {
       create_assessment: false,
+      create_webhook_endpoint: false,
+      delete_webhook_endpoint: false,
       create_integration: false,
       delete_integration: false,
       get_assessment: true,
+      list_webhook_endpoints: true,
       list_integrations: true,
       query_assessments: true,
       record_outcome: false,
+      rotate_webhook_signing_key: false,
+      send_webhook_test_event: false,
       rotate_integration_secret: false,
       wait_for_assessment: true,
     });
     const destructive = tools.filter((t) => t.annotations?.destructiveHint === true).map((t) => t.name);
-    assert.deepEqual(destructive, ["delete_integration"]);
+    assert.deepEqual(destructive.sort(), ["delete_integration", "delete_webhook_endpoint"]);
+  });
+
+  test("the webhook endpoint tools call their routes with the caller's key", async () => {
+    api.requests.length = 0;
+    const listed = await client.callTool({ name: "list_webhook_endpoints", arguments: {} });
+    assert.ok(!listed.isError, listed.content?.[0]?.text);
+    assert.deepEqual(json(listed), ENDPOINTS);
+    const created = await client.callTool({
+      name: "create_webhook_endpoint",
+      arguments: { request: { url: "https://hooks.example.com/noresponse" } },
+    });
+    assert.ok(!created.isError, created.content?.[0]?.text);
+    assert.equal(json(created).endpoint.endpoint_id, ENDPOINT);
+    const sent = await client.callTool({
+      name: "send_webhook_test_event",
+      arguments: { request: { endpoint_id: ENDPOINT, body: { event: "assessment.updated" } } },
+    });
+    assert.ok(!sent.isError, sent.content?.[0]?.text);
+    assert.deepEqual(json(sent), SENT);
+    const deleted = await client.callTool({ name: "delete_webhook_endpoint", arguments: { request: { endpoint_id: ENDPOINT } } });
+    assert.ok(!deleted.isError, deleted.content?.[0]?.text);
+    assert.deepEqual(api.requests.map((r) => `${r.method} ${r.path}`), [
+      "GET /v1/webhooks",
+      "POST /v1/webhooks",
+      `POST /v1/webhooks/${ENDPOINT}/test`,
+      `DELETE /v1/webhooks/${ENDPOINT}`,
+    ]);
+    assert.deepEqual(api.requests[1].body, { url: "https://hooks.example.com/noresponse" });
+    assert.deepEqual(api.requests[2].body, { event: "assessment.updated" });
+    for (const req of api.requests) {
+      assert.equal(req.headers.authorization, `Bearer ${CALLER_KEY}`);
+      assert.equal(req.headers["idempotency-key"], undefined);
+    }
   });
 
   test("create_assessment sends the key from NORESPONSE_API_KEY and a fresh Idempotency-Key", async () => {

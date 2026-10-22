@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: d6801ec1b973e6005840c3df72d964e1
+  docChecksum: 7d111174e17b0683f9851b8e7097104c
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.1.6
-  configChecksum: 110af214c6e6827293408f9d1dad4beb
+  releaseVersion: 0.1.7
+  configChecksum: cc42551ac213d64c45cad812003f24e3
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -33,11 +33,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:8bae8922f02dae593d15ec477fa61266e9005ad9
+    last_write_checksum: sha1:d03d30f72914c9138ce1855aae5de8875f9bc57c
   package.json:
-    last_write_checksum: sha1:c12a4d2e3dc74bf9a850095a48391e168ffec537
+    last_write_checksum: sha1:c6e355627c281809fa98e4d794d40efc78edb913
   server.json:
-    last_write_checksum: sha1:ba120b0bc25bcb3559a447ca7cbd75b1f4505cac
+    last_write_checksum: sha1:3afc8a57fad072c14f5d9f44af85baf379a7b49e
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -60,6 +60,16 @@ trackedFiles:
     last_write_checksum: sha1:e25517169111b5540c54d7451d11b9a37d50b57b
   src/funcs/keysRotate.ts:
     last_write_checksum: sha1:4a09bea4853463862cdeccca71a2c2d6a8c1d1f9
+  src/funcs/webhookEndpointsCreate.ts:
+    last_write_checksum: sha1:b87de1d25c01ac6bcd4a3b0196b1f1571e9fd961
+  src/funcs/webhookEndpointsDelete.ts:
+    last_write_checksum: sha1:491dc499ac15f29f4d67c72cca4929464c22f62a
+  src/funcs/webhookEndpointsList.ts:
+    last_write_checksum: sha1:40115d335f981b4edb9bd615cde258a655e58b5b
+  src/funcs/webhookEndpointsRotateSigningKey.ts:
+    last_write_checksum: sha1:20b059c20e99a2faf7f5dc88b825ed7c48c14e6f
+  src/funcs/webhookEndpointsSendTestEvent.ts:
+    last_write_checksum: sha1:f170755af96f83496597b11cbf604b7dcbe019c7
   src/hooks/hooks.ts:
     last_write_checksum: sha1:96b3bd97e0015d3de962ee6e187357c5c72498e7
   src/hooks/types.ts:
@@ -69,7 +79,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:94b78dd06a9ed4d2924febb84b23e895687ff4c1
+    last_write_checksum: sha1:4ea9ea0d32ce1ce412e9c21960215764c0538e14
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -113,7 +123,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:cdb9939763ae7b53bd58655001040e4b9d663f2e
+    last_write_checksum: sha1:63c6d77037fc724fe3df7c39656557ea39e1c3b9
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -121,7 +131,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:0ac43b05c518160f5781290ef0bb273cddd73621
+    last_write_checksum: sha1:e717236e30fba5f06153e1c2d013018f126e5c36
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -142,6 +152,16 @@ trackedFiles:
     last_write_checksum: sha1:c940ac1597b4ca3be906ce885d9afad5fa89a0ef
   src/mcp-server/tools/integrationsRotate.ts:
     last_write_checksum: sha1:a81a0dba4adbbca434b0d6f911eb24a8d485a6a9
+  src/mcp-server/tools/webhookEndpointsCreate.ts:
+    last_write_checksum: sha1:b35f5868e871149dab7a552da91750a8e50130d7
+  src/mcp-server/tools/webhookEndpointsDelete.ts:
+    last_write_checksum: sha1:c54b493b886d25df9d81e87d07627b951bb30e5d
+  src/mcp-server/tools/webhookEndpointsList.ts:
+    last_write_checksum: sha1:bba4e9e58407e8bfcc035ad5d054d3ac93463078
+  src/mcp-server/tools/webhookEndpointsRotateSigningKey.ts:
+    last_write_checksum: sha1:8e425e3b559a84639cc9d7a20ce65d379fb341cf
+  src/mcp-server/tools/webhookEndpointsSendTestEvent.ts:
+    last_write_checksum: sha1:c34a0029d0fe77db3a933e580d8d000797557912
   src/models/assessment.ts:
     last_write_checksum: sha1:79b18d412404d6e3a63a59eb330ecf84decb2806
   src/models/assessmentlist.ts:
@@ -177,7 +197,7 @@ trackedFiles:
   src/models/badrequesterror.ts:
     last_write_checksum: sha1:08d9a95687bb524210152bae4a256dc98ddf2e68
   src/models/badrequesterrorcode.ts:
-    last_write_checksum: sha1:1971cdff1bc2850e54170e9d632747871412dfab
+    last_write_checksum: sha1:57bd0671da0e7cc6ffafc37dd761bdef01eebdb5
   src/models/band.ts:
     last_write_checksum: sha1:5e7465a41e9ba40a9adf9ba00c85da84d1300a13
   src/models/breach.ts:
@@ -195,7 +215,7 @@ trackedFiles:
   src/models/conflicterror.ts:
     last_write_checksum: sha1:7261ef9a30d010545a2f10a1ce7021c94eea2134
   src/models/conflicterrorcode.ts:
-    last_write_checksum: sha1:9ecae0f123d93be49ec25d294e13afb31a5074ba
+    last_write_checksum: sha1:be6e24324c8707f354be3866aae7dbd36a51092f
   src/models/consistency.ts:
     last_write_checksum: sha1:85079f3f94f86bcfa01f233fdcbf2e98caefa52a
   src/models/consistencyvalue.ts:
@@ -206,8 +226,12 @@ trackedFiles:
     last_write_checksum: sha1:e0e93724933dd65e8f89015bc75289e073c82bb0
   src/models/createintegrationop.ts:
     last_write_checksum: sha1:d43d033cfa81b19b9dc1f5151951227070e435d8
+  src/models/createwebhookendpointop.ts:
+    last_write_checksum: sha1:e1a75375fb46b670f7e4807dd0b85a5529c189b8
   src/models/deleteintegrationop.ts:
     last_write_checksum: sha1:53609f9c39d6d991372e9d55e1822e90f1fb61c4
+  src/models/deletewebhookendpointop.ts:
+    last_write_checksum: sha1:bf229a272f43c83e0150b761aa2fc65ff2f0c27b
   src/models/errors/apierror.ts:
     last_write_checksum: sha1:4bbcdd42dc53818f55f5de8ef6e69c41b96ad8ed
   src/models/errors/httpclienterrors.ts:
@@ -256,6 +280,8 @@ trackedFiles:
     last_write_checksum: sha1:37e963b04feba1f24ae6691a499ab932532ca747
   src/models/listintegrationsop.ts:
     last_write_checksum: sha1:89e93c4ab11a5952f1a9c16adec949717650e915
+  src/models/listwebhookendpointsop.ts:
+    last_write_checksum: sha1:3b92e84b454320db33c7479cab63fdc820301a29
   src/models/notfounderror.ts:
     last_write_checksum: sha1:99d881369757a10a6752b6ca85501b028c00f267
   src/models/notfounderrorcode.ts:
@@ -316,18 +342,46 @@ trackedFiles:
     last_write_checksum: sha1:820fca1a434a0379d4c1be6820933210a612c0fe
   src/models/rotateintegrationsecretop.ts:
     last_write_checksum: sha1:b809f981838a14423e82cf15aeb4c685bffcea80
+  src/models/rotatewebhooksigningkeyop.ts:
+    last_write_checksum: sha1:8cf0b757f37962b172ab8c39e5d0d8c70483c631
   src/models/security.ts:
     last_write_checksum: sha1:3b574dfe64bc4fd97d6d4bb49c641133c06dc4e3
+  src/models/sendwebhooktesteventop.ts:
+    last_write_checksum: sha1:68fc3f72261e63265f94bb8153adc54c0794e56d
   src/models/signal.ts:
     last_write_checksum: sha1:ba9f9d96ecfed5ca10b47d4243645117b62efddc
   src/models/signaloutcome.ts:
     last_write_checksum: sha1:6f21aac1cb2760c4d2bb62c257fb36167dbe0c2f
+  src/models/signingkey.ts:
+    last_write_checksum: sha1:6880285f30a0acacf886d301e55fd3ba9186d1f2
+  src/models/signingsecret.ts:
+    last_write_checksum: sha1:4f9e93c39b04764a76ff4b1c1ddbde55423f2173
   src/models/status.ts:
     last_write_checksum: sha1:2de12a856682361acb5139f01b4a673204e5f482
   src/models/transport.ts:
     last_write_checksum: sha1:8ae008d42ef96ea9821d762a120fd0c42822614f
+  src/models/webhookendpoint.ts:
+    last_write_checksum: sha1:d0450cf518a6dc3efd41e0aca2ff56a492ffb2dd
+  src/models/webhookendpointcreated.ts:
+    last_write_checksum: sha1:b270b3ab8e66478a67756aa7353c6a27ffc44adb
+  src/models/webhookendpointlist.ts:
+    last_write_checksum: sha1:f1395c68dbbccd9f37d316ba66f3067558dc7fcb
+  src/models/webhookendpointrequest.ts:
+    last_write_checksum: sha1:54f9f342866639c5c8d38368b066ecc281ac76ba
+  src/models/webhookendpointstate.ts:
+    last_write_checksum: sha1:45a28d36250f17c6775f4fcd132ceccecd6dc1e0
+  src/models/webhookkeyrotation.ts:
+    last_write_checksum: sha1:2ac10d3cf2e6780ba7a399e7416829cb7fc06fc1
+  src/models/webhookkeyrotationrequest.ts:
+    last_write_checksum: sha1:e39d8426794ecaaf15c8bb4ea1407e7a05d5ad6b
+  src/models/webhooktest.ts:
+    last_write_checksum: sha1:701f147552b1cd587103d2d1673a85848a2173fd
+  src/models/webhooktestrequest.ts:
+    last_write_checksum: sha1:d2444a19484dff6c72bcd5429a5241f3bf6085dd
+  src/models/webhooktestrequestevent.ts:
+    last_write_checksum: sha1:8df81ee84be6c2fa72e8c55ce43e0437ef11d42a
   src/tool-names.ts:
-    last_write_checksum: sha1:86e9517fdfb18d60ed97a5091906e432c01b9081
+    last_write_checksum: sha1:b2930bdb56cf6e68620483d9632813ab1a9227b1
   src/types/async.ts:
     last_write_checksum: sha1:ebc27b1229fbbe1835d89ec484c7fa28188b9cf4
   src/types/bigint.ts:
@@ -678,4 +732,120 @@ examples:
           application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 409, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "idempotency_key_reused", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
         "429":
           application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 429, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "rate_limited", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+  listWebhookEndpoints:
+    endpoints:
+      responses:
+        "200":
+          application/json: {"items": [{"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "url": "https://hooks.example.com/noresponse", "state": "verified", "response_mode": "standard", "created_at": "2026-10-22T09:00:00.000Z", "verified_at": "2026-10-22T09:00:05.000Z", "signing_keys": [{"key_id": "whk_01JA2Z9A1B2C3D4E5F6G7H8J9K", "created_at": "2026-10-22T09:00:00.000Z", "expires_at": "2026-10-29T10:00:00.000Z"}, {"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "created_at": "2026-10-22T10:00:00.000Z"}]}]}
+  createWebhookEndpoint:
+    standard:
+      requestBody:
+        application/json: {"url": "https://hooks.example.com/noresponse"}
+      responses:
+        "201":
+          application/json: {"endpoint": {"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "url": "https://hooks.example.com/noresponse", "state": "unverified", "response_mode": "standard", "created_at": "2026-10-22T09:00:00.000Z", "verified_at": "2026-10-22T09:00:05.000Z", "signing_keys": [{"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "created_at": "2026-10-22T09:00:00.000Z", "expires_at": "2026-10-29T10:00:00.000Z"}]}, "signing_secret": {"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "secret": "Zm9yLWRvY3Mtb25seS1ub3QtYS1yZWFsLXNlY3JldDA", "created_at": "2026-10-22T09:00:00.000Z"}}
+        "400":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "webhook_url_refused", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "401":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 401, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "unauthorized", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "403":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 403, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "tenant_forbidden", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "404":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 404, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "not_found", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "409":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 409, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "too_many_integrations", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "429":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 429, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "rate_limited", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+    detailed:
+      requestBody:
+        application/json: {"url": "https://hooks.example.com:8443/noresponse/detailed", "response_mode": "detailed"}
+      responses:
+        "201":
+          application/json: {"endpoint": {"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "url": "https://hooks.example.com/noresponse", "state": "unverified", "response_mode": "standard", "created_at": "2026-10-22T09:00:00.000Z", "verified_at": "2026-10-22T09:00:05.000Z", "signing_keys": [{"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "created_at": "2026-10-22T09:00:00.000Z", "expires_at": "2026-10-29T10:00:00.000Z"}]}, "signing_secret": {"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "secret": "Zm9yLWRvY3Mtb25seS1ub3QtYS1yZWFsLXNlY3JldDA", "created_at": "2026-10-22T09:00:00.000Z"}}
+        "400":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "webhook_url_refused", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "401":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 401, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "unauthorized", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "403":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 403, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "tenant_forbidden", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "404":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 404, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "not_found", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "409":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 409, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "too_many_integrations", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "429":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 429, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "rate_limited", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+    created:
+      requestBody:
+        application/json: {"url": "https://hooks.example.com/noresponse"}
+      responses:
+        "201":
+          application/json: {"endpoint": {"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "url": "https://hooks.example.com/noresponse", "state": "unverified", "response_mode": "standard", "created_at": "2026-10-22T09:00:00.000Z", "signing_keys": [{"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "created_at": "2026-10-22T09:00:00.000Z"}]}, "signing_secret": {"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "secret": "Zm9yLWRvY3Mtb25seS1ub3QtYS1yZWFsLXNlY3JldDA", "created_at": "2026-10-22T09:00:00.000Z"}}
+  deleteWebhookEndpoint:
+    noresponse-default-delete-webhook-endpoint:
+      parameters:
+        path:
+          endpoint_id: "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9"
+      responses:
+        "400":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "invalid_idempotency_key", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "401":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 401, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "unauthorized", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "403":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 403, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "tenant_forbidden", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "404":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 404, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "not_found", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "409":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 409, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "too_many_integrations", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "429":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 429, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "rate_limited", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+  rotateWebhookSigningKey:
+    empty:
+      parameters:
+        path:
+          endpoint_id: "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9"
+      requestBody:
+        application/json: {}
+      responses:
+        "201":
+          application/json: {"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "signing_secret": {"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "secret": "Zm9yLWRvY3Mtb25seS1ub3QtYS1yZWFsLXNlY3JldDA", "created_at": "2026-10-22T09:00:00.000Z"}, "previous_key_id": "whk_01JA2Z9A1B2C3D4E5F6G7H8J9K", "previous_key_expires_at": "2026-10-29T10:00:00.000Z"}
+        "400":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "invalid_cursor", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "401":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 401, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "unauthorized", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "403":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 403, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "tenant_forbidden", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "404":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 404, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "not_found", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "409":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 409, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "too_many_integrations", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "429":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 429, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "rate_limited", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+    rotated:
+      parameters:
+        path:
+          endpoint_id: "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9"
+      requestBody:
+        application/json: {}
+      responses:
+        "201":
+          application/json: {"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "signing_secret": {"key_id": "whk_01JA2ZD1M2N3P4Q5R6S7T8V9W0", "secret": "cm90YXRlZC1mb3ItZG9jcy1vbmx5LW5vdC1yZWFsLTE", "created_at": "2026-10-22T10:00:00.000Z"}, "previous_key_id": "whk_01JA2Z9A1B2C3D4E5F6G7H8J9K", "previous_key_expires_at": "2026-10-29T10:00:00.000Z"}
+  sendWebhookTestEvent:
+    verification:
+      parameters:
+        path:
+          endpoint_id: "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9"
+      requestBody:
+        application/json: {"event": "endpoint.verification"}
+      responses:
+        "202":
+          application/json: {"delivery_id": "evt_01JA2ZD2A3B4C5D6E7F8G9H0J1", "endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "event": "endpoint.verification", "state": "verified", "verified": true}
+    assessment_updated:
+      parameters:
+        path:
+          endpoint_id: "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9"
+      requestBody:
+        application/json: {"event": "assessment.updated"}
+      responses:
+        "202":
+          application/json: {"delivery_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2", "endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "event": "assessment.updated", "state": "verified"}
 examplesVersion: 1.0.2

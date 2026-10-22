@@ -23,6 +23,11 @@ import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
 import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
 import { tool$integrationsList } from "./tools/integrationsList.js";
 import { tool$integrationsRotate } from "./tools/integrationsRotate.js";
+import { tool$webhookEndpointsCreate } from "./tools/webhookEndpointsCreate.js";
+import { tool$webhookEndpointsDelete } from "./tools/webhookEndpointsDelete.js";
+import { tool$webhookEndpointsList } from "./tools/webhookEndpointsList.js";
+import { tool$webhookEndpointsRotateSigningKey } from "./tools/webhookEndpointsRotateSigningKey.js";
+import { tool$webhookEndpointsSendTestEvent } from "./tools/webhookEndpointsSendTestEvent.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -37,7 +42,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.1.6",
+    version: "0.1.7",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -90,6 +95,11 @@ export function createMCPServer(deps: {
   tool(tool$integrationsList);
   tool(tool$integrationsDelete);
   tool(tool$integrationsRotate);
+  tool(tool$webhookEndpointsList);
+  tool(tool$webhookEndpointsCreate);
+  tool(tool$webhookEndpointsDelete);
+  tool(tool$webhookEndpointsRotateSigningKey);
+  tool(tool$webhookEndpointsSendTestEvent);
 
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);

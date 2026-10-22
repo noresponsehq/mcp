@@ -37,6 +37,23 @@ async function everyTool(client) {
   // The mock answers with the document's example outcome, not the one sent.
   assert.match(json(recorded).assessment_id, /^asm_/);
   assert.equal(typeof json(recorded).outcome, "string");
+  const endpoints = await client.callTool({ name: "list_webhook_endpoints", arguments: {} });
+  assert.ok(!endpoints.isError, endpoints.content?.[0]?.text);
+  assert.ok(Array.isArray(json(endpoints).items));
+  const registered = await client.callTool({ name: "create_webhook_endpoint", arguments: { request: { url: "https://hooks.example.com/noresponse" } } });
+  assert.ok(!registered.isError, registered.content?.[0]?.text);
+  const endpoint = json(registered).endpoint.endpoint_id;
+  assert.match(endpoint, /^whe_/);
+  const sent = await client.callTool({
+    name: "send_webhook_test_event",
+    arguments: { request: { endpoint_id: endpoint, body: { event: "endpoint.verification" } } },
+  });
+  assert.ok(!sent.isError, sent.content?.[0]?.text);
+  assert.match(json(sent).delivery_id, /^evt_/);
+  const rotated = await client.callTool({ name: "rotate_webhook_signing_key", arguments: { request: { endpoint_id: endpoint, body: {} } } });
+  assert.ok(!rotated.isError, rotated.content?.[0]?.text);
+  // delete_webhook_endpoint is left out: the mock serves only operations
+  // whose answer has a body, and DELETE answers 204. tools.test.mjs covers it.
   const integration = await client.callTool({ name: "create_integration", arguments: { request: { platform: "auth0" } } });
   assert.ok(!integration.isError, integration.content?.[0]?.text);
   const intID = json(integration).integration_id;
@@ -44,12 +61,12 @@ async function everyTool(client) {
   const integrations = await client.callTool({ name: "list_integrations", arguments: {} });
   assert.ok(!integrations.isError, integrations.content?.[0]?.text);
   assert.ok(Array.isArray(json(integrations).items));
-  const rotated = await client.callTool({
+  const rotatedSecret = await client.callTool({
     name: "rotate_integration_secret",
     arguments: { request: { integration_id: intID, body: {} } },
   });
-  assert.ok(!rotated.isError, rotated.content?.[0]?.text);
-  assert.match(json(rotated).integration_id, /^int_/);
+  assert.ok(!rotatedSecret.isError, rotatedSecret.content?.[0]?.text);
+  assert.match(json(rotatedSecret).integration_id, /^int_/);
   // delete_integration is not called here: its 204 has no example, so the
   // generated mock server has no route for it. tests/tools.test.mjs covers it.
 }

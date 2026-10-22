@@ -7,6 +7,8 @@ import { ClosedEnum } from "../types/enums.js";
 export const ConflictErrorCode = {
   IdempotencyKeyReused: "idempotency_key_reused",
   KeyRotationInProgress: "key_rotation_in_progress",
+  WebhookEndpointLimitReached: "webhook_endpoint_limit_reached",
+  WebhookEndpointUnverified: "webhook_endpoint_unverified",
   TooManyIntegrations: "too_many_integrations",
 } as const;
 /**
@@ -17,5 +19,7 @@ export type ConflictErrorCode = ClosedEnum<typeof ConflictErrorCode>;
 export const ConflictErrorCode$zodSchema = z.enum([
   "idempotency_key_reused",
   "key_rotation_in_progress",
+  "webhook_endpoint_limit_reached",
+  "webhook_endpoint_unverified",
   "too_many_integrations",
 ]).describe("Machine codes an HTTP 409 answer can carry.");

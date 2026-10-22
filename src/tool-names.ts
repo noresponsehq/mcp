@@ -33,6 +33,26 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Replace an integration's secret.\n\nFor Auth0, send {} and the answer's secret is the new shared secret, shown once. For WorkOS, regenerate the Actions secret in the WorkOS dashboard and send it as signing_secret. The replaced secret is still accepted for 24 hours (previous_secret_expires_at). Requires the integrations scope. Not idempotent: a retry after a lost answer rotates again."
   },
   {
+    "name": "list_webhook_endpoints",
+    "description": "List the tenant's webhook endpoints.\n\nLists your webhook endpoints in every state, ordered by endpoint_id, with the ids of their signing keys and without secrets. Requires the webhooks scope."
+  },
+  {
+    "name": "create_webhook_endpoint",
+    "description": "Register a webhook endpoint.\n\nRegisters a webhook endpoint and returns it with its first signing secret, shown only in this answer: store it where your receiver reads it. The URL is https on port 443 or 8443 with a DNS host whose every address is public; it is checked now and on every delivery. The endpoint starts unverified and receives assessment events once it echoes an endpoint.verification challenge, which sendTestEvent sends. You can hold 5 endpoints. Requires the webhooks scope, and response_mode detailed also the detailed scope. Registration is not idempotent: a retry after a lost answer registers a second endpoint, which you can list and delete."
+  },
+  {
+    "name": "delete_webhook_endpoint",
+    "description": "Delete a webhook endpoint.\n\nDeletes the endpoint and its signing keys. Deliveries still queued for it are dropped. Requires the webhooks scope. An endpoint that is already gone answers 404."
+  },
+  {
+    "name": "rotate_webhook_signing_key",
+    "description": "Rotate an endpoint's signing key.\n\nIssues a new signing key for the endpoint and returns its secret once. Every delivery from now on is signed with it; the key it replaces keeps verifying for 7 days, so your receiver can hold both while it switches. Requires the webhooks scope. Rotation is not idempotent: a retry after a lost answer issues another key, which replaces the first."
+  },
+  {
+    "name": "send_webhook_test_event",
+    "description": "Send a test event to an endpoint.\n\nendpoint.verification sends a signed challenge now and answers whether the endpoint echoed it within 5 seconds; an echo verifies the endpoint, including a disabled one. assessment.updated queues one signed event with test: true and a fixed example assessment in the endpoint's response mode, delivered and retried like any other event; the endpoint must be verified. Both use the endpoint's current signing key. Requires the webhooks scope."
+  },
+  {
     "name": "wait_for_assessment",
     "description": "Wait until a pending assessment is no longer pending, then return it.\n\nPolls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, partial or failed, or until timeout_seconds pass. When the time runs out the assessment is still pending: the result says so and carries the last answer, and you can call this tool again. A pending assessment has no recommendation; apply your own fallback until it settles. Requires the assess or history scope."
   }

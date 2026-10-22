@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.1.7
+
+* `SDK.keys.rotate()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.rotate()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.recordOutcome()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.list()`: **Added**
+* `SDK.webhookEndpoints.create()`: **Added**
+* `SDK.webhookEndpoints.sendTestEvent()`: **Added**
+* `SDK.webhookEndpoints.rotateSigningKey()`: **Added**
+* `SDK.webhookEndpoints.delete()`: **Added**
+
 ## 0.1.6
 
 * `SDK.assessments.create()`:  `response.code.enum(too_many_integrations)` **Added** (Breaking ⚠️)
