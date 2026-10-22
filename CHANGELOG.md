@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.12
+
+* `SDK.assessments.create()`:  `response.auth_context` **Added**
+* `SDK.assessments.get()`:  `response.auth_context` **Added**
+* `SDK.assessments.query()`:  `response.items[].auth_context` **Added**
+
 ## 0.1.11
 
 No changes detected.

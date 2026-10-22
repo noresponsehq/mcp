@@ -1,5 +1,9 @@
 import * as z from "zod";
 import {
+  AssessmentAuthContext,
+  AssessmentAuthContext$zodSchema,
+} from "./assessmentauthcontext.js";
+import {
   AssessmentTiming,
   AssessmentTiming$zodSchema,
 } from "./assessmenttiming.js";
@@ -35,6 +39,7 @@ export type Assessment = {
   expires_at: string;
   assessment_url?: string | undefined;
   timing: AssessmentTiming;
+  auth_context?: AssessmentAuthContext | undefined;
 };
 
 export const Assessment$zodSchema: z.ZodType<Assessment> = z.object({
@@ -49,6 +54,9 @@ export const Assessment$zodSchema: z.ZodType<Assessment> = z.object({
   ),
   assessment_version: z.int().describe(
     "Monotonic revision of this assessment. 1 on the synchronous answer; each material change while the assessment is served (an async continuation settling a source, a change of recommendation, confidence or status) increments it. Expiry does not increment it: an expired assessment is gone, not revised, and the expiry webhook carries the last served version.",
+  ),
+  auth_context: AssessmentAuthContext$zodSchema.optional().describe(
+    "The identity fields of the auth context the assessment was made with, echoed for the tenant's own correlation: the request's auth_context, or the one a hosted provider hook (POST /hooks/{integration_id}) built, with transport provider_hook and its hook_point. Present exactly when the request carried an auth_context, and the same on every revision of the assessment. Values are as the request or the hook sent them; tokens, timestamps, roles and scopes are not echoed, and the echo does not change the score.",
   ),
   confidence: Confidence$zodSchema.describe(
     "Ordinal confidence in the recommendation under the current policy: low, medium, high or unavailable.",

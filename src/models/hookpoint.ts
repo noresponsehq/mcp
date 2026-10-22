@@ -2,7 +2,7 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 
 /**
- * The provider event a provider_hook context was sent for. pre_registration runs before the user exists, so subject and the request's account_id may be absent there. Sent only with transport provider_hook.
+ * The provider event a provider_hook context was sent for; absent for any other transport.
  */
 export const HookPoint = {
   PreRegistration: "pre_registration",
@@ -12,7 +12,7 @@ export const HookPoint = {
   TokenIssuance: "token_issuance",
 } as const;
 /**
- * The provider event a provider_hook context was sent for. pre_registration runs before the user exists, so subject and the request's account_id may be absent there. Sent only with transport provider_hook.
+ * The provider event a provider_hook context was sent for; absent for any other transport.
  */
 export type HookPoint = ClosedEnum<typeof HookPoint>;
 
@@ -23,5 +23,5 @@ export const HookPoint$zodSchema = z.enum([
   "post_login",
   "token_issuance",
 ]).describe(
-  "The provider event a provider_hook context was sent for. pre_registration runs before the user exists, so subject and the request's account_id may be absent there. Sent only with transport provider_hook.",
+  "The provider event a provider_hook context was sent for; absent for any other transport.",
 );
