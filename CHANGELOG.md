@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.8
+
+No changes detected.
+
 ## 0.1.7
 
 * `SDK.keys.rotate()`:  `response.code` **Changed** (Breaking ⚠️)
