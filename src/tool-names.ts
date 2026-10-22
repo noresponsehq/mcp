@@ -17,6 +17,22 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Page through one account's unexpired assessments.\n\nHistory is a POST with account_id in the body so an account identifier stays out of URLs and access logs. Requires the history scope. Read-only and safe to retry. Newest first, each at its latest assessment_version. An account with no assessments answers 200 with empty items. The cursor is opaque and bound to your tenant and the account; a tampered or expired cursor answers 400 invalid_cursor. response_mode=detailed needs the detailed scope."
   },
   {
+    "name": "create_integration",
+    "description": "Register a hosted provider integration.\n\nRegisters a WorkOS or Auth0 integration and returns its hosted endpoint, url, so a sign-up or sign-in is scored with no server of your own. For WorkOS, send the Actions signing secret from the WorkOS dashboard and point the user registration and authentication Actions at url. For Auth0, the answer's secret is the shared secret of the NoResponse Auth0 Action, shown once: store it as an Action secret. hook_points defaults to both pre_registration and post_login; an event that is not listed is allowed without an assessment. The endpoint waits for the full assessment for at most 2.5 seconds (WorkOS) or 4.5 seconds (Auth0), denies only when risk.block is true and allows on any failure. Requires the integrations scope; at most 10 per account. Not idempotent: a retry after a lost answer registers another integration."
+  },
+  {
+    "name": "list_integrations",
+    "description": "List the tenant's integrations.\n\nEvery integration, oldest first. Listings carry no secrets. Requires the integrations scope."
+  },
+  {
+    "name": "delete_integration",
+    "description": "Delete an integration.\n\nRemoves the integration and its secrets; its endpoint answers 404 from then on, so remove the Action from the provider first. Requires the integrations scope. An unknown or already deleted integration answers 404."
+  },
+  {
+    "name": "rotate_integration_secret",
+    "description": "Replace an integration's secret.\n\nFor Auth0, send {} and the answer's secret is the new shared secret, shown once. For WorkOS, regenerate the Actions secret in the WorkOS dashboard and send it as signing_secret. The replaced secret is still accepted for 24 hours (previous_secret_expires_at). Requires the integrations scope. Not idempotent: a retry after a lost answer rotates again."
+  },
+  {
     "name": "wait_for_assessment",
     "description": "Wait until a pending assessment is no longer pending, then return it.\n\nPolls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, partial or failed, or until timeout_seconds pass. When the time runs out the assessment is still pending: the result says so and carries the last answer, and you can call this tool again. A pending assessment has no recommendation; apply your own fallback until it settles. Requires the assess or history scope."
   }

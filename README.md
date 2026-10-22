@@ -2,7 +2,7 @@
 
 An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can assess a signup or gateway event, wait for a pending assessment, page through an account's history and record what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
 
-The server uses the API key you give it and stores nothing. Key rotation is not a tool: rotate keys from your own backend.
+The server uses the API key you give it and stores nothing. Key rotation is not a tool: rotate keys from your own backend. The integration tools need a key with the `integrations` scope; give the server a key without it to keep them unusable.
 
 ## Tools
 
@@ -13,6 +13,10 @@ The server uses the API key you give it and stores nothing. Key rotation is not 
 | `wait_for_assessment` | Poll a pending assessment, at the interval Retry-After asks for, until it settles or `timeout_seconds` (default 25, at most 55) pass. | `GET /v1/assessments/{assessment_id}` |
 | `query_assessments` | Page through one account's unexpired assessments, newest first. | `POST /v1/assessments/query` |
 | `record_outcome` | Report what you later learned about an assessed account (`confirmed_abuse`, `legitimate` and so on). | `POST /v1/assessments/{assessment_id}/outcomes` |
+| `create_integration` | Register a hosted WorkOS or Auth0 integration and return its endpoint URL. For Auth0 the answer holds the Action's shared secret, shown once. Never retried. | `POST /v1/integrations` |
+| `list_integrations` | List the account's integrations, oldest first, with no secrets. | `GET /v1/integrations` |
+| `delete_integration` | Delete an integration; its endpoint answers 404 from then on. | `DELETE /v1/integrations/{integration_id}` |
+| `rotate_integration_secret` | Replace an integration's secret. The old one is accepted for 24 hours. Never retried. | `POST /v1/integrations/{integration_id}/rotate` |
 
 Recommendations are advisory. A pending assessment has no recommendation, so apply your own fallback for pending, 429, 503 or a timeout.
 

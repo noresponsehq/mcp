@@ -6,6 +6,7 @@ export const Scope = {
   History: "history",
   Webhooks: "webhooks",
   Detailed: "detailed",
+  Integrations: "integrations",
 } as const;
 export type Scope = ClosedEnum<typeof Scope>;
 
@@ -14,6 +15,7 @@ export const Scope$zodSchema = z.enum([
   "history",
   "webhooks",
   "detailed",
+  "integrations",
 ]);
 
 /**

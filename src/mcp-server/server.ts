@@ -19,6 +19,10 @@ import { tool$assessmentsCreate } from "./tools/assessmentsCreate.js";
 import { tool$assessmentsGet } from "./tools/assessmentsGet.js";
 import { tool$assessmentsQuery } from "./tools/assessmentsQuery.js";
 import { tool$assessmentsRecordOutcome } from "./tools/assessmentsRecordOutcome.js";
+import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
+import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
+import { tool$integrationsList } from "./tools/integrationsList.js";
+import { tool$integrationsRotate } from "./tools/integrationsRotate.js";
 
 export function createMCPServer(deps: {
   logger: ConsoleLogger;
@@ -33,7 +37,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.1.5",
+    version: "0.1.6",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -82,6 +86,10 @@ export function createMCPServer(deps: {
   tool(tool$assessmentsGet);
   tool(tool$assessmentsRecordOutcome);
   tool(tool$assessmentsQuery);
+  tool(tool$integrationsCreate);
+  tool(tool$integrationsList);
+  tool(tool$integrationsDelete);
+  tool(tool$integrationsRotate);
 
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);

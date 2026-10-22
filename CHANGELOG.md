@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.6
+
+* `SDK.assessments.create()`:  `response.code.enum(too_many_integrations)` **Added** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.code.enum(too_many_integrations)` **Added** (Breaking ⚠️)
+* `SDK.assessments.recordOutcome()`:  `response.code.enum(too_many_integrations)` **Added** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.code.enum(too_many_integrations)` **Added** (Breaking ⚠️)
+* `SDK.keys.rotate()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.integrations.create()`: **Added**
+* `SDK.integrations.list()`: **Added**
+* `SDK.integrations.delete()`: **Added**
+* `SDK.integrations.rotate()`: **Added**
+
 ## 0.1.5
 
 * `SDK.assessments.create()`: 

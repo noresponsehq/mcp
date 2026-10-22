@@ -37,6 +37,21 @@ async function everyTool(client) {
   // The mock answers with the document's example outcome, not the one sent.
   assert.match(json(recorded).assessment_id, /^asm_/);
   assert.equal(typeof json(recorded).outcome, "string");
+  const integration = await client.callTool({ name: "create_integration", arguments: { request: { platform: "auth0" } } });
+  assert.ok(!integration.isError, integration.content?.[0]?.text);
+  const intID = json(integration).integration_id;
+  assert.match(intID, /^int_/);
+  const integrations = await client.callTool({ name: "list_integrations", arguments: {} });
+  assert.ok(!integrations.isError, integrations.content?.[0]?.text);
+  assert.ok(Array.isArray(json(integrations).items));
+  const rotated = await client.callTool({
+    name: "rotate_integration_secret",
+    arguments: { request: { integration_id: intID, body: {} } },
+  });
+  assert.ok(!rotated.isError, rotated.content?.[0]?.text);
+  assert.match(json(rotated).integration_id, /^int_/);
+  // delete_integration is not called here: its 204 has no example, so the
+  // generated mock server has no route for it. tests/tools.test.mjs covers it.
 }
 
 describe("against the mock server", { skip }, () => {
@@ -56,7 +71,7 @@ describe("against the mock server", { skip }, () => {
     } finally {
       await client.close();
     }
-    assert.ok(proxy.requests.length >= 5);
+    assert.ok(proxy.requests.length >= 8);
     assert.ok(proxy.requests.every((r) => r.headers.authorization === `Bearer ${CALLER_KEY}`));
   });
 
@@ -70,7 +85,7 @@ describe("against the mock server", { skip }, () => {
       await client.close();
       await worker.close();
     }
-    assert.ok(proxy.requests.length >= 5);
+    assert.ok(proxy.requests.length >= 8);
     assert.ok(proxy.requests.every((r) => r.headers.authorization === `Bearer ${CALLER_KEY}`));
   });
 });

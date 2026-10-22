@@ -10,9 +10,23 @@ const PENDING = fixture("assessment-pending.json");
 const COMPLETE = fixture("assessment-complete.json");
 const OUTCOME = fixture("assessment-outcome.json");
 const LIST = fixture("assessment-list.json");
+const INTEGRATION = fixture("integration-auth0.json");
+const INTEGRATION_ROTATED = fixture("integration-auth0-rotated.json");
+const INTEGRATIONS = fixture("integration-list.json");
+const INT_ID = INTEGRATION.integration_id;
 const ID = COMPLETE.assessment_id;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
-const TOOLS = ["create_assessment", "get_assessment", "query_assessments", "record_outcome", "wait_for_assessment"];
+const TOOLS = [
+  "create_assessment",
+  "create_integration",
+  "delete_integration",
+  "get_assessment",
+  "list_integrations",
+  "query_assessments",
+  "record_outcome",
+  "rotate_integration_secret",
+  "wait_for_assessment",
+];
 
 // Answers by route; GET of the assessment answers pending until `settleAfter`
 // polls have been made.
@@ -26,6 +40,10 @@ function fakeAPI() {
       if (req.method === "POST" && req.path === "/v1/assessments") return { status: 202, headers: { "retry-after": "1" }, body: PENDING };
       if (req.method === "POST" && req.path === "/v1/assessments/query") return { body: LIST };
       if (req.method === "POST" && req.path === `/v1/assessments/${ID}/outcomes`) return { status: 201, body: OUTCOME };
+      if (req.method === "POST" && req.path === "/v1/integrations") return { status: 201, body: INTEGRATION };
+      if (req.method === "GET" && req.path === "/v1/integrations") return { body: INTEGRATIONS };
+      if (req.method === "POST" && req.path === `/v1/integrations/${INT_ID}/rotate`) return { body: INTEGRATION_ROTATED };
+      if (req.method === "DELETE" && req.path === `/v1/integrations/${INT_ID}`) return { status: 204 };
       if (req.method === "GET" && req.path.startsWith(`/v1/assessments/${ID}`)) {
         state.gets += 1;
         return state.gets <= state.settleAfter
@@ -50,18 +68,24 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     await api?.close();
   });
 
-  test("exposes create, get, wait, query and record outcome, and not key rotation", async () => {
+  test("exposes the assessment and integration tools, and not key rotation", async () => {
     const { tools } = await client.listTools();
     assert.deepEqual(tools.map((t) => t.name).sort(), TOOLS);
-    assert.ok(!tools.some((t) => /rotate|key/i.test(t.name)));
+    assert.ok(!tools.some((t) => /key/i.test(t.name)));
     const readOnly = Object.fromEntries(tools.map((t) => [t.name, t.annotations?.readOnlyHint === true]));
     assert.deepEqual(readOnly, {
       create_assessment: false,
+      create_integration: false,
+      delete_integration: false,
       get_assessment: true,
+      list_integrations: true,
       query_assessments: true,
       record_outcome: false,
+      rotate_integration_secret: false,
       wait_for_assessment: true,
     });
+    const destructive = tools.filter((t) => t.annotations?.destructiveHint === true).map((t) => t.name);
+    assert.deepEqual(destructive, ["delete_integration"]);
   });
 
   test("create_assessment sends the key from NORESPONSE_API_KEY and a fresh Idempotency-Key", async () => {
@@ -116,6 +140,39 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     assert.equal(req.path, "/v1/assessments/query");
     assert.deepEqual(req.body, { account_id: "acct_7f3a9c", limit: 5 });
     assert.equal(req.headers["idempotency-key"], undefined);
+  });
+
+  test("the integration tools call their routes with the caller's key and no Idempotency-Key", async () => {
+    api.requests.length = 0;
+    const created = await client.callTool({ name: "create_integration", arguments: { request: { platform: "auth0" } } });
+    assert.ok(!created.isError, created.content?.[0]?.text);
+    assert.equal(json(created).integration_id, INT_ID);
+    const listed = await client.callTool({ name: "list_integrations", arguments: {} });
+    assert.ok(!listed.isError, listed.content?.[0]?.text);
+    assert.deepEqual(json(listed), INTEGRATIONS);
+    const rotated = await client.callTool({
+      name: "rotate_integration_secret",
+      arguments: { request: { integration_id: INT_ID, body: {} } },
+    });
+    assert.ok(!rotated.isError, rotated.content?.[0]?.text);
+    assert.equal(json(rotated).secret, INTEGRATION_ROTATED.secret);
+    const deleted = await client.callTool({ name: "delete_integration", arguments: { request: { integration_id: INT_ID } } });
+    assert.ok(!deleted.isError, deleted.content?.[0]?.text);
+    assert.deepEqual(
+      api.requests.map((r) => [r.method, r.path]),
+      [
+        ["POST", "/v1/integrations"],
+        ["GET", "/v1/integrations"],
+        ["POST", `/v1/integrations/${INT_ID}/rotate`],
+        ["DELETE", `/v1/integrations/${INT_ID}`],
+      ],
+    );
+    assert.deepEqual(api.requests[0].body, { platform: "auth0" });
+    assert.deepEqual(api.requests[2].body, {});
+    for (const req of api.requests) {
+      assert.equal(req.headers.authorization, `Bearer ${CALLER_KEY}`);
+      assert.equal(req.headers["idempotency-key"], undefined);
+    }
   });
 
   test("wait_for_assessment polls at Retry-After until the assessment settles", async () => {
