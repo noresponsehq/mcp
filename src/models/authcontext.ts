@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { AssuranceLevel, AssuranceLevel$zodSchema } from "./assurancelevel.js";
 import { AuthContextMfa, AuthContextMfa$zodSchema } from "./authcontextmfa.js";
+import { HookPoint, HookPoint$zodSchema } from "./hookpoint.js";
 import { Transport, Transport$zodSchema } from "./transport.js";
 
 /**
@@ -26,6 +27,7 @@ export type AuthContext = {
   assurance_level?: AssuranceLevel | undefined;
   impersonated?: boolean | undefined;
   transport?: Transport | undefined;
+  hook_point?: HookPoint | undefined;
   verified: boolean;
   mfa?: AuthContextMfa | undefined;
   roles?: Array<string> | undefined;
@@ -52,6 +54,9 @@ export const AuthContext$zodSchema: z.ZodType<AuthContext> = z.object({
     "Whether the customer's provider asserts that the email identifier was verified.",
   ),
   expires_at: z.string().optional().describe("Verified token expiry (`exp`)."),
+  hook_point: HookPoint$zodSchema.optional().describe(
+    "The provider event a provider_hook context was sent for. pre_registration runs before the user exists, so subject and the request's account_id may be absent there. Sent only with transport provider_hook.",
+  ),
   impersonated: z.boolean().optional().describe(
     "Whether the verified session is acting on behalf of another subject.",
   ),
@@ -86,7 +91,7 @@ export const AuthContext$zodSchema: z.ZodType<AuthContext> = z.object({
     "The verified session identifier (`sid` or provider equivalent).",
   ),
   subject: z.string().describe(
-    "The verified stable subject identifier (`sub`), opaque to NoResponse.",
+    "The verified stable subject identifier (`sub`), opaque to NoResponse. Required, except from a provider hook at pre_registration, where no user exists yet.",
   ),
   tenant_id: z.string().optional().describe(
     "The provider tenant identifier, when distinct from organization_id.",
@@ -95,7 +100,7 @@ export const AuthContext$zodSchema: z.ZodType<AuthContext> = z.object({
     "The verified token identifier (`jti`), used for replay and rotation correlation.",
   ),
   transport: Transport$zodSchema.optional().describe(
-    "Where the customer derived this context. Backend is the trusted integration path; browser values are treated as weak hints.",
+    "Where this context was derived. Backend is the trusted integration path; browser values are treated as weak hints. provider_hook is a hosted provider hook (an Auth0 or WorkOS Action) calling at hook_point; it needs hook_point and verified false, and its authentication facts are not scored.",
   ),
   verified: z.boolean().describe(
     "Whether the customer completed signature, issuer, audience and expiry validation before calling NoResponse. False contexts are accepted only as weak hints.",

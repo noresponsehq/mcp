@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 72f76147e9b733925eefd222cf09efcd
+  docChecksum: 5bbc5f21facf4a4755c2c433ffc5b66a
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.1.1
-  configChecksum: d1f301d1bd1bc12d9c66072c99c9f583
+  releaseVersion: 0.1.2
+  configChecksum: 917ad785c46d782e581795a2fc526d9a
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -33,11 +33,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:0cbfc38b728784180bb10467ce20ae55c83409cd
+    last_write_checksum: sha1:af29a7667a32dc0c3643dc7f8f17382f5268b704
   package.json:
-    last_write_checksum: sha1:2bc6b438e121ac68b79946675b94a8e7195599a7
+    last_write_checksum: sha1:dab91914f0301de4a8f47bd12cc1fb34b9840a9e
   server.json:
-    last_write_checksum: sha1:575d4892114d0c71d47286066c0e6c4f6c9c8fdb
+    last_write_checksum: sha1:16ccd86901859665dce629b2a31008bbd120adad
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -61,7 +61,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:e989f02071da31e0a7f981e627c2ca854552ace2
+    last_write_checksum: sha1:eaf3275cfb4c6bca160e55587609336cbb3d6721
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -105,7 +105,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:5c2af95e6349777327042cd26918705d1c692d05
+    last_write_checksum: sha1:bb2c0e56991e5cdb9d9b79f949f6e39d7e77d8db
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -113,7 +113,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:cbd3b887a9b72661ea967b502b548d582f762874
+    last_write_checksum: sha1:b1e820e51569a26777e53b7fb112d7029b71b495
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -127,17 +127,17 @@ trackedFiles:
   src/mcp-server/tools/assessmentsRecordOutcome.ts:
     last_write_checksum: sha1:839ed392d83547c097c347e087ae483ac3d025bb
   src/models/assessment.ts:
-    last_write_checksum: sha1:5681347bc3281d98f8dae81f06a756194c9cd4f4
+    last_write_checksum: sha1:79b18d412404d6e3a63a59eb330ecf84decb2806
   src/models/assessmentlist.ts:
-    last_write_checksum: sha1:034e3d5fd9d96c309df01fcaa3d4cab4ed0bd46b
+    last_write_checksum: sha1:65f2c393a235d68028ee268b341c6b87366df530
   src/models/assessmentoutcome.ts:
     last_write_checksum: sha1:bc1de92d60a7293a36993f8fba69746636c38b10
   src/models/assessmentoutcomerequest.ts:
     last_write_checksum: sha1:726115119f8881dc1f810a32f8d9b1e5f0a6b9b5
   src/models/assessmentquery.ts:
-    last_write_checksum: sha1:8a88b4a1f359b938185f443f8bf2387226e35fa8
+    last_write_checksum: sha1:903f34de13451d06ec372f5ef9e9fd200b8953a5
   src/models/assessmentrequest.ts:
-    last_write_checksum: sha1:23aa7aa44ce71abeed3bcd68c76c24d609612af5
+    last_write_checksum: sha1:bc7e66acbb64b7e110aa09ae58b8fd787daffefa
   src/models/assessmentrequestclientcontext.ts:
     last_write_checksum: sha1:1d477ee10a112d2a841b82b14b188896f7117420
   src/models/assessmentrequestidentifiers.ts:
@@ -149,7 +149,7 @@ trackedFiles:
   src/models/assurancelevel.ts:
     last_write_checksum: sha1:928fdc70d8c1739e8b9d723146a50cc2a36e5111
   src/models/authcontext.ts:
-    last_write_checksum: sha1:6bb948dd730241e656bb15a4af0e580f9258a13a
+    last_write_checksum: sha1:63254e92196ab4e4d48862d497ce8ea18f93bef8
   src/models/authcontextmfa.ts:
     last_write_checksum: sha1:176e95e66d42ca942b512de7af59205d2fda7030
   src/models/authenticationerror.ts:
@@ -200,6 +200,8 @@ trackedFiles:
     last_write_checksum: sha1:623a5f38fd27856520b75b6affb2205091148198
   src/models/getassessmentop.ts:
     last_write_checksum: sha1:9a9ef152d12d5f265fd7bf78d938e48add857407
+  src/models/hookpoint.ts:
+    last_write_checksum: sha1:cebbd1d82476ce526700cccabf3c8318dbfa50d2
   src/models/identifierkind.ts:
     last_write_checksum: sha1:4142bf1e74af943b77ed72aba4d0de0531043011
   src/models/incompletereason.ts:
@@ -285,7 +287,7 @@ trackedFiles:
   src/models/status.ts:
     last_write_checksum: sha1:2de12a856682361acb5139f01b4a673204e5f482
   src/models/transport.ts:
-    last_write_checksum: sha1:a9157d4ddef849a124bd684114b9464338ad6ab7
+    last_write_checksum: sha1:8ae008d42ef96ea9821d762a120fd0c42822614f
   src/tool-names.ts:
     last_write_checksum: sha1:485277ef8ba995c9dd18246f3d19181a76f71cdd
   src/types/async.ts:
