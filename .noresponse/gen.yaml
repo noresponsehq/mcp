@@ -5,7 +5,6 @@ generation:
   usageSnippets:
     optionalPropertyRendering: withExample
     sdkInitStyle: constructor
-  useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
     nameResolutionFeb2025: true
@@ -20,8 +19,6 @@ generation:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
     hoistGlobalSecurity: true
-  inferSSEOverload: true
-  sdkHooksConfigAccess: true
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: body
@@ -32,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.1.0
+  version: 0.1.1
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -70,7 +67,7 @@ mcp-typescript:
   cloudflareURL: https://mcp.noresponse.org
   envVarPrefix: NORESPONSE
   fixEnumNameSanitization: false
-  formStringArrayEncodeMode: array
+  formStringArrayEncodeMode: encoded-string
   gramEnabled: false
   inferUnionDiscriminators: true
   inputModelSuffix: input
@@ -86,8 +83,8 @@ mcp-typescript:
       api_key:
         description: Your NoResponse API key (nrk_...). It stays on this computer and is sent only to api.noresponse.org.
         title: API key
-  multipartArrayFormat: standard
-  numericEnumMemberNames: words
+  multipartArrayFormat: legacy
+  numericEnumMemberNames: legacy
   outputModelSuffix: output
   packageName: '@noresponse/mcp'
   responseFormat: flat

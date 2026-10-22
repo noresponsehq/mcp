@@ -501,10 +501,6 @@ export function appendForm(
     } else {
       fd.append(key, value as Blob);
     }
-  } else if (Array.isArray(value)) {
-    value.forEach((v) => {
-      appendForm(fd, key, v);
-    });
   } else {
     fd.append(key, String(value));
   }
