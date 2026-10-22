@@ -1,0 +1,152 @@
+import type { ResourceTemplate as LegacyResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
+import {
+  McpServer,
+  ReadResourceResult,
+  ResourceMetadata,
+  ResourceTemplate,
+  Variables,
+} from "@modelcontextprotocol/server";
+import { NoResponseCore } from "../core.js";
+import { ConsoleLogger } from "./console-logger.js";
+import { MCPScope } from "./scopes.js";
+import { MCPServerContext, mcpServerContext, valueToBase64 } from "./shared.js";
+
+export type ReadResourceCallback = (
+  client: NoResponseCore,
+  uri: URL,
+  extra: MCPServerContext,
+) => ReadResourceResult | Promise<ReadResourceResult>;
+
+export type ResourceDefinition = {
+  name: string;
+  description?: string;
+  metadata?: ResourceMetadata;
+  scopes?: MCPScope[];
+  resource: string;
+  read: ReadResourceCallback;
+};
+
+export type ReadResourceTemplateCallback = (
+  client: NoResponseCore,
+  uri: URL,
+  vars: Variables,
+  extra: MCPServerContext,
+) => ReadResourceResult | Promise<ReadResourceResult>;
+
+export type ResourceTemplateDefinition = {
+  name: string;
+  description: string;
+  metadata?: ResourceMetadata;
+  scopes?: MCPScope[];
+  resource: ResourceTemplate | LegacyResourceTemplate;
+  read: ReadResourceTemplateCallback;
+};
+
+// Optional function to assist with formatting tool results
+export async function formatResult(
+  response: Response,
+  uri: URL,
+  init?: { mimeType?: string | undefined },
+): Promise<ReadResourceResult> {
+  let contents: ReadResourceResult["contents"] = [];
+  const mimeType = init?.mimeType ?? response.headers.get("content-type") ?? "";
+
+  if (mimeType.startsWith("image/") || mimeType.startsWith("audio/")) {
+    const blob = await valueToBase64(await response.arrayBuffer());
+    contents = blob == null ? [] : [{ uri: uri.toString(), blob, mimeType }];
+  } else {
+    const text = await response.text();
+    contents = [{ uri: uri.toString(), mimeType, text }];
+  }
+
+  return { contents };
+}
+
+export function createRegisterResource(
+  logger: ConsoleLogger,
+  server: McpServer,
+  getSDK: () => NoResponseCore,
+  allowedScopes: Set<MCPScope>,
+): (resource: ResourceDefinition) => void {
+  return (resource: ResourceDefinition): void => {
+    const scopes = resource.scopes ?? [];
+    if (allowedScopes.size > 0 && scopes.length === 0) {
+      return;
+    }
+
+    if (
+      allowedScopes.size > 0
+      && !scopes.every((s: MCPScope) => allowedScopes.has(s))
+    ) {
+      return;
+    }
+
+    const metadata: ResourceMetadata = {
+      ...resource.metadata,
+      description: resource.description,
+    };
+
+    server.registerResource(
+      resource.name,
+      resource.resource,
+      metadata,
+      async (uri, ctx) => resource.read(getSDK(), uri, mcpServerContext(ctx)),
+    );
+
+    logger.debug("Registered resource", { name: resource.name });
+  };
+}
+
+export function createRegisterResourceTemplate(
+  logger: ConsoleLogger,
+  server: McpServer,
+  getSDK: () => NoResponseCore,
+  allowedScopes: Set<MCPScope>,
+): (resource: ResourceTemplateDefinition) => void {
+  return (resource: ResourceTemplateDefinition): void => {
+    const scopes = resource.scopes ?? [];
+    if (allowedScopes.size > 0 && scopes.length === 0) {
+      return;
+    }
+
+    if (
+      allowedScopes.size > 0
+      && !scopes.every((s: MCPScope) => allowedScopes.has(s))
+    ) {
+      return;
+    }
+
+    const metadata: ResourceMetadata = {
+      ...resource.metadata,
+      description: resource.description,
+    };
+
+    server.registerResource(
+      resource.name,
+      normalizeResourceTemplate(resource.resource),
+      metadata,
+      async (uri, vars, ctx) =>
+        resource.read(getSDK(), uri, vars, mcpServerContext(ctx)),
+    );
+
+    logger.debug("Registered resource template", { name: resource.name });
+  };
+}
+
+function normalizeResourceTemplate(
+  resource: ResourceTemplate | LegacyResourceTemplate,
+): ResourceTemplate {
+  if (resource instanceof ResourceTemplate) return resource;
+  const complete: NonNullable<
+    ConstructorParameters<typeof ResourceTemplate>[1]["complete"]
+  > = {};
+  for (const variable of resource.uriTemplate.variableNames) {
+    const callback = resource.completeCallback(variable);
+    if (callback) complete[variable] = callback;
+  }
+  const list = resource.listCallback;
+  return new ResourceTemplate(resource.uriTemplate.toString(), {
+    list: list ? (ctx) => list(mcpServerContext(ctx)) : undefined,
+    complete,
+  });
+}

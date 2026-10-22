@@ -1,0 +1,23 @@
+// Auto-generated at build time
+export const toolNames: Array<{ name: string; description: string }>= [
+  {
+    "name": "create_assessment",
+    "description": "Assess identifiers for a signup or gateway decision.\n\nReturns within the deadline (500 ms at most) with a complete, partial or pending assessment: 200 carries complete or partial, 202 carries pending with Location and Retry-After. A pending answer has no recommendation; apply your own fallback for pending, 429, 503 or a timeout. Requires the assess scope. Idempotency-Key is optional in the SDK and is bound to the body for 24 hours: the same key with the same body replays the latest assessment with Idempotent-Replayed: true and starts no new work; the same key with a different body answers 409 idempotency_key_reused. response_mode defaults to standard; detailed needs the detailed scope."
+  },
+  {
+    "name": "get_assessment",
+    "description": "Poll the authoritative assessment of one assessment.\n\nReturns the highest assessment_version. Requires the assess or history scope. While status is pending, or partial with a source still running, the response carries Retry-After; poll no faster than it says. Another tenant's assessment, an unknown or expired assessment and a malformed assessment_id all answer 404 not_found. response_mode=detailed needs the detailed scope."
+  },
+  {
+    "name": "record_outcome",
+    "description": "Report what was later learned about an assessed account.\n\nRecords what you later learned about an assessed account: confirmed_abuse, account_takeover and chargeback report abuse; false_positive and legitimate withdraw your earlier report; unknown is recorded only. Outcomes are append-only and the latest one wins. Requires the assess scope. Idempotency-Key is optional in the SDK and handled as on POST /v1/assessments: a retry with the same key and body answers the same record with Idempotent-Replayed: true; a different body answers 409. An unknown, expired or foreign assessment answers 404 not_found."
+  },
+  {
+    "name": "query_assessments",
+    "description": "Page through one account's unexpired assessments.\n\nHistory is a POST with account_id in the body so an account identifier stays out of URLs and access logs. Requires the history scope. Read-only and safe to retry. Newest first, each at its latest assessment_version. An account with no assessments answers 200 with empty items. The cursor is opaque and bound to your tenant and the account; a tampered or expired cursor answers 400 invalid_cursor. response_mode=detailed needs the detailed scope."
+  },
+  {
+    "name": "wait_for_assessment",
+    "description": "Wait until a pending assessment is no longer pending, then return it.\n\nPolls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, partial or failed, or until timeout_seconds pass. When the time runs out the assessment is still pending: the result says so and carries the last answer, and you can call this tool again. A pending assessment has no recommendation; apply your own fallback until it settles. Requires the assess or history scope."
+  }
+];

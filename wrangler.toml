@@ -1,0 +1,47 @@
+# The hosted MCP server: mcp.noresponse.org calls the production API and
+# mcp-staging.noresponse.org (`--env staging`) the staging API. Hand-written;
+# the generator leaves this file alone. sdk-publish.yml deploys both on every
+# release, staging first, and smoke-tests staging before production.
+#
+# The Worker passes each caller's Authorization header to the API and stores
+# nothing: a session's Durable Object keeps the caller's headers in memory
+# only, and logs and observability stay off because request headers carry the
+# caller's key. LOG_LEVEL = "debug" would log every request's headers.
+name = "noresponse-mcp"
+main = "src/cloudflare-worker/cloudflare-worker.ts"
+compatibility_date = "2025-07-15"
+compatibility_flags = ["nodejs_compat", "enable_request_signal"]
+workers_dev = false
+preview_urls = false
+routes = [{ pattern = "mcp.noresponse.org", custom_domain = true }]
+
+# Legacy (pre-2026 protocol) Streamable HTTP and SSE sessions. The class name
+# and binding are the generator's, derived from packageName.
+[[durable_objects.bindings]]
+name = "NORESPONSE_MCP_MCP"
+class_name = "AtNoresponseMcpMCP"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["AtNoresponseMcpMCP"]
+
+# Serves the desktop extension (noresponse.mcpb) beside the server.
+[assets]
+directory = "./static"
+binding = "ASSETS"
+run_worker_first = true
+
+[observability]
+enabled = false
+
+[env.staging]
+name = "noresponse-mcp-staging"
+workers_dev = false
+preview_urls = false
+routes = [{ pattern = "mcp-staging.noresponse.org", custom_domain = true }]
+vars = { SERVER_URL = "https://api-staging.noresponse.org" }
+durable_objects.bindings = [{ name = "NORESPONSE_MCP_MCP", class_name = "AtNoresponseMcpMCP" }]
+observability = { enabled = false }
+
+[dev]
+port = 8787

@@ -1,0 +1,503 @@
+import {
+  createMcpHandler,
+  isInitializeRequest,
+  isLegacyRequest,
+  legacyStatelessFallback,
+  WebStandardStreamableHTTPServerTransport,
+} from "@modelcontextprotocol/server";
+import { SSEServerTransport } from "@modelcontextprotocol/server-legacy/sse";
+import { AsyncLocalStorage } from "node:async_hooks";
+import { NoResponseCore } from "../core.js";
+import { landingPage } from "../landing-page.js";
+import {
+  type ConsoleLoggerLevel,
+  consoleLoggerLevels,
+  createConsoleLogger,
+} from "../mcp-server/console-logger.js";
+import { createMCPServer } from "../mcp-server/server.js";
+
+function logLevel(): ConsoleLoggerLevel {
+  const level = process.env["LOG_LEVEL"];
+  return consoleLoggerLevels.find((l) => l === level) ?? "info";
+}
+
+function getSDK(headers: Headers | undefined) {
+  const getHeader = (name: string) => headers?.get(name) ?? "";
+
+  return new NoResponseCore({
+    serverURL: process.env["SERVER_URL"] || undefined,
+    // The SDK's debug log prints request headers and bodies, credentials included.
+    debugLogger: logLevel() === "debug"
+      ? {
+        log: (...args) => console.log(...args),
+        group: (...args) => console.group(...args),
+        groupEnd: (...args) => console.groupEnd(...args),
+      }
+      : undefined,
+    security: async () => ({ apiKey: getHeader("authorization") }),
+  });
+}
+
+function createServer(getHeaders: () => Headers | undefined) {
+  const { server } = createMCPServer({
+    logger: createConsoleLogger(logLevel()),
+    getSDK: () => getSDK(getHeaders()),
+  });
+  return server;
+}
+
+const PROPS_HEADER = "x-mcp-worker-props";
+
+type Credentials = { headers: Headers; authoritative: boolean };
+
+function credentials(request: Request): Credentials {
+  const props = request.headers.get(PROPS_HEADER);
+  if (props == null) return { headers: request.headers, authoritative: false };
+  try {
+    return {
+      headers: new Headers(JSON.parse(props) as Record<string, string>),
+      authoritative: true,
+    };
+  } catch {
+    return { headers: new Headers(), authoritative: true };
+  }
+}
+
+function credentialHeaders(request: Request | undefined): Headers | undefined {
+  return request ? credentials(request).headers : undefined;
+}
+
+const modernHandler = createMcpHandler(
+  ({ requestInfo }) => createServer(() => credentialHeaders(requestInfo)),
+  { legacy: "reject" },
+);
+
+const statelessLegacyHandler = legacyStatelessFallback(
+  ({ requestInfo }) => createServer(() => credentialHeaders(requestInfo)),
+);
+
+type CorsOptions = {
+  origin?: string;
+  methods?: string;
+  headers?: string;
+  exposeHeaders?: string;
+  maxAge?: number;
+};
+
+type ServeOptions = {
+  binding?: string;
+  corsOptions?: CorsOptions;
+  transport?: "streamable-http" | "sse";
+  jurisdiction?: DurableObjectJurisdiction;
+};
+
+type WorkerProps = Record<string, unknown> | undefined;
+
+function corsHeaders(request: Request, cors: CorsOptions = {}): Headers {
+  return new Headers({
+    "Access-Control-Allow-Origin": cors.origin ?? "*",
+    "Access-Control-Allow-Methods": cors.methods
+      ?? "GET, POST, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": cors.headers
+      ?? request.headers.get("Access-Control-Request-Headers")
+      ?? "Content-Type, Accept, mcp-session-id, mcp-protocol-version",
+    "Access-Control-Expose-Headers": cors.exposeHeaders
+      ?? "mcp-session-id, mcp-protocol-version",
+    "Access-Control-Max-Age": String(cors.maxAge ?? 86400),
+  });
+}
+
+function withCors(
+  response: Response,
+  request: Request,
+  cors?: CorsOptions,
+): Response {
+  const headers = new Headers(response.headers);
+  corsHeaders(request, cors).forEach((value, name) => headers.set(name, value));
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
+function sessionNotFound(): Response {
+  return Response.json(
+    {
+      jsonrpc: "2.0",
+      error: { code: -32001, message: "Session not found" },
+      id: null,
+    },
+    { status: 404 },
+  );
+}
+
+function sessionObject(
+  namespace: DurableObjectNamespace,
+  sessionId: string | null,
+) {
+  if (!sessionId) return undefined;
+  try {
+    return namespace.get(namespace.idFromString(sessionId));
+  } catch {
+    return undefined;
+  }
+}
+
+function forwardRequest(
+  request: Request,
+  pathname: string,
+  props: WorkerProps,
+  search: Record<string, string> = {},
+): Request {
+  const url = new URL(request.url);
+  url.pathname = pathname;
+  for (const [name, value] of Object.entries(search)) {
+    url.searchParams.set(name, value);
+  }
+  const forwarded = new Request(url.toString(), request as RequestInit);
+  forwarded.headers.delete(PROPS_HEADER);
+  if (props) {
+    const values = Object.fromEntries(
+      Object.entries(props).filter(([, value]) => typeof value === "string"),
+    );
+    forwarded.headers.set(PROPS_HEADER, JSON.stringify(values));
+  }
+  return forwarded;
+}
+
+function matchesPath(path: string, pathname: string): boolean {
+  return path === "/" || pathname === path;
+}
+
+function messagePath(basePath: string): string {
+  return `${basePath.replace(/\/+$/, "")}/message`;
+}
+
+async function startsSession(request: Request): Promise<boolean> {
+  if (request.method !== "POST") return false;
+  const body: unknown = await request.clone().json().catch(() => undefined);
+  return Array.isArray(body)
+    ? body.some((message) => isInitializeRequest(message))
+    : isInitializeRequest(body);
+}
+
+async function legacyStreamableHttp(
+  request: Request,
+  namespace: DurableObjectNamespace,
+): Promise<Response> {
+  const sessionId = request.headers.get("mcp-session-id");
+  if (sessionId) {
+    return sessionObject(namespace, sessionId)?.fetch(request)
+      ?? sessionNotFound();
+  }
+  if (await startsSession(request)) {
+    return namespace.get(namespace.newUniqueId()).fetch(request);
+  }
+  return statelessLegacyHandler(request);
+}
+
+async function handleStreamableHttp(
+  request: Request,
+  namespace: DurableObjectNamespace,
+  props: WorkerProps,
+  cors?: CorsOptions,
+): Promise<Response> {
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders(request, cors),
+    });
+  }
+  const forwarded = forwardRequest(request, "/mcp", props);
+  const response = (await isLegacyRequest(forwarded))
+    ? await legacyStreamableHttp(forwarded, namespace)
+    : await modernHandler.fetch(forwarded);
+  return withCors(response, request, cors);
+}
+
+async function handleSse(
+  request: Request,
+  namespace: DurableObjectNamespace,
+  basePath: string,
+  props: WorkerProps,
+  cors?: CorsOptions,
+): Promise<Response> {
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: corsHeaders(request, cors),
+    });
+  }
+  const url = new URL(request.url);
+  let response: Response;
+  if (url.pathname === messagePath(basePath)) {
+    const session = sessionObject(namespace, url.searchParams.get("session"));
+    response = session
+      ? await session.fetch(forwardRequest(request, "/sse/message", props))
+      : new Response("Session not found", { status: 404 });
+  } else if (matchesPath(basePath, url.pathname) && request.method === "GET") {
+    response = await namespace.get(namespace.newUniqueId()).fetch(
+      forwardRequest(request, "/sse", props, {
+        endpoint: messagePath(basePath),
+      }),
+    );
+  } else {
+    response = new Response("Not Found", { status: 404 });
+  }
+  return withCors(response, request, cors);
+}
+
+function bindingNamespace(
+  env: Env,
+  options: ServeOptions,
+): DurableObjectNamespace {
+  const bindings = env as unknown as Record<string, unknown>;
+  const name = options.binding
+    ?? ("MCP_OBJECT" in bindings ? "MCP_OBJECT" : "NORESPONSE_MCP_MCP");
+  const namespace = bindings[name] as DurableObjectNamespace | undefined;
+  if (!namespace || typeof namespace.newUniqueId !== "function") {
+    throw new Error(
+      `Durable Object binding ${name} was not found. Check the wrangler configuration.`,
+    );
+  }
+  return options.jurisdiction
+    ? namespace.jurisdiction(options.jurisdiction)
+    : namespace;
+}
+
+type SseResponse = ConstructorParameters<typeof SSEServerTransport>[1];
+
+function sseStream(
+  request: Request,
+): {
+  response: SseResponse;
+  body: ReadableStream<Uint8Array>;
+  headers: () => HeadersInit;
+} {
+  const { readable, writable } = new TransformStream<Uint8Array, Uint8Array>();
+  const writer = writable.getWriter();
+  const encoder = new TextEncoder();
+  const closeListeners: Array<() => void> = [];
+  let headers: HeadersInit = {};
+  let closed = false;
+  const notifyClosed = () => {
+    if (closed) return;
+    closed = true;
+    for (const listener of closeListeners) listener();
+  };
+  writer.closed.then(notifyClosed, notifyClosed);
+  request.signal.addEventListener("abort", () => {
+    void writer.abort().catch(() => {});
+    notifyClosed();
+  });
+  const response = {
+    writeHead(_status: number, head?: HeadersInit) {
+      headers = head ?? {};
+      return response;
+    },
+    write(chunk: string) {
+      writer.write(encoder.encode(chunk)).catch(notifyClosed);
+      return true;
+    },
+    end() {
+      writer.close().catch(() => {});
+      return response;
+    },
+    on(event: string, listener: () => void) {
+      if (event === "close") closeListeners.push(listener);
+      return response;
+    },
+  };
+  return {
+    response: response as unknown as SseResponse,
+    body: readable,
+    headers: () => headers,
+  };
+}
+
+const requestCredentials = new AsyncLocalStorage<Credentials>();
+
+export class AtNoresponseMcpMCP {
+  readonly #sessionId: string;
+  #sessionCredentials: Credentials | undefined;
+  #streamableHttp: WebStandardStreamableHTTPServerTransport | undefined;
+  #sse: SSEServerTransport | undefined;
+
+  constructor(state: DurableObjectState) {
+    this.#sessionId = state.id.toString();
+  }
+
+  static serve(path: string, options: ServeOptions = {}) {
+    return {
+      fetch: async (
+        request: Request,
+        env: Env,
+        ctx?: { props?: Record<string, unknown> },
+      ): Promise<Response> => {
+        const namespace = bindingNamespace(env, options);
+        if (options.transport === "sse") {
+          return handleSse(
+            request,
+            namespace,
+            path,
+            ctx?.props,
+            options.corsOptions,
+          );
+        }
+        if (!matchesPath(path, new URL(request.url).pathname)) {
+          return new Response("Not Found", { status: 404 });
+        }
+        return handleStreamableHttp(
+          request,
+          namespace,
+          ctx?.props,
+          options.corsOptions,
+        );
+      },
+    };
+  }
+
+  static serveSSE(path: string, options: Omit<ServeOptions, "transport"> = {}) {
+    return this.serve(path, { ...options, transport: "sse" });
+  }
+
+  static mount(path: string, options: Omit<ServeOptions, "transport"> = {}) {
+    return this.serveSSE(path, options);
+  }
+
+  async fetch(request: Request): Promise<Response> {
+    return requestCredentials.run(
+      credentials(request),
+      () => this.#route(request),
+    );
+  }
+
+  #requestHeaders(): Headers | undefined {
+    const current = requestCredentials.getStore();
+    const session = this.#sessionCredentials;
+    if (!current) return session?.headers;
+    if (current.authoritative || !session || session.authoritative) {
+      return current.headers;
+    }
+    const merged = new Headers(session.headers);
+    current.headers.forEach((value, name) => merged.set(name, value));
+    return merged;
+  }
+
+  async #route(request: Request): Promise<Response> {
+    const { pathname } = new URL(request.url);
+    if (pathname === "/mcp") return this.#handleStreamableHttp(request);
+    if (pathname === "/sse" && request.method === "GET") {
+      return this.#openSse(request);
+    }
+    if (pathname === "/sse/message" && request.method === "POST") {
+      return this.#handleSseMessage(request);
+    }
+    return new Response("Not Found", { status: 404 });
+  }
+
+  async #handleStreamableHttp(request: Request): Promise<Response> {
+    if (!this.#streamableHttp) {
+      if (request.headers.has("mcp-session-id")) return sessionNotFound();
+      const transport = new WebStandardStreamableHTTPServerTransport({
+        sessionIdGenerator: () => this.#sessionId,
+        onsessionclosed: () => {
+          this.#streamableHttp = undefined;
+        },
+      });
+      this.#sessionCredentials = credentials(request);
+      await createServer(() => this.#requestHeaders()).connect(transport);
+      this.#streamableHttp = transport;
+    }
+    return this.#streamableHttp.handleRequest(request);
+  }
+
+  async #openSse(request: Request): Promise<Response> {
+    if (this.#sse) return new Response("Session already open", { status: 409 });
+    const stream = sseStream(request);
+    const requested = new URL(request.url).searchParams.get("endpoint");
+    const endpoint = requested?.startsWith("/") && !requested.startsWith("//")
+      ? requested
+      : "/sse/message";
+    const transport = new SSEServerTransport(
+      `${endpoint}?session=${encodeURIComponent(this.#sessionId)}`,
+      stream.response,
+    );
+    this.#sessionCredentials = credentials(request);
+    const server = createServer(() => this.#requestHeaders());
+    transport.onclose = () => {
+      this.#sse = undefined;
+    };
+    await server.connect(transport);
+    this.#sse = transport;
+    return new Response(stream.body, {
+      status: 200,
+      headers: stream.headers(),
+    });
+  }
+
+  async #handleSseMessage(request: Request): Promise<Response> {
+    const sessionId = new URL(request.url).searchParams.get("sessionId");
+    if (!this.#sse || sessionId !== this.#sse.sessionId) {
+      return new Response("Session not found", { status: 404 });
+    }
+    let message: unknown;
+    try {
+      message = await request.json();
+    } catch {
+      return new Response("Invalid JSON", { status: 400 });
+    }
+    try {
+      await this.#sse.handleMessage(message, { request });
+    } catch {
+      return new Response("Invalid message", { status: 400 });
+    }
+    return new Response("Accepted", { status: 202 });
+  }
+}
+
+export default {
+  async fetch(request: Request, env: Env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/mcp") {
+      return handleStreamableHttp(request, env.NORESPONSE_MCP_MCP, undefined);
+    }
+
+    if (url.pathname === "/sse" || url.pathname === "/sse/message") {
+      return handleSse(request, env.NORESPONSE_MCP_MCP, "/sse", undefined);
+    }
+
+    // Landing page
+    if (url.pathname === "/") {
+      return landingPage(request);
+    }
+
+    // NOTE: we renamed .dxt extension to .mcpb; redirect for backwards compatibility
+    if (url.pathname.endsWith(".dxt")) {
+      const newPath = url.pathname.replace(/\.dxt$/, ".mcpb");
+      const newUrl = new URL(url);
+      newUrl.pathname = newPath;
+      return Response.redirect(newUrl.toString(), 301);
+    }
+
+    // Fallback to serving static assets
+    const response = await env.ASSETS.fetch(request);
+
+    // Only modify headers if asset was found successfully
+    if (response.ok) {
+      // Clone the response to modify headers
+      return new Response(response.body, {
+        headers: {
+          "Content-Type": "application/octet-stream",
+          "Content-Disposition": "attachment; filename=\"mcp-server.mcpb\"",
+          "Cache-Control": "public, max-age=3600",
+        },
+      });
+    }
+
+    // Return the original response (including 404s) as-is
+    return response;
+  },
+};

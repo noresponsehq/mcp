@@ -1,0 +1,31 @@
+import * as z from "zod";
+import { Breach, Breach$zodSchema } from "./breach.js";
+import {
+  RiskDetailsBreachName,
+  RiskDetailsBreachName$zodSchema,
+} from "./riskdetailsbreachname.js";
+import {
+  RiskDetailsPhoneName,
+  RiskDetailsPhoneName$zodSchema,
+} from "./riskdetailsphonename.js";
+
+/**
+ * Detailed view only (response_mode=detailed, which needs the detailed scope); a standard answer leaves it out. Merged observations without provider, source, origin, raw breach record, value or score.
+ */
+export type RiskDetails = {
+  phone_names?: Array<RiskDetailsPhoneName> | undefined;
+  breaches?: Array<Breach> | undefined;
+  breach_names?: Array<RiskDetailsBreachName> | undefined;
+};
+
+export const RiskDetails$zodSchema: z.ZodType<RiskDetails> = z.object({
+  breach_names: z.array(RiskDetailsBreachName$zodSchema).optional().describe(
+    "Names found next to the identifiers in breach records, merged, with the number of distinct tables each was seen in.",
+  ),
+  breaches: z.array(Breach$zodSchema).optional().describe(
+    "The matching breach tables, newest first, at most 50.",
+  ),
+  phone_names: z.array(RiskDetailsPhoneName$zodSchema).optional(),
+}).describe(
+  "Detailed view only (response_mode=detailed, which needs the detailed scope); a standard answer leaves it out. Merged observations without provider, source, origin, raw breach record, value or score.",
+);

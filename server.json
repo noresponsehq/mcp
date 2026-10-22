@@ -1,0 +1,39 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "org.noresponse/mcp",
+  "version": "0.1.0",
+  "description": "NoResponse API: Server-side signup and gateway risk assessment: a recommendation, polling and signed",
+  "title": "NoResponse API: Server-side signup and gateway risk assessment: a recommendation, polling and signed",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@noresponse/mcp",
+      "version": "0.1.0",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "API_KEY",
+          "description": "The apiKey for the server",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ],
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "start",
+          "valueHint": "start_command"
+        },
+        {
+          "type": "named",
+          "name": "--api-key",
+          "value": "{API_KEY}"
+        }
+      ]
+    }
+  ]
+}

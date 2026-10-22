@@ -1,0 +1,10 @@
+# Hand-written files beside the generated server. The generator leaves them alone.
+src/hooks/registration.ts
+src/hooks/idempotency.ts
+src/mcp-server/server.extensions.ts
+/README.md
+/CHANGELOG.md
+/LICENSE
+tests/
+/wrangler.toml
+/.github/

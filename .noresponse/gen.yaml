@@ -1,0 +1,94 @@
+configVersion: 2.0.0
+generation:
+  sdkClassName: NoResponse
+  maintainOpenAPIOrder: true
+  usageSnippets:
+    optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
+  useClassNamesForArrayFields: true
+  fixes:
+    nameResolutionDec2023: true
+    nameResolutionFeb2025: true
+    parameterOrderingFeb2024: true
+    requestResponseComponentNamesFeb2024: true
+    securityFeb2025: true
+    sharedErrorComponentsApr2025: true
+    sharedNestedComponentsJan2026: true
+    nameOverrideFeb2026: true
+    openSingleValueEnumsOct2026: true
+  auth:
+    oAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
+  inferSSEOverload: true
+  sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: body
+  versioningStrategy: automatic
+  persistentEdits: {}
+  tests:
+    generateTests: false
+    generateNewTests: false
+    skipResponseBodyAssertions: false
+mcp-typescript:
+  version: 0.1.0
+  additionalDependencies:
+    dependencies: {}
+    devDependencies: {}
+    peerDependencies: {}
+  additionalPackageJSON:
+    bin:
+      noresponse-mcp: bin/mcp-server.js
+    bugs:
+      url: https://github.com/noresponsehq/mcp/issues
+    description: NoResponse signup and gateway risk assessment as an MCP server, for agents
+    files:
+      - bin
+      - manifest.json
+      - LICENSE
+      - README.md
+      - CHANGELOG.md
+    homepage: https://docs.noresponse.org
+    keywords:
+      - noresponse
+      - mcp
+      - signup
+      - fraud
+      - risk
+      - identity
+    license: Apache-2.0
+    repository:
+      type: git
+      url: git+https://github.com/noresponsehq/mcp.git
+  additionalScripts:
+    test: node --test tests/*.test.mjs
+  advancedFlags: []
+  author: NoResponse
+  baseErrorName: NoResponseError
+  cloudflareEnabled: true
+  cloudflareURL: https://mcp.noresponse.org
+  envVarPrefix: NORESPONSE
+  fixEnumNameSanitization: false
+  formStringArrayEncodeMode: array
+  gramEnabled: false
+  inferUnionDiscriminators: true
+  inputModelSuffix: input
+  maxMethodParams: 0
+  mcpName: org.noresponse/mcp
+  mcpbManifestOverlay:
+    description: Assess signups and gateway events for abuse risk, wait for pending assessments, page an account's history and record outcomes.
+    display_name: NoResponse
+    homepage: https://docs.noresponse.org
+    license: Apache-2.0
+    name: noresponse
+    user_config:
+      api_key:
+        description: Your NoResponse API key (nrk_...). It stays on this computer and is sent only to api.noresponse.org.
+        title: API key
+  multipartArrayFormat: standard
+  numericEnumMemberNames: words
+  outputModelSuffix: output
+  packageName: '@noresponse/mcp'
+  responseFormat: flat
+  validateResponse: false
