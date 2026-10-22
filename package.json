@@ -1,6 +1,6 @@
 {
   "name": "@noresponse/mcp",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "mcpName": "org.noresponse/mcp",
   "author": "NoResponse",
   "type": "module",
@@ -27,8 +27,8 @@
   ],
   "license": "Apache-2.0",
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/noresponsehq/mcp.git"
+    "url": "git+https://github.com/noresponsehq/mcp.git",
+    "type": "git"
   },
   "bin": {
     "noresponse-mcp": "bin/mcp-server.js"
