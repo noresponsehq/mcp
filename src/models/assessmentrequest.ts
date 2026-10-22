@@ -8,6 +8,10 @@ import {
   AssessmentRequestIdentifiers$zodSchema,
 } from "./assessmentrequestidentifiers.js";
 import {
+  AssessmentRequestIssuedCredential,
+  AssessmentRequestIssuedCredential$zodSchema,
+} from "./assessmentrequestissuedcredential.js";
+import {
   AssessmentRequestPolicyContext,
   AssessmentRequestPolicyContext$zodSchema,
 } from "./assessmentrequestpolicycontext.js";
@@ -26,6 +30,7 @@ export type AssessmentRequest = {
   response_mode?: ResponseMode | undefined;
   client_context?: AssessmentRequestClientContext | undefined;
   auth_context?: AuthContext | undefined;
+  issued_credential?: AssessmentRequestIssuedCredential | undefined;
 };
 
 export const AssessmentRequest$zodSchema: z.ZodType<AssessmentRequest> = z
@@ -46,6 +51,10 @@ export const AssessmentRequest$zodSchema: z.ZodType<AssessmentRequest> = z
     identifiers: AssessmentRequestIdentifiers$zodSchema.describe(
       "At least one of email, username or phone. name and ip refine the match and travel beside a lookup identifier; a body with only name or ip is refused with 400.",
     ),
+    issued_credential: AssessmentRequestIssuedCredential$zodSchema.optional()
+      .describe(
+        "Optional. When the signup gate issues an API key to the new account, send SHA-256 of that key, so later usage of the key, or a leaked copy, ties back to this assessment. Each SDK has a helper that computes it. Send only the hash: customer keys are high-entropy, so the hash reveals nothing about them. The assessment stores it, and no response, webhook or log carries it.",
+      ),
     policy_context: AssessmentRequestPolicyContext$zodSchema.optional(),
     request_id: z.string().optional().describe(
       "An optional provider correlation id, echoed back. It is not an idempotency key. Refuses an exact-shape JWT or a bare 40, 64 or 128 character hex digest; a UUID is accepted.",

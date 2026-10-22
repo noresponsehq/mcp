@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.5
+
+* `SDK.assessments.create()`: 
+  *  `request.body.issued_credential` **Added**
+  *  `response.risk` **Changed**
+* `SDK.assessments.get()`:  `response.risk` **Changed**
+* `SDK.assessments.query()`:  `response.items[].risk` **Changed**
+
 ## 0.1.4
 
 No changes detected.
