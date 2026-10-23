@@ -46,7 +46,7 @@ export const AssessmentRequest$zodSchema: z.ZodType<AssessmentRequest> = z
         "Optional context observed by your signup client. The server parses these hints into coarse features, leaves raw user_agent and opaque ids out of every answer, and weighs a mismatch with the other evidence.",
       ),
     deadline_ms: z.int().optional().describe(
-      "Optional tighter budget, 50 to 500 ms, measured from the moment the request reaches NoResponse. Absent means the 500 ms ceiling; a value above it is refused with 400 rather than clamped.",
+      "Optional tighter budget, 50 to 3000 ms, measured from the moment the request reaches NoResponse. Absent means the 3000 ms ceiling; a value above it is refused with 400 rather than clamped.",
     ),
     identifiers: AssessmentRequestIdentifiers$zodSchema.describe(
       "At least one of email, username or phone. name and ip refine the match and travel beside a lookup identifier; a body with only name or ip is refused with 400.",
