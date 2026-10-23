@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.10
+
+* `SDK.webhookEndpoints.listDeliveries()`:  `response.items[].event_type` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.replayDelivery()`:  `response.event_type` **Changed** (Breaking ⚠️)
+
 ## 0.2.9
 
 No changes detected.

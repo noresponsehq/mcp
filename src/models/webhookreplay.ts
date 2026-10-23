@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { EventType, EventType$zodSchema } from "./eventtype.js";
 
 /**
  * The 202 answer of POST /v1/webhooks/{endpoint_id}/deliveries/{event_id}/replay: the event queued to be sent again.
@@ -7,7 +6,7 @@ import { EventType, EventType$zodSchema } from "./eventtype.js";
 export type WebhookReplay = {
   endpoint_id: string;
   event_id: string;
-  event_type: EventType;
+  event_type: string;
 };
 
 export const WebhookReplay$zodSchema: z.ZodType<WebhookReplay> = z.object({
@@ -15,7 +14,9 @@ export const WebhookReplay$zodSchema: z.ZodType<WebhookReplay> = z.object({
   event_id: z.string().describe(
     "The replayed event's id. The receiver sees the same id and body as the first time, with a new NR-Webhook-Timestamp and signature.",
   ),
-  event_type: EventType$zodSchema,
+  event_type: z.string().describe(
+    "The event's type, as its body's type: assessment.updated, account.deleted or account.risk_changed.",
+  ),
 }).describe(
   "The 202 answer of POST /v1/webhooks/{endpoint_id}/deliveries/{event_id}/replay: the event queued to be sent again.",
 );

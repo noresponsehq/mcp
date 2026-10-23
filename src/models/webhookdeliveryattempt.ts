@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { EventType, EventType$zodSchema } from "./eventtype.js";
 import { Failure, Failure$zodSchema } from "./failure.js";
 import {
   WebhookDeliveryAttemptStatus,
@@ -8,7 +7,7 @@ import {
 
 export type WebhookDeliveryAttempt = {
   event_id: string;
-  event_type: EventType;
+  event_type: string;
   attempt: number;
   replay: boolean;
   status: WebhookDeliveryAttemptStatus;
@@ -30,7 +29,9 @@ export const WebhookDeliveryAttempt$zodSchema: z.ZodType<
   event_id: z.string().describe(
     "The event id the receiver saw as NR-Webhook-Id and as the body's id. Replay it with POST /v1/webhooks/{endpoint_id}/deliveries/{event_id}/replay.",
   ),
-  event_type: EventType$zodSchema,
+  event_type: z.string().describe(
+    "The event's type, as its body's type: assessment.updated, account.deleted or account.risk_changed.",
+  ),
   failure: Failure$zodSchema.optional().describe(
     "Why the attempt failed: the URL is no longer valid, the host did not resolve, it resolved to an address that is not public, no answer within 5 seconds, the connection failed, a 3xx (redirects are not followed) or another non-2xx status. Absent for a delivered attempt.",
   ),
