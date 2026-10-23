@@ -16,13 +16,14 @@ const ID = "asm_01JA2Z8K6Q4V7W9XBCDEFGHJKM";
 async function everyTool(client) {
   const created = await client.callTool({
     name: "create_assessment",
-    arguments: { request: { body: { account_id: "acct_7f3a9c", identifiers: { email: "new.user@example.com" } } } },
+    arguments: { request: { body: { account_id: "acct_7f3a9c", flow: "signup", identifiers: { email: "new.user@example.com" } } } },
   });
   assert.ok(!created.isError, created.content?.[0]?.text);
-  assert.match(json(created).assessment_id, /^asm_/);
+  assert.match(json(created).id, /^asm_/);
+  assert.equal(json(created).detail.assessment_id, json(created).id);
   const got = await client.callTool({ name: "get_assessment", arguments: { request: { assessment_id: ID } } });
   assert.ok(!got.isError, got.content?.[0]?.text);
-  assert.match(json(got).assessment_id, /^asm_/);
+  assert.match(json(got).id, /^asm_/);
   const waited = await client.callTool({ name: "wait_for_assessment", arguments: { assessment_id: ID, timeout_seconds: 5 } });
   assert.ok(!waited.isError, waited.content?.[0]?.text);
   assert.ok(waited.content.length >= 1);

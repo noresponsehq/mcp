@@ -2,24 +2,22 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 
 /**
- * The provider flow the assessment gates. Use the top-level flow instead; this member is ignored when the top-level flow is present. Absent means signup.
+ * The customer event an assessment is made for: signup (a new account), login (a returning sign-in) or purchase (a payment or credit grant). The account's risk is reported with the decision for this flow.
  */
 export const Flow = {
   Signup: "signup",
   Login: "login",
-  Recovery: "recovery",
-  ProfileChange: "profile_change",
+  Purchase: "purchase",
 } as const;
 /**
- * The provider flow the assessment gates. Use the top-level flow instead; this member is ignored when the top-level flow is present. Absent means signup.
+ * The customer event an assessment is made for: signup (a new account), login (a returning sign-in) or purchase (a payment or credit grant). The account's risk is reported with the decision for this flow.
  */
 export type Flow = ClosedEnum<typeof Flow>;
 
 export const Flow$zodSchema = z.enum([
   "signup",
   "login",
-  "recovery",
-  "profile_change",
+  "purchase",
 ]).describe(
-  "The provider flow the assessment gates. Use the top-level flow instead; this member is ignored when the top-level flow is present. Absent means signup.",
+  "The customer event an assessment is made for: signup (a new account), login (a returning sign-in) or purchase (a payment or credit grant). The account's risk is reported with the decision for this flow.",
 );

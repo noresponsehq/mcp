@@ -6,9 +6,10 @@ import assert from "node:assert/strict";
 import { after, before, describe, test } from "node:test";
 import { CALLER_KEY, fixture, httpClient, json, recordingAPI, stdioClient, workerServer } from "./helpers.mjs";
 
-const PENDING = fixture("assessment-pending.json");
-const PARTIAL = fixture("assessment-partial.json");
-const COMPLETE = fixture("assessment-complete.json");
+const PENDING = fixture("assessment-view-pending.json");
+const PARTIAL = fixture("assessment-view-partial.json");
+// The same assessment as PENDING, settled: the tenant's block threshold was reached.
+const COMPLETE = fixture("assessment-view-block.json");
 const OUTCOME = fixture("assessment-outcome.json");
 const LIST = fixture("assessment-list.json");
 const ACCOUNT = fixture("account.json");
@@ -22,7 +23,7 @@ const INTEGRATION = fixture("integration-auth0.json");
 const INTEGRATION_ROTATED = fixture("integration-auth0-rotated.json");
 const INTEGRATIONS = fixture("integration-list.json");
 const INT_ID = INTEGRATION.integration_id;
-const ID = COMPLETE.assessment_id;
+const ID = PENDING.id;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const TOOLS = [
   "create_assessment",
@@ -161,7 +162,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
 
   test("create_assessment sends the key from NORESPONSE_API_KEY and a fresh Idempotency-Key", async () => {
     api.requests.length = 0;
-    const body = { account_id: "acct_7f3a9c", identifiers: { email: "new.user@example.com" } };
+    const body = { account_id: "acct_7f3a9c", flow: "signup", identifiers: { email: "new.user@example.com" } };
     const first = await client.callTool({ name: "create_assessment", arguments: { request: { body } } });
     const second = await client.callTool({ name: "create_assessment", arguments: { request: { body } } });
     assert.ok(!first.isError, first.content?.[0]?.text);
@@ -183,7 +184,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     const key = "signup-acct_7f3a9c-0001";
     await client.callTool({
       name: "create_assessment",
-      arguments: { request: { idempotencyKey: key, body: { account_id: "acct_7f3a9c", identifiers: { email: "new.user@example.com" } } } },
+      arguments: { request: { idempotencyKey: key, body: { account_id: "acct_7f3a9c", flow: "signup", identifiers: { email: "new.user@example.com" } } } },
     });
     assert.equal(api.requests[0].headers["idempotency-key"], key);
   });
@@ -295,6 +296,8 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     fake.state.settleAfter = 0;
     assert.ok(!result.isError, result.content?.[0]?.text);
     assert.equal(json(result).status, "complete");
+    assert.equal(json(result).account.risk.decision, "block");
+    assert.equal(json(result).detail.assessment_version, COMPLETE.detail.assessment_version);
     assert.equal(api.requests.length, 3);
     assert.ok(elapsed >= 1900, `two Retry-After: 1 waits took only ${elapsed} ms`);
     for (const req of api.requests) {
@@ -312,6 +315,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     assert.ok(!result.isError);
     assert.match(result.content[0].text, /still pending after 1 s/);
     assert.equal(json(result, 1).status, "pending");
+    assert.equal(json(result, 1).account, undefined);
   });
 
   test("wait_for_assessment keeps polling a partial answer until it is complete", async () => {
@@ -402,9 +406,9 @@ describe("Cloudflare Worker (mcp.noresponse.org)", () => {
     api.requests.length = 0;
     const created = await client.callTool({
       name: "create_assessment",
-      arguments: { request: { body: { account_id: "acct_7f3a9c", identifiers: { email: "new.user@example.com" } } } },
+      arguments: { request: { body: { account_id: "acct_7f3a9c", flow: "signup", identifiers: { email: "new.user@example.com" } } } },
     });
-    const waited = await client.callTool({ name: "wait_for_assessment", arguments: { assessment_id: json(created).assessment_id } });
+    const waited = await client.callTool({ name: "wait_for_assessment", arguments: { assessment_id: json(created).id } });
     fake.state.settleAfter = 0;
     await client.close();
     assert.equal(json(created).status, "pending");

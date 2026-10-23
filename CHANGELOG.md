@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0
+
+* `SDK.assessments.create()`: 
+  *  `request.body` **Changed** (Breaking ⚠️)
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response` **Changed** (Breaking ⚠️)
+
 ## 0.1.39
 
 * `SDK.assessments.delete()`: **Added**

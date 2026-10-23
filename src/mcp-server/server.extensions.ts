@@ -42,7 +42,7 @@ export function retryAfterMs(value: string | null, now = Date.now()): number | u
 }
 
 const args = {
-  assessment_id: z.string().describe("The assessment_id that create_assessment returned."),
+  assessment_id: z.string().describe("The id that create_assessment returned."),
   response_mode: ResponseMode$zodSchema.optional().describe(
     "standard (default) or detailed; detailed needs the detailed scope.",
   ),

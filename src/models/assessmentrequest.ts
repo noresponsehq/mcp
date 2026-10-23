@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { AssessmentFlow, AssessmentFlow$zodSchema } from "./assessmentflow.js";
 import {
   AssessmentRequestClientContext,
   AssessmentRequestClientContext$zodSchema,
@@ -18,6 +17,7 @@ import {
 } from "./assessmentrequestpolicycontext.js";
 import { AuthContext, AuthContext$zodSchema } from "./authcontext.js";
 import { Depth, Depth$zodSchema } from "./depth.js";
+import { Flow, Flow$zodSchema } from "./flow.js";
 import { ResponseMode, ResponseMode$zodSchema } from "./responsemode.js";
 
 /**
@@ -25,7 +25,7 @@ import { ResponseMode, ResponseMode$zodSchema } from "./responsemode.js";
  */
 export type AssessmentRequest = {
   account_id: string;
-  flow?: AssessmentFlow | undefined;
+  flow: Flow;
   depth?: Depth | undefined;
   identifiers: AssessmentRequestIdentifiers;
   policy_context?: AssessmentRequestPolicyContext | undefined;
@@ -55,7 +55,7 @@ export const AssessmentRequest$zodSchema: z.ZodType<AssessmentRequest> = z
     depth: Depth$zodSchema.optional().describe(
       "How long the synchronous answer waits for sources. quick waits only for the fast sources, those that answer within 500 ms of ingress (or deadline_ms when lower); full waits for the whole budget, up to 3000 ms. Sources still running at the cut continue asynchronously and update the assessment either way.",
     ),
-    flow: AssessmentFlow$zodSchema.optional().describe(
+    flow: Flow$zodSchema.describe(
       "The customer event an assessment is made for: signup (a new account), login (a returning sign-in) or purchase (a payment or credit grant). The account's risk is reported with the decision for this flow.",
     ),
     identifiers: AssessmentRequestIdentifiers$zodSchema.describe(
@@ -65,7 +65,8 @@ export const AssessmentRequest$zodSchema: z.ZodType<AssessmentRequest> = z
       .describe(
         "Optional. When the signup gate issues an API key to the new account, send SHA-256 of that key, so later usage of the key, or a leaked copy, ties back to this assessment. Each SDK has a helper that computes it. Send only the hash: customer keys are high-entropy, so the hash reveals nothing about them. The assessment stores it, and no response, webhook or log carries it.",
       ),
-    policy_context: AssessmentRequestPolicyContext$zodSchema.optional(),
+    policy_context: AssessmentRequestPolicyContext$zodSchema.optional()
+      .describe("Optional policy inputs: region."),
     request_id: z.string().optional().describe(
       "An optional provider correlation id, echoed back. It is not an idempotency key. Refuses an exact-shape JWT or a bare 40, 64 or 128 character hex digest; a UUID is accepted.",
     ),

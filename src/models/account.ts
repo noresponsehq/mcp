@@ -22,7 +22,7 @@ export const Account$zodSchema: z.ZodType<Account> = z.object({
     "The assessment the current risk comes from.",
   ),
   decisions_by_flow: AccountDecisionsByFlow$zodSchema.describe(
-    "The decision for each flow. Every flow uses the tenant's signup thresholds today, so all three equal risk.decision.",
+    "The decision for each flow. Every flow uses the tenant's signup thresholds today, so all three are equal.",
   ),
   id: z.string().describe(
     "The account_id the tenant sends with its assessments.",

@@ -8,7 +8,7 @@ The server uses the API key you give it and stores nothing. API key rotation is 
 
 | Tool | What it does | API call |
 |---|---|---|
-| `create_assessment` | Assess identifiers (email, phone, username, name, IP) for a signup or gateway decision. Sends a fresh Idempotency-Key when you give none. | `POST /v1/assessments` |
+| `create_assessment` | Assess identifiers (email, phone, username, name, IP) for a `signup`, `login` or `purchase` flow. Sends a fresh Idempotency-Key when you give none. | `POST /v1/assessments` |
 | `get_assessment` | Read the latest version of one assessment. | `GET /v1/assessments/{assessment_id}` |
 | `wait_for_assessment` | Poll a pending assessment, at the interval Retry-After asks for, until it settles or `timeout_seconds` (default 25, at most 55) pass. | `GET /v1/assessments/{assessment_id}` |
 | `query_assessments` | Page through one account's unexpired assessments, newest first. | `POST /v1/assessments/query` |
@@ -29,7 +29,7 @@ The server uses the API key you give it and stores nothing. API key rotation is 
 | `delete_integration` | Delete an integration; its endpoint answers 404 from then on. | `DELETE /v1/integrations/{integration_id}` |
 | `rotate_integration_secret` | Replace an integration's secret. The old one is accepted for 24 hours. Never retried. | `POST /v1/integrations/{integration_id}/rotate` |
 
-Recommendations are advisory. A pending assessment has no recommendation, so apply your own fallback for pending, 429, 503 or a timeout.
+Act on `account.risk.decision` (`allow`, `step_up`, `review` or `block`), the account's current decision for the assessment's flow. `detail` holds the assessment's own risk, recommendation and `assessment_version`. While the account's first assessment is pending, `account` is absent, so apply your own fallback for that, 429, 503 or a timeout.
 
 ## Hosted server
 

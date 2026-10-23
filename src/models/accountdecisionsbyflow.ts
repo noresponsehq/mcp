@@ -5,7 +5,7 @@ import {
 } from "./accountdecision.js";
 
 /**
- * The decision for each flow. Every flow uses the tenant's signup thresholds today, so all three equal risk.decision.
+ * The decision for each flow. Every flow uses the tenant's signup thresholds today, so all three are equal.
  */
 export type AccountDecisionsByFlow = {
   signup: AccountDecision;
@@ -26,5 +26,5 @@ export const AccountDecisionsByFlow$zodSchema: z.ZodType<
     "block when the score reached your block threshold (risk.block of the assessment), otherwise the assessment's recommendation. Your application applies it.",
   ),
 }).describe(
-  "The decision for each flow. Every flow uses the tenant's signup thresholds today, so all three equal risk.decision.",
+  "The decision for each flow. Every flow uses the tenant's signup thresholds today, so all three are equal.",
 );
