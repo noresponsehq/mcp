@@ -28,6 +28,8 @@ import { tool$integrationsRotate } from "./tools/integrationsRotate.js";
 import { tool$webhookEndpointsCreate } from "./tools/webhookEndpointsCreate.js";
 import { tool$webhookEndpointsDelete } from "./tools/webhookEndpointsDelete.js";
 import { tool$webhookEndpointsList } from "./tools/webhookEndpointsList.js";
+import { tool$webhookEndpointsListDeliveries } from "./tools/webhookEndpointsListDeliveries.js";
+import { tool$webhookEndpointsReplayDelivery } from "./tools/webhookEndpointsReplayDelivery.js";
 import { tool$webhookEndpointsRotateSigningKey } from "./tools/webhookEndpointsRotateSigningKey.js";
 import { tool$webhookEndpointsSendTestEvent } from "./tools/webhookEndpointsSendTestEvent.js";
 
@@ -44,7 +46,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.1.31",
+    version: "0.1.32",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -104,6 +106,8 @@ export function createMCPServer(deps: {
   tool(tool$webhookEndpointsDelete);
   tool(tool$webhookEndpointsRotateSigningKey);
   tool(tool$webhookEndpointsSendTestEvent);
+  tool(tool$webhookEndpointsListDeliveries);
+  tool(tool$webhookEndpointsReplayDelivery);
 
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);

@@ -20,6 +20,8 @@ The server uses the API key you give it and stores nothing. API key rotation is 
 | `send_webhook_test_event` | Send `endpoint.verification` (verifies the endpoint) or a test `assessment.updated`. | `POST /v1/webhooks/{endpoint_id}/test` |
 | `rotate_webhook_signing_key` | Issue a new signing key; the old one verifies for 7 more days. | `POST /v1/webhooks/{endpoint_id}/rotate` |
 | `delete_webhook_endpoint` | Delete a webhook endpoint. | `DELETE /v1/webhooks/{endpoint_id}` |
+| `list_webhook_deliveries` | Page through an endpoint's delivery attempts, newest first: the event, attempt, status, response code, failure and latency. | `GET /v1/webhooks/{endpoint_id}/deliveries` |
+| `replay_webhook_delivery` | Send one logged event to the endpoint again, signed fresh. Not retried. | `POST /v1/webhooks/{endpoint_id}/deliveries/{event_id}/replay` |
 | `create_integration` | Register a hosted WorkOS or Auth0 integration and return its endpoint URL. For Auth0 the answer holds the Action's shared secret, shown once. Never retried. | `POST /v1/integrations` |
 | `list_integrations` | List the account's integrations, oldest first, with no secrets. | `GET /v1/integrations` |
 | `delete_integration` | Delete an integration; its endpoint answers 404 from then on. | `DELETE /v1/integrations/{integration_id}` |

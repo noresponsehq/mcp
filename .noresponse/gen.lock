@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 72b8866738d753bce35cb06ab2b45b6e
+  docChecksum: b2b3f918bb1c6b2b4001ad3ff94be426
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.1.31
-  configChecksum: 726ad3a7a1a42611ca201ffc470b4543
+  releaseVersion: 0.1.32
+  configChecksum: 36aa67dbf384870ae9e44649cdb074df
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -33,11 +33,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:2c28a882203bfb7d11b8b4296f3d4601b3280604
+    last_write_checksum: sha1:83289b6abb68424245ded85830b4cf69fd60b7de
   package.json:
-    last_write_checksum: sha1:24abab1f5854f2b9b8ec2b2ea8793a080b6cba54
+    last_write_checksum: sha1:c529a14e6f830ac4354c4a0df4d24e85d28bb931
   server.json:
-    last_write_checksum: sha1:3322bca1764553b07500b4a05a56d7cc95cdcc10
+    last_write_checksum: sha1:62adf3f0945716d62080cc4c7e6a18ad0780aa06
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -70,6 +70,10 @@ trackedFiles:
     last_write_checksum: sha1:491dc499ac15f29f4d67c72cca4929464c22f62a
   src/funcs/webhookEndpointsList.ts:
     last_write_checksum: sha1:40115d335f981b4edb9bd615cde258a655e58b5b
+  src/funcs/webhookEndpointsListDeliveries.ts:
+    last_write_checksum: sha1:43507f78946479073f131f36a5fd98933b811dd8
+  src/funcs/webhookEndpointsReplayDelivery.ts:
+    last_write_checksum: sha1:124b01f2fff73ee2f70eb5a2138619e6cd547118
   src/funcs/webhookEndpointsRotateSigningKey.ts:
     last_write_checksum: sha1:20b059c20e99a2faf7f5dc88b825ed7c48c14e6f
   src/funcs/webhookEndpointsSendTestEvent.ts:
@@ -83,7 +87,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:70eda1211928a9aa8000fff1c1939414bf035c2f
+    last_write_checksum: sha1:07bc9fbdef2abf4ecf52c9f3dda883622d5e15a2
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -127,7 +131,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:a0f3df96aad47bb4ea38260c4cfc219284b107f8
+    last_write_checksum: sha1:0cba6af220fdc6ca78179bbde9a5e7e5b3b64464
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -135,7 +139,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:0be27b766f0a2cef5f0dd4b055fdbb3398843e05
+    last_write_checksum: sha1:ad1ffc922e1471f1b0f7301dd99f6562255da361
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -166,6 +170,10 @@ trackedFiles:
     last_write_checksum: sha1:c54b493b886d25df9d81e87d07627b951bb30e5d
   src/mcp-server/tools/webhookEndpointsList.ts:
     last_write_checksum: sha1:bba4e9e58407e8bfcc035ad5d054d3ac93463078
+  src/mcp-server/tools/webhookEndpointsListDeliveries.ts:
+    last_write_checksum: sha1:a34a9043008005c6c34c2849241b078aee4522b2
+  src/mcp-server/tools/webhookEndpointsReplayDelivery.ts:
+    last_write_checksum: sha1:289a187e54b4bd7c22d220549b01717aff7521dd
   src/mcp-server/tools/webhookEndpointsRotateSigningKey.ts:
     last_write_checksum: sha1:8e425e3b559a84639cc9d7a20ce65d379fb341cf
   src/mcp-server/tools/webhookEndpointsSendTestEvent.ts:
@@ -258,6 +266,10 @@ trackedFiles:
     last_write_checksum: sha1:ad4ab276df05a69c6fa47ced3c2decf0fa5709a6
   src/models/errors/sdkvalidationerror.ts:
     last_write_checksum: sha1:604caf3f6c916c962a891a8f6e2c1a3543815441
+  src/models/eventtype.ts:
+    last_write_checksum: sha1:d81093cf59cf791ee0cd3d9c673c43815d4160bb
+  src/models/failure.ts:
+    last_write_checksum: sha1:53e65ce638a520cb3c410a39cbe60b9df872aa96
   src/models/failurereason.ts:
     last_write_checksum: sha1:eb52e9c8e893bf0bd9b59a99540e6ab9cfec963d
   src/models/flow.ts:
@@ -304,6 +316,8 @@ trackedFiles:
     last_write_checksum: sha1:223075cc6d9301b0550fe1985c554b72a248eb6a
   src/models/listintegrationsop.ts:
     last_write_checksum: sha1:89e93c4ab11a5952f1a9c16adec949717650e915
+  src/models/listwebhookdeliveriesop.ts:
+    last_write_checksum: sha1:a0edac68a152daa9968e5ac4cbb69182dd184d7c
   src/models/listwebhookendpointsop.ts:
     last_write_checksum: sha1:3b92e84b454320db33c7479cab63fdc820301a29
   src/models/notfounderror.ts:
@@ -338,6 +352,8 @@ trackedFiles:
     last_write_checksum: sha1:7a8a1774caf30aa3c4ead8b629799fd9bd0058bb
   src/models/recordassessmentoutcomeop.ts:
     last_write_checksum: sha1:da875210ebadea9aca5a9bf73d93fe81628c05c8
+  src/models/replaywebhookdeliveryop.ts:
+    last_write_checksum: sha1:8540be9a583037375f1ae4fb76dbaafb99ed4aa6
   src/models/responsemode.ts:
     last_write_checksum: sha1:4c59c0d1f1ebf355fa9b97881d69230eb0b5450d
   src/models/risk.ts:
@@ -384,6 +400,12 @@ trackedFiles:
     last_write_checksum: sha1:2de12a856682361acb5139f01b4a673204e5f482
   src/models/transport.ts:
     last_write_checksum: sha1:de4bdd023cdce603d522d24a906410a112210006
+  src/models/webhookdeliveryattempt.ts:
+    last_write_checksum: sha1:0537d945fdf8e75f1221c8d93116342af119fddf
+  src/models/webhookdeliveryattemptstatus.ts:
+    last_write_checksum: sha1:4701316a1d7ea60f0460384c9ea6ac5a65037de1
+  src/models/webhookdeliverylist.ts:
+    last_write_checksum: sha1:3198498435335ff1d24d6d71746cf9b6b1c84eaf
   src/models/webhookendpoint.ts:
     last_write_checksum: sha1:d0450cf518a6dc3efd41e0aca2ff56a492ffb2dd
   src/models/webhookendpointcreated.ts:
@@ -398,6 +420,10 @@ trackedFiles:
     last_write_checksum: sha1:2ac10d3cf2e6780ba7a399e7416829cb7fc06fc1
   src/models/webhookkeyrotationrequest.ts:
     last_write_checksum: sha1:e39d8426794ecaaf15c8bb4ea1407e7a05d5ad6b
+  src/models/webhookreplay.ts:
+    last_write_checksum: sha1:bb51f83a3e0d4973df91aeba029ec7d19812bbcf
+  src/models/webhookreplayrequest.ts:
+    last_write_checksum: sha1:d9977159daf60d0f5059da41d4e9690d0461323b
   src/models/webhooktest.ts:
     last_write_checksum: sha1:701f147552b1cd587103d2d1673a85848a2173fd
   src/models/webhooktestrequest.ts:
@@ -405,7 +431,7 @@ trackedFiles:
   src/models/webhooktestrequestevent.ts:
     last_write_checksum: sha1:8df81ee84be6c2fa72e8c55ce43e0437ef11d42a
   src/tool-names.ts:
-    last_write_checksum: sha1:c64e56e3b8a10f9608d30b3bda3d58b4225c5a89
+    last_write_checksum: sha1:cbb800e4e2ed4b8ca62fbaa45fe0525e40cc160d
   src/types/async.ts:
     last_write_checksum: sha1:ebc27b1229fbbe1835d89ec484c7fa28188b9cf4
   src/types/bigint.ts:
@@ -897,4 +923,47 @@ examples:
       responses:
         "202":
           application/json: {"delivery_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2", "endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "event": "assessment.updated", "state": "verified"}
+  listWebhookDeliveries:
+    attempts:
+      parameters:
+        path:
+          endpoint_id: "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9"
+        query:
+          limit: 20
+      responses:
+        "200":
+          application/json: {"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "items": [{"event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2", "event_type": "assessment.updated", "attempt": 1, "replay": true, "status": "delivered", "response_code": 200, "latency_ms": 184, "attempted_at": "2026-10-22T10:15:02.118Z"}, {"event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2", "event_type": "assessment.updated", "attempt": 2, "replay": false, "status": "failed", "response_code": 500, "failure": "non_2xx", "latency_ms": 96, "attempted_at": "2026-10-22T09:00:31.402Z"}, {"event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2", "event_type": "assessment.updated", "attempt": 1, "replay": false, "status": "failed", "failure": "timeout", "latency_ms": 5000, "attempted_at": "2026-10-22T09:00:00.951Z"}], "next_cursor": "AQAAAABpG1CXAAYqJ2gK4cQAx1dJ2Hk3Q6CjhYbJ9xU8Pz0qRkL1n3VbW2c"}
+  replayWebhookDelivery:
+    empty:
+      parameters:
+        path:
+          endpoint_id: "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9"
+          event_id: "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2"
+      requestBody:
+        application/json: {}
+      responses:
+        "202":
+          application/json: {"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2", "event_type": "assessment.updated"}
+        "400":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "invalid_idempotency_key", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "401":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 401, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "unauthorized", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "403":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 403, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "tenant_forbidden", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "404":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 404, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "not_found", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "409":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 409, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "key_rotation_in_progress", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "429":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 429, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "rate_limited", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+    replay:
+      parameters:
+        path:
+          endpoint_id: "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9"
+          event_id: "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2"
+      requestBody:
+        application/json: {}
+      responses:
+        "202":
+          application/json: {"endpoint_id": "whe_01JA2ZD0E1F2G3H4J5K6M7N8P9", "event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2", "event_type": "assessment.updated"}
 examplesVersion: 1.0.2

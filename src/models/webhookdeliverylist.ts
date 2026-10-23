@@ -1,0 +1,25 @@
+import * as z from "zod";
+import {
+  WebhookDeliveryAttempt,
+  WebhookDeliveryAttempt$zodSchema,
+} from "./webhookdeliveryattempt.js";
+
+/**
+ * The 200 answer of GET /v1/webhooks/{endpoint_id}/deliveries: one page of the endpoint's delivery attempts, newest first. Each item is one POST to the endpoint. Attempts are kept for 30 days, or the tenant's retention_days when that is shorter, and are deleted with the assessment they carried. next_cursor is present only when another page exists.
+ */
+export type WebhookDeliveryList = {
+  endpoint_id: string;
+  items: Array<WebhookDeliveryAttempt>;
+  next_cursor?: string | undefined;
+};
+
+export const WebhookDeliveryList$zodSchema: z.ZodType<WebhookDeliveryList> = z
+  .object({
+    endpoint_id: z.string().describe("Opaque id of the endpoint registration."),
+    items: z.array(WebhookDeliveryAttempt$zodSchema),
+    next_cursor: z.string().optional().describe(
+      "Opaque cursor for the next page, MAC'd by the server and bound to the tenant and endpoint it was issued for. Pass it back unchanged as cursor; a tampered, foreign or expired cursor answers 400 invalid_cursor.",
+    ),
+  }).describe(
+    "The 200 answer of GET /v1/webhooks/{endpoint_id}/deliveries: one page of the endpoint's delivery attempts, newest first. Each item is one POST to the endpoint. Attempts are kept for 30 days, or the tenant's retention_days when that is shorter, and are deleted with the assessment they carried. next_cursor is present only when another page exists.",
+  );

@@ -61,6 +61,14 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Send a test event to an endpoint.\n\nendpoint.verification sends a signed challenge now and answers whether the endpoint echoed it within 5 seconds; an echo verifies the endpoint, including a disabled one. assessment.updated queues one signed event with test: true and a fixed example assessment in the endpoint's response mode, delivered and retried like any other event; the endpoint must be verified. Both use the endpoint's current signing key. Requires the webhooks scope."
   },
   {
+    "name": "list_webhook_deliveries",
+    "description": "List an endpoint's delivery attempts.\n\nEvery POST the endpoint received, newest first: the event id and type, which attempt it was, whether it was a replay, delivered or failed, the response code, why it failed and how long it took. Attempts are kept for 30 days, or your retention_days when that is shorter, and are deleted with the assessment they carried. Requires the webhooks scope. Read-only and safe to retry. The cursor is opaque and bound to your tenant and the endpoint; a tampered or expired cursor answers 400 invalid_cursor."
+  },
+  {
+    "name": "replay_webhook_delivery",
+    "description": "Send one delivery again.\n\nQueues the event for the endpoint again: the same event id and body it received, with a new NR-Webhook-Timestamp and a signature from the endpoint's current signing key, retried like any other delivery and listed with replay: true. Your receiver deduplicates on the event id. The endpoint must be verified. Requires the webhooks scope. Not idempotent: each call, a retry included, sends the event again."
+  },
+  {
     "name": "wait_for_assessment",
     "description": "Wait until a pending assessment is no longer pending, then return it.\n\nPolls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, partial or failed, or until timeout_seconds pass. When the time runs out the assessment is still pending: the result says so and carries the last answer, and you can call this tool again. A pending assessment has no recommendation; apply your own fallback until it settles. Requires the assess or history scope."
   }
