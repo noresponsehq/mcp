@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { AssessmentFlow, AssessmentFlow$zodSchema } from "./assessmentflow.js";
 import {
   AssessmentRequestClientContext,
   AssessmentRequestClientContext$zodSchema,
@@ -16,6 +17,7 @@ import {
   AssessmentRequestPolicyContext$zodSchema,
 } from "./assessmentrequestpolicycontext.js";
 import { AuthContext, AuthContext$zodSchema } from "./authcontext.js";
+import { Depth, Depth$zodSchema } from "./depth.js";
 import { ResponseMode, ResponseMode$zodSchema } from "./responsemode.js";
 
 /**
@@ -23,6 +25,8 @@ import { ResponseMode, ResponseMode$zodSchema } from "./responsemode.js";
  */
 export type AssessmentRequest = {
   account_id: string;
+  flow?: AssessmentFlow | undefined;
+  depth?: Depth | undefined;
   identifiers: AssessmentRequestIdentifiers;
   policy_context?: AssessmentRequestPolicyContext | undefined;
   request_id?: string | undefined;
@@ -47,6 +51,12 @@ export const AssessmentRequest$zodSchema: z.ZodType<AssessmentRequest> = z
       ),
     deadline_ms: z.int().optional().describe(
       "Optional tighter budget, 50 to 3000 ms, measured from the moment the request reaches NoResponse. Absent means the 3000 ms ceiling; a value above it is refused with 400 rather than clamped.",
+    ),
+    depth: Depth$zodSchema.optional().describe(
+      "How long the synchronous answer waits for sources. quick waits only for the fast sources, those that answer within 500 ms of ingress (or deadline_ms when lower); full waits for the whole budget, up to 3000 ms. Sources still running at the cut continue asynchronously and update the assessment either way.",
+    ),
+    flow: AssessmentFlow$zodSchema.optional().describe(
+      "The customer event an assessment is made for: signup (a new account), login (a returning sign-in) or purchase (a payment or credit grant). The account's risk is reported with the decision for this flow.",
     ),
     identifiers: AssessmentRequestIdentifiers$zodSchema.describe(
       "At least one of email, username or phone. name and ip refine the match and travel beside a lookup identifier; a body with only name or ip is refused with 400.",
