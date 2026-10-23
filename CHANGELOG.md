@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.21
+
+* `SDK.accounts.get()`: **Added**
+* `SDK.accounts.listAssessments()`: **Added**
+
 ## 0.1.20
 
 No changes detected.

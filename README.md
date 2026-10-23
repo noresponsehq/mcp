@@ -12,6 +12,8 @@ The server uses the API key you give it and stores nothing. API key rotation is 
 | `get_assessment` | Read the latest version of one assessment. | `GET /v1/assessments/{assessment_id}` |
 | `wait_for_assessment` | Poll a pending assessment, at the interval Retry-After asks for, until it settles or `timeout_seconds` (default 25, at most 55) pass. | `GET /v1/assessments/{assessment_id}` |
 | `query_assessments` | Page through one account's unexpired assessments, newest first. | `POST /v1/assessments/query` |
+| `get_account` | Read an account's one current risk: the score, a decision (`allow`, `step_up`, `review` or `block`) for each flow, and the assessment it comes from. Needs the `history` scope. | `GET /v1/accounts/{account_id}` |
+| `list_account_assessments` | Page through one account's unexpired assessments, newest first, with the account id in the URL. Needs the `history` scope. | `GET /v1/accounts/{account_id}/assessments` |
 | `record_outcome` | Report what you later learned about an assessed account (`confirmed_abuse`, `legitimate` and so on). | `POST /v1/assessments/{assessment_id}/outcomes` |
 | `create_webhook_endpoint` | Register a webhook endpoint; the answer holds its signing secret, shown once. Needs the `webhooks` scope. | `POST /v1/webhooks` |
 | `list_webhook_endpoints` | List your webhook endpoints and their signing key ids. | `GET /v1/webhooks` |

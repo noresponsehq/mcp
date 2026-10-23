@@ -29,6 +29,12 @@ async function everyTool(client) {
   const listed = await client.callTool({ name: "query_assessments", arguments: { request: { account_id: "acct_7f3a9c" } } });
   assert.ok(!listed.isError, listed.content?.[0]?.text);
   assert.ok(Array.isArray(json(listed).items));
+  const account = await client.callTool({ name: "get_account", arguments: { request: { account_id: "acct_7f3a9c" } } });
+  assert.ok(!account.isError, account.content?.[0]?.text);
+  assert.equal(json(account).id, "acct_7f3a9c");
+  const history = await client.callTool({ name: "list_account_assessments", arguments: { request: { account_id: "acct_7f3a9c" } } });
+  assert.ok(!history.isError, history.content?.[0]?.text);
+  assert.ok(Array.isArray(json(history).items));
   const recorded = await client.callTool({
     name: "record_outcome",
     arguments: { request: { assessment_id: ID, body: { outcome: "false_positive" } } },

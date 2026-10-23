@@ -10,6 +10,7 @@ const PENDING = fixture("assessment-pending.json");
 const COMPLETE = fixture("assessment-complete.json");
 const OUTCOME = fixture("assessment-outcome.json");
 const LIST = fixture("assessment-list.json");
+const ACCOUNT = fixture("account.json");
 const ENDPOINTS = fixture("webhook-endpoint-list.json");
 const CREATED = fixture("webhook-endpoint-created.json");
 const SENT = fixture("webhook-test-assessment-updated.json");
@@ -26,7 +27,9 @@ const TOOLS = [
   "create_webhook_endpoint",
   "delete_integration",
   "delete_webhook_endpoint",
+  "get_account",
   "get_assessment",
+  "list_account_assessments",
   "list_integrations",
   "list_webhook_endpoints",
   "query_assessments",
@@ -48,6 +51,8 @@ function fakeAPI() {
       }
       if (req.method === "POST" && req.path === "/v1/assessments") return { status: 202, headers: { "retry-after": "1" }, body: PENDING };
       if (req.method === "POST" && req.path === "/v1/assessments/query") return { body: LIST };
+      if (req.method === "GET" && req.path === "/v1/accounts/acct_7f3a9c") return { body: ACCOUNT };
+      if (req.method === "GET" && req.path.startsWith("/v1/accounts/acct_7f3a9c/assessments")) return { body: LIST };
       if (req.method === "POST" && req.path === `/v1/assessments/${ID}/outcomes`) return { status: 201, body: OUTCOME };
       if (req.method === "GET" && req.path === "/v1/webhooks") return { body: ENDPOINTS };
       if (req.method === "POST" && req.path === "/v1/webhooks") return { status: 201, body: CREATED };
@@ -92,7 +97,9 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       delete_webhook_endpoint: false,
       create_integration: false,
       delete_integration: false,
+      get_account: true,
       get_assessment: true,
+      list_account_assessments: true,
       list_webhook_endpoints: true,
       list_integrations: true,
       query_assessments: true,
@@ -191,6 +198,27 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     assert.equal(req.path, "/v1/assessments/query");
     assert.deepEqual(req.body, { account_id: "acct_7f3a9c", limit: 5 });
     assert.equal(req.headers["idempotency-key"], undefined);
+  });
+
+  test("get_account and list_account_assessments read the account with the caller's key", async () => {
+    api.requests.length = 0;
+    const account = await client.callTool({ name: "get_account", arguments: { request: { account_id: "acct_7f3a9c" } } });
+    assert.ok(!account.isError, account.content?.[0]?.text);
+    assert.deepEqual(json(account), ACCOUNT);
+    const history = await client.callTool({
+      name: "list_account_assessments",
+      arguments: { request: { account_id: "acct_7f3a9c", limit: 5, response_mode: "standard" } },
+    });
+    assert.ok(!history.isError, history.content?.[0]?.text);
+    assert.deepEqual(json(history), LIST);
+    assert.deepEqual(api.requests.map((r) => `${r.method} ${r.path}`), [
+      "GET /v1/accounts/acct_7f3a9c",
+      "GET /v1/accounts/acct_7f3a9c/assessments?limit=5&response_mode=standard",
+    ]);
+    for (const req of api.requests) {
+      assert.equal(req.headers.authorization, `Bearer ${CALLER_KEY}`);
+      assert.equal(req.headers["idempotency-key"], undefined);
+    }
   });
 
   test("the integration tools call their routes with the caller's key and no Idempotency-Key", async () => {
