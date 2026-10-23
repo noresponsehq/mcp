@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.35
+
+* `SDK.accounts.delete()`: **Added**
+
 ## 0.1.34
 
 * `SDK.assessments.create()`: 

@@ -12,6 +12,7 @@ const COMPLETE = fixture("assessment-complete.json");
 const OUTCOME = fixture("assessment-outcome.json");
 const LIST = fixture("assessment-list.json");
 const ACCOUNT = fixture("account.json");
+const DELETION = fixture("account-deletion.json");
 const ENDPOINTS = fixture("webhook-endpoint-list.json");
 const CREATED = fixture("webhook-endpoint-created.json");
 const SENT = fixture("webhook-test-assessment-updated.json");
@@ -26,6 +27,7 @@ const TOOLS = [
   "create_assessment",
   "create_integration",
   "create_webhook_endpoint",
+  "delete_account",
   "delete_integration",
   "delete_webhook_endpoint",
   "get_account",
@@ -55,6 +57,7 @@ function fakeAPI() {
       if (req.method === "POST" && req.path === "/v1/assessments") return { status: 202, headers: { "retry-after": "1" }, body: PENDING };
       if (req.method === "POST" && req.path === "/v1/assessments/query") return { body: LIST };
       if (req.method === "GET" && req.path === "/v1/accounts/acct_7f3a9c") return { body: ACCOUNT };
+      if (req.method === "DELETE" && req.path === "/v1/accounts/acct_7f3a9c") return { body: DELETION };
       if (req.method === "GET" && req.path.startsWith("/v1/accounts/acct_7f3a9c/assessments")) return { body: LIST };
       if (req.method === "POST" && req.path === `/v1/assessments/${ID}/outcomes`) return { status: 201, body: OUTCOME };
       if (req.method === "GET" && req.path === "/v1/webhooks") return { body: ENDPOINTS };
@@ -97,6 +100,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     assert.deepEqual(readOnly, {
       create_assessment: false,
       create_webhook_endpoint: false,
+      delete_account: false,
       delete_webhook_endpoint: false,
       create_integration: false,
       delete_integration: false,
@@ -115,7 +119,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       wait_for_assessment: true,
     });
     const destructive = tools.filter((t) => t.annotations?.destructiveHint === true).map((t) => t.name);
-    assert.deepEqual(destructive.sort(), ["delete_integration", "delete_webhook_endpoint"]);
+    assert.deepEqual(destructive.sort(), ["delete_account", "delete_integration", "delete_webhook_endpoint"]);
   });
 
   test("the webhook endpoint tools call their routes with the caller's key", async () => {
@@ -224,6 +228,15 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       assert.equal(req.headers.authorization, `Bearer ${CALLER_KEY}`);
       assert.equal(req.headers["idempotency-key"], undefined);
     }
+  });
+
+  test("delete_account erases the account with the caller's key", async () => {
+    api.requests.length = 0;
+    const erased = await client.callTool({ name: "delete_account", arguments: { request: { account_id: "acct_7f3a9c" } } });
+    assert.ok(!erased.isError, erased.content?.[0]?.text);
+    assert.deepEqual(json(erased), DELETION);
+    assert.deepEqual(api.requests.map((r) => `${r.method} ${r.path}`), ["DELETE /v1/accounts/acct_7f3a9c"]);
+    assert.equal(api.requests[0].headers.authorization, `Bearer ${CALLER_KEY}`);
   });
 
   test("the integration tools call their routes with the caller's key and no Idempotency-Key", async () => {

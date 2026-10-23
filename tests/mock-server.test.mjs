@@ -35,6 +35,9 @@ async function everyTool(client) {
   const history = await client.callTool({ name: "list_account_assessments", arguments: { request: { account_id: "acct_7f3a9c" } } });
   assert.ok(!history.isError, history.content?.[0]?.text);
   assert.ok(Array.isArray(json(history).items));
+  const erased = await client.callTool({ name: "delete_account", arguments: { request: { account_id: "acct_7f3a9c" } } });
+  assert.ok(!erased.isError, erased.content?.[0]?.text);
+  assert.equal(json(erased).deleted, true);
   const recorded = await client.callTool({
     name: "record_outcome",
     arguments: { request: { assessment_id: ID, body: { outcome: "false_positive" } } },

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 22e1bb2fbee9ec2f35bbd6e3c323864b
+  docChecksum: 92b0529c79117a2f019f6c4edd758b03
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.1.34
-  configChecksum: a2c911c2701515d956aaa9b3a22f6d59
+  releaseVersion: 0.1.35
+  configChecksum: ab445f11277eb66505a9c064224350f1
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -33,15 +33,17 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:86cd288a4b2b7935bded76d82ed07904f932e66c
+    last_write_checksum: sha1:0cd89832b60c08fc1b41241769c61837b700c291
   package.json:
-    last_write_checksum: sha1:1375140920f21a23b7d13567ae8f27271c82c8b8
+    last_write_checksum: sha1:9e934d61ab97e7ebe36c07135110ac1ee400981a
   server.json:
-    last_write_checksum: sha1:66f5264f6f13fde2ae876e1f5e5334c1fd59473b
+    last_write_checksum: sha1:21efa236610036f33098201a5a7c9268b7cf5178
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
     last_write_checksum: sha1:777e9e0f1e38ea3247241ea7f31b9223b9d811f0
+  src/funcs/accountsDelete.ts:
+    last_write_checksum: sha1:89f2721a8d235387e60cd245633370edc2af9d17
   src/funcs/accountsGet.ts:
     last_write_checksum: sha1:5cf8d77a1aa7f48443352c0d55c0f1ce0a6441f4
   src/funcs/accountsListAssessments.ts:
@@ -87,7 +89,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:9b9caff1acf5327733f086a77a046a83f53aea41
+    last_write_checksum: sha1:8f52226fa8e5dbd1552ed8844dea3a175cbabe5c
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -131,7 +133,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:d0305126ce2b205d74106a30d6c9292e619898a2
+    last_write_checksum: sha1:b778e2f64d149d1d4fccc63426c70d14113e692e
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -139,11 +141,13 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:ca59a84d88b2ebd2f811304dc4525dcee3cc20d2
+    last_write_checksum: sha1:7b7f869da9637b3134b99613a2600cb7f76605ea
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
     last_write_checksum: sha1:5e4ed3f5323932f06c6a96a0c967f693f4670b6b
+  src/mcp-server/tools/accountsDelete.ts:
+    last_write_checksum: sha1:e0a1c95b70d39432197db6951d9686da82e65fb2
   src/mcp-server/tools/accountsGet.ts:
     last_write_checksum: sha1:ac51f221285aee1d381f388eae76e7da38bc2af1
   src/mcp-server/tools/accountsListAssessments.ts:
@@ -184,6 +188,8 @@ trackedFiles:
     last_write_checksum: sha1:05632a53674c0adaf4787974a413ef666f94e995
   src/models/accountdecisionsbyflow.ts:
     last_write_checksum: sha1:c0ec44ad16993cb4f8f6f17acdb26989f3d68ab1
+  src/models/accountdeletion.ts:
+    last_write_checksum: sha1:bd8e24c5576aac9d471bc915ce886582fa61b21a
   src/models/accountrisk.ts:
     last_write_checksum: sha1:d43b1d47db81959d582d406f17b8a57f12bbf4b7
   src/models/accountriskreason.ts:
@@ -258,6 +264,8 @@ trackedFiles:
     last_write_checksum: sha1:d43d033cfa81b19b9dc1f5151951227070e435d8
   src/models/createwebhookendpointop.ts:
     last_write_checksum: sha1:e1a75375fb46b670f7e4807dd0b85a5529c189b8
+  src/models/deleteaccountop.ts:
+    last_write_checksum: sha1:414e7b1732395a7d1e1dc7ee3ec2365eb4923bcc
   src/models/deleteintegrationop.ts:
     last_write_checksum: sha1:53609f9c39d6d991372e9d55e1822e90f1fb61c4
   src/models/deletewebhookendpointop.ts:
@@ -435,7 +443,7 @@ trackedFiles:
   src/models/webhooktestrequestevent.ts:
     last_write_checksum: sha1:8df81ee84be6c2fa72e8c55ce43e0437ef11d42a
   src/tool-names.ts:
-    last_write_checksum: sha1:a8fe58ad92998c85f991b1a2697a5b29b5f3ae7a
+    last_write_checksum: sha1:fd8ac80b6b634d48e5029eff3ad6c30b1fea5776
   src/types/async.ts:
     last_write_checksum: sha1:ebc27b1229fbbe1835d89ec484c7fa28188b9cf4
   src/types/bigint.ts:
@@ -691,6 +699,21 @@ examples:
       responses:
         "200":
           application/json: {"schema_version": "1", "id": "acct_7f3a9c", "risk": {"score": 90, "decision": "block", "reasons": [{"code": "disposable_email", "weight": 40, "identifier": "email"}, {"code": "proxy_ip", "weight": 30, "identifier": "ip"}, {"code": "many_recent_signups", "weight": 20}]}, "decisions_by_flow": {"signup": "block", "login": "block", "purchase": "block"}, "assessment_id": "asm_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "updated_at": "2026-10-14T09:00:00.412Z"}
+  deleteAccount:
+    erased:
+      parameters:
+        path:
+          account_id: "acct_7f3a9c"
+      responses:
+        "200":
+          application/json: {"schema_version": "1", "id": "acct_7f3a9c", "deleted": true, "assessments_deleted": 3, "deleted_at": "2026-10-23T09:00:00.000Z"}
+    repeat:
+      parameters:
+        path:
+          account_id: "acct_7f3a9c"
+      responses:
+        "200":
+          application/json: {"schema_version": "1", "id": "acct_7f3a9c", "deleted": true, "assessments_deleted": 0, "deleted_at": "2026-10-23T09:00:05.000Z"}
   listAccountAssessments:
     page:
       parameters:

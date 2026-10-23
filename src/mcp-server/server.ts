@@ -15,6 +15,7 @@ import {
   MCPToolAnnotationFilter,
   registerDynamicTools,
 } from "./tools.js";
+import { tool$accountsDelete } from "./tools/accountsDelete.js";
 import { tool$accountsGet } from "./tools/accountsGet.js";
 import { tool$accountsListAssessments } from "./tools/accountsListAssessments.js";
 import { tool$assessmentsCreate } from "./tools/assessmentsCreate.js";
@@ -46,7 +47,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.1.34",
+    version: "0.1.35",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -96,6 +97,7 @@ export function createMCPServer(deps: {
   tool(tool$assessmentsRecordOutcome);
   tool(tool$assessmentsQuery);
   tool(tool$accountsGet);
+  tool(tool$accountsDelete);
   tool(tool$accountsListAssessments);
   tool(tool$integrationsCreate);
   tool(tool$integrationsList);
