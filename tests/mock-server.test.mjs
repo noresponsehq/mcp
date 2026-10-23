@@ -16,7 +16,7 @@ const ID = "asm_01JA2Z8K6Q4V7W9XBCDEFGHJKM";
 async function everyTool(client) {
   const created = await client.callTool({
     name: "create_assessment",
-    arguments: { request: { body: { account_id: "acct_7f3a9c", flow: "signup", identifiers: { email: "new.user@example.com" } } } },
+    arguments: { request: { body: { account_id: "acct_7f3a9c", flow: "account_creation", identifiers: { email: "new.user@example.com" } } } },
   });
   assert.ok(!created.isError, created.content?.[0]?.text);
   assert.match(json(created).id, /^asm_/);

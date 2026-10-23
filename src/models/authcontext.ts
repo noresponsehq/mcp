@@ -94,7 +94,7 @@ export const AuthContext$zodSchema: z.ZodType<AuthContext> = z.object({
     "The verified stable subject identifier (`sub`), opaque to NoResponse. Required, except from a provider hook at pre_registration, where no user exists yet.",
   ),
   tenant_id: z.string().optional().describe(
-    "The provider tenant identifier, when distinct from organization_id.",
+    "The provider workspace identifier, when distinct from organization_id.",
   ),
   token_id: z.string().optional().describe(
     "The verified token identifier (`jti`), used for replay and rotation correlation.",

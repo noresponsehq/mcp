@@ -9,7 +9,7 @@ import {
 } from "./integrationplatform.js";
 
 /**
- * POST /v1/integrations body. Registers a hosted endpoint for one authentication provider. The tenant is the API key that signs the request, so the body has no tenant field and refuses one like any other unknown member. A WorkOS integration needs signing_secret, the Actions secret shown in the WorkOS dashboard, which NoResponse uses to verify each Action request and to sign its answer. An Auth0 integration sends no signing_secret: NoResponse generates the shared secret and returns it once.
+ * POST /v1/integrations body. Registers a hosted endpoint for one authentication provider. The workspace is the API key that signs the request, so the body has no workspace field and refuses one like any other unknown member. A WorkOS integration needs signing_secret, the Actions secret shown in the WorkOS dashboard, which NoResponse uses to verify each Action request and to sign its answer. An Auth0 integration sends no signing_secret: NoResponse generates the shared secret and returns it once.
  */
 export type IntegrationRequest = {
   platform: IntegrationPlatform;
@@ -29,5 +29,5 @@ export const IntegrationRequest$zodSchema: z.ZodType<IntegrationRequest> = z
       "The WorkOS Actions signing secret, as the WorkOS dashboard shows it: 16 to 256 printable ASCII characters with no spaces. It is stored sealed and is not returned.",
     ),
   }).describe(
-    "POST /v1/integrations body. Registers a hosted endpoint for one authentication provider. The tenant is the API key that signs the request, so the body has no tenant field and refuses one like any other unknown member. A WorkOS integration needs signing_secret, the Actions secret shown in the WorkOS dashboard, which NoResponse uses to verify each Action request and to sign its answer. An Auth0 integration sends no signing_secret: NoResponse generates the shared secret and returns it once.",
+    "POST /v1/integrations body. Registers a hosted endpoint for one authentication provider. The workspace is the API key that signs the request, so the body has no workspace field and refuses one like any other unknown member. A WorkOS integration needs signing_secret, the Actions secret shown in the WorkOS dashboard, which NoResponse uses to verify each Action request and to sign its answer. An Auth0 integration sends no signing_secret: NoResponse generates the shared secret and returns it once.",
   );

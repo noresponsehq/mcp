@@ -2,7 +2,7 @@
 
 # NoResponse MCP server
 
-An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can assess a signup or gateway event, wait for a pending assessment, page through an account's history and record what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
+An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can assess an account creation, login or purchase, wait for a pending assessment, page through an account's history and record what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
 
 The server uses the API key you give it and stores nothing. API key rotation is not a tool: rotate keys from your own backend. The integration tools need a key with the `integrations` scope; give the server a key without it to keep them unusable.
 
@@ -10,7 +10,7 @@ The server uses the API key you give it and stores nothing. API key rotation is 
 
 | Tool | What it does | API call |
 |---|---|---|
-| `create_assessment` | Assess identifiers (email, phone, username, name, IP) for a `signup`, `login` or `purchase` flow. Sends a fresh Idempotency-Key when you give none. | `POST /v1/assessments` |
+| `create_assessment` | Assess identifiers (email, phone, username, name, IP) for an `account_creation`, `login` or `purchase` flow. Sends a fresh Idempotency-Key when you give none. | `POST /v1/assessments` |
 | `get_assessment` | Read the latest version of one assessment. | `GET /v1/assessments/{assessment_id}` |
 | `wait_for_assessment` | Poll a pending assessment, at the interval Retry-After asks for, until it settles or `timeout_seconds` (default 25, at most 55) pass. | `GET /v1/assessments/{assessment_id}` |
 | `query_assessments` | Page through one account's unexpired assessments, newest first. | `POST /v1/assessments/query` |

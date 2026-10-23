@@ -17,7 +17,7 @@ export const WebhookEndpointCreated$zodSchema: z.ZodType<
   WebhookEndpointCreated
 > = z.object({
   endpoint: WebhookEndpoint$zodSchema.describe(
-    "One of the tenant's registered webhook endpoints. Signing secrets are not part of it: a secret is shown once, when it is issued (POST /v1/webhooks and POST /v1/webhooks/{endpoint_id}/rotate).",
+    "One of the workspace's registered webhook endpoints. Signing secrets are not part of it: a secret is shown once, when it is issued (POST /v1/webhooks and POST /v1/webhooks/{endpoint_id}/rotate).",
   ),
   signing_secret: SigningSecret$zodSchema.describe(
     "A newly issued signing key with its secret, shown only in this answer. A receiver verifies NR-Webhook-Signature with the secret's UTF-8 bytes as the HMAC-SHA256 key.",

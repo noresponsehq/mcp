@@ -28,7 +28,7 @@ export const Integration$zodSchema: z.ZodType<Integration> = z.object({
     "Each hook point at most once.",
   ),
   integration_id: z.string().describe(
-    "Opaque, server-assigned integration id: int_ and a 26-character Crockford base32 ULID. Another tenant's integration id answers 404.",
+    "Opaque, server-assigned integration id: int_ and a 26-character Crockford base32 ULID. Another workspace's integration id answers 404.",
   ),
   platform: IntegrationPlatform$zodSchema.describe(
     "The authentication provider that calls the endpoint.",

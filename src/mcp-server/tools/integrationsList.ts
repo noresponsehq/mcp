@@ -3,7 +3,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$integrationsList: ToolDefinition = {
   name: "list_integrations",
-  description: `List the tenant's integrations.
+  description: `List the workspace's integrations.
 
 Every integration, oldest first. Listings carry no secrets. Requires the integrations scope.`,
   annotations: {

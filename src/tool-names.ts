@@ -2,11 +2,11 @@
 export const toolNames: Array<{ name: string; description: string }>= [
   {
     "name": "create_assessment",
-    "description": "Assess identifiers for a signup or gateway decision.\n\nAssesses one signup, login or purchase (flow) and answers with the account's one current risk: account.risk.decision is the decision for this flow (allow, step_up, review or block, where block means your block threshold was reached), and detail holds this assessment's own facts. depth sets how long the answer waits for sources: quick waits only for the fast ones (500 ms), full for the whole budget (3000 ms at most); it defaults to full for signup and purchase and quick for login. 200 carries complete or partial, 202 carries pending with Location and Retry-After. While the account's first assessment is pending, account is absent: apply your own fallback for that, 429, 503 or a timeout. NoResponse blocks nothing itself; you decide. Requires the assess scope. Idempotency-Key is optional in the SDK and is bound to the body for 24 hours: the same key with the same body replays the latest assessment with Idempotent-Replayed: true and starts no new work; the same key with a different body answers 409 idempotency_key_reused. response_mode defaults to standard; detailed needs the detailed scope."
+    "description": "Assess identifiers for a signup or gateway decision.\n\nAssesses one account creation, login or purchase (flow) and answers with the account's one current risk: account.risk.decision is the decision for this flow (allow, step_up, review or block, where block means your block threshold was reached), and detail holds this assessment's own facts. depth sets how long the answer waits for sources: quick waits only for the fast ones (500 ms), full for the whole budget (3000 ms at most); it defaults to full for account_creation and purchase and quick for login. 200 carries complete or partial, 202 carries pending with Location and Retry-After. While the account's first assessment is pending, account is absent: apply your own fallback for that, 429, 503 or a timeout. NoResponse blocks nothing itself; you decide. Requires the assess scope. Idempotency-Key is optional in the SDK and is bound to the body for 24 hours: the same key with the same body replays the latest assessment with Idempotent-Replayed: true and starts no new work; the same key with a different body answers 409 idempotency_key_reused. response_mode defaults to standard; detailed needs the detailed scope."
   },
   {
     "name": "get_assessment",
-    "description": "Poll the authoritative assessment of one assessment.\n\nReturns the highest assessment_version, with the account's current risk. Requires the assess or history scope. While status is pending, or partial with a source still running, the response carries Retry-After; poll no faster than it says. Another tenant's assessment, an unknown or expired assessment and a malformed assessment_id all answer 404 not_found. response_mode=detailed needs the detailed scope."
+    "description": "Poll the authoritative assessment of one assessment.\n\nReturns the highest assessment_version, with the account's current risk. Requires the assess or history scope. While status is pending, or partial with a source still running, the response carries Retry-After; poll no faster than it says. Another workspace's assessment, an unknown or expired assessment and a malformed assessment_id all answer 404 not_found. response_mode=detailed needs the detailed scope."
   },
   {
     "name": "delete_assessment",
@@ -18,7 +18,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "query_assessments",
-    "description": "Page through one account's unexpired assessments.\n\nHistory is a POST with account_id in the body so an account identifier stays out of URLs and access logs. Requires the history scope. Read-only and safe to retry. Newest first, each at its latest assessment_version. An account with no assessments answers 200 with empty items. The cursor is opaque and bound to your tenant and the account; a tampered or expired cursor answers 400 invalid_cursor. response_mode=detailed needs the detailed scope."
+    "description": "Page through one account's unexpired assessments.\n\nHistory is a POST with account_id in the body so an account identifier stays out of URLs and access logs. Requires the history scope. Read-only and safe to retry. Newest first, each at its latest assessment_version. An account with no assessments answers 200 with empty items. The cursor is opaque and bound to your workspace and the account; a tampered or expired cursor answers 400 invalid_cursor. response_mode=detailed needs the detailed scope."
   },
   {
     "name": "get_account",
@@ -30,7 +30,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "list_account_assessments",
-    "description": "Page through one account's unexpired assessments.\n\nThe account's history: the same page as POST /v1/assessments/query for this account_id, newest first, each at its latest assessment_version. Requires the history scope. Read-only and safe to retry. An account with no assessments answers 200 with empty items. The cursor is opaque and bound to your tenant and the account; a tampered or expired cursor answers 400 invalid_cursor. response_mode=detailed needs the detailed scope. The account_id travels in the URL; use POST /v1/assessments/query to keep it out of access logs."
+    "description": "Page through one account's unexpired assessments.\n\nThe account's history: the same page as POST /v1/assessments/query for this account_id, newest first, each at its latest assessment_version. Requires the history scope. Read-only and safe to retry. An account with no assessments answers 200 with empty items. The cursor is opaque and bound to your workspace and the account; a tampered or expired cursor answers 400 invalid_cursor. response_mode=detailed needs the detailed scope. The account_id travels in the URL; use POST /v1/assessments/query to keep it out of access logs."
   },
   {
     "name": "create_integration",
@@ -38,7 +38,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "list_integrations",
-    "description": "List the tenant's integrations.\n\nEvery integration, oldest first. Listings carry no secrets. Requires the integrations scope."
+    "description": "List the workspace's integrations.\n\nEvery integration, oldest first. Listings carry no secrets. Requires the integrations scope."
   },
   {
     "name": "delete_integration",
@@ -50,7 +50,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "list_webhook_endpoints",
-    "description": "List the tenant's webhook endpoints.\n\nLists your webhook endpoints in every state, ordered by endpoint_id, with the ids of their signing keys and without secrets. Requires the webhooks scope."
+    "description": "List the workspace's webhook endpoints.\n\nLists your webhook endpoints in every state, ordered by endpoint_id, with the ids of their signing keys and without secrets. Requires the webhooks scope."
   },
   {
     "name": "create_webhook_endpoint",
@@ -70,7 +70,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "list_webhook_deliveries",
-    "description": "List an endpoint's delivery attempts.\n\nEvery POST the endpoint received, newest first: the event id and type, which attempt it was, whether it was a replay, delivered or failed, the response code, why it failed and how long it took. Attempts are kept for 30 days, or your retention_days when that is shorter, and are deleted with the assessment they carried. Requires the webhooks scope. Read-only and safe to retry. The cursor is opaque and bound to your tenant and the endpoint; a tampered or expired cursor answers 400 invalid_cursor."
+    "description": "List an endpoint's delivery attempts.\n\nEvery POST the endpoint received, newest first: the event id and type, which attempt it was, whether it was a replay, delivered or failed, the response code, why it failed and how long it took. Attempts are kept for 30 days, or your retention_days when that is shorter, and are deleted with the assessment they carried. Requires the webhooks scope. Read-only and safe to retry. The cursor is opaque and bound to your workspace and the endpoint; a tampered or expired cursor answers 400 invalid_cursor."
   },
   {
     "name": "replay_webhook_delivery",

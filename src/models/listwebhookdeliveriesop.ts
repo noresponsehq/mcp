@@ -31,7 +31,7 @@ export const ListWebhookDeliveriesRequest$zodSchema: z.ZodType<
   cursor: z.string().describe("next_cursor from the previous page, unchanged.")
     .optional(),
   endpoint_id: z.string().describe(
-    "The endpoint's whe_ id. An id that is unknown, malformed or another tenant's answers 404.",
+    "The endpoint's whe_ id. An id that is unknown, malformed or another workspace's answers 404.",
   ),
   limit: z.int().default(20).describe("Attempts per page."),
 });

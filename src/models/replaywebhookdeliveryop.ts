@@ -31,10 +31,10 @@ export const ReplayWebhookDeliveryRequest$zodSchema: z.ZodType<
 > = z.object({
   body: WebhookReplayRequest$zodSchema,
   endpoint_id: z.string().describe(
-    "The endpoint's whe_ id. An id that is unknown, malformed or another tenant's answers 404.",
+    "The endpoint's whe_ id. An id that is unknown, malformed or another workspace's answers 404.",
   ),
   event_id: z.string().describe(
-    "The evt_ id of a delivery the endpoint's log holds, as GET /v1/webhooks/{endpoint_id}/deliveries lists it. An id that is malformed, not sent to this endpoint, past the log's retention or another tenant's answers 404.",
+    "The evt_ id of a delivery the endpoint's log holds, as GET /v1/webhooks/{endpoint_id}/deliveries lists it. An id that is malformed, not sent to this endpoint, past the log's retention or another workspace's answers 404.",
   ),
 });
 

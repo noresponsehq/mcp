@@ -162,7 +162,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
 
   test("create_assessment sends the key from NORESPONSE_API_KEY and a fresh Idempotency-Key", async () => {
     api.requests.length = 0;
-    const body = { account_id: "acct_7f3a9c", flow: "signup", identifiers: { email: "new.user@example.com" } };
+    const body = { account_id: "acct_7f3a9c", flow: "account_creation", identifiers: { email: "new.user@example.com" } };
     const first = await client.callTool({ name: "create_assessment", arguments: { request: { body } } });
     const second = await client.callTool({ name: "create_assessment", arguments: { request: { body } } });
     assert.ok(!first.isError, first.content?.[0]?.text);
@@ -181,10 +181,10 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
 
   test("create_assessment keeps an Idempotency-Key the agent gives", async () => {
     api.requests.length = 0;
-    const key = "signup-acct_7f3a9c-0001";
+    const key = "account-acct_7f3a9c-0001";
     await client.callTool({
       name: "create_assessment",
-      arguments: { request: { idempotencyKey: key, body: { account_id: "acct_7f3a9c", flow: "signup", identifiers: { email: "new.user@example.com" } } } },
+      arguments: { request: { idempotencyKey: key, body: { account_id: "acct_7f3a9c", flow: "account_creation", identifiers: { email: "new.user@example.com" } } } },
     });
     assert.equal(api.requests[0].headers["idempotency-key"], key);
   });
@@ -411,7 +411,7 @@ describe("Cloudflare Worker (mcp.noresponse.org)", () => {
     api.requests.length = 0;
     const created = await client.callTool({
       name: "create_assessment",
-      arguments: { request: { body: { account_id: "acct_7f3a9c", flow: "signup", identifiers: { email: "new.user@example.com" } } } },
+      arguments: { request: { body: { account_id: "acct_7f3a9c", flow: "account_creation", identifiers: { email: "new.user@example.com" } } } },
     });
     const waited = await client.callTool({ name: "wait_for_assessment", arguments: { assessment_id: json(created).id } });
     fake.state.settleAfter = 0;

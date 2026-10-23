@@ -33,7 +33,7 @@ export const RotateWebhookSigningKeyRequest$zodSchema: z.ZodType<
 > = z.object({
   body: WebhookKeyRotationRequest$zodSchema,
   endpoint_id: z.string().describe(
-    "The endpoint's whe_ id. An id that is unknown, malformed or another tenant's answers 404.",
+    "The endpoint's whe_ id. An id that is unknown, malformed or another workspace's answers 404.",
   ),
 });
 

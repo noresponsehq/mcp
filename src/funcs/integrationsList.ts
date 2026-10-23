@@ -21,7 +21,7 @@ export enum ListAcceptEnum {
 }
 
 /**
- * List the tenant's integrations.
+ * List the workspace's integrations.
  *
  * @remarks
  * Every integration, oldest first. Listings carry no secrets. Requires the integrations scope.

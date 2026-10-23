@@ -31,7 +31,7 @@ export const RiskSummary$zodSchema: z.ZodType<RiskSummary> = z.object({
   ),
   email: RiskSummaryEmail$zodSchema.optional(),
   ip: IpSummary$zodSchema.optional().describe(
-    "Facts about the submitted IP from the offline database and this tenant's own recent assessments. Every member is optional; absent makes no claim.",
+    "Facts about the submitted IP from the offline database and this workspace's own recent assessments. Every member is optional; absent makes no claim.",
   ),
   phone: RiskSummaryPhone$zodSchema.optional(),
   username: RiskSummaryUsername$zodSchema.optional(),

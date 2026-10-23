@@ -47,7 +47,7 @@ export const Signal$zodSchema: z.ZodType<Signal> = z.object({
     "Why a signal or source did not produce a definite found/not_found. timed_out means the source missed the request deadline; a continuation may still settle it. deferred means the (source, identifier) pair is async-only and was not attempted on the synchronous path; a continuation settles it.",
   ),
   source_id: z.string().describe(
-    "Opaque, tenant-scoped projection of the source that produced a signal. It stays stable for your tenant while the projection key is unchanged and reveals no upstream provider, feed, breach table or source record.",
+    "Opaque, workspace-scoped projection of the source that produced a signal. It stays stable for your workspace while the projection key is unchanged and reveals no upstream provider, feed, breach table or source record.",
   ),
   type: z.string().describe(
     "Signal kind, for example account_presence or breach_exposure. New kinds may appear; ignore any you do not know.",

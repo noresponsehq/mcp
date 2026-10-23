@@ -5,7 +5,7 @@ import { ClosedEnum } from "../types/enums.js";
  * Machine codes an HTTP 403 answer can carry.
  */
 export const PermissionDeniedErrorCode = {
-  TenantForbidden: "tenant_forbidden",
+  WorkspaceForbidden: "workspace_forbidden",
 } as const;
 /**
  * Machine codes an HTTP 403 answer can carry.
@@ -15,5 +15,5 @@ export type PermissionDeniedErrorCode = ClosedEnum<
 >;
 
 export const PermissionDeniedErrorCode$zodSchema = z.enum([
-  "tenant_forbidden",
+  "workspace_forbidden",
 ]).describe("Machine codes an HTTP 403 answer can carry.");

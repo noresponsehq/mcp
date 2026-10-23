@@ -29,7 +29,7 @@ export const RecordKeyUsageRequest$zodSchema: z.ZodType<RecordKeyUsageRequest> =
   z.object({
     body: KeyUsageBatchRequest$zodSchema,
     idempotencyKey: z.string().describe(
-      "Opaque client key, 16 to 128 characters of [A-Za-z0-9._:-] (a UUID or ULID fits). Scoped to the tenant principal and bound to the canonical body for 24 hours. Optional: the SDK generates a UUID when you omit it and sends the same key on every retry of the call.",
+      "Opaque client key, 16 to 128 characters of [A-Za-z0-9._:-] (a UUID or ULID fits). Scoped to the workspace principal and bound to the canonical body for 24 hours. Optional: the SDK generates a UUID when you omit it and sends the same key on every retry of the call.",
     ).optional(),
   });
 

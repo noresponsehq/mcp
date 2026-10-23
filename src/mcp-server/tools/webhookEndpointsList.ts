@@ -3,7 +3,7 @@ import { formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$webhookEndpointsList: ToolDefinition = {
   name: "list_webhook_endpoints",
-  description: `List the tenant's webhook endpoints.
+  description: `List the workspace's webhook endpoints.
 
 Lists your webhook endpoints in every state, ordered by endpoint_id, with the ids of their signing keys and without secrets. Requires the webhooks scope.`,
   annotations: {

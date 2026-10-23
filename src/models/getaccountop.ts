@@ -21,7 +21,7 @@ export type GetAccountRequest = { account_id: string };
 export const GetAccountRequest$zodSchema: z.ZodType<GetAccountRequest> = z
   .object({
     account_id: z.string().describe(
-      "The account_id the tenant sends with its assessments, as one path segment (percent-encode '|' and ':' if the client requires it). A value that does not match the account_id shape answers 400 invalid_request.",
+      "The account_id the workspace sends with its assessments, as one path segment (percent-encode '|' and ':' if the client requires it). A value that does not match the account_id shape answers 400 invalid_request.",
     ),
   });
 

@@ -10,7 +10,7 @@ export const tool$assessmentsGet: ToolDefinition<typeof args> = {
   name: "get_assessment",
   description: `Poll the authoritative assessment of one assessment.
 
-Returns the highest assessment_version, with the account's current risk. Requires the assess or history scope. While status is pending, or partial with a source still running, the response carries Retry-After; poll no faster than it says. Another tenant's assessment, an unknown or expired assessment and a malformed assessment_id all answer 404 not_found. response_mode=detailed needs the detailed scope.`,
+Returns the highest assessment_version, with the account's current risk. Requires the assess or history scope. While status is pending, or partial with a source still running, the response carries Retry-After; poll no faster than it says. Another workspace's assessment, an unknown or expired assessment and a malformed assessment_id all answer 404 not_found. response_mode=detailed needs the detailed scope.`,
   annotations: {
     "title": "Get an assessment",
     "destructiveHint": false,

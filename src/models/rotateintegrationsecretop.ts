@@ -30,7 +30,7 @@ export const RotateIntegrationSecretRequest$zodSchema: z.ZodType<
 > = z.object({
   body: IntegrationRotationRequest$zodSchema,
   integration_id: z.string().describe(
-    "Path segment, matched case-sensitively. A value that does not match the integration_id shape, or another tenant's id, answers 404.",
+    "Path segment, matched case-sensitively. A value that does not match the integration_id shape, or another workspace's id, answers 404.",
   ),
 });
 
