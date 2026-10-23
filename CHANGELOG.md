@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.22
+
+No changes detected.
+
 ## 0.1.21
 
 * `SDK.accounts.get()`: **Added**

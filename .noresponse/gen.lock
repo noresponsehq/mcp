@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 8e3161307956ef38f5739a85f187b1b1
+  docChecksum: 2f4edd7eddbe12da4d65dd8dff5ff373
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.1.21
-  configChecksum: 701100b768af4446e96c873791a086c3
+  releaseVersion: 0.1.22
+  configChecksum: 0e4c1741fbb1ca64a4b3cb6584cb1429
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -33,11 +33,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:dd4257211540dad1fa9777d2db8c0973f3cffa1e
+    last_write_checksum: sha1:148cf5c2db5a11e18ad941b5a8630a02f29edb89
   package.json:
-    last_write_checksum: sha1:7bc113ceda03160faf9e58eddc40c5a5c890adad
+    last_write_checksum: sha1:172c4affdfce830a86e62ee913d94afdce2bccc6
   server.json:
-    last_write_checksum: sha1:75c7bb1f5cab20df4c6e335b4373f8b63b89954b
+    last_write_checksum: sha1:48ea88dd2afb88f76c192a4dd02983a1b990c91b
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -83,7 +83,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:65617bff674a7935d1eab85496ebfafba7923891
+    last_write_checksum: sha1:69ff3d8d34ea7f12c1638d6d877a6fb98bb99f7c
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -127,7 +127,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:65ca6d35cd3120566a72f1da15a3185a783c3561
+    last_write_checksum: sha1:83107e56d207f435cfb72d2ca5a4633e89568f4a
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -135,7 +135,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:5d109d30ae06b2d43bd583d8212208d93b021b50
+    last_write_checksum: sha1:09f106e7a2887e9f4d631fffacc50d369e73122f
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -293,7 +293,7 @@ trackedFiles:
   src/models/ipsummarytype.ts:
     last_write_checksum: sha1:b418b65e56245bfac82270c3239a5e164b4c0a4e
   src/models/keyrotation.ts:
-    last_write_checksum: sha1:545b3d68ea61ad0a2e70804205ed18c1c0df2306
+    last_write_checksum: sha1:63f8c2e166add408dbbca599964c967b9fa9e1f0
   src/models/keyrotationrequest.ts:
     last_write_checksum: sha1:fa4d8deccaf1eda7efcd4d7121ba55e7f99d479b
   src/models/lane.ts:
@@ -677,7 +677,7 @@ examples:
         application/json: {"overlap_seconds": 3600}
       responses:
         "201":
-          application/json: {"key": "nrk_01JA2Z8K6Q4V7W9XBCDEFGHJKM_k3Yx8pQ2mN7vR4tW6zB9cD1eF5gH0jL4sP9uV2wX7yA", "key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKM", "scopes": [], "created_at": "2026-10-14T09:10:00.000Z", "previous_key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKN", "previous_key_expires_at": "2026-10-15T09:10:00.000Z"}
+          application/json: {"key": "nrk_live_01JA2Z8K6Q4V7W9XBCDEFGHJKM_k3Yx8pQ2mN7vR4tW6zB9cD1eF5gH0jL4sP9uV2wX7yA", "key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKM", "scopes": [], "created_at": "2026-10-14T09:10:00.000Z", "previous_key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKN", "previous_key_expires_at": "2026-10-15T09:10:00.000Z"}
         "400":
           application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "webhook_url_refused", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
         "401":
@@ -695,7 +695,7 @@ examples:
         application/json: {}
       responses:
         "201":
-          application/json: {"key": "nrk_01JA2Z8K6Q4V7W9XBCDEFGHJKM_k3Yx8pQ2mN7vR4tW6zB9cD1eF5gH0jL4sP9uV2wX7yA", "key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKM", "scopes": [], "created_at": "2026-10-14T09:10:00.000Z", "previous_key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKN", "previous_key_expires_at": "2026-10-15T09:10:00.000Z"}
+          application/json: {"key": "nrk_live_01JA2Z8K6Q4V7W9XBCDEFGHJKM_k3Yx8pQ2mN7vR4tW6zB9cD1eF5gH0jL4sP9uV2wX7yA", "key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKM", "scopes": [], "created_at": "2026-10-14T09:10:00.000Z", "previous_key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKN", "previous_key_expires_at": "2026-10-15T09:10:00.000Z"}
         "400":
           application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "webhook_url_refused", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
         "401":
@@ -713,7 +713,7 @@ examples:
         application/json: {}
       responses:
         "201":
-          application/json: {"key": "nrk_01JA2ZC0Q1R2S3T4V5W6X7Y8Z9_0123456789abcdefghijklmnopqrstuvwxyzABCDEFA", "key_id": "01JA2ZC0Q1R2S3T4V5W6X7Y8Z9", "scopes": ["assess", "history"], "created_at": "2026-10-21T09:00:00.000Z", "previous_key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKM", "previous_key_expires_at": "2026-10-22T09:00:00.000Z"}
+          application/json: {"key": "nrk_live_01JA2ZC0Q1R2S3T4V5W6X7Y8Z9_0123456789abcdefghijklmnopqrstuvwxyzABCDEFA", "key_id": "01JA2ZC0Q1R2S3T4V5W6X7Y8Z9", "scopes": ["assess", "history"], "created_at": "2026-10-21T09:00:00.000Z", "previous_key_id": "01JA2Z8K6Q4V7W9XBCDEFGHJKM", "previous_key_expires_at": "2026-10-22T09:00:00.000Z"}
   createIntegration:
     auth0:
       requestBody:
