@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.4
+
+* `SDK.assessments.create()`:  `response.account.risk.reasons[].code.enum(shared_api_key)` **Added** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.account.risk.reasons[].code.enum(shared_api_key)` **Added** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.items[].risk.reasons[].code.enum(shared_api_key)` **Added** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.risk.reasons[].code.enum(shared_api_key)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.items[].risk.reasons[].code.enum(shared_api_key)` **Added** (Breaking ⚠️)
+* `SDK.keyUsage.record()`: **Added**
+
 ## 0.2.3
 
 No changes detected.

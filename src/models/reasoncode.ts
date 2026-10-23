@@ -41,6 +41,7 @@ export const ReasonCode = {
   ContextLineCountryMismatch: "context_line_country_mismatch",
   PriorAbuseLink: "prior_abuse_link",
   TestScenario: "test_scenario",
+  SharedApiKey: "shared_api_key",
 } as const;
 /**
  * A stable reason code. New codes may appear; ignore any you do not know.
@@ -84,6 +85,7 @@ export const ReasonCode$zodSchema = z.enum([
   "context_line_country_mismatch",
   "prior_abuse_link",
   "test_scenario",
+  "shared_api_key",
 ]).describe(
   "A stable reason code. New codes may appear; ignore any you do not know.",
 );

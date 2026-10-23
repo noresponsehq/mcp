@@ -96,10 +96,10 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     await api?.close();
   });
 
-  test("exposes the assessment, webhook endpoint and integration tools, and not API key rotation", async () => {
+  test("exposes the assessment, webhook endpoint and integration tools, and not API key rotation or key usage", async () => {
     const { tools } = await client.listTools();
     assert.deepEqual(tools.map((t) => t.name).sort(), TOOLS);
-    assert.ok(!tools.some((t) => /api_key|rotate_key/i.test(t.name)));
+    assert.ok(!tools.some((t) => /api_key|rotate_key|key_usage/i.test(t.name)));
     const readOnly = Object.fromEntries(tools.map((t) => [t.name, t.annotations?.readOnlyHint === true]));
     assert.deepEqual(readOnly, {
       create_assessment: false,
