@@ -19,6 +19,7 @@ import { tool$accountsDelete } from "./tools/accountsDelete.js";
 import { tool$accountsGet } from "./tools/accountsGet.js";
 import { tool$accountsListAssessments } from "./tools/accountsListAssessments.js";
 import { tool$assessmentsCreate } from "./tools/assessmentsCreate.js";
+import { tool$assessmentsDelete } from "./tools/assessmentsDelete.js";
 import { tool$assessmentsGet } from "./tools/assessmentsGet.js";
 import { tool$assessmentsQuery } from "./tools/assessmentsQuery.js";
 import { tool$assessmentsRecordOutcome } from "./tools/assessmentsRecordOutcome.js";
@@ -47,7 +48,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.1.38",
+    version: "0.1.39",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -94,6 +95,7 @@ export function createMCPServer(deps: {
 
   tool(tool$assessmentsCreate);
   tool(tool$assessmentsGet);
+  tool(tool$assessmentsDelete);
   tool(tool$assessmentsRecordOutcome);
   tool(tool$assessmentsQuery);
   tool(tool$accountsGet);

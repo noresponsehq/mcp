@@ -13,6 +13,7 @@ const OUTCOME = fixture("assessment-outcome.json");
 const LIST = fixture("assessment-list.json");
 const ACCOUNT = fixture("account.json");
 const DELETION = fixture("account-deletion.json");
+const ASSESSMENT_DELETION = fixture("assessment-deletion.json");
 const ENDPOINTS = fixture("webhook-endpoint-list.json");
 const CREATED = fixture("webhook-endpoint-created.json");
 const SENT = fixture("webhook-test-assessment-updated.json");
@@ -28,6 +29,7 @@ const TOOLS = [
   "create_integration",
   "create_webhook_endpoint",
   "delete_account",
+  "delete_assessment",
   "delete_integration",
   "delete_webhook_endpoint",
   "get_account",
@@ -58,6 +60,7 @@ function fakeAPI() {
       if (req.method === "POST" && req.path === "/v1/assessments/query") return { body: LIST };
       if (req.method === "GET" && req.path === "/v1/accounts/acct_7f3a9c") return { body: ACCOUNT };
       if (req.method === "DELETE" && req.path === "/v1/accounts/acct_7f3a9c") return { body: DELETION };
+      if (req.method === "DELETE" && req.path === `/v1/assessments/${ASSESSMENT_DELETION.id}`) return { body: ASSESSMENT_DELETION };
       if (req.method === "GET" && req.path.startsWith("/v1/accounts/acct_7f3a9c/assessments")) return { body: LIST };
       if (req.method === "POST" && req.path === `/v1/assessments/${ID}/outcomes`) return { status: 201, body: OUTCOME };
       if (req.method === "GET" && req.path === "/v1/webhooks") return { body: ENDPOINTS };
@@ -101,6 +104,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       create_assessment: false,
       create_webhook_endpoint: false,
       delete_account: false,
+      delete_assessment: false,
       delete_webhook_endpoint: false,
       create_integration: false,
       delete_integration: false,
@@ -119,7 +123,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       wait_for_assessment: true,
     });
     const destructive = tools.filter((t) => t.annotations?.destructiveHint === true).map((t) => t.name);
-    assert.deepEqual(destructive.sort(), ["delete_account", "delete_integration", "delete_webhook_endpoint"]);
+    assert.deepEqual(destructive.sort(), ["delete_account", "delete_assessment", "delete_integration", "delete_webhook_endpoint"]);
   });
 
   test("the webhook endpoint tools call their routes with the caller's key", async () => {
@@ -236,6 +240,15 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     assert.ok(!erased.isError, erased.content?.[0]?.text);
     assert.deepEqual(json(erased), DELETION);
     assert.deepEqual(api.requests.map((r) => `${r.method} ${r.path}`), ["DELETE /v1/accounts/acct_7f3a9c"]);
+    assert.equal(api.requests[0].headers.authorization, `Bearer ${CALLER_KEY}`);
+  });
+
+  test("delete_assessment deletes one assessment with the caller's key", async () => {
+    api.requests.length = 0;
+    const removed = await client.callTool({ name: "delete_assessment", arguments: { request: { assessment_id: ASSESSMENT_DELETION.id } } });
+    assert.ok(!removed.isError, removed.content?.[0]?.text);
+    assert.deepEqual(json(removed), ASSESSMENT_DELETION);
+    assert.deepEqual(api.requests.map((r) => `${r.method} ${r.path}`), [`DELETE /v1/assessments/${ASSESSMENT_DELETION.id}`]);
     assert.equal(api.requests[0].headers.authorization, `Bearer ${CALLER_KEY}`);
   });
 

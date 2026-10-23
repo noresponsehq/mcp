@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: a87e6bb9ea6d49ceca6e9886086d1653
+  docChecksum: 7b914d106f1153fada438f3868f1aa09
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.1.38
-  configChecksum: 77c47184f9961f97e81a53087f91bf9d
+  releaseVersion: 0.1.39
+  configChecksum: c7b130d5ca46de0782eebd092e46ffcc
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -33,11 +33,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:3a5409137b59ebe301c379b9bc0c64102ebcb03e
+    last_write_checksum: sha1:091f49d27758cfcb9441c7a930ae6951be31d1f9
   package.json:
-    last_write_checksum: sha1:c04210e2448ea86193c35297932301b1556ce3dc
+    last_write_checksum: sha1:2a4ccead83588b852fbced475ddcef768e5b8f72
   server.json:
-    last_write_checksum: sha1:27115094b0a1640f4780f71d44176d6947d27e5b
+    last_write_checksum: sha1:76f8960503a8febdfbba21a63b7650c2fd85b1c8
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -50,6 +50,8 @@ trackedFiles:
     last_write_checksum: sha1:18c9f45b9c6f65783dd161dcfd3706eb1aab1320
   src/funcs/assessmentsCreate.ts:
     last_write_checksum: sha1:7f1f41c3db8b3d6d1b7f9558cb738c6e89540404
+  src/funcs/assessmentsDelete.ts:
+    last_write_checksum: sha1:392e359e07c53f0c345ba8de3110a547af0ed1c4
   src/funcs/assessmentsGet.ts:
     last_write_checksum: sha1:a5eaa9558dac937427593ff6a3c7464cb3d231fc
   src/funcs/assessmentsQuery.ts:
@@ -89,7 +91,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:5a14bc5abc2b181a65a1b56d244b2922b8d5b1d4
+    last_write_checksum: sha1:e610d2787cc7ad18b38ff30d0fc7e00f8551f9de
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -133,7 +135,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:d6eace1073ccef64346e8a56827ed427fbdaade8
+    last_write_checksum: sha1:20c1e117b7eda7ab2a93ffabb6710e063d5c1a68
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -141,7 +143,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:563380264d48deda40a77d0d445d3927dedcbfcd
+    last_write_checksum: sha1:cb5b3022b94b2b94c2c395155c4325e13032b8f6
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -154,6 +156,8 @@ trackedFiles:
     last_write_checksum: sha1:6525c9ba805ff9567b33774c89fdcc1993445f4c
   src/mcp-server/tools/assessmentsCreate.ts:
     last_write_checksum: sha1:c562da11177d524674fa643d297c9fee36b67be0
+  src/mcp-server/tools/assessmentsDelete.ts:
+    last_write_checksum: sha1:2d5a7bfc9abbf96f52d903fd5aed910848a0e32d
   src/mcp-server/tools/assessmentsGet.ts:
     last_write_checksum: sha1:a2917ef0e32f620cf5182de338ab899373617189
   src/mcp-server/tools/assessmentsQuery.ts:
@@ -198,6 +202,10 @@ trackedFiles:
     last_write_checksum: sha1:e7552027cd1b525bd8a248d6e0dc91d182a6b062
   src/models/assessmentauthcontext.ts:
     last_write_checksum: sha1:eb5e894f946d5b31859decc481f10a196f3029a3
+  src/models/assessmentdeletion.ts:
+    last_write_checksum: sha1:c65ba0fe9e3aa052c739699d68cd0852eb6b7a31
+  src/models/assessmentdeletionaccount.ts:
+    last_write_checksum: sha1:fc6b37b086807920ce029dbe49cff3e0d4d243fe
   src/models/assessmentflow.ts:
     last_write_checksum: sha1:b65ec194402abb6d4c061a7ac0426dd3ca5a21ec
   src/models/assessmentlist.ts:
@@ -266,6 +274,8 @@ trackedFiles:
     last_write_checksum: sha1:e1a75375fb46b670f7e4807dd0b85a5529c189b8
   src/models/deleteaccountop.ts:
     last_write_checksum: sha1:414e7b1732395a7d1e1dc7ee3ec2365eb4923bcc
+  src/models/deleteassessmentop.ts:
+    last_write_checksum: sha1:02d985130fe59abb1735f8b95a268e10bb545373
   src/models/deleteintegrationop.ts:
     last_write_checksum: sha1:53609f9c39d6d991372e9d55e1822e90f1fb61c4
   src/models/deletewebhookendpointop.ts:
@@ -443,7 +453,7 @@ trackedFiles:
   src/models/webhooktestrequestevent.ts:
     last_write_checksum: sha1:8df81ee84be6c2fa72e8c55ce43e0437ef11d42a
   src/tool-names.ts:
-    last_write_checksum: sha1:fd8ac80b6b634d48e5029eff3ad6c30b1fea5776
+    last_write_checksum: sha1:f06e4942a0887bfe20ba180790821cb4c754c8d4
   src/types/async.ts:
     last_write_checksum: sha1:ebc27b1229fbbe1835d89ec484c7fa28188b9cf4
   src/types/bigint.ts:
@@ -601,6 +611,21 @@ examples:
       responses:
         "200":
           application/json: {"schema_version": "1", "assessment_id": "asm_01JB3C4D5E6F7G8H9JKMNPQRST", "account_id": "acct_8412", "request_id": "req_01", "status": "complete", "recommendation": "allow", "confidence": "high", "risk": {"score": 10, "band": "low", "recommendation": "allow", "block": false, "confidence": "high", "policy_version": "risk-2026-10.3", "policy_basis": "heuristic_unvalidated", "reasons": [{"code": "voip_number", "weight": 25, "identifier": "phone"}, {"code": "breach_name_match", "weight": -15, "identifier": "name"}], "summary": {"phone": {"line_type": "voip", "country": "US"}, "email": {"disposable": false, "accounts_found": 1, "breach": {"found": true, "breach_count": 2, "first_year": 2016, "last_year": 2019, "exposed": ["email", "password", "password_hash"], "in_credential_lists": true, "truncated": false}}, "consistency": {"name": "match"}}, "coverage": {"answered": 4, "failed": 0, "pending": 0}, "details": {"phone_names": [{"value": "Jane Doe", "seen_by": 3}], "breaches": [{"name": "Collection #1", "category": "combolist", "kind": "credential_list", "year": 2019, "matched_on": "email", "exposed": ["email", "password"]}, {"name": "LinkedIn", "domain": "linkedin.com", "category": "social", "kind": "site_breach", "year": 2016, "month": 5, "matched_on": "email", "exposed": ["email", "password_hash"]}], "breach_names": [{"value": "Jane Doe", "seen_in": 2}]}}, "signals": [{"type": "account_presence", "identifier": "email", "outcome": "found", "source_id": "src_3f9a1c", "evidence_ref": "evr_01JB3C4D5E6F7G8H9JKMNPQRSV", "observed_at": "2026-10-18T11:00:00.180Z", "last_checked_at": "2026-10-18T11:00:00.180Z", "freshness": "fresh"}, {"type": "breach_exposure", "identifier": "email", "outcome": "found", "source_id": "src_8d27e4", "evidence_ref": "evr_01JB3C4D5E6F7G8H9JKMNPQRSW", "observed_at": "2026-10-18T11:00:01.900Z", "last_checked_at": "2026-10-18T11:00:01.900Z", "freshness": "fresh"}, {"type": "account_presence", "identifier": "phone", "outcome": "found", "source_id": "src_51b0d7", "evidence_ref": "evr_01JB3C4D5E6F7G8H9JKMNPQRSX", "observed_at": "2026-10-18T11:00:03.700Z", "last_checked_at": "2026-10-18T11:00:03.700Z", "freshness": "fresh"}], "incomplete_sources": [], "policy_version": "risk-2026-10.3", "policy_basis": "heuristic_unvalidated", "assessment_version": 2, "created_at": "2026-10-18T11:00:00.000Z", "updated_at": "2026-10-18T11:00:04.000Z", "expires_at": "2027-10-18T11:00:00.000Z", "timing": {"deadline_ms": 500, "elapsed_ms": 4000}}
+  deleteAssessment:
+    next:
+      parameters:
+        path:
+          assessment_id: "asm_01JA2Z8K6Q4V7W9XBCDEFGHJKM"
+      responses:
+        "200":
+          application/json: {"schema_version": "1", "id": "asm_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "deleted": true, "account": {"id": "acct_7f3a9c", "current_assessment_id": "asm_01JA2Z7Y3N5P8Q2R4S6T8V0W1X"}, "deleted_at": "2026-10-23T09:00:00.000Z"}
+    last:
+      parameters:
+        path:
+          assessment_id: "asm_01JA2Z8K6Q4V7W9XBCDEFGHJKM"
+      responses:
+        "200":
+          application/json: {"schema_version": "1", "id": "asm_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "deleted": true, "account": {"id": "acct_7f3a9c"}, "deleted_at": "2026-10-23T09:00:00.000Z"}
   recordAssessmentOutcome:
     abuse:
       parameters:
