@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.29
+
+No changes detected.
+
 ## 0.1.28
 
 * `SDK.assessments.create()`:  `response.risk.reasons[].code.enum(test_scenario)` **Added** (Breaking ⚠️)
