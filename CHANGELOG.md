@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.5
+
+No changes detected.
+
 ## 0.2.4
 
 * `SDK.assessments.create()`:  `response.account.risk.reasons[].code.enum(shared_api_key)` **Added** (Breaking ⚠️)
