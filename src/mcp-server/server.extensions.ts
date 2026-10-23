@@ -111,6 +111,9 @@ Polls get_assessment at the interval the API's Retry-After asks for (at least on
         if (left <= 0) return timedOut(status, text);
         const delay = Math.max(MIN_POLL_INTERVAL_MS, retryAfterMs(response.headers.get("retry-after")) ?? 0);
         await sleep(Math.min(delay, left), signal);
+        // A sleep that ran to the deadline starts no new poll: its timeout floor would overrun
+        // timeout_seconds. Decided from the sleep, not the clock, since a timer can fire a little early.
+        if (delay >= left) return timedOut(status, text);
       }
     },
   });

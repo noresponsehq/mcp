@@ -310,12 +310,17 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
   test("wait_for_assessment says the assessment is still pending when the time runs out", async () => {
     fake.state.gets = 0;
     fake.state.settleAfter = 1000;
+    const started = Date.now();
     const result = await client.callTool({ name: "wait_for_assessment", arguments: { assessment_id: ID, timeout_seconds: 1 } });
+    const elapsed = Date.now() - started;
     fake.state.settleAfter = 0;
     assert.ok(!result.isError);
     assert.match(result.content[0].text, /still pending after 1 s/);
     assert.equal(json(result, 1).status, "pending");
     assert.equal(json(result, 1).account, undefined);
+    // Retry-After 1 s fills the whole second: no poll starts once the deadline has passed.
+    assert.equal(fake.state.gets, 1);
+    assert.ok(elapsed < 1800, `took ${elapsed} ms`);
   });
 
   test("wait_for_assessment keeps polling a partial answer until it is complete", async () => {
