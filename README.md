@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/noresponsehq/.github/main/profile/sdk-header.png" alt="NoResponse" width="100%">
+
 # NoResponse MCP server
 
 An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can assess a signup or gateway event, wait for a pending assessment, page through an account's history and record what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
