@@ -70,6 +70,6 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "wait_for_assessment",
-    "description": "Wait until a pending assessment is no longer pending, then return it.\n\nPolls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, partial or failed, or until timeout_seconds pass. When the time runs out the assessment is still pending: the result says so and carries the last answer, and you can call this tool again. A pending assessment has no recommendation; apply your own fallback until it settles. Requires the assess or history scope."
+    "description": "Wait until an assessment is complete, then return it.\n\nPolls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, or until timeout_seconds pass. When the time runs out the result says so and carries the latest answer, and you can call this tool again. A partial answer has a recommendation you can act on while a lane is still running; a pending one has none, so apply your own fallback until it settles. Requires the assess or history scope."
   }
 ];

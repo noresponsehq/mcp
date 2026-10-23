@@ -54,11 +54,11 @@ const args = {
 export function registerMCPExtensions(register: Register): void {
   register.tool({
     name: "wait_for_assessment",
-    description: `Wait until a pending assessment is no longer pending, then return it.
+    description: `Wait until an assessment is complete, then return it.
 
-Polls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, partial or failed, or until timeout_seconds pass. When the time runs out the assessment is still pending: the result says so and carries the last answer, and you can call this tool again. A pending assessment has no recommendation; apply your own fallback until it settles. Requires the assess or history scope.`,
+Polls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, or until timeout_seconds pass. When the time runs out the result says so and carries the latest answer, and you can call this tool again. A partial answer has a recommendation you can act on while a lane is still running; a pending one has none, so apply your own fallback until it settles. Requires the assess or history scope.`,
     annotations: {
-      title: "Wait for a pending assessment",
+      title: "Wait for an assessment to complete",
       destructiveHint: false,
       idempotentHint: true,
       openWorldHint: false,
@@ -72,6 +72,19 @@ Polls get_assessment at the interval the API's Retry-After asks for (at least on
       const request = args.response_mode === undefined
         ? { assessment_id: args.assessment_id }
         : { assessment_id: args.assessment_id, response_mode: args.response_mode };
+      // The latest partial answer, returned if the time runs out first.
+      let partial: string | undefined;
+      const timedOut = (state: "partial" | "pending", text: string) => ({
+        content: [
+          {
+            type: "text" as const,
+            text: state === "partial"
+              ? `Assessment ${args.assessment_id} is still partial after ${timeoutMs / 1000} s. This is the latest answer: act on its recommendation, or call wait_for_assessment again for the complete one.`
+              : `Assessment ${args.assessment_id} is still pending after ${timeoutMs / 1000} s. Call wait_for_assessment again, or apply your fallback for a pending assessment.`,
+          },
+          { type: "text" as const, text },
+        ],
+      });
       for (;;) {
         const remaining = deadline - Date.now();
         const [result] = await assessmentsGet(client, request, {
@@ -79,6 +92,8 @@ Polls get_assessment at the interval the API's Retry-After asks for (at least on
           timeoutMs: Math.max(remaining, MIN_POLL_INTERVAL_MS),
         }).$inspect();
         if (!result.ok) {
+          // The last poll ran into the deadline: the partial answer stands.
+          if (partial !== undefined && !signal.aborted && Date.now() >= deadline) return timedOut("partial", partial);
           return { content: [{ type: "text", text: result.error.message }], isError: true };
         }
         const response = result.value;
@@ -90,19 +105,10 @@ Polls get_assessment at the interval the API's Retry-After asks for (at least on
         } catch {
           return { content: [{ type: "text", text }], isError: true };
         }
-        if (status !== "pending") return { content: [{ type: "text", text }] };
+        if (status !== "pending" && status !== "partial") return { content: [{ type: "text", text }] };
+        if (status === "partial") partial = text;
         const left = deadline - Date.now();
-        if (left <= 0) {
-          return {
-            content: [
-              {
-                type: "text",
-                text: `Assessment ${args.assessment_id} is still pending after ${timeoutMs / 1000} s. Call wait_for_assessment again, or apply your fallback for a pending assessment.`,
-              },
-              { type: "text", text },
-            ],
-          };
-        }
+        if (left <= 0) return timedOut(status, text);
         const delay = Math.max(MIN_POLL_INTERVAL_MS, retryAfterMs(response.headers.get("retry-after")) ?? 0);
         await sleep(Math.min(delay, left), signal);
       }

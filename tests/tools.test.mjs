@@ -7,6 +7,7 @@ import { after, before, describe, test } from "node:test";
 import { CALLER_KEY, fixture, httpClient, json, recordingAPI, stdioClient, workerServer } from "./helpers.mjs";
 
 const PENDING = fixture("assessment-pending.json");
+const PARTIAL = fixture("assessment-partial.json");
 const COMPLETE = fixture("assessment-complete.json");
 const OUTCOME = fixture("assessment-outcome.json");
 const LIST = fixture("assessment-list.json");
@@ -42,10 +43,10 @@ const TOOLS = [
   "wait_for_assessment",
 ];
 
-// Answers by route; GET of the assessment answers pending until `settleAfter`
-// polls have been made.
+// Answers by route; GET of the assessment answers `unsettled` (pending by
+// default) until `settleAfter` polls have been made.
 function fakeAPI() {
-  const state = { settleAfter: 0, gets: 0, status: 200 };
+  const state = { settleAfter: 0, gets: 0, status: 200, unsettled: PENDING };
   const api = recordingAPI({
     respond(req) {
       if (state.status !== 200) {
@@ -67,7 +68,7 @@ function fakeAPI() {
       if (req.method === "GET" && req.path.startsWith(`/v1/assessments/${ID}`)) {
         state.gets += 1;
         return state.gets <= state.settleAfter
-          ? { headers: { "retry-after": "1" }, body: PENDING }
+          ? { headers: { "retry-after": "1" }, body: state.unsettled }
           : { body: COMPLETE };
       }
       return { status: 404, body: { status: 404, code: "not_found" } };
@@ -285,6 +286,30 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     assert.ok(!result.isError);
     assert.match(result.content[0].text, /still pending after 1 s/);
     assert.equal(json(result, 1).status, "pending");
+  });
+
+  test("wait_for_assessment keeps polling a partial answer until it is complete", async () => {
+    fake.state.gets = 0;
+    fake.state.settleAfter = 1;
+    fake.state.unsettled = PARTIAL;
+    const result = await client.callTool({ name: "wait_for_assessment", arguments: { assessment_id: ID, timeout_seconds: 20 } });
+    fake.state.settleAfter = 0;
+    fake.state.unsettled = PENDING;
+    assert.ok(!result.isError, result.content?.[0]?.text);
+    assert.equal(json(result).status, "complete");
+    assert.equal(fake.state.gets, 2);
+  });
+
+  test("wait_for_assessment returns the latest partial answer when the time runs out", async () => {
+    fake.state.gets = 0;
+    fake.state.settleAfter = 1000;
+    fake.state.unsettled = PARTIAL;
+    const result = await client.callTool({ name: "wait_for_assessment", arguments: { assessment_id: ID, timeout_seconds: 1 } });
+    fake.state.settleAfter = 0;
+    fake.state.unsettled = PENDING;
+    assert.ok(!result.isError);
+    assert.match(result.content[0].text, /still partial after 1 s/);
+    assert.equal(json(result, 1).status, "partial");
   });
 
   test("an API error comes back as a tool error with the problem document", async () => {
