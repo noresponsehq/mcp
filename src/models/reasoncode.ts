@@ -40,6 +40,7 @@ export const ReasonCode = {
   ContextLocaleMismatch: "context_locale_mismatch",
   ContextLineCountryMismatch: "context_line_country_mismatch",
   PriorAbuseLink: "prior_abuse_link",
+  TestScenario: "test_scenario",
 } as const;
 /**
  * A stable reason code. New codes may appear; ignore any you do not know.
@@ -82,6 +83,7 @@ export const ReasonCode$zodSchema = z.enum([
   "context_locale_mismatch",
   "context_line_country_mismatch",
   "prior_abuse_link",
+  "test_scenario",
 ]).describe(
   "A stable reason code. New codes may appear; ignore any you do not know.",
 );
