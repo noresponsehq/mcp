@@ -15,6 +15,7 @@ export type Account = {
   decisions_by_flow: AccountDecisionsByFlow;
   assessment_id: string;
   updated_at: string;
+  risk_version: number;
 };
 
 export const Account$zodSchema: z.ZodType<Account> = z.object({
@@ -28,6 +29,9 @@ export const Account$zodSchema: z.ZodType<Account> = z.object({
     "The account_id the workspace sends with its assessments.",
   ),
   risk: AccountRisk$zodSchema,
+  risk_version: z.int().describe(
+    "The version of the account's current risk. It increases every time the account's current risk or decisions_by_flow changes, and does not decrease. Of two copies of an account, the one with the higher risk_version is newer. account.risk_changed carries the risk_version that its change made.",
+  ),
   schema_version: z.literal("1").default("1").optional().describe(
     "Version of the body shape.",
   ),

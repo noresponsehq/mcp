@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.5
+
+* `SDK.assessments.create()`:  `response.account.risk_version` **Added**
+* `SDK.assessments.get()`:  `response.account.risk_version` **Added**
+* `SDK.accounts.get()`:  `response.risk_version` **Added**
+
 ## 0.3.4
 
 No changes detected.
