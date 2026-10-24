@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+No changes detected.
+
 ## 0.3.5
 
 * `SDK.assessments.create()`:  `response.account.risk_version` **Added**
