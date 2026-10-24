@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.4
+
+No changes detected.
+
 ## 0.3.3
 
 * `SDK.keys.rotate()`:  `response.scopes[].enum(delete)` **Added** (Breaking ⚠️)
