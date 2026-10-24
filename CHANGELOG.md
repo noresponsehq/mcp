@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3
+
+No changes detected.
+
 ## 0.4.2
 
 * `SDK.keyUsage.record()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
