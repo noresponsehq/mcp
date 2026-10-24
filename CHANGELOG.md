@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+No changes detected.
+
 ## 0.3.0
 
 * `SDK.assessments.create()`: 

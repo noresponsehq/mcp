@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 71646a37e5561fb195cfcffacbbea5c6
+  docChecksum: e89e35e6ca28b053d5cbb81640c07d03
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.3.0
-  configChecksum: 2eceeb2ff594fca75dd132464e1c281b
+  releaseVersion: 0.3.1
+  configChecksum: b53e220673ba88ce74ad18e9fdfb0fc4
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -33,11 +33,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:9682f8cb6406232875dfc0cbfcfba6246eb4fdec
+    last_write_checksum: sha1:a3778658a06ccab40032d11b43b5f9f47583defb
   package.json:
-    last_write_checksum: sha1:7f9f0fb9a7d8154fa5ecfdc86f21be06ee9771b4
+    last_write_checksum: sha1:d6322b7506021df7dec684d6132520fc9e7552a9
   server.json:
-    last_write_checksum: sha1:07a8e56df09306f2a633f2df4afa5bfff96a764d
+    last_write_checksum: sha1:4c581bbceaed84785737eea70b85112807ea37c3
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -93,7 +93,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:087a9e9cff7653780644e0968c7e5bd4b707c87d
+    last_write_checksum: sha1:2fb4236be4e14386c282fcb95fd153094759a492
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -137,7 +137,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:2e75f80398fc79adc26309f562558ee1b04f7c7a
+    last_write_checksum: sha1:206fd2c486603e39744436c7044a685dad1e715a
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -145,7 +145,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:70ee0aeab20aafa1d9575ae0a9de5b7c65ecc621
+    last_write_checksum: sha1:6758d70290e9b3a26e940a709f94535758f87330
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -431,7 +431,7 @@ trackedFiles:
   src/models/transport.ts:
     last_write_checksum: sha1:de4bdd023cdce603d522d24a906410a112210006
   src/models/webhookdeliveryattempt.ts:
-    last_write_checksum: sha1:6bb6972e327d6737451731da05d5de47ae42e9de
+    last_write_checksum: sha1:bbb4f58c9cb5938ce6684cf13e9fa213c11d8784
   src/models/webhookdeliveryattemptstatus.ts:
     last_write_checksum: sha1:4701316a1d7ea60f0460384c9ea6ac5a65037de1
   src/models/webhookdeliverylist.ts:
@@ -451,7 +451,7 @@ trackedFiles:
   src/models/webhookkeyrotationrequest.ts:
     last_write_checksum: sha1:e39d8426794ecaaf15c8bb4ea1407e7a05d5ad6b
   src/models/webhookreplay.ts:
-    last_write_checksum: sha1:341455a6592e2daea5132ca1a0fa4a3916fc9d11
+    last_write_checksum: sha1:53cd327731a702a98e5a7d59e698fd4e274ad36f
   src/models/webhookreplayrequest.ts:
     last_write_checksum: sha1:d9977159daf60d0f5059da41d4e9690d0461323b
   src/models/webhooktest.ts:
