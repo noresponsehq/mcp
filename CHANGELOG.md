@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.4.2
+
+* `SDK.keyUsage.record()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.accounts.delete()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.assessments.create()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.assessments.delete()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.assessments.recordOutcome()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.integrations.create()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.keys.rotate()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.replayDelivery()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.listDeliveries()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.integrations.list()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.integrations.delete()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.integrations.rotate()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.list()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.create()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.delete()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.rotateSigningKey()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.sendTestEvent()`:  `response.code.enum(risk_version_ahead)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`: **Added**
+* `SDK.accounts.recordEnforcement()`: **Added**
+
 ## 0.4.1
 
 No changes detected.
