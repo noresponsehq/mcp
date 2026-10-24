@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.4
+
+* `SDK.assessments.create()`:  `response.account.risk.decision.enum(held)` **Added** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.account.risk.decision.enum(held)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response.items[].risk.decision.enum(held)` **Added** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.risk.decision.enum(held)` **Added** (Breaking ⚠️)
+
 ## 0.4.3
 
 No changes detected.
