@@ -4,6 +4,7 @@ import { ClosedEnum } from "../types/enums.js";
 export const Scope = {
   Assess: "assess",
   History: "history",
+  Delete: "delete",
   Webhooks: "webhooks",
   Detailed: "detailed",
   Integrations: "integrations",
@@ -13,6 +14,7 @@ export type Scope = ClosedEnum<typeof Scope>;
 export const Scope$zodSchema = z.enum([
   "assess",
   "history",
+  "delete",
   "webhooks",
   "detailed",
   "integrations",
