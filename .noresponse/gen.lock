@@ -5,8 +5,8 @@ management:
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.4.4
-  configChecksum: e70fd22640c5c2eefc48120c990b1c35
+  releaseVersion: 0.4.5
+  configChecksum: b0c675a41bc6dfed760272116b3293eb
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -34,11 +34,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:24269356d27bd52c1f6dfd2d20dcfe9b90d17cd8
+    last_write_checksum: sha1:b30f90ba1659546c254969dce30fd3e6ba6f421f
   package.json:
-    last_write_checksum: sha1:671e22364a0ee45ba1ffd28dd1e965e98f1e5f26
+    last_write_checksum: sha1:a83df0f020c8d07b5fcb49aead2abb12ff7f486e
   server.json:
-    last_write_checksum: sha1:740fffdd76c47d314c5e0a79f45b2f7e862c563d
+    last_write_checksum: sha1:ed4498526ee5ba08795eb80c9b194ca948947a13
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -98,7 +98,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:3625617d8911f0605806600c46e6035bb9e939df
+    last_write_checksum: sha1:af9e01a38a1648028d10f031b903fbd2da195009
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -142,7 +142,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:8c8133384a4ab6d4b268719a68241ac3cf4e6fb9
+    last_write_checksum: sha1:ad9199b99ca334135d34ac41a79fcd799568613f
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -150,7 +150,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:48c5ead97dd2cec4d8e128cb91be2a82efc27368
+    last_write_checksum: sha1:ec1d087e7f15abe18bea45563bf74dfa1100a37e
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:

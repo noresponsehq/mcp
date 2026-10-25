@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.5
+
+No changes detected.
+
 ## 0.4.4
 
 * `SDK.assessments.create()`:  `response.account.risk.decision.enum(held)` **Added** (Breaking ⚠️)

@@ -14,7 +14,7 @@ The server uses the API key you give it and stores nothing. API key rotation is 
 | `get_assessment` | Read the latest version of one assessment. | `GET /v1/assessments/{assessment_id}` |
 | `wait_for_assessment` | Poll a pending assessment, at the interval Retry-After asks for, until it settles or `timeout_seconds` (default 25, at most 55) pass. | `GET /v1/assessments/{assessment_id}` |
 | `query_assessments` | Page through one account's unexpired assessments, newest first. | `POST /v1/assessments/query` |
-| `get_account` | Read an account's one current risk: the score, a decision (`allow`, `step_up`, `review` or `block`) for each flow, and the assessment it comes from. Needs the `history` scope. | `GET /v1/accounts/{account_id}` |
+| `get_account` | Read an account's one current risk: the score, a decision (`allow`, `step_up`, `review`, `block`, or `held` while a held flow waits) for each flow, and the assessment it comes from. Needs the `history` scope. | `GET /v1/accounts/{account_id}` |
 | `list_account_assessments` | Page through one account's unexpired assessments, newest first, with the account id in the URL. Needs the `history` scope. | `GET /v1/accounts/{account_id}/assessments` |
 | `list_changed_accounts` | List the accounts whose risk changed, oldest change first; pass `next_cursor` back as `changed_since` to poll, and `unenforced` true for only the accounts that need action. Needs the `history` scope. | `GET /v1/accounts` |
 | `record_enforcement` | Record what you did to an account in your identity provider for one flow at one `risk_version`, applied or failed. A repeat answers the stored record. Needs the `history` scope. | `POST /v1/accounts/{account_id}/enforcements` |
@@ -33,7 +33,7 @@ The server uses the API key you give it and stores nothing. API key rotation is 
 | `delete_integration` | Delete an integration; its endpoint answers 404 from then on. | `DELETE /v1/integrations/{integration_id}` |
 | `rotate_integration_secret` | Replace an integration's secret. The old one is accepted for 24 hours. Never retried. | `POST /v1/integrations/{integration_id}/rotate` |
 
-Act on `account.risk.decision` (`allow`, `step_up`, `review` or `block`), the account's current decision for the assessment's flow. `detail` holds the assessment's own risk, recommendation and `assessment_version`. While the account's first assessment is pending, `account` is absent, so apply your own fallback for that, 429, 503 or a timeout.
+Act on `account.risk.decision` (`allow`, `step_up`, `review`, `block`, or `held` while a held flow waits for its investigation), the account's current decision for the assessment's flow. `detail` holds the assessment's own risk, recommendation and `assessment_version`. While the account's first assessment is pending, `account` is absent, so apply your own fallback for that, 429, 503 or a timeout.
 
 ## Hosted server
 
