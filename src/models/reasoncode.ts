@@ -42,6 +42,9 @@ export const ReasonCode = {
   PriorAbuseLink: "prior_abuse_link",
   TestScenario: "test_scenario",
   SharedApiKey: "shared_api_key",
+  YoungEmailDomain: "young_email_domain",
+  EmailDomainNoMx: "email_domain_no_mx",
+  EmailDomainNonexistent: "email_domain_nonexistent",
 } as const;
 /**
  * A stable reason code. New codes may appear; ignore any you do not know.
@@ -86,6 +89,9 @@ export const ReasonCode$zodSchema = z.enum([
   "prior_abuse_link",
   "test_scenario",
   "shared_api_key",
+  "young_email_domain",
+  "email_domain_no_mx",
+  "email_domain_nonexistent",
 ]).describe(
   "A stable reason code. New codes may appear; ignore any you do not know.",
 );
