@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.5.6
+
+* `SDK.assessments.create()`:  `response.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+
 ## 0.5.5
 
 * `SDK.integrations.create()`: 

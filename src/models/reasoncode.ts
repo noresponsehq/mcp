@@ -47,6 +47,12 @@ export const ReasonCode = {
   EmailDomainNonexistent: "email_domain_nonexistent",
   ForumSanctioned: "forum_sanctioned",
   PriorPaymentAbuse: "prior_payment_abuse",
+  IpHistoryMatch: "ip_history_match",
+  IdentityAttributeConflict: "identity_attribute_conflict",
+  ImpossibleIdentityAge: "impossible_identity_age",
+  BreachSharedIp: "breach_shared_ip",
+  NationalityMismatch: "nationality_mismatch",
+  MinorIdentity: "minor_identity",
 } as const;
 /**
  * A stable reason code. New codes may appear; ignore any you do not know.
@@ -96,6 +102,12 @@ export const ReasonCode$zodSchema = z.enum([
   "email_domain_nonexistent",
   "forum_sanctioned",
   "prior_payment_abuse",
+  "ip_history_match",
+  "identity_attribute_conflict",
+  "impossible_identity_age",
+  "breach_shared_ip",
+  "nationality_mismatch",
+  "minor_identity",
 ]).describe(
   "A stable reason code. New codes may appear; ignore any you do not know.",
 );
