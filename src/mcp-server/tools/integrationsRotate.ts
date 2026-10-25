@@ -10,7 +10,7 @@ export const tool$integrationsRotate: ToolDefinition<typeof args> = {
   name: "rotate_integration_secret",
   description: `Replace an integration's secret.
 
-For Auth0, send {} and the answer's secret is the new shared secret, shown once. For WorkOS, regenerate the Actions secret in the WorkOS dashboard and send it as signing_secret. The replaced secret is still accepted for 24 hours (previous_secret_expires_at). Requires the integrations scope. Not idempotent: a retry after a lost answer rotates again.`,
+For Auth0, send {} and the answer's secret is the new shared secret, shown once. For WorkOS, regenerate the Actions secret in the WorkOS dashboard and send it as signing_secret; for Supabase, generate a new hook secret in the Supabase dashboard and send it as signing_secret. The replaced secret is still accepted for 24 hours (previous_secret_expires_at). Requires the integrations scope. Not idempotent: a retry after a lost answer rotates again.`,
   annotations: {
     "title": "Rotate a hosted provider integration's signing secret",
     "destructiveHint": false,
