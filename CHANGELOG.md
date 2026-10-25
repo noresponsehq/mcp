@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+* `SDK.accounts.recordEnforcement()`: 
+  *  `request.body.action.enum(activate)` **Added**
+  *  `response.action.enum(activate)` **Added** (Breaking ⚠️)
+
 ## 0.5.0
 
 * `SDK.accounts.recordEnforcement()`:  `response.code` **Changed** (Breaking ⚠️)

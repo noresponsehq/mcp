@@ -54,7 +54,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.5.0",
+    version: "0.5.1",
   });
 
   const getClient = deps.getSDK || (() =>
