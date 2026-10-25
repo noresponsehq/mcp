@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2
+
+No changes detected.
+
 ## 0.5.1
 
 * `SDK.accounts.recordEnforcement()`: 
