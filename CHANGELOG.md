@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.7
+
+* `SDK.assessments.create()`:  `response.detail.incomplete_sources[].lane.enum(domain)` **Added** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.detail.incomplete_sources[].lane.enum(domain)` **Added** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.items[].incomplete_sources[].lane.enum(domain)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.items[].incomplete_sources[].lane.enum(domain)` **Added** (Breaking ⚠️)
+
 ## 0.4.6
 
 No changes detected.

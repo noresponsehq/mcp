@@ -13,7 +13,7 @@ export type IncompleteSource = { lane: Lane; reason: IncompleteReason };
 export const IncompleteSource$zodSchema: z.ZodType<IncompleteSource> = z.object(
   {
     lane: Lane$zodSchema.describe(
-      "An evidence lane: accounts (account presence for email and username), phone, breach and ip.",
+      "An evidence lane: accounts (account presence for email and username), phone, breach, domain (the email domain's registration) and ip.",
     ),
     reason: IncompleteReason$zodSchema.describe(
       "Why a lane did not settle. deferred means the lane is asynchronous and still running; a continuation settles it. timed_out means the lane missed its deadline. insufficient_evidence is a settled inconclusive signal rather than an incomplete lane.",
