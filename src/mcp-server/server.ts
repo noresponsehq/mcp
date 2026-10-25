@@ -29,6 +29,10 @@ import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
 import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
 import { tool$integrationsList } from "./tools/integrationsList.js";
 import { tool$integrationsRotate } from "./tools/integrationsRotate.js";
+import { tool$keysList } from "./tools/keysList.js";
+import { tool$keysRevoke } from "./tools/keysRevoke.js";
+import { tool$settingsGet } from "./tools/settingsGet.js";
+import { tool$settingsUpdate } from "./tools/settingsUpdate.js";
 import { tool$webhookEndpointsCreate } from "./tools/webhookEndpointsCreate.js";
 import { tool$webhookEndpointsDelete } from "./tools/webhookEndpointsDelete.js";
 import { tool$webhookEndpointsList } from "./tools/webhookEndpointsList.js";
@@ -50,7 +54,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.4.12",
+    version: "0.5.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -105,6 +109,8 @@ export function createMCPServer(deps: {
   tool(tool$accountsDelete);
   tool(tool$accountsListAssessments);
   tool(tool$accountsRecordEnforcement);
+  tool(tool$keysList);
+  tool(tool$keysRevoke);
   tool(tool$integrationsCreate);
   tool(tool$integrationsList);
   tool(tool$integrationsDelete);
@@ -116,6 +122,8 @@ export function createMCPServer(deps: {
   tool(tool$webhookEndpointsSendTestEvent);
   tool(tool$webhookEndpointsListDeliveries);
   tool(tool$webhookEndpointsReplayDelivery);
+  tool(tool$settingsGet);
+  tool(tool$settingsUpdate);
 
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);

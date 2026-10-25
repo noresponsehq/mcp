@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.5.0
+
+* `SDK.accounts.recordEnforcement()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.replayDelivery()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.listDeliveries()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.sendTestEvent()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.recordOutcome()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.rotateSigningKey()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keyUsage.record()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keys.rotate()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.integrations.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.rotate()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.settings.update()`: **Added**
+* `SDK.keys.list()`: **Added**
+* `SDK.keys.create()`: **Added**
+* `SDK.settings.get()`: **Added**
+* `SDK.keys.revoke()`: **Added**
+
 ## 0.4.12
 
 No changes detected.

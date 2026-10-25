@@ -23,6 +23,10 @@ const INTEGRATION = fixture("integration-auth0.json");
 const INTEGRATION_ROTATED = fixture("integration-auth0-rotated.json");
 const INTEGRATIONS = fixture("integration-list.json");
 const INT_ID = INTEGRATION.integration_id;
+const KEYS = fixture("key-list.json");
+const REVOKED = fixture("key-revoked.json");
+const SETTINGS = fixture("settings.json");
+const WORKSPACE = SETTINGS.workspace_id;
 const ID = PENDING.id;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const TOOLS = [
@@ -35,18 +39,22 @@ const TOOLS = [
   "delete_webhook_endpoint",
   "get_account",
   "get_assessment",
+  "get_settings",
   "list_account_assessments",
   "list_changed_accounts",
   "list_integrations",
+  "list_keys",
   "list_webhook_deliveries",
   "list_webhook_endpoints",
   "query_assessments",
   "record_enforcement",
   "record_outcome",
   "replay_webhook_delivery",
+  "revoke_key",
   "rotate_integration_secret",
   "rotate_webhook_signing_key",
   "send_webhook_test_event",
+  "update_settings",
   "wait_for_assessment",
 ];
 
@@ -74,6 +82,9 @@ function fakeAPI() {
       if (req.method === "GET" && req.path === "/v1/integrations") return { body: INTEGRATIONS };
       if (req.method === "POST" && req.path === `/v1/integrations/${INT_ID}/rotate`) return { body: INTEGRATION_ROTATED };
       if (req.method === "DELETE" && req.path === `/v1/integrations/${INT_ID}`) return { status: 204 };
+      if (req.method === "GET" && req.path === `/v1/workspaces/${WORKSPACE}/keys`) return { body: KEYS };
+      if (req.method === "DELETE" && req.path === `/v1/workspaces/${WORKSPACE}/keys/${REVOKED.id}`) return { body: REVOKED };
+      if (req.path === `/v1/workspaces/${WORKSPACE}/settings/live`) return { body: SETTINGS };
       if (req.method === "GET" && req.path.startsWith(`/v1/assessments/${ID}`)) {
         state.gets += 1;
         return state.gets <= state.settleAfter
@@ -98,10 +109,10 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     await api?.close();
   });
 
-  test("exposes the assessment, webhook endpoint and integration tools, and not API key rotation or key usage", async () => {
+  test("exposes the assessment, webhook endpoint, integration, key and settings tools, and not API key rotation, key creation or key usage", async () => {
     const { tools } = await client.listTools();
     assert.deepEqual(tools.map((t) => t.name).sort(), TOOLS);
-    assert.ok(!tools.some((t) => /api_key|rotate_key|key_usage/i.test(t.name)));
+    assert.ok(!tools.some((t) => /api_key|rotate_key|create_key|key_usage/i.test(t.name)));
     const readOnly = Object.fromEntries(tools.map((t) => [t.name, t.annotations?.readOnlyHint === true]));
     assert.deepEqual(readOnly, {
       create_assessment: false,
@@ -113,6 +124,10 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       delete_integration: false,
       get_account: true,
       get_assessment: true,
+      get_settings: true,
+      list_keys: true,
+      revoke_key: false,
+      update_settings: false,
       list_account_assessments: true,
       list_changed_accounts: true,
       list_webhook_endpoints: true,
@@ -128,7 +143,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       wait_for_assessment: true,
     });
     const destructive = tools.filter((t) => t.annotations?.destructiveHint === true).map((t) => t.name);
-    assert.deepEqual(destructive.sort(), ["delete_account", "delete_assessment", "delete_integration", "delete_webhook_endpoint"]);
+    assert.deepEqual(destructive.sort(), ["delete_account", "delete_assessment", "delete_integration", "delete_webhook_endpoint", "revoke_key"]);
   });
 
   test("the webhook endpoint tools call their routes with the caller's key", async () => {
@@ -287,6 +302,37 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     for (const req of api.requests) {
       assert.equal(req.headers.authorization, `Bearer ${CALLER_KEY}`);
       assert.equal(req.headers["idempotency-key"], undefined);
+    }
+  });
+
+  test("the key and settings tools call their routes with the caller's key", async () => {
+    api.requests.length = 0;
+    const listed = await client.callTool({ name: "list_keys", arguments: { request: { workspace_id: WORKSPACE } } });
+    assert.ok(!listed.isError, listed.content?.[0]?.text);
+    assert.deepEqual(json(listed), KEYS);
+    const revoked = await client.callTool({ name: "revoke_key", arguments: { request: { workspace_id: WORKSPACE, key_id: REVOKED.id } } });
+    assert.ok(!revoked.isError, revoked.content?.[0]?.text);
+    assert.equal(json(revoked).status, "revoked");
+    const read = await client.callTool({ name: "get_settings", arguments: { request: { workspace_id: WORKSPACE, environment: "live" } } });
+    assert.ok(!read.isError, read.content?.[0]?.text);
+    const changed = await client.callTool({
+      name: "update_settings",
+      arguments: { request: { workspace_id: WORKSPACE, environment: "live", body: { retention_days: 30 } } },
+    });
+    assert.ok(!changed.isError, changed.content?.[0]?.text);
+    assert.deepEqual(
+      api.requests.map((r) => [r.method, r.path]),
+      [
+        ["GET", `/v1/workspaces/${WORKSPACE}/keys`],
+        ["DELETE", `/v1/workspaces/${WORKSPACE}/keys/${REVOKED.id}`],
+        ["GET", `/v1/workspaces/${WORKSPACE}/settings/live`],
+        ["PATCH", `/v1/workspaces/${WORKSPACE}/settings/live`],
+      ],
+    );
+    assert.deepEqual(api.requests[3].body, { retention_days: 30 });
+    for (const req of api.requests) {
+      assert.equal(req.headers.authorization, `Bearer ${CALLER_KEY}`);
+      assert.equal(req.headers["nr-acting-user"], undefined);
     }
   });
 

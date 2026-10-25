@@ -4,7 +4,7 @@
 
 An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can assess an account creation, login or purchase, wait for a pending assessment, page through an account's history and record what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
 
-The server uses the API key you give it and stores nothing. API key rotation is not a tool: rotate keys from your own backend. The integration tools need a key with the `integrations` scope; give the server a key without it to keep them unusable.
+The server uses the API key you give it and stores nothing. API key rotation and key creation are not tools: rotate and create keys from your own backend. The integration tools need a key with the `integrations` scope, and the key and settings tools a key with the `management` scope; give the server a key without them to keep them unusable.
 
 ## Tools
 
@@ -32,6 +32,10 @@ The server uses the API key you give it and stores nothing. API key rotation is 
 | `list_integrations` | List the account's integrations, oldest first, with no secrets. | `GET /v1/integrations` |
 | `delete_integration` | Delete an integration; its endpoint answers 404 from then on. | `DELETE /v1/integrations/{integration_id}` |
 | `rotate_integration_secret` | Replace an integration's secret. The old one is accepted for 24 hours. Never retried. | `POST /v1/integrations/{integration_id}/rotate` |
+| `list_keys` | List the keys of the key's environment, newest first, with no secrets. Needs the `management` scope. | `GET /v1/workspaces/{workspace_id}/keys` |
+| `revoke_key` | Revoke a key of the key's environment at once. A key cannot revoke itself. Needs the `management` scope; marked destructive. | `DELETE /v1/workspaces/{workspace_id}/keys/{key_id}` |
+| `get_settings` | Read the environment's retention, flow thresholds, admission and refused sources. Needs the `management` scope. | `GET /v1/workspaces/{workspace_id}/settings/{environment}` |
+| `update_settings` | Change only what the body names, in one transaction. Needs the `management` scope. | `PATCH /v1/workspaces/{workspace_id}/settings/{environment}` |
 
 Act on `account.risk.decision` (`allow`, `step_up`, `review`, `block`, or `held` while a held flow waits for its investigation), the account's current decision for the assessment's flow. `detail` holds the assessment's own risk, recommendation and `assessment_version`. While the account's first assessment is pending, `account` is absent, so apply your own fallback for that, 429, 503 or a timeout.
 

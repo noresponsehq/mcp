@@ -11,6 +11,8 @@ export const ConflictErrorCode = {
   WebhookEndpointUnverified: "webhook_endpoint_unverified",
   TooManyIntegrations: "too_many_integrations",
   RiskVersionAhead: "risk_version_ahead",
+  KeyLimitReached: "key_limit_reached",
+  SelfRevocation: "self_revocation",
 } as const;
 /**
  * Machine codes an HTTP 409 answer can carry.
@@ -24,4 +26,6 @@ export const ConflictErrorCode$zodSchema = z.enum([
   "webhook_endpoint_unverified",
   "too_many_integrations",
   "risk_version_ahead",
+  "key_limit_reached",
+  "self_revocation",
 ]).describe("Machine codes an HTTP 409 answer can carry.");

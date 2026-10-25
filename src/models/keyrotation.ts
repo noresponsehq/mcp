@@ -1,23 +1,25 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 
-export const Scope = {
+export const KeyRotationScope = {
   Assess: "assess",
   History: "history",
   Delete: "delete",
   Webhooks: "webhooks",
   Detailed: "detailed",
   Integrations: "integrations",
+  Management: "management",
 } as const;
-export type Scope = ClosedEnum<typeof Scope>;
+export type KeyRotationScope = ClosedEnum<typeof KeyRotationScope>;
 
-export const Scope$zodSchema = z.enum([
+export const KeyRotationScope$zodSchema = z.enum([
   "assess",
   "history",
   "delete",
   "webhooks",
   "detailed",
   "integrations",
+  "management",
 ]);
 
 /**
@@ -26,7 +28,7 @@ export const Scope$zodSchema = z.enum([
 export type KeyRotation = {
   key: string;
   key_id: string;
-  scopes: Array<Scope>;
+  scopes: Array<KeyRotationScope>;
   created_at: string;
   previous_key_id: string;
   previous_key_expires_at: string;
@@ -44,7 +46,7 @@ export const KeyRotation$zodSchema: z.ZodType<KeyRotation> = z.object({
   previous_key_id: z.string().describe(
     "The id of the key that signed this request.",
   ),
-  scopes: z.array(Scope$zodSchema).describe(
+  scopes: z.array(KeyRotationScope$zodSchema).describe(
     "The scopes of the new key: those of the presented key.",
   ),
 }).describe(
