@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0
+
+No changes detected.
+
 ## 0.5.7
 
 * `SDK.assessments.create()`:  `response` **Changed**
