@@ -1,14 +1,14 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "org.noresponse/mcp",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "NoResponse API: Server-side risk assessment of account creation, login and purchase: a recommendatio",
   "title": "NoResponse API: Server-side risk assessment of account creation, login and purchase: a recommendatio",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@noresponse/mcp",
-      "version": "0.6.1",
+      "version": "0.6.2",
       "registryBaseUrl": "https://registry.npmjs.org",
       "runtimeHint": "npx",
       "transport": {
