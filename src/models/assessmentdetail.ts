@@ -77,7 +77,7 @@ export const AssessmentDetail$zodSchema: z.ZodType<AssessmentDetail> = z.object(
       "Labels the v0 policy as hand-authored and not statistically validated.",
     ),
     policy_version: z.string().describe(
-      "Version of the hand-authored heuristic weights that produced the recommendation, for example 'risk-2026-10.7'. A workspace threshold override adds a +t<N> suffix, e.g. 'risk-2026-10.7+t3'.",
+      "Version of the hand-authored heuristic policy that produced the recommendation, for example 'risk-2026-10.7'. A workspace threshold override adds a +t<N> suffix, e.g. 'risk-2026-10.7+t3'.",
     ),
     recommendation: Recommendation$zodSchema.optional().describe(
       "The recommended action: allow, step_up or review. Your application applies it.",
@@ -86,7 +86,7 @@ export const AssessmentDetail$zodSchema: z.ZodType<AssessmentDetail> = z.object(
       "An optional provider correlation id, echoed back. It is not an idempotency key. Refuses an exact-shape JWT or a bare 40, 64 or 128 character hex digest; a UUID is accepted.",
     ),
     risk: Risk$zodSchema.optional().describe(
-      "The one risk decision for this event. score is 0 (safe) to 100 (risky): the sum of the weights of the reasons that fired, clamped to 0 to 100, from hand-set versioned weights. Every answer with a recommendation carries it, and the top-level recommendation equals risk.recommendation. It names no source or provider.",
+      "The one risk decision for this event. score is 0 (safe) to 100 (risky), set by the reasons that fired under a hand-set, versioned heuristic policy. Each reason carries its direction and impact band; the policy's weights are not published. Every answer with a recommendation carries it, and the top-level recommendation equals risk.recommendation. It names no source or provider.",
     ),
     schema_version: z.literal("1").default("1").optional().describe(
       "Version of the body shape.",
