@@ -7,10 +7,14 @@ import { IpSummaryType, IpSummaryType$zodSchema } from "./ipsummarytype.js";
 export type IpSummary = {
   country?: string | undefined;
   type?: IpSummaryType | undefined;
+  asn?: number | undefined;
   seen_in_workspace?: number | undefined;
 };
 
 export const IpSummary$zodSchema: z.ZodType<IpSummary> = z.object({
+  asn: z.int().optional().describe(
+    "Autonomous system number of the network that announces the address, from the offline database. Absent when unknown.",
+  ),
   country: z.string().optional().describe(
     "ISO 3166-1 alpha-2 country of the address.",
   ),
