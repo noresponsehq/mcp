@@ -1,7 +1,8 @@
-# The hosted MCP server: mcp.noresponse.org calls the production API and
-# mcp-staging.noresponse.org (`--env staging`) the staging API. Hand-written;
-# the generator leaves this file alone. sdk-publish.yml deploys both on every
-# release, staging first, and smoke-tests staging before production.
+# The hosted MCP server: mcp.noresponse.org, and the pre-production Worker
+# mcp-staging.noresponse.org (`--env staging`). Both call the production API.
+# Hand-written; the generator leaves this file alone. sdk-publish.yml deploys
+# the pre-production Worker first on every release and smoke-tests it with a
+# production test key before it deploys mcp.noresponse.org.
 #
 # The Worker passes each caller's Authorization header to the API and stores
 # nothing: a session's Durable Object keeps the caller's headers in memory
@@ -39,7 +40,7 @@ name = "noresponse-mcp-staging"
 workers_dev = false
 preview_urls = false
 routes = [{ pattern = "mcp-staging.noresponse.org", custom_domain = true }]
-vars = { SERVER_URL = "https://api-staging.noresponse.org" }
+vars = { SERVER_URL = "https://api.noresponse.org" }
 durable_objects.bindings = [{ name = "NORESPONSE_MCP_MCP", class_name = "AtNoresponseMcpMCP" }]
 observability = { enabled = false }
 
