@@ -4,7 +4,7 @@
 
 An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can assess an account creation, login or purchase, wait for a pending assessment, page through an account's history and record what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
 
-The server uses the API key you give it and stores nothing. API key rotation and key creation are not tools: rotate and create keys from your own backend. The integration tools need a key with the `integrations` scope, and the key and settings tools a key with the `management` scope; give the server a key without them to keep them unusable.
+The server uses the API key you give it and stores nothing. API key rotation and key creation are not tools: rotate and create keys from your own backend. The integration tools need a key with the `integrations` scope, and the key, settings and list tools a key with the `management` scope; give the server a key without them to keep them unusable.
 
 ## Tools
 
@@ -36,6 +36,9 @@ The server uses the API key you give it and stores nothing. API key rotation and
 | `revoke_key` | Revoke a key of the key's environment at once. A key cannot revoke itself. Needs the `management` scope; marked destructive. | `DELETE /v1/workspaces/{workspace_id}/keys/{key_id}` |
 | `get_settings` | Read the environment's retention, flow thresholds, admission and refused sources. Needs the `management` scope. | `GET /v1/workspaces/{workspace_id}/settings/{environment}` |
 | `update_settings` | Change only what the body names, in one transaction. Needs the `management` scope. | `PATCH /v1/workspaces/{workspace_id}/settings/{environment}` |
+| `list_list_entries` | List the environment's allow and block list, oldest first. Needs the `management` scope. | `GET /v1/workspaces/{workspace_id}/lists/{environment}` |
+| `create_list_entry` | Add an email or email domain to the block or allow list; the accounts it matches are decided again. Needs the `management` scope. | `POST /v1/workspaces/{workspace_id}/lists/{environment}` |
+| `delete_list_entry` | Delete an entry; the accounts it matched go back to their scored decision. Needs the `management` scope. | `DELETE /v1/workspaces/{workspace_id}/lists/{environment}/{list_entry_id}` |
 
 Act on `account.risk.decision` (`allow`, `step_up`, `review`, `block`, or `held` while a held flow waits for its investigation), the account's current decision for the assessment's flow. `detail` holds the assessment's own risk, recommendation and `assessment_version`. While the account's first assessment is pending, `account` is absent, so apply your own fallback for that, 429, 503 or a timeout.
 

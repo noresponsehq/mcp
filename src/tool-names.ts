@@ -101,6 +101,18 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Change an environment's settings.\n\nChanges only what the body names, in one transaction: retention_days, refused_sources, and per flow step_up, review, block (null turns blocking off), default_depth, admission, hold_seconds, on_expiry, or inherits_account_creation to return login or purchase to account_creation's thresholds. After the change each flow keeps 0 < step_up < review <= 100 and block off or review <= block <= 100; a change that breaks it answers 400 naming the flow. A policy change is one new policy_version with the signing key's prefix as updated_by, and every change is recorded in the workspace's audit log with the key as its actor. Requires the management scope; the other environment answers 404 not_found. A change reaches assessments within a minute."
   },
   {
+    "name": "list_list_entries",
+    "description": "List an environment's list entries.\n\nLists every entry of the signing key's environment's list, newest first: each an email or an email domain that decides the accounts it matches, block or allow, whatever their score. Requires the management scope; the other environment answers 404 not_found. Read-only and safe to retry."
+  },
+  {
+    "name": "create_list_entry",
+    "description": "Add an entry to an environment's list.\n\nAdds an exact email (kind email) or an email domain (kind email_domain) to the signing key's environment's list with the action block or allow, and answers the entry with its value in canonical form. An account matches when one of its assessments sent the email, or an email of the domain: a block entry decides block for every flow and an allow entry allow, block winning when both match, and the account's risk carries list_match with the entry's id while its score is unchanged. Every matching account is re-decided at once and sends account.risk_changed when its decision changes. A value already on the list answers 409 list_entry_exists; a full list, or an entry matching more than 5,000 accounts, 409 list_limit_reached. Requires the management scope; the other environment answers 404 not_found."
+  },
+  {
+    "name": "delete_list_entry",
+    "description": "Remove an entry from an environment's list.\n\nRemoves an entry from the signing key's environment's list and re-decides every account it matched, each sending account.risk_changed when its decision changes. An unknown or already removed entry answers 404 not_found. Requires the management scope."
+  },
+  {
     "name": "wait_for_assessment",
     "description": "Wait until an assessment is complete, then return it.\n\nPolls get_assessment at the interval the API's Retry-After asks for (at least once a second) until status is complete, or until timeout_seconds pass. When the time runs out the result says so and carries the latest answer, and you can call this tool again. A partial answer has a recommendation you can act on while a lane is still running; a pending one has none, so apply your own fallback until it settles. Requires the assess or history scope."
   }

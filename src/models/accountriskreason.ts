@@ -15,6 +15,7 @@ export type AccountRiskReason = {
   direction: Direction;
   impact: Impact;
   identifier?: ReasonIdentifier | undefined;
+  list_entry_id?: string | undefined;
 };
 
 export const AccountRiskReason$zodSchema: z.ZodType<AccountRiskReason> = z
@@ -27,6 +28,9 @@ export const AccountRiskReason$zodSchema: z.ZodType<AccountRiskReason> = z
       "The submitted identifier or client context field a reason concerns; absent when it concerns the whole assessment. Client context is a claimed hint, not a device fingerprint.",
     ),
     impact: Impact$zodSchema,
+    list_entry_id: z.string().optional().describe(
+      "The list entry a list_match reason applied. No other reason carries it.",
+    ),
   }).describe(
     "One reason that fired. direction is whether it raises or lowers the score, or is neutral (informational, it moves nothing). impact is a coarse band of how much it moves the score: none for a neutral reason, otherwise low, medium or high.",
   );

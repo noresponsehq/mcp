@@ -32,10 +32,12 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{1
 const TOOLS = [
   "create_assessment",
   "create_integration",
+  "create_list_entry",
   "create_webhook_endpoint",
   "delete_account",
   "delete_assessment",
   "delete_integration",
+  "delete_list_entry",
   "delete_webhook_endpoint",
   "get_account",
   "get_assessment",
@@ -44,6 +46,7 @@ const TOOLS = [
   "list_changed_accounts",
   "list_integrations",
   "list_keys",
+  "list_list_entries",
   "list_webhook_deliveries",
   "list_webhook_endpoints",
   "query_assessments",
@@ -109,7 +112,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     await api?.close();
   });
 
-  test("exposes the assessment, webhook endpoint, integration, key and settings tools, and not API key rotation, key creation or key usage", async () => {
+  test("exposes the assessment, webhook endpoint, integration, key, settings and list tools, and not API key rotation, key creation or key usage", async () => {
     const { tools } = await client.listTools();
     assert.deepEqual(tools.map((t) => t.name).sort(), TOOLS);
     assert.ok(!tools.some((t) => /api_key|rotate_key|create_key|key_usage/i.test(t.name)));
@@ -128,6 +131,9 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       list_keys: true,
       revoke_key: false,
       update_settings: false,
+      list_list_entries: true,
+      create_list_entry: false,
+      delete_list_entry: false,
       list_account_assessments: true,
       list_changed_accounts: true,
       list_webhook_endpoints: true,
@@ -143,7 +149,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       wait_for_assessment: true,
     });
     const destructive = tools.filter((t) => t.annotations?.destructiveHint === true).map((t) => t.name);
-    assert.deepEqual(destructive.sort(), ["delete_account", "delete_assessment", "delete_integration", "delete_webhook_endpoint", "revoke_key"]);
+    assert.deepEqual(destructive.sort(), ["delete_account", "delete_assessment", "delete_integration", "delete_list_entry", "delete_webhook_endpoint", "revoke_key"]);
   });
 
   test("the webhook endpoint tools call their routes with the caller's key", async () => {
