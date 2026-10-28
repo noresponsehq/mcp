@@ -13,6 +13,7 @@ import { Bucket, Bucket$zodSchema } from "./bucket.js";
 export const AssessmentAggregateMetric = {
   Count: "count",
   ScoreHistogram: "score_histogram",
+  ScoreOutcomes: "score_outcomes",
   LateFlips: "late_flips",
 } as const;
 export type AssessmentAggregateMetric = ClosedEnum<
@@ -22,6 +23,7 @@ export type AssessmentAggregateMetric = ClosedEnum<
 export const AssessmentAggregateMetric$zodSchema = z.enum([
   "count",
   "score_histogram",
+  "score_outcomes",
   "late_flips",
 ]);
 

@@ -8,12 +8,17 @@ import {
   AggregateScoreCount,
   AggregateScoreCount$zodSchema,
 } from "./aggregatescorecount.js";
+import {
+  AggregateScoreOutcome,
+  AggregateScoreOutcome$zodSchema,
+} from "./aggregatescoreoutcome.js";
 
 export type AggregateBucket = {
   start: string;
   count?: number | undefined;
   groups?: Array<AggregateGroup> | undefined;
   score_histogram?: Array<AggregateScoreCount> | undefined;
+  score_outcomes?: Array<AggregateScoreOutcome> | undefined;
   late_flips?: Array<AggregateLateFlip> | undefined;
 };
 
@@ -26,5 +31,8 @@ export const AggregateBucket$zodSchema: z.ZodType<AggregateBucket> = z.object({
   ),
   late_flips: z.array(AggregateLateFlip$zodSchema).optional(),
   score_histogram: z.array(AggregateScoreCount$zodSchema).optional(),
+  score_outcomes: z.array(AggregateScoreOutcome$zodSchema).optional().describe(
+    "With metric score_outcomes: the score_histogram's first answers whose assessment has a reported outcome, by its latest. A bin's count less its score_outcomes is the first answers with none reported.",
+  ),
   start: z.string(),
 });

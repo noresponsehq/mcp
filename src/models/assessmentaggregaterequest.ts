@@ -14,6 +14,7 @@ import { Status, Status$zodSchema } from "./status.js";
 export const AssessmentAggregateRequestMetric = {
   Count: "count",
   ScoreHistogram: "score_histogram",
+  ScoreOutcomes: "score_outcomes",
   LateFlips: "late_flips",
 } as const;
 export type AssessmentAggregateRequestMetric = ClosedEnum<
@@ -23,6 +24,7 @@ export type AssessmentAggregateRequestMetric = ClosedEnum<
 export const AssessmentAggregateRequestMetric$zodSchema = z.enum([
   "count",
   "score_histogram",
+  "score_outcomes",
   "late_flips",
 ]);
 
@@ -64,7 +66,7 @@ export const AssessmentAggregateRequest$zodSchema: z.ZodType<
   ),
   metrics: z.array(AssessmentAggregateRequestMetric$zodSchema).optional()
     .describe(
-      "count: each bucket's count and groups. score_histogram: first answers by flow and 5-point score bucket. late_flips: changes of an assessment's account decision for its flow after its first answer, by from, to and delay.",
+      "count: each bucket's count and groups. score_histogram: first answers by flow and 5-point score bucket. score_outcomes: the histogram's first answers that have a reported outcome, by flow, 5-point score bucket and the latest outcome reported for the assessment (POST /v1/assessments/{assessment_id}/outcomes); the rest of a bin has none reported. late_flips: changes of an assessment's account decision for its flow after its first answer, by from, to and delay.",
     ),
   recommendation: Recommendation$zodSchema.optional().describe(
     "The recommended action: allow, step_up or review. Your application applies it.",

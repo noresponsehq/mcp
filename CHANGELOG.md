@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.15
+
+* `SDK.assessments.aggregate()`: 
+  *  `request.metrics[].enum(score_outcomes)` **Added**
+  *  `response` **Changed** (Breaking ⚠️)
+
 ## 0.6.14
 
 * `SDK.assessments.aggregate()`: **Added**
