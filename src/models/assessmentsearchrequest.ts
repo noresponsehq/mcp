@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { AnswerRevision, AnswerRevision$zodSchema } from "./answerrevision.js";
 import { Decision, Decision$zodSchema } from "./decision.js";
 import { Flow, Flow$zodSchema } from "./flow.js";
 import { Recommendation, Recommendation$zodSchema } from "./recommendation.js";
@@ -19,6 +20,7 @@ export type AssessmentSearchRequest = {
   cursor?: string | undefined;
   response_mode?: ResponseMode | undefined;
   decision?: Decision | undefined;
+  revision?: AnswerRevision | undefined;
 };
 
 export const AssessmentSearchRequest$zodSchema: z.ZodType<
@@ -31,7 +33,7 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
     "Opaque, expiring cursor bound to this environment, operation and every filter. Keep the filters unchanged.",
   ),
   decision: Decision$zodSchema.optional().describe(
-    "The decision of the assessment's latest stored revision: block when its stored risk.block is true, otherwise its recommendation. This is not the account's current decision or held-admission state. Combined with recommendation using AND.",
+    "An assessment's own decision: block when its stored risk.block is true, otherwise its recommendation. It is not the account's decision or held-admission state.",
   ),
   flow: Flow$zodSchema.optional().describe(
     "The event an assessment is made for: account_creation (a user creates an account), login (a user returns to an existing account) or purchase (a payment or a credit grant). The account's risk is reported with the decision for this flow.",
@@ -43,6 +45,9 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
   ),
   response_mode: ResponseMode$zodSchema.optional().describe(
     "standard returns the consolidated risk response; detailed adds merged provider-neutral facts when the key has detailed scope. There is no raw mode.",
+  ),
+  revision: AnswerRevision$zodSchema.optional().describe(
+    "Which answer of each assessment the filters describe: latest, the latest stored revision, or first, the first answer, as served when the assessment was first answered (POST /v1/assessments/aggregate counts first answers). A cell of an aggregate drills down to POST /v1/assessments/search with the same filters, revision first and the cell's bucket as from and to.",
   ),
   status: Status$zodSchema.optional().describe(
     "complete: final; nothing is still running. A lane that failed or missed its 10 s deadline stays listed in incomplete_sources, and confidence is lower. partial: a recommendation exists and at least one lane is still running or did not settle (see incomplete_sources). pending: nothing usable before the deadline; no recommendation yet, poll or wait for the webhook.",

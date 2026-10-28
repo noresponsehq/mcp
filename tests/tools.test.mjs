@@ -30,6 +30,7 @@ const WORKSPACE = SETTINGS.workspace_id;
 const ID = PENDING.id;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const TOOLS = [
+  "aggregate_assessments",
   "associate_account_credential",
   "bind_provisional_account",
   "create_assessment",
@@ -129,6 +130,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     assert.ok(!tools.some((t) => /api_key|rotate_key|create_key|key_usage/i.test(t.name)));
     const readOnly = Object.fromEntries(tools.map((t) => [t.name, t.annotations?.readOnlyHint === true]));
     assert.deepEqual(readOnly, {
+      aggregate_assessments: true,
       associate_account_credential: false,
       bind_provisional_account: false,
       export_account: true,

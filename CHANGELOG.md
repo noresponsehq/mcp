@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.14
+
+* `SDK.assessments.aggregate()`: **Added**
+* `SDK.assessments.search()`: 
+  *  `request.revision` **Added**
+
 ## 0.6.13
 
 * `SDK.assessments.create()`:  `response.detail.identifiers` **Added**

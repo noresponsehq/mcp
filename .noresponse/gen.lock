@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: e711b30a0a214e6c472e073cbb1ad4d3
+  docChecksum: e3c3a232c0c682d1060ed8d2e7155a5a
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.6.13
-  configChecksum: 906f14c266068909fe5bb3e74b638641
+  releaseVersion: 0.6.14
+  configChecksum: b52a8c4fb9d8ba95632c8812cf23781d
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -36,11 +36,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:ee0b966798b2f39897e8101dea80ae29e3811d01
+    last_write_checksum: sha1:3e2110dc884aeb2f040fdd7849cd7e4228c07e1b
   package.json:
-    last_write_checksum: sha1:44c61ea4f7bb5c099f2ef0cca85c393fb87c33c4
+    last_write_checksum: sha1:02878239cc6a2a4bf29a9ece29adb453604cff3a
   server.json:
-    last_write_checksum: sha1:2637361d1c3f2111b45c35db4cc38cb7076f9d5f
+    last_write_checksum: sha1:af5d817c6f242c73c6f4c11223219ed50b06a99a
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -69,6 +69,8 @@ trackedFiles:
     last_write_checksum: sha1:8e103492950e576deea329c099fb9b9c8e3b67f9
   src/funcs/accountsRetrieveDecision.ts:
     last_write_checksum: sha1:aee3753f53e451f46f4e3fcbe941c53cd182a10c
+  src/funcs/assessmentsAggregate.ts:
+    last_write_checksum: sha1:2062593ab75579fe9edb572428a6bdddb649b6a5
   src/funcs/assessmentsBindAccount.ts:
     last_write_checksum: sha1:3084b9290ca073a2177dcd4e2b888afb510b3b85
   src/funcs/assessmentsCreate.ts:
@@ -138,7 +140,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:0de4db080ee8b29d303878ac8f98bc55fd3a5f92
+    last_write_checksum: sha1:246702598abf6346961a29b12843c34f3449b52d
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -182,7 +184,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:575ebc3a257eceb51b2c7997b70d41378aef8d2f
+    last_write_checksum: sha1:b87250d10fbfff887997828b332d3a573f824e48
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -190,7 +192,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:ed1a8f0b0d842c0434896639143e63374df3a9b5
+    last_write_checksum: sha1:37cac15281246e037e0eb8a655cf6f48ebc68378
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -219,6 +221,8 @@ trackedFiles:
     last_write_checksum: sha1:b2388af01fc21fdbe8f7e7018a0ef0cb59c9d2bc
   src/mcp-server/tools/accountsRetrieveDecision.ts:
     last_write_checksum: sha1:2628a3be28df22684f54436ef74344100635b401
+  src/mcp-server/tools/assessmentsAggregate.ts:
+    last_write_checksum: sha1:4f3826a51bfa425c05c379d8a96d6779e86ca804
   src/mcp-server/tools/assessmentsBindAccount.ts:
     last_write_checksum: sha1:ffdd038363161a0e33c7e7f9f3dca4a6990bf42f
   src/mcp-server/tools/assessmentsCreate.ts:
@@ -315,10 +319,28 @@ trackedFiles:
     last_write_checksum: sha1:3ac73569693a809f7c48e117e421ccd44e241867
   src/models/admission.ts:
     last_write_checksum: sha1:c751e9365385f788ebe2c5eb155ca3274fd19702
+  src/models/aggregateassessmentsop.ts:
+    last_write_checksum: sha1:edb6988fe456d62afe5f3f5946208ec11910744a
+  src/models/aggregatebucket.ts:
+    last_write_checksum: sha1:ae00f36ec166bab8107c3f489e790bf64bb319ca
+  src/models/aggregatedimension.ts:
+    last_write_checksum: sha1:dabf41641f377f6aa6ff7a3d7d68d959102f134a
+  src/models/aggregategroup.ts:
+    last_write_checksum: sha1:3cc1871af9d8dc81eb473b13dd201759d228431a
+  src/models/aggregatelateflip.ts:
+    last_write_checksum: sha1:9f184aa844d1b0504e2feb9c4544fc4581f508ba
+  src/models/aggregatescorecount.ts:
+    last_write_checksum: sha1:734cedd30e42bd97321a52739743ecbcdcd3d221
   src/models/agreement.ts:
     last_write_checksum: sha1:423db5c307ea498ef9a436689874d61df911be63
+  src/models/answerrevision.ts:
+    last_write_checksum: sha1:8b77eadca0b60f7d271540d39aca1e77e5ae4a59
   src/models/assessment.ts:
     last_write_checksum: sha1:4118eea41a95621af2f39a0bd41847d0eee3f2fc
+  src/models/assessmentaggregate.ts:
+    last_write_checksum: sha1:d2fd1eaa265d25b989065ee4888c485044c4a204
+  src/models/assessmentaggregaterequest.ts:
+    last_write_checksum: sha1:719ac77b52d99c62f2b075be5f5f51311abbbcd9
   src/models/assessmentdeletion.ts:
     last_write_checksum: sha1:ef63fe7d49434ffad97287569f5ba9e567d548fe
   src/models/assessmentdeletionaccount.ts:
@@ -354,7 +376,7 @@ trackedFiles:
   src/models/assessmentsearchpage.ts:
     last_write_checksum: sha1:a057a0a9c69a6f4df253bb30178b3102ff8a7687
   src/models/assessmentsearchrequest.ts:
-    last_write_checksum: sha1:afe999e054d3e565581350b9dbadb139752c21ed
+    last_write_checksum: sha1:1c2cad25f3b9127033466bdfebbdd9f4c68c4e49
   src/models/assessmentupdateddata.ts:
     last_write_checksum: sha1:f2cbb057bdbdbbe80076700823facd5587095be3
   src/models/assessmentupdatedevent.ts:
@@ -391,6 +413,8 @@ trackedFiles:
     last_write_checksum: sha1:23996413b6603f560937cfaecb159efcd95e9576
   src/models/breachsummary.ts:
     last_write_checksum: sha1:0411d2bb8854ce635648748613e1efbdcc52379f
+  src/models/bucket.ts:
+    last_write_checksum: sha1:13d46b1bbc888e595846f6f6b24a41b331d3ad9e
   src/models/confidence.ts:
     last_write_checksum: sha1:c955e3d9d0dbc7088d3d4813af99bb53c8db4b53
   src/models/conflicterror.ts:
@@ -424,11 +448,13 @@ trackedFiles:
   src/models/credentialrequest.ts:
     last_write_checksum: sha1:e1c45cb4a3f530ec05dfbedd7fbef8baaf35316b
   src/models/decision.ts:
-    last_write_checksum: sha1:45ab5e35a879171a769f6d21e56ca87e809aa931
+    last_write_checksum: sha1:5994acca387ac8fbfe548924c967d7b87627acfb
   src/models/decisionreceipt.ts:
     last_write_checksum: sha1:41e3354df084043104e7b71aa7234a2e2eae214e
   src/models/defaultdepth.ts:
     last_write_checksum: sha1:bbabec1502fc918a5d6f363683ab3b7a8255956c
+  src/models/delay.ts:
+    last_write_checksum: sha1:d7a66a3951e2c655aa81f32eaec7750f137428af
   src/models/deleteaccountop.ts:
     last_write_checksum: sha1:7a9a190702d94edc97b34d885903df91f5b3213c
   src/models/deleteassessmentop.ts:
@@ -577,6 +603,8 @@ trackedFiles:
     last_write_checksum: sha1:30571b4725df28111d52f5d0eb7e3daec74b3157
   src/models/listlistentriesop.ts:
     last_write_checksum: sha1:d3ebc2b1dbec2cea331b8b2b5bc7e0bf7df7dba9
+  src/models/listmatch.ts:
+    last_write_checksum: sha1:3c6b849cf1f915022bafd62d0dd5c9b2ebf88294
   src/models/listrequestdiagnosticsop.ts:
     last_write_checksum: sha1:1d951dcc28d3725f9ec201669a4c38d88f36b13f
   src/models/listwebhookdeliveriesop.ts:
@@ -742,7 +770,7 @@ trackedFiles:
   src/models/workspacedeletedevent.ts:
     last_write_checksum: sha1:da3cf5ebb95878f446e927776c00f735fdaad076
   src/tool-names.ts:
-    last_write_checksum: sha1:d1e64494c1dd5e9a1e1e04985e600bf3769b748c
+    last_write_checksum: sha1:9ac03dc06b724d36093bc168283b52b68dcba767
   src/types/async.ts:
     last_write_checksum: sha1:ebc27b1229fbbe1835d89ec484c7fa28188b9cf4
   src/types/bigint.ts:
@@ -1005,6 +1033,25 @@ examples:
       responses:
         "200":
           application/json: {"schema_version": "1", "account_id": "acct_7f3a9c", "items": [{"schema_version": "1", "assessment_id": "asm_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "account_id": "acct_7f3a9c", "request_id": "req-2026-10-14-0001", "status": "complete", "recommendation": "step_up", "confidence": "medium", "signals": [{"type": "account_presence", "identifier": "email", "outcome": "found", "source_id": "github", "evidence_ref": "evr_01JA2Z8K6Q4V7W9XBCDEFGHJKN", "observed_at": "2026-10-14T09:00:00.210Z", "last_checked_at": "2026-10-14T09:00:00.210Z", "freshness": "fresh"}, {"type": "account_presence", "identifier": "username", "outcome": "not_found", "source_id": "gitlab", "last_checked_at": "2026-10-14T09:00:00.190Z", "freshness": "fresh"}, {"type": "breach_exposure", "identifier": "email", "outcome": "found", "source_id": "breach.corpus", "evidence_ref": "evr_01JA2Z8K6Q4V7W9XBCDEFGHJKP", "observed_at": "2025-03-02T00:00:00Z", "last_checked_at": "2026-10-14T09:00:00.150Z", "freshness": "stale"}], "incomplete_sources": [], "policy_version": "heuristic-2026-10.1", "policy_basis": "heuristic_unvalidated", "assessment_version": 2, "created_at": "2026-10-14T09:00:00.000Z", "updated_at": "2026-10-14T09:00:00.412Z", "expires_at": "2027-10-14T09:00:00.000Z", "timing": {"deadline_ms": 300, "elapsed_ms": 287}}, {"schema_version": "1", "assessment_id": "asm_01JA2Z9Y3R5T6V7W8X9ZABCDEF", "account_id": "acct_7f3a9c", "request_id": "req-2026-10-01-0007", "status": "complete", "recommendation": "allow", "confidence": "high", "signals": [{"type": "account_presence", "identifier": "username", "outcome": "not_found", "source_id": "gitlab", "last_checked_at": "2026-10-14T09:00:00.190Z", "freshness": "fresh"}], "incomplete_sources": [], "policy_version": "heuristic-2026-10.1", "policy_basis": "heuristic_unvalidated", "assessment_version": 2, "created_at": "2026-10-01T12:00:00Z", "updated_at": "2026-10-01T12:00:05Z", "expires_at": "2027-10-01T12:00:00.000Z", "timing": {"deadline_ms": 300, "elapsed_ms": 287}}], "next_cursor": "eyJiIjoiY2hrXzAxIn0", "retention_days": 365}
+  aggregateAssessments:
+    noresponse-default-aggregate-assessments:
+      requestBody:
+        application/json: {"from": "2026-10-19T00:00:00Z", "to": "2026-10-26T00:00:00Z", "bucket": "week", "limit": 20}
+      responses:
+        "200":
+          application/json: {"schema_version": "1", "from": "2026-10-19T00:00:00.000Z", "to": "2026-10-26T00:00:00.000Z", "bucket": "week", "group_by": [], "metrics": [], "retention_days": 365, "groups_truncated": false, "buckets": []}
+        "400":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "invalid_idempotency_key", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "401":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 401, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "unauthorized", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "403":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 403, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "role_forbidden", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "404":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 404, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "not_found", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "409":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 409, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "webhook_endpoint_limit_reached", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
+        "429":
+          application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 429, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "rate_limited", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
   searchAssessments:
     noresponse-default-search-assessments:
       requestBody:
