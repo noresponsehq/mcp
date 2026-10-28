@@ -28,10 +28,10 @@ export const RiskDetails$zodSchema: z.ZodType<RiskDetails> = z.object({
     "Names found next to the identifiers in breach records, merged, with the number of distinct tables each was seen in.",
   ),
   breaches: z.array(Breach$zodSchema).optional().describe(
-    "The matching breach tables, newest first, at most 50.",
+    "The matching breach tables, newest first, at most 100.",
   ),
   events: z.array(RiskDetailsEvent$zodSchema).optional().describe(
-    "The identity's dated footprint events, newest first, at most 100: the year and month, what happened (created, last_active, breached), the site, its category, the kind of evidence and the identifier it belongs to. No breach value: dates are coarsened to the month.",
+    "The identity's dated footprint events, newest first, at most 300: the year and month, what happened (created, last_active, breached), the site, its category, the kind of evidence and the identifier it belongs to. No breach value: dates are coarsened to the month.",
   ),
   phone_names: z.array(RiskDetailsPhoneName$zodSchema).optional(),
 }).describe(

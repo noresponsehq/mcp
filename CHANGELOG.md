@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.16
+
+No changes detected.
+
 ## 0.6.15
 
 * `SDK.assessments.aggregate()`: 
