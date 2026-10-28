@@ -14,6 +14,10 @@ import {
 } from "./incompletesource.js";
 import { Recommendation, Recommendation$zodSchema } from "./recommendation.js";
 import { Risk, Risk$zodSchema } from "./risk.js";
+import {
+  SentIdentifiers,
+  SentIdentifiers$zodSchema,
+} from "./sentidentifiers.js";
 import { Signal, Signal$zodSchema } from "./signal.js";
 import { Status, Status$zodSchema } from "./status.js";
 
@@ -24,6 +28,7 @@ export type AssessmentDetail = {
   schema_version?: "1" | undefined;
   assessment_id: string;
   account_id: string;
+  identifiers?: SentIdentifiers | undefined;
   request_id?: string | undefined;
   status: Status;
   recommendation?: Recommendation | undefined;
@@ -67,6 +72,9 @@ export const AssessmentDetail$zodSchema: z.ZodType<AssessmentDetail> = z.object(
     ),
     expires_at: z.string().describe(
       "After this instant the assessment is no longer served: GET /v1/assessments/{assessment_id} answers 404 and it leaves the account history. It is created_at plus your retention period at creation (default and maximum 365 days) and is fixed per record: a later revision keeps it, and a new assessment for the same account starts its own clock. If you later shorten retention, the effective expiry becomes created_at plus the shorter of the two periods.",
+    ),
+    identifiers: SentIdentifiers$zodSchema.optional().describe(
+      "The identifiers an assessment was sent: each member of the request's identifiers object exactly as received, before the server normalised it (the email domain keeps its case, the name its Unicode form). A member the request did not send is absent. NoResponse keeps them encrypted under the workspace's own key, does not index or log them, and deletes them with the assessment: on DELETE of the assessment or its account, at its expires_at, and with the workspace.",
     ),
     incomplete_sources: z.array(IncompleteSource$zodSchema).describe(
       "The lanes that did not settle, each listed once with a reason; lanes, not sources. In a detailed view a lane is listed exactly when one of its signals did not settle; a standard view carries no signals to match.",

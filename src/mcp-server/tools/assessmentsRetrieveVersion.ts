@@ -10,7 +10,7 @@ export const tool$assessmentsRetrieveVersion: ToolDefinition<typeof args> = {
   name: "get_assessment_version",
   description: `Retrieve an exact assessment revision
 
-Retrieve a retained assessment version with its original decision, policy, flow and depth. This response excludes the current account decision. Current retention and response-mode permissions still apply.`,
+Retrieve a retained assessment version with its original decision, policy, flow and depth. This response excludes the current account decision. Current retention and response-mode permissions still apply. detail.identifiers holds the identifiers the assessment was sent, exactly as received.`,
   annotations: {
     "title": "Read an exact assessment revision",
     "destructiveHint": false,

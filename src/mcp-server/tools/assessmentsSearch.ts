@@ -10,7 +10,7 @@ export const tool$assessmentsSearch: ToolDefinition<typeof args> = {
   name: "search_assessments",
   description: `Search assessments across this environment
 
-Search retained assessments created in [from,to), over at most 366 days. Filters use each assessment decision, rather than the current account decision. Results can change between pages. Keep the assessment version to retrieve the exact decision later. This read does not require an idempotency key.`,
+Search retained assessments created in [from,to), over at most 366 days. Filters use each assessment decision, rather than the current account decision. Results can change between pages. Keep the assessment version to retrieve the exact decision later. Each item's detail.identifiers holds the identifiers its assessment was sent, exactly as received. This read does not require an idempotency key.`,
   annotations: {
     "title": "Search assessments in this environment",
     "destructiveHint": false,

@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.6.13
+
+* `SDK.assessments.create()`:  `response.detail.identifiers` **Added**
+* `SDK.assessments.get()`:  `response.detail.identifiers` **Added**
+* `SDK.assessments.query()`:  `response.items[].identifiers` **Added**
+* `SDK.assessments.search()`:  `response.items[].detail.identifiers` **Added**
+* `SDK.assessments.retrieveVersion()`:  `response.detail.identifiers` **Added**
+* `SDK.accounts.listAssessments()`:  `response.items[].identifiers` **Added**
+* `SDK.accounts.export()`:  `response.assessments[].detail.identifiers` **Added**
+
 ## 0.6.12
 
 * `SDK.webhookEndpoints.list()`:  `response.code` **Changed** (Breaking ⚠️)
