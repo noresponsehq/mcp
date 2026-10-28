@@ -1,5 +1,50 @@
 # Changelog
 
+## 0.6.12
+
+* `SDK.webhookEndpoints.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keyUsage.record()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keys.rotate()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.lists.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.lists.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.lists.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.settings.update()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.settings.get()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.replayDelivery()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.listDeliveries()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.sendTestEvent()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.create()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.assessments.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.recordOutcome()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.accounts.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.rotateSigningKey()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.recordEnforcement()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keys.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keys.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keys.revoke()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.rotate()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.search()`: **Added**
+* `SDK.assessments.bindAccount()`: **Added**
+* `SDK.assessments.retrieveVersion()`: **Added**
+* `SDK.requests.list()`: **Added**
+* `SDK.accounts.export()`: **Added**
+* `SDK.accounts.retireCredential()`: **Added**
+* `SDK.accounts.listCredentials()`: **Added**
+* `SDK.accounts.associateCredential()`: **Added**
+* `SDK.accounts.retrieveDecision()`: **Added**
+* `SDK.accounts.listOutcomes()`: **Added**
+* `SDK.accounts.recordOutcome()`: **Added**
+
 ## 0.6.11
 
 * `SDK.assessments.create()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)

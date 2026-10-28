@@ -15,16 +15,26 @@ import {
   MCPToolAnnotationFilter,
   registerDynamicTools,
 } from "./tools.js";
+import { tool$accountsAssociateCredential } from "./tools/accountsAssociateCredential.js";
 import { tool$accountsDelete } from "./tools/accountsDelete.js";
+import { tool$accountsExport } from "./tools/accountsExport.js";
 import { tool$accountsGet } from "./tools/accountsGet.js";
 import { tool$accountsListAssessments } from "./tools/accountsListAssessments.js";
 import { tool$accountsListChanged } from "./tools/accountsListChanged.js";
+import { tool$accountsListCredentials } from "./tools/accountsListCredentials.js";
+import { tool$accountsListOutcomes } from "./tools/accountsListOutcomes.js";
 import { tool$accountsRecordEnforcement } from "./tools/accountsRecordEnforcement.js";
+import { tool$accountsRecordOutcome } from "./tools/accountsRecordOutcome.js";
+import { tool$accountsRetireCredential } from "./tools/accountsRetireCredential.js";
+import { tool$accountsRetrieveDecision } from "./tools/accountsRetrieveDecision.js";
+import { tool$assessmentsBindAccount } from "./tools/assessmentsBindAccount.js";
 import { tool$assessmentsCreate } from "./tools/assessmentsCreate.js";
 import { tool$assessmentsDelete } from "./tools/assessmentsDelete.js";
 import { tool$assessmentsGet } from "./tools/assessmentsGet.js";
 import { tool$assessmentsQuery } from "./tools/assessmentsQuery.js";
 import { tool$assessmentsRecordOutcome } from "./tools/assessmentsRecordOutcome.js";
+import { tool$assessmentsRetrieveVersion } from "./tools/assessmentsRetrieveVersion.js";
+import { tool$assessmentsSearch } from "./tools/assessmentsSearch.js";
 import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
 import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
 import { tool$integrationsList } from "./tools/integrationsList.js";
@@ -34,6 +44,7 @@ import { tool$keysRevoke } from "./tools/keysRevoke.js";
 import { tool$listsCreate } from "./tools/listsCreate.js";
 import { tool$listsDelete } from "./tools/listsDelete.js";
 import { tool$listsList } from "./tools/listsList.js";
+import { tool$requestsList } from "./tools/requestsList.js";
 import { tool$settingsGet } from "./tools/settingsGet.js";
 import { tool$settingsUpdate } from "./tools/settingsUpdate.js";
 import { tool$webhookEndpointsCreate } from "./tools/webhookEndpointsCreate.js";
@@ -57,7 +68,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.6.11",
+    version: "0.6.12",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -107,11 +118,21 @@ export function createMCPServer(deps: {
   tool(tool$assessmentsDelete);
   tool(tool$assessmentsRecordOutcome);
   tool(tool$assessmentsQuery);
+  tool(tool$assessmentsSearch);
+  tool(tool$assessmentsRetrieveVersion);
+  tool(tool$assessmentsBindAccount);
   tool(tool$accountsListChanged);
   tool(tool$accountsGet);
   tool(tool$accountsDelete);
   tool(tool$accountsListAssessments);
   tool(tool$accountsRecordEnforcement);
+  tool(tool$accountsRecordOutcome);
+  tool(tool$accountsListOutcomes);
+  tool(tool$accountsRetrieveDecision);
+  tool(tool$accountsAssociateCredential);
+  tool(tool$accountsListCredentials);
+  tool(tool$accountsRetireCredential);
+  tool(tool$accountsExport);
   tool(tool$keysList);
   tool(tool$keysRevoke);
   tool(tool$integrationsCreate);
@@ -127,6 +148,7 @@ export function createMCPServer(deps: {
   tool(tool$webhookEndpointsReplayDelivery);
   tool(tool$settingsGet);
   tool(tool$settingsUpdate);
+  tool(tool$requestsList);
   tool(tool$listsList);
   tool(tool$listsCreate);
   tool(tool$listsDelete);

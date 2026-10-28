@@ -30,6 +30,8 @@ const WORKSPACE = SETTINGS.workspace_id;
 const ID = PENDING.id;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const TOOLS = [
+  "associate_account_credential",
+  "bind_provisional_account",
   "create_assessment",
   "create_integration",
   "create_list_entry",
@@ -39,23 +41,32 @@ const TOOLS = [
   "delete_integration",
   "delete_list_entry",
   "delete_webhook_endpoint",
+  "export_account",
   "get_account",
+  "get_account_decision",
   "get_assessment",
+  "get_assessment_version",
   "get_settings",
   "list_account_assessments",
+  "list_account_credentials",
+  "list_account_outcomes",
   "list_changed_accounts",
   "list_integrations",
   "list_keys",
   "list_list_entries",
+  "list_request_diagnostics",
   "list_webhook_deliveries",
   "list_webhook_endpoints",
   "query_assessments",
+  "record_account_outcome",
   "record_enforcement",
   "record_outcome",
   "replay_webhook_delivery",
+  "retire_account_credential",
   "revoke_key",
   "rotate_integration_secret",
   "rotate_webhook_signing_key",
+  "search_assessments",
   "send_webhook_test_event",
   "update_settings",
   "wait_for_assessment",
@@ -118,6 +129,17 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     assert.ok(!tools.some((t) => /api_key|rotate_key|create_key|key_usage/i.test(t.name)));
     const readOnly = Object.fromEntries(tools.map((t) => [t.name, t.annotations?.readOnlyHint === true]));
     assert.deepEqual(readOnly, {
+      associate_account_credential: false,
+      bind_provisional_account: false,
+      export_account: true,
+      get_account_decision: true,
+      get_assessment_version: true,
+      list_account_credentials: true,
+      list_account_outcomes: true,
+      list_request_diagnostics: true,
+      record_account_outcome: false,
+      retire_account_credential: false,
+      search_assessments: true,
       create_assessment: false,
       create_webhook_endpoint: false,
       delete_account: false,
@@ -149,7 +171,7 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       wait_for_assessment: true,
     });
     const destructive = tools.filter((t) => t.annotations?.destructiveHint === true).map((t) => t.name);
-    assert.deepEqual(destructive.sort(), ["delete_account", "delete_assessment", "delete_integration", "delete_list_entry", "delete_webhook_endpoint", "revoke_key"]);
+    assert.deepEqual(destructive.sort(), ["delete_account", "delete_assessment", "delete_integration", "delete_list_entry", "delete_webhook_endpoint", "retire_account_credential", "revoke_key"]);
   });
 
   test("the webhook endpoint tools call their routes with the caller's key", async () => {

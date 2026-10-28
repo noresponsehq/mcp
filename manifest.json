@@ -40,7 +40,7 @@
       "type": "string"
     }
   },
-  "version": "0.6.11",
+  "version": "0.6.12",
   "tools": [
     {
       "name": "create_assessment",
@@ -63,6 +63,18 @@
       "description": "Page through one account's unexpired assessments.\n\nHistory is a POST with account_id in the body so an account identifier stays out of URLs and access logs. Requires the history scope. Read-only and safe to retry. Newest first, each at its latest assessment_version. An account with no assessments answers 200 with empty items. The cursor is opaque and bound to your workspace and the account; a tampered or expired cursor answers 400 invalid_cursor. response_mode=detailed needs the detailed scope."
     },
     {
+      "name": "search_assessments",
+      "description": "Search assessments across this environment\n\nSearch retained assessments created in [from,to), over at most 366 days. Filters use each assessment decision, rather than the current account decision. Results can change between pages. Keep the assessment version to retrieve the exact decision later. This read does not require an idempotency key."
+    },
+    {
+      "name": "get_assessment_version",
+      "description": "Retrieve an exact assessment revision\n\nRetrieve a retained assessment version with its original decision, policy, flow and depth. This response excludes the current account decision. Current retention and response-mode permissions still apply."
+    },
+    {
+      "name": "bind_provisional_account",
+      "description": "Bind a provisional signup account\n\nOne-time association to an opaque stable customer account. The assessment is its natural idempotency key. Repeating the same binding returns its first receipt; a conflicting target is refused. No arbitrary account merging."
+    },
+    {
       "name": "list_changed_accounts",
       "description": "Poll the accounts whose risk changed.\n\nYour accounts whose risk changed, oldest change first, each as accounts.get answers it. Every page carries next_cursor: pass it back as changed_since to read the changes made after that page; without changed_since the list starts from the oldest change. When nothing changed, items is empty and next_cursor is the cursor you sent, so poll by calling again with the latest next_cursor. An account appears again each time its risk changes, with a higher risk_version; keep the copy with the highest. unenforced=true lists only accounts with a decision other than allow for some flow and no applied enforcement at their current risk_version; such a page can hold fewer than limit items, or none, while later changes exist, so keep polling with next_cursor. Requires the history scope. Read-only and safe to retry. A tampered or foreign cursor answers 400 invalid_cursor."
     },
@@ -81,6 +93,34 @@
     {
       "name": "record_enforcement",
       "description": "Record what you did to an account in your identity provider.\n\nRecords what you did to the account in your identity provider for one flow's decision at one risk_version: the action (or none), the account's state before it, the provider and whether it was applied or failed. It is your action, not an outcome, and it leaves the account's risk unchanged. A record is kept once per account, risk_version, flow and action: the first report answers 201, and a repeat answers 200 with the stored record unchanged, so retries are safe without an Idempotency-Key. An applied report after a failed one replaces the failed record, keeping its id and created_at, and answers 201. A risk_version older than the account's current one is accepted and stored, but only an applied record at the current risk_version takes the account out of listChanged with unenforced=true; a newer one answers 409 risk_version_ahead. An account with no current risk answers 404 not_found. error_code is allowed only with status failed. Requires the history scope."
+    },
+    {
+      "name": "record_account_outcome",
+      "description": "Record or correct an account outcome\n\nRecord a factual report, not an enforcement action. A known outcome replaces the effective report. unknown alone records uncertainty without changing it; unknown with supersedes explicitly retracts it. supersedes must name the current effective report or the request answers 409 outcome_conflict. Reports remain append-only. Idempotency-Key is required. observed_at defaults to receipt time and cannot be over five minutes ahead."
+    },
+    {
+      "name": "list_account_outcomes",
+      "description": "List retained account feedback\n\nList retained account reports, newest first. The page-level effective outcome id names the current report. Each receipt preserves the effective report and risk version from its original write. Page with the returned cursor."
+    },
+    {
+      "name": "get_account_decision",
+      "description": "Retrieve an exact historical account decision\n\nRetrieve the account decision at one recorded risk version. The answer uses the original assessment and account-specific risk inputs. Earlier versions that were not captured return 404. The assessment version, policy version and account calculation version identify the decision."
+    },
+    {
+      "name": "associate_account_credential",
+      "description": "Associate a customer-issued API key\n\nAssociate the SHA-256 of a high-entropy key issued by your service. Send the hash instead of the key. Repeating a hash returns its original association, including its retirement state. A hash associated with another account returns a conflict."
+    },
+    {
+      "name": "list_account_credentials",
+      "description": "List issued credential associations\n\nRetained credential associations, ordered by id. Page with the authenticated cursor. Associations are removed on account erasure."
+    },
+    {
+      "name": "retire_account_credential",
+      "description": "Retire an issued credential association\n\nMark this association retired, idempotently. This does not revoke the actual key. Requires delete scope."
+    },
+    {
+      "name": "export_account",
+      "description": "Export an account\n\nRetrieve one consistent snapshot of retained customer-accessible records, including assessment revisions, account decisions, feedback, key associations, enforcements and request diagnostics. Secrets, restricted source information, other customers' data and legacy free-text notes are excluded. The same standard/detailed permissions apply. An export exceeding 10000 records or 8 MiB returns export_too_large without a partial result. Historical decisions that were not captured are identified as an exclusion."
     },
     {
       "name": "list_keys",
@@ -141,6 +181,10 @@
     {
       "name": "update_settings",
       "description": "Change an environment's settings.\n\nChanges only what the body names, in one transaction: retention_days, refused_sources, and per flow step_up, review, block (null turns blocking off), default_depth, admission, hold_seconds, on_expiry, or inherits_account_creation to return login or purchase to account_creation's thresholds. After the change each flow keeps 0 < step_up < review <= 100 and block off or review <= block <= 100; a change that breaks it answers 400 naming the flow. A policy change is one new policy_version with the signing key's prefix as updated_by, and every change is recorded in the workspace's audit log with the key as its actor. Requires the management scope; the other environment answers 404 not_found. A change reaches assessments within a minute."
+    },
+    {
+      "name": "list_request_diagnostics",
+      "description": "Search request diagnostics\n\nSearch authenticated request attempts by time, route, status or request correlation id. The interval is at most seven days. Each attempt has a unique id and may include the exact served decision. Records are bounded best effort and exclude request bodies, secrets and source payloads. A repeated correlation id does not overwrite another attempt."
     },
     {
       "name": "list_list_entries",
