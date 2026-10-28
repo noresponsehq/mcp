@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.6.11
+
+* `SDK.assessments.create()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.assessments.delete()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.assessments.recordOutcome()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.accounts.delete()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.accounts.recordEnforcement()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.keyUsage.record()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.keys.rotate()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.keys.create()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.keys.list()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.keys.revoke()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.integrations.create()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.integrations.list()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.integrations.delete()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.integrations.rotate()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.list()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.create()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.delete()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.rotateSigningKey()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.sendTestEvent()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.listDeliveries()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.webhookEndpoints.replayDelivery()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.settings.get()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.settings.update()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.lists.list()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.lists.create()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+* `SDK.lists.delete()`:  `response.code.enum(list_entry_too_broad)` **Added** (Breaking ⚠️)
+
 ## 0.6.10
 
 * `SDK.keys.rotate()`:  `response.code` **Changed** (Breaking ⚠️)

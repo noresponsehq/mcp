@@ -15,6 +15,7 @@ export const ConflictErrorCode = {
   SelfRevocation: "self_revocation",
   ListEntryExists: "list_entry_exists",
   ListLimitReached: "list_limit_reached",
+  ListEntryTooBroad: "list_entry_too_broad",
 } as const;
 /**
  * Machine codes an HTTP 409 answer can carry.
@@ -32,4 +33,5 @@ export const ConflictErrorCode$zodSchema = z.enum([
   "self_revocation",
   "list_entry_exists",
   "list_limit_reached",
+  "list_entry_too_broad",
 ]).describe("Machine codes an HTTP 409 answer can carry.");
