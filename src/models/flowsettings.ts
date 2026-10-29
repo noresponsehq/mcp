@@ -1,7 +1,10 @@
 import * as z from "zod";
 import { Admission, Admission$zodSchema } from "./admission.js";
-import { DefaultDepth, DefaultDepth$zodSchema } from "./defaultdepth.js";
 import { OnExpiry, OnExpiry$zodSchema } from "./onexpiry.js";
+import {
+  UsageCountDepth,
+  UsageCountDepth$zodSchema,
+} from "./usagecountdepth.js";
 
 /**
  * One flow's policy in force. A score below step_up is allow, below review step_up, and from review review; from block, when present, the decision is block. admission says when the flow's decision is final.
@@ -10,7 +13,7 @@ export type FlowSettings = {
   step_up: number;
   review: number;
   block?: number | undefined;
-  default_depth: DefaultDepth;
+  default_depth: UsageCountDepth;
   inherits_account_creation: boolean;
   admission: Admission;
   hold_seconds: number;
@@ -24,9 +27,7 @@ export const FlowSettings$zodSchema: z.ZodType<FlowSettings> = z.object({
   block: z.int().optional().describe(
     "The score from which the decision is block. Absent while blocking is off, the default.",
   ),
-  default_depth: DefaultDepth$zodSchema.describe(
-    "The depth a request for this flow that names none is served at. Defaults: full for account_creation and purchase, quick for login.",
-  ),
+  default_depth: UsageCountDepth$zodSchema.describe("assessments only."),
   hold_seconds: z.int().describe(
     "How long a held flow's assessment is held after it was created, 30 to 86400 seconds (default 300). Kept while the flow is immediate.",
   ),

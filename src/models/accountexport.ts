@@ -31,6 +31,8 @@ export const Exclusion = {
   CrossCustomerData: "cross_customer_data",
   LegacyOutcomeNotes: "legacy_outcome_notes",
   UncapturedHistoricalDecisions: "uncaptured_historical_decisions",
+  InvestigatorReviewsRequireReviewExport:
+    "investigator_reviews_require_review_export",
 } as const;
 export type Exclusion = ClosedEnum<typeof Exclusion>;
 
@@ -41,6 +43,7 @@ export const Exclusion$zodSchema = z.enum([
   "cross_customer_data",
   "legacy_outcome_notes",
   "uncaptured_historical_decisions",
+  "investigator_reviews_require_review_export",
 ]);
 
 /**

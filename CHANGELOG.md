@@ -1,5 +1,120 @@
 # Changelog
 
+## 0.6.17
+
+* `SDK.assessments.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.lists.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.lists.create()`: 
+  *  `request.body.expires_at` **Added**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.lists.list()`: 
+  *  `request` **Changed**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.requests.list()`: 
+  *  `request.api_key_id` **Added**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.settings.update()`: 
+  *  `request.body` **Changed**
+  *  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.settings.get()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.replayDelivery()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.listDeliveries()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.sendTestEvent()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.rotateSigningKey()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.webhookEndpoints.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.rotate()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.delete()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.create()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.integrations.list()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keys.revoke()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.keys.create()`: 
+  *  `request.body` **Changed**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.keys.list()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.keys.rotate()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.keyUsage.record()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.export()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.accounts.retireCredential()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.associateCredential()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listCredentials()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.retrieveDecision()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.recordOutcome()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listOutcomes()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.accounts.recordEnforcement()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.delete()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.bindAccount()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.retrieveVersion()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.search()`: 
+  *  `request` **Changed**
+  *  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.aggregate()`: 
+  *  `request` **Changed**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.recordOutcome()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.delete()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.code` **Changed** (Breaking ⚠️)
+* `SDK.lists.getChange()`: **Added**
+* `SDK.reviews.update()`: **Added**
+* `SDK.exports.cancel()`: **Added**
+* `SDK.exports.retry()`: **Added**
+* `SDK.exports.downloadChunk()`: **Added**
+* `SDK.evaluations.list()`: **Added**
+* `SDK.evaluations.create()`: **Added**
+* `SDK.evaluations.get()`: **Added**
+* `SDK.evaluations.getResult()`: **Added**
+* `SDK.evaluations.cancel()`: **Added**
+* `SDK.evaluations.publish()`: **Added**
+* `SDK.operations.summarize()`: **Added**
+* `SDK.exports.create()`: **Added**
+* `SDK.exports.list()`: **Added**
+* `SDK.erasures.get()`: **Added**
+* `SDK.reviews.deleteSubject()`: **Added**
+* `SDK.reviews.addSubject()`: **Added**
+* `SDK.reviews.listSubjects()`: **Added**
+* `SDK.reviews.export()`: **Added**
+* `SDK.reviews.updateView()`: **Added**
+* `SDK.reviews.deleteView()`: **Added**
+* `SDK.reviews.createView()`: **Added**
+* `SDK.reviews.listViews()`: **Added**
+* `SDK.reviews.listResolutions()`: **Added**
+* `SDK.reviews.comment()`: **Added**
+* `SDK.reviews.listComments()`: **Added**
+* `SDK.reviews.resolve()`: **Added**
+* `SDK.exports.get()`: **Added**
+* `SDK.reviews.get()`: **Added**
+* `SDK.reviews.create()`: **Added**
+* `SDK.reviews.list()`: **Added**
+* `SDK.accounts.listEnforcements()`: **Added**
+* `SDK.lists.change()`: **Added**
+* `SDK.lists.preview()`: **Added**
+* `SDK.requests.aggregate()`: **Added**
+* `SDK.settings.preview()`: **Added**
+* `SDK.settings.restore()`: **Added**
+* `SDK.settings.listHistory()`: **Added**
+* `SDK.invites.resend()`: **Added**
+* `SDK.invites.revoke()`: **Added**
+* `SDK.invites.create()`: **Added**
+* `SDK.invites.list()`: **Added**
+* `SDK.usage.get()`: **Added**
+* `SDK.audit.replayStream()`: **Added**
+* `SDK.audit.removeStream()`: **Added**
+* `SDK.audit.configureStream()`: **Added**
+* `SDK.audit.listStreams()`: **Added**
+* `SDK.audit.updateRetention()`: **Added**
+* `SDK.audit.getRetention()`: **Added**
+* `SDK.audit.list()`: **Added**
+* `SDK.members.update()`: **Added**
+* `SDK.members.remove()`: **Added**
+* `SDK.members.list()`: **Added**
+* `SDK.webhookEndpoints.aggregate()`: **Added**
+* `SDK.accounts.listDecisions()`: **Added**
+
 ## 0.6.16
 
 No changes detected.

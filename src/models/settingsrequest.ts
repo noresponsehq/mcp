@@ -6,15 +6,21 @@ import {
 import { SourceId, SourceId$zodSchema } from "./sourceid.js";
 
 /**
- * PATCH /v1/workspaces/{workspace_id}/settings/{environment} body. Changes only what it names, in one transaction; a policy change is one new policy_version. Needs the admin or owner role, or an API key with the management scope for its own environment.
+ * Changes only named settings, atomically. Every successful write advances policy_version and retains an immutable settings snapshot. expected_policy_version optionally guards against stale edits; restore always requires it.
  */
 export type SettingsRequest = {
   retention_days?: number | undefined;
   refused_sources?: Array<SourceId> | undefined;
   flows?: SettingsRequestFlows | undefined;
+  expected_policy_version?: number | undefined;
+  change_reason?: string | undefined;
 };
 
 export const SettingsRequest$zodSchema: z.ZodType<SettingsRequest> = z.object({
+  change_reason: z.string().optional(),
+  expected_policy_version: z.int().optional().describe(
+    "Compare-and-set guard. A stale version returns 409 policy_version_conflict before any change; every settings write including retention advances the version.",
+  ),
   flows: SettingsRequestFlows$zodSchema.optional().describe(
     "Use account_creation or its deprecated alias signup, not both.",
   ),
@@ -23,5 +29,5 @@ export const SettingsRequest$zodSchema: z.ZodType<SettingsRequest> = z.object({
   ),
   retention_days: z.int().optional(),
 }).describe(
-  "PATCH /v1/workspaces/{workspace_id}/settings/{environment} body. Changes only what it names, in one transaction; a policy change is one new policy_version. Needs the admin or owner role, or an API key with the management scope for its own environment.",
+  "Changes only named settings, atomically. Every successful write advances policy_version and retains an immutable settings snapshot. expected_policy_version optionally guards against stale edits; restore always requires it.",
 );

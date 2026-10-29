@@ -1,0 +1,565 @@
+[
+  {
+    "name": "create_assessment",
+    "title": "Assess an account creation, login or purchase",
+    "idempotentHint": true
+  },
+  {
+    "name": "get_assessment",
+    "title": "Get an assessment",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "record_outcome",
+    "title": "Record what you learned about an account",
+    "idempotentHint": true
+  },
+  {
+    "name": "query_assessments",
+    "title": "List an account's assessments",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "get_account",
+    "title": "Get an account's current risk",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_account_assessments",
+    "title": "Page through an account's assessments",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "delete_account",
+    "title": "Delete an account and its history",
+    "destructiveHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_changed_accounts",
+    "title": "List the accounts whose risk changed",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "record_enforcement",
+    "title": "Record an enforcement of an account",
+    "idempotentHint": true
+  },
+  {
+    "name": "delete_assessment",
+    "title": "Delete one assessment",
+    "destructiveHint": true
+  },
+  {
+    "name": "aggregate_assessments",
+    "title": "Count assessments by time, decision and reason",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "search_assessments",
+    "title": "Search assessments in this environment",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "get_assessment_version",
+    "title": "Read an exact assessment revision",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "record_account_outcome",
+    "title": "Report or correct an account outcome",
+    "idempotentHint": true
+  },
+  {
+    "name": "list_account_outcomes",
+    "title": "Read account feedback and corrections",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "get_account_decision",
+    "title": "Read an exact historical account decision",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "associate_account_credential",
+    "title": "Associate a customer-issued credential by hash",
+    "idempotentHint": true
+  },
+  {
+    "name": "list_account_credentials",
+    "title": "List account credential associations",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "retire_account_credential",
+    "title": "Retire a credential association, not the provider key",
+    "destructiveHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "bind_provisional_account",
+    "title": "Bind a provisional assessment to its stable account",
+    "idempotentHint": true
+  },
+  {
+    "name": "export_account",
+    "title": "Export this account's retained customer-accessible records",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_request_diagnostics",
+    "title": "Inspect bounded request attempts and served decisions",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_keys",
+    "title": "List the API keys of this environment",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "revoke_key",
+    "title": "Revoke an API key of this environment",
+    "destructiveHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "get_settings",
+    "title": "Read this environment's settings",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "update_settings",
+    "title": "Change this environment's settings"
+  },
+  {
+    "name": "list_list_entries",
+    "title": "List this environment's allow and block list",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "create_list_entry",
+    "title": "Add an email or domain to the allow or block list"
+  },
+  {
+    "name": "delete_list_entry",
+    "title": "Delete an entry from the allow or block list",
+    "destructiveHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_members",
+    "title": "List workspace members",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "update_member",
+    "title": "Change a non-owner member's role and access",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "remove_member",
+    "title": "Revoke a non-owner member's workspace access",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "list_invites",
+    "title": "List pending invitations without their secrets",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "revoke_invite",
+    "title": "Revoke a pending non-owner invitation",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "create_webhook_endpoint",
+    "title": "Register a webhook endpoint"
+  },
+  {
+    "name": "list_webhook_endpoints",
+    "title": "List your webhook endpoints",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "delete_webhook_endpoint",
+    "title": "Delete a webhook endpoint",
+    "destructiveHint": true
+  },
+  {
+    "name": "rotate_webhook_signing_key",
+    "title": "Rotate a webhook endpoint's signing key"
+  },
+  {
+    "name": "send_webhook_test_event",
+    "title": "Send a test event to a webhook endpoint"
+  },
+  {
+    "name": "list_webhook_deliveries",
+    "title": "List a webhook endpoint's delivery attempts",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "replay_webhook_delivery",
+    "title": "Send one webhook delivery again"
+  },
+  {
+    "name": "create_integration",
+    "title": "Register a hosted provider integration"
+  },
+  {
+    "name": "list_integrations",
+    "title": "List hosted provider integrations",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "delete_integration",
+    "title": "Delete a hosted provider integration",
+    "destructiveHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "rotate_integration_secret",
+    "title": "Rotate a hosted provider integration's signing secret"
+  },
+  {
+    "name": "list_account_enforcements",
+    "title": "Read retained enforcement reports for an account",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_account_decisions",
+    "title": "Read immutable account decision history",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "get_erasure_receipt",
+    "title": "Read retained deletion progress and downstream acknowledgements",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_audit_events",
+    "title": "Read audit events within the key's environment and filters",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "get_workspace_usage",
+    "title": "Read unpriced workspace usage in the key's environment",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "aggregate_requests",
+    "title": "Summarize retained request attempts and latency",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "aggregate_webhooks",
+    "title": "Summarize retained webhook attempts and current queue state",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "summarize_workspace_operations",
+    "title": "Summarize retained outcomes, enforcement reports and reviews with separate denominators",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_policy_history",
+    "title": "Read immutable configuration versions",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "preview_policy",
+    "title": "Compare proposed thresholds with retained evidence without changing settings",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "restore_policy",
+    "title": "Restore captured settings as a new guarded policy version",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": true
+  },
+  {
+    "name": "preview_list",
+    "title": "Preview list matches and risk effects without changing the list",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "change_lists",
+    "title": "Apply a bounded atomic list change with an idempotency key",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "get_list_change",
+    "title": "Read a list change and its account propagation progress",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_reviews",
+    "title": "List retained account investigations",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "create_review",
+    "title": "Open a review for a retained account",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "get_review",
+    "title": "Read a review and its current version",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "update_review",
+    "title": "Assign, prioritize or reopen a review at its current version",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": true
+  },
+  {
+    "name": "resolve_review",
+    "title": "Resolve a review against exact review and account decision versions",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": true
+  },
+  {
+    "name": "list_review_comments",
+    "title": "Read retained investigation comments",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "comment_review",
+    "title": "Append an investigation comment at the current review version",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "list_review_resolutions",
+    "title": "Read immutable review resolution history",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_review_views",
+    "title": "Read visible private and shared investigation filters",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "create_review_view",
+    "title": "Save a private or shared investigation filter",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "update_review_view",
+    "title": "Replace a saved investigation filter at its current version",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": true
+  },
+  {
+    "name": "delete_review_view",
+    "title": "Delete a saved investigation filter at its current version",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": true
+  },
+  {
+    "name": "export_review",
+    "title": "Read a bounded investigation export including comments and resolutions",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "list_review_subjects",
+    "title": "Read the retained evidence linked to an investigation",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "add_review_subject",
+    "title": "Link retained evidence to a review at its current version",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "delete_review_subject",
+    "title": "Delete a review evidence link without deleting its source",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": true
+  },
+  {
+    "name": "create_export",
+    "title": "Start an encrypted account or audit export with saved criteria",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "list_exports",
+    "title": "Read permitted export jobs for a kind and environment",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "get_export",
+    "title": "Read export status, progress and expiry",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "download_export_chunk",
+    "title": "Read one authorized chunk from a completed unexpired export",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "cancel_export",
+    "title": "Cancel export processing and delete its encrypted artifact",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "retry_export",
+    "title": "Start a new generation of a failed export before its original expiry",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": true
+  },
+  {
+    "name": "get_audit_retention",
+    "title": "Read audit retention and oldest available capture",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "update_audit_retention",
+    "title": "Set test audit retention, invalidating expired events and export artifacts",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "list_audit_streams",
+    "title": "Read audit subscriptions and delivery health",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "configure_audit_stream",
+    "title": "Send selected audit events to an existing verified webhook endpoint",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "remove_audit_stream",
+    "title": "Stop an audit subscription and cancel its queued deliveries",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "replay_audit_stream",
+    "title": "Send one retained audit event again under the current subscription policy",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "list_policy_evaluations",
+    "title": "Read retained policy evaluation jobs",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "create_policy_evaluation",
+    "title": "Evaluate retained evidence with saved criteria and an idempotency key",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
+    "name": "get_policy_evaluation",
+    "title": "Read evaluation status, progress and evidence provenance",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "get_policy_evaluation_result",
+    "title": "Read the completed bounded evaluation report and its coverage",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "cancel_policy_evaluation",
+    "title": "Cancel evaluation processing and delete retained evidence and report",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "publish_policy_evaluation",
+    "title": "Publish an explicitly reviewed proposal with exact evidence and policy versions",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": true
+  },
+  {
+    "name": "wait_for_assessment",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  }
+]

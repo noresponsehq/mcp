@@ -57,6 +57,10 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Record what you did to an account in your identity provider.\n\nRecords what you did to the account in your identity provider for one flow's decision at one risk_version: the action (or none), the account's state before it, the provider and whether it was applied or failed. It is your action, not an outcome, and it leaves the account's risk unchanged. A record is kept once per account, risk_version, flow and action: the first report answers 201, and a repeat answers 200 with the stored record unchanged, so retries are safe without an Idempotency-Key. An applied report after a failed one replaces the failed record, keeping its id and created_at, and answers 201. A risk_version older than the account's current one is accepted and stored, but only an applied record at the current risk_version takes the account out of listChanged with unenforced=true; a newer one answers 409 risk_version_ahead. An account with no current risk answers 404 not_found. error_code is allowed only with status failed. Requires the history scope."
   },
   {
+    "name": "list_account_enforcements",
+    "description": "Page through account enforcements\n\nList retained enforcement reports for one account with an authenticated cursor."
+  },
+  {
     "name": "record_account_outcome",
     "description": "Record or correct an account outcome\n\nRecord a factual report, not an enforcement action. A known outcome replaces the effective report. unknown alone records uncertainty without changing it; unknown with supersedes explicitly retracts it. supersedes must name the current effective report or the request answers 409 outcome_conflict. Reports remain append-only. Idempotency-Key is required. observed_at defaults to receipt time and cannot be over five minutes ahead."
   },
@@ -83,6 +87,10 @@ export const toolNames: Array<{ name: string; description: string }>= [
   {
     "name": "export_account",
     "description": "Export an account\n\nRetrieve one consistent snapshot of retained customer-accessible records, including assessment revisions, account decisions, feedback, key associations, enforcements and request diagnostics. Each assessment revision's detail.identifiers holds the identifiers that assessment was sent, exactly as received. Secrets, restricted source information, other customers' data and legacy free-text notes are excluded. The same standard/detailed permissions apply. An export exceeding 10000 records or 8 MiB returns export_too_large without a partial result. Historical decisions that were not captured are identified as an exclusion."
+  },
+  {
+    "name": "list_account_decisions",
+    "description": "Page through recorded account decisions\n\nList retained immutable risk decisions for one account with an authenticated cursor."
   },
   {
     "name": "list_keys",
@@ -137,28 +145,232 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Send one delivery again.\n\nQueues the event for the endpoint again: the same event id and body it received, with a new NR-Webhook-Timestamp and a signature from the endpoint's current signing key, retried like any other delivery and listed with replay: true. Your receiver deduplicates on the event id. The endpoint must be verified. Requires the webhooks scope. Not idempotent: each call, a retry included, sends the event again."
   },
   {
+    "name": "aggregate_webhooks",
+    "description": "Summarise retained webhook attempts and delivery queue\n\nCount retained webhook delivery attempts within thirty days and report current retained queue state."
+  },
+  {
+    "name": "list_members",
+    "description": "List a workspace's members.\n\nRead the workspace directory with a live key carrying members or members_manage. Member identities and grants belong to this workspace. Owner-controlled issuance limits team automation to authorised service credentials."
+  },
+  {
+    "name": "update_member",
+    "description": "Change a member's role.\n\nUpdate a non-owner member role, environment access or sensitive permission exclusions with a live members_manage key. Owner changes, identity binding and support access remain outside this scope. The current delegation ceiling is checked within the change transaction."
+  },
+  {
+    "name": "remove_member",
+    "description": "Remove a member.\n\nRemove a non-owner member with a live members_manage key. Subsequent access is refused and personal credentials are revoked. Independently owned service credentials follow their own lifecycle."
+  },
+  {
+    "name": "list_audit_events",
+    "description": "List a workspace's audit log.\n\nRead audit events within your current environment permissions. Filters apply before pagination."
+  },
+  {
+    "name": "get_audit_retention",
+    "description": "Read audit retention and available history.\n\nRead audit retention for the environment. The default is 365 days. Oldest available is an observation; it does not establish uninterrupted capture. Workspace-wide events follow the live storage policy."
+  },
+  {
+    "name": "update_audit_retention",
+    "description": "Set bounded customer audit retention.\n\nSet test-environment audit retention from 1 to 365 days with audit_manage scope. Live retention also governs workspace-wide audit events and requires a dashboard member authorised in both environments. Shortening immediately hides older events and invalidates audit exports; extending cannot restore deleted events. External receivers control copies already delivered."
+  },
+  {
+    "name": "list_audit_streams",
+    "description": "Read audit stream subscriptions.\n\nList audit subscriptions and their endpoint state and latest delivery attempt. Streams use verified HTTPS webhook endpoints and signed audit.event bodies. Delivery is at least once and unordered; deduplicate by webhook id. An empty action filter accepts all actions within the chosen scope."
+  },
+  {
+    "name": "configure_audit_stream",
+    "description": "Configure an audit stream subscription.\n\nConfigure the action filter for one verified webhook endpoint. Requires audit_manage. Capture starts at subscription creation; use an audit export for available earlier events. Workspace-wide scope requires an unrestricted console member and is unavailable to API keys."
+  },
+  {
+    "name": "remove_audit_stream",
+    "description": "Remove an audit stream.\n\nRemove an audit subscription and cancel queued deliveries. Requires audit_manage. An HTTP delivery already in flight cannot be recalled. The endpoint remains registered for other event types."
+  },
+  {
+    "name": "replay_audit_stream",
+    "description": "Replay an audit delivery.\n\nReplay a recorded delivery for the current audit subscription. Requires audit_manage. Source retention and the current action filter are checked again before sending. Expired or unsubscribed events are dropped."
+  },
+  {
+    "name": "get_workspace_usage",
+    "description": "Read a workspace's usage.\n\nRead daily usage units for the environments you can access. These counts are unpriced."
+  },
+  {
+    "name": "list_invites",
+    "description": "List pending invites.\n\nRead pending workspace invitations with a live members_manage key. Tokens are excluded. Expiry and token reissue timestamps describe invitation state; they do not establish email delivery."
+  },
+  {
+    "name": "revoke_invite",
+    "description": "Revoke an invite.\n\nRevoke a pending invitation with a live members_manage key. A revoked token cannot be accepted. Owner-role invitations remain outside machine delegation."
+  },
+  {
     "name": "get_settings",
-    "description": "Read an environment's settings.\n\nReads the settings of the signing key's environment: retention in days; per flow (account_creation, login, purchase) the step_up, review and block thresholds, the default depth and the admission; and the sources the environment refuses. A flow without thresholds of its own shows account_creation's with inherits_account_creation true. Requires the management scope; the other environment answers 404 not_found. Read-only and safe to retry."
+    "description": "Read an environment's settings.\n\nRead this environment retention, source selection and effective flow policies. A flow without its own thresholds inherits account_creation. Requires settings or management. Another environment answers404. Read-only and safe to retry."
   },
   {
     "name": "update_settings",
-    "description": "Change an environment's settings.\n\nChanges only what the body names, in one transaction: retention_days, refused_sources, and per flow step_up, review, block (null turns blocking off), default_depth, admission, hold_seconds, on_expiry, or inherits_account_creation to return login or purchase to account_creation's thresholds. After the change each flow keeps 0 < step_up < review <= 100 and block off or review <= block <= 100; a change that breaks it answers 400 naming the flow. A policy change is one new policy_version with the signing key's prefix as updated_by, and every change is recorded in the workspace's audit log with the key as its actor. Requires the management scope; the other environment answers 404 not_found. A change reaches assessments within a minute."
+    "description": "Change an environment's settings.\n\nChange named retention, source or flow settings in one transaction. Requires settings or management; changes to active policy also require policy_publish, which legacy management includes. Use expected_policy_version to reject concurrent changes and record a change_reason. Each accepted change creates a fresh version and an atomic audit event. Retention-only edits do not require policy publication authority. Flow thresholds preserve their declared ordering and bounds."
+  },
+  {
+    "name": "list_policy_history",
+    "description": "Read immutable configuration versions.\n\nRead immutable configuration versions in one environment with settings or management. Follow before_version for older records."
+  },
+  {
+    "name": "restore_policy",
+    "description": "Restore captured settings as a new guarded version.\n\nRestore a retained configuration as a fresh version with the expected current version and a change reason. Requires settings plus policy_publish, or legacy management. Restore preserves the historical record and does not undo customer enforcement."
+  },
+  {
+    "name": "preview_policy",
+    "description": "Preview exact retained-score threshold transitions without side effects.\n\nCompare proposed policy with bounded retained first answers, including baseline, coverage and uncertainty. Requires settings or management. This read starts no provider work and publishes no changes."
   },
   {
     "name": "list_request_diagnostics",
     "description": "Search request diagnostics\n\nSearch authenticated request attempts by time, route, status or request correlation id. The interval is at most seven days. Each attempt has a unique id and may include the exact served decision. Records are bounded best effort and exclude request bodies, secrets and source payloads. A repeated correlation id does not overwrite another attempt."
   },
   {
+    "name": "aggregate_requests",
+    "description": "Summarise retained request attempts\n\nCount all retained matching request attempts and latency samples within seven days. Capture is best effort."
+  },
+  {
     "name": "list_list_entries",
-    "description": "List an environment's list entries.\n\nLists every entry of the signing key's environment's list, newest first: each an email or an email domain that decides the accounts it matches, block or allow, whatever their score. Requires the management scope; the other environment answers 404 not_found. Read-only and safe to retry."
+    "description": "List an environment's list entries.\n\nPage through this environment allow and block entries, with canonical values, reasons and optional expiry. Requires settings or management. Follow the returned cursor until exhausted; a page is not the complete list. The cursor is bound to the environment and current filters."
   },
   {
     "name": "create_list_entry",
-    "description": "Add an entry to an environment's list.\n\nAdds an exact email (kind email) or an email domain (kind email_domain) to the signing key's environment's list with the action block or allow, and answers the entry with its value in canonical form. An account matches when one of its assessments sent the email, or an email of the domain: a block entry decides block for every flow and an allow entry allow, block winning when both match, and the account's risk carries list_match with the entry's id while its score is unchanged. Every matching account is re-decided at once and sends account.risk_changed when its decision changes. A value already on the list answers 409 list_entry_exists, a full list 409 list_limit_reached, and an entry matching more than 5,000 accounts 409 list_entry_too_broad. Requires the management scope; the other environment answers 404 not_found."
+    "description": "Add an entry to an environment's list.\n\nAdd a canonical email or email-domain override with a reason and optional expiry. Requires settings plus policy_publish, or legacy management. Block wins over allow when both match. A small single-entry change retains the documented synchronous match budget; use lists.change for larger changes, whose account propagation is durable and resumable."
   },
   {
     "name": "delete_list_entry",
-    "description": "Remove an entry from an environment's list.\n\nRemoves an entry from the signing key's environment's list and re-decides the accounts it matched, the 5,000 most recently assessed at most, each sending account.risk_changed when its decision changes. An unknown or already removed entry answers 404 not_found. Requires the management scope."
+    "description": "Remove an entry from an environment's list.\n\nRemove an override with settings plus policy_publish, or legacy management. The removal takes effect for new decisions and schedules resumable propagation across matching retained accounts. An unknown or already removed entry answers404. Account risk events announce changed decisions as propagation runs."
+  },
+  {
+    "name": "preview_list",
+    "description": "Preview a list override change without side effects.\n\nPreview canonical list matches and current override effects with settings or management. The result states its bounded coverage and changes no list entries."
+  },
+  {
+    "name": "change_lists",
+    "description": "Apply an idempotent atomic bulk list change.\n\nAtomically add and remove a bounded batch of entries with an idempotency key. Requires settings plus policy_publish, or legacy management. The receipt exposes durable account propagation beyond the synchronous single-entry budget; poll lists.getChange until completion."
+  },
+  {
+    "name": "get_list_change",
+    "description": "Read a bulk list change and propagation progress.\n\nRead retained propagation progress for a list change with settings or management."
+  },
+  {
+    "name": "list_reviews",
+    "description": "List retained account reviews.\n\nList retained investigation reviews using filters and an authenticated cursor."
+  },
+  {
+    "name": "create_review",
+    "description": "Open a review for a retained account.\n\nOpen a review for one account. An account can have one active review in its environment."
+  },
+  {
+    "name": "get_review",
+    "description": "Read an account review.\n\nRead a retained review and its current version."
+  },
+  {
+    "name": "update_review",
+    "description": "Assign, prioritize or reopen a guarded review.\n\nChange review status, priority or assignment after checking the expected version."
+  },
+  {
+    "name": "resolve_review",
+    "description": "Resolve a review against an exact account risk version.\n\nResolve a review against the exact current review and account decision versions. A resolution does not report a factual outcome or execute enforcement."
+  },
+  {
+    "name": "list_review_comments",
+    "description": "Read retained review comments.\n\nPage through retained review comments."
+  },
+  {
+    "name": "comment_review",
+    "description": "Append a comment against the current review version.\n\nAppend a comment after checking the expected review version."
+  },
+  {
+    "name": "list_review_resolutions",
+    "description": "Read immutable review resolution history.\n\nPage through immutable review resolutions."
+  },
+  {
+    "name": "list_review_views",
+    "description": "List your private and shared review filters.\n\nList private and shared saved review filters visible to you."
+  },
+  {
+    "name": "create_review_view",
+    "description": "Save a tenant-local review filter.\n\nSave a private or shared review filter."
+  },
+  {
+    "name": "update_review_view",
+    "description": "Replace your saved filter with optimistic concurrency.\n\nUpdate your saved review filter after checking its expected version."
+  },
+  {
+    "name": "delete_review_view",
+    "description": "Delete your saved filter with optimistic concurrency.\n\nDelete your saved review filter after checking its expected version."
+  },
+  {
+    "name": "export_review",
+    "description": "Export an account review\n\nExport retained review details, comments, resolutions and linked subjects. Requires current reviews.read and exports.read; API keys need management together with exports, history or audit_manage. The audit event commits before any bytes are returned. Oversized exports are refused without truncation; use the bounded collection APIs."
+  },
+  {
+    "name": "list_review_subjects",
+    "description": "List retained subjects linked to a review.\n\nList retained subjects linked to this review. A link supplies investigation context and does not prove a relationship or change account risk."
+  },
+  {
+    "name": "add_review_subject",
+    "description": "Link retained tenant-local evidence to an investigation.\n\nLink an account, exact assessment revision or issued-key association within this environment. Supply the expected review version. A review permits 100 links. Erasure removes links to erased subjects. This action records context without creating feedback or enforcement."
+  },
+  {
+    "name": "delete_review_subject",
+    "description": "Remove a linked subject using the current review version.\n\nRemove a subject link with the expected review version. The linked account, assessment or key association remains unchanged."
+  },
+  {
+    "name": "get_erasure_receipt",
+    "description": "Read an erasure receipt\n\nRead retained erasure progress and downstream acknowledgements. Completion does not certify deletion from backups."
+  },
+  {
+    "name": "create_export",
+    "description": "Request an asynchronous customer export.\n\nRequest an encrypted JSON Lines snapshot of retained account or audit records. Requires exports plus history or audit scope; detailed account data also needs evidence or detailed scope. Criteria are frozen and hashed. Each environment permits four active jobs, 64 MiB per artifact, and 256 KiB per chunk. Artifacts expire after 24 hours. Send an Idempotency-Key to safely repeat a request. Every operation checks current permissions and source retention."
+  },
+  {
+    "name": "list_exports",
+    "description": "List exports for one collection.\n\nList authorised jobs for one kind and environment. Detailed jobs require current detailed-data permission and are filtered before pagination. Keep the kind and environment unchanged when following next_cursor."
+  },
+  {
+    "name": "get_export",
+    "description": "Read export state and progress.\n\nRead the status of an authorised export. Records and bytes describe committed progress in the current generation. Only completed, unexpired artifacts can be downloaded. Source erasure, retention changes and workspace removal can invalidate a job."
+  },
+  {
+    "name": "cancel_export",
+    "description": "Cancel and remove an export artifact.\n\nCancel an export and remove its stored chunks. Repeating cancellation is safe. An already admitted download may finish; bytes already returned cannot be recalled. Send an empty JSON object."
+  },
+  {
+    "name": "retry_export",
+    "description": "Retry a failed export.\n\nStart a new generation of a failed export before its original expiry, up to ten generations. The request criteria stay fixed and the new generation takes a fresh source snapshot. Cancelled, erased and expired jobs cannot be retried. Send an empty JSON object."
+  },
+  {
+    "name": "download_export_chunk",
+    "description": "Download one authorized export chunk.\n\nDownload one chunk of a completed, unexpired export after a fresh permission and privacy check. The response contains base64-encoded JSON Lines, a SHA-256, generation and next index. Decode and concatenate chunks in order from one generation. Audit storage failure withholds the bytes."
+  },
+  {
+    "name": "list_policy_evaluations",
+    "description": "List retained policy evaluation jobs.\n\nList retained policy evaluation jobs for this environment, newest first. At most five jobs are retained for their 24-hour evidence lifetime. Use next_before as before on the next page."
+  },
+  {
+    "name": "create_policy_evaluation",
+    "description": "Freeze an evaluation cohort and queue a bounded job.\n\nCreate a bounded evaluation with an Idempotency-Key, expected policy version, fixed candidates, cohort, seed and cost assumptions. Evidence is frozen before evaluation and recorded by hashes. Limits are 1000 accounts, 50000 request attempts and 64 MiB. Capture completeness is currently unknown, so results are no_change and cannot be published. The evaluation fetches no new source evidence and changes no live policy."
+  },
+  {
+    "name": "get_policy_evaluation",
+    "description": "Read evaluation state and provenance.\n\nRead a retained evaluation job and its capture and provenance metadata. Cancellation, source erasure, retention reduction and expiry can make a result unavailable."
+  },
+  {
+    "name": "get_policy_evaluation_result",
+    "description": "Read the bounded completed evaluator report.\n\nRead the completed evaluation report, including coverage, uncertainty and candidate results. Unknown capture completeness produces no_change. A completed result is not an automatic policy change."
+  },
+  {
+    "name": "cancel_policy_evaluation",
+    "description": "Cancel processing and destroy retained evidence and report.\n\nCancel a queued or running evaluation and invalidate its stored evidence. The operation does not change policy. Send an empty JSON object."
+  },
+  {
+    "name": "publish_policy_evaluation",
+    "description": "Publish an explicitly reviewed proposal with exact provenance.\n\nPublish an explicitly reviewed candidate with its exact manifest, input and result hashes and unchanged baseline policy version. Requires settings plus policy_publish, or legacy management. Publication creates a fresh policy version and immutable provenance. no_change, expired or invalidated results are refused."
+  },
+  {
+    "name": "summarize_workspace_operations",
+    "description": "Summarize retained account outcomes, enforcement reports and reviews.\n\nRead one retained snapshot of account outcomes, enforcement reports and review states for the environment and a window of at most 31 days. Each section declares its own population, numerator, denominator and label coverage. Current outcome heads preserve explicit unknown labels. Enforcement rows are reports from your application and do not independently verify execution. Requires history or investigate together with management scope. A result exceeding 100000 population rows or the query budget is refused without truncation."
   },
   {
     "name": "wait_for_assessment",

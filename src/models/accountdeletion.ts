@@ -9,6 +9,7 @@ export type AccountDeletion = {
   deleted?: true | undefined;
   assessments_deleted: number;
   deleted_at: string;
+  erasure_id?: string | undefined;
 };
 
 export const AccountDeletion$zodSchema: z.ZodType<AccountDeletion> = z.object({
@@ -18,6 +19,9 @@ export const AccountDeletion$zodSchema: z.ZodType<AccountDeletion> = z.object({
   deleted: z.literal(true).default(true).optional(),
   deleted_at: z.string().describe(
     "When the erasure took effect. An assessment of the account begun before this time is refused or stopped.",
+  ),
+  erasure_id: z.string().optional().describe(
+    "Receipt for GET /v1/erasures/{erasure_id}, when durable storage issued one.",
   ),
   id: z.string().describe("The account_id that was erased."),
   schema_version: z.literal("1").default("1").optional().describe(

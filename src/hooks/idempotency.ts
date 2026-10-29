@@ -6,7 +6,7 @@
 import type { RequestInput } from "../lib/http.js";
 import type { BeforeCreateRequestContext, BeforeCreateRequestHook } from "./types.js";
 
-export const IDEMPOTENT_OPERATIONS = new Set(["createAssessment", "recordAssessmentOutcome"]);
+export const IDEMPOTENT_OPERATIONS = new Set(["createAssessment", "recordAssessmentOutcome", "recordKeyUsage", "recordAccountOutcome", "changeLists", "createPolicyEvaluation"]);
 
 export class IdempotencyKeyHook implements BeforeCreateRequestHook {
   beforeCreateRequest(hookCtx: BeforeCreateRequestContext, input: RequestInput): RequestInput {

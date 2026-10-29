@@ -12,6 +12,10 @@ import {
   AssessmentUpdatedEvent$zodSchema,
 } from "./assessmentupdatedevent.js";
 import {
+  AuditEventEvent,
+  AuditEventEvent$zodSchema,
+} from "./auditeventevent.js";
+import {
   EndpointVerificationEvent,
   EndpointVerificationEvent$zodSchema,
 } from "./endpointverificationevent.js";
@@ -33,7 +37,8 @@ export type WebhookEvent =
   | (AccountDeletedEvent & { type: "account.deleted" })
   | (WorkspaceDeletedEvent & { type: "workspace.deleted" })
   | (WebhookEndpointDisabledEvent & { type: "webhook_endpoint.disabled" })
-  | (AccountRiskChangedEvent & { type: "account.risk_changed" });
+  | (AccountRiskChangedEvent & { type: "account.risk_changed" })
+  | (AuditEventEvent & { type: "audit.event" });
 
 export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
   AssessmentUpdatedEvent$zodSchema.and(
@@ -64,6 +69,11 @@ export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
   AccountRiskChangedEvent$zodSchema.and(
     z.object({
       type: z.literal("account.risk_changed"),
+    }).transform((v) => ({ type: v.type })),
+  ),
+  AuditEventEvent$zodSchema.and(
+    z.object({
+      type: z.literal("audit.event"),
     }).transform((v) => ({ type: v.type })),
   ),
 ]).describe(

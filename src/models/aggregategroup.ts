@@ -1,10 +1,13 @@
 import * as z from "zod";
+import {
+  AggregateGroupListMatch,
+  AggregateGroupListMatch$zodSchema,
+} from "./aggregategrouplistmatch.js";
 import { Band, Band$zodSchema } from "./band.js";
 import { Decision, Decision$zodSchema } from "./decision.js";
 import { Flow, Flow$zodSchema } from "./flow.js";
 import { Impact, Impact$zodSchema } from "./impact.js";
 import { Lane, Lane$zodSchema } from "./lane.js";
-import { ListMatch, ListMatch$zodSchema } from "./listmatch.js";
 import { ReasonCode, ReasonCode$zodSchema } from "./reasoncode.js";
 import { Recommendation, Recommendation$zodSchema } from "./recommendation.js";
 
@@ -16,7 +19,7 @@ export type AggregateGroup = {
   flow?: Flow | undefined;
   recommendation?: Recommendation | undefined;
   band?: Band | undefined;
-  list_match?: ListMatch | undefined;
+  list_match?: AggregateGroupListMatch | undefined;
   reason?: ReasonCode | undefined;
   impact?: Impact | undefined;
   lane?: Lane | undefined;
@@ -27,9 +30,7 @@ export type AggregateGroup = {
 
 export const AggregateGroup$zodSchema: z.ZodType<AggregateGroup> = z.object({
   asn: z.int().optional(),
-  band: Band$zodSchema.optional().describe(
-    "low 0-29, medium 30-59, high 60-84, critical 85-100.",
-  ),
+  band: Band$zodSchema.optional(),
   count: z.int(),
   country: z.string().optional(),
   decision: Decision$zodSchema.optional().describe(
@@ -38,12 +39,14 @@ export const AggregateGroup$zodSchema: z.ZodType<AggregateGroup> = z.object({
   flow: Flow$zodSchema.optional().describe(
     "The event an assessment is made for: account_creation (a user creates an account), login (a user returns to an existing account) or purchase (a payment or a credit grant). The account's risk is reported with the decision for this flow.",
   ),
-  impact: Impact$zodSchema.optional(),
+  impact: Impact$zodSchema.optional().describe(
+    "The selected reason's served impact band. Requires reason.",
+  ),
   lane: Lane$zodSchema.optional().describe(
     "An evidence lane: accounts (account presence for email and username), phone, breach, domain (the email domain's registration) and ip.",
   ),
-  list_match: ListMatch$zodSchema.optional().describe(
-    "The action of the list entry that decided the account.",
+  list_match: AggregateGroupListMatch$zodSchema.optional().describe(
+    "The list action captured with the first answer. none means no matching entry was found. For retained_first_answers an absent field means the older assessment did not capture list state; this remains a separate group.",
   ),
   reason: ReasonCode$zodSchema.optional().describe(
     "A stable reason code. New codes may appear; ignore any you do not know.",

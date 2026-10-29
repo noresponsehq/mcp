@@ -20,10 +20,14 @@ export type RequestDiagnostic = {
   idempotent_replayed: boolean;
   write_complete: boolean;
   decision?: DecisionReceipt | undefined;
+  api_key_id?: string | undefined;
 };
 
 export const RequestDiagnostic$zodSchema: z.ZodType<RequestDiagnostic> = z
   .object({
+    api_key_id: z.string().optional().describe(
+      "Public authenticated API key identifier. Absent for member requests and older unattributed diagnostics.",
+    ),
     completed_at: z.string(),
     decision: DecisionReceipt$zodSchema.optional().describe(
       "The decision prepared for one HTTP attempt. Its account field preserves the account decision returned for that attempt, even after subsequent changes.",

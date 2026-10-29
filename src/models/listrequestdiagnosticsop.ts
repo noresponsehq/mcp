@@ -27,11 +27,15 @@ export type ListRequestDiagnosticsRequest = {
   status?: number | undefined;
   limit?: number | undefined;
   cursor?: string | undefined;
+  api_key_id?: string | undefined;
 };
 
 export const ListRequestDiagnosticsRequest$zodSchema: z.ZodType<
   ListRequestDiagnosticsRequest
 > = z.object({
+  api_key_id: z.string().describe(
+    "Filter by the public authenticated API key identifier; older unattributed rows do not match.",
+  ).optional(),
   cursor: z.string().describe("Optional filter or paging parameter.")
     .optional(),
   from: z.string().describe(

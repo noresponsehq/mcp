@@ -1,7 +1,10 @@
 import * as z from "zod";
 import { Admission, Admission$zodSchema } from "./admission.js";
-import { DefaultDepth, DefaultDepth$zodSchema } from "./defaultdepth.js";
 import { OnExpiry, OnExpiry$zodSchema } from "./onexpiry.js";
+import {
+  UsageCountDepth,
+  UsageCountDepth$zodSchema,
+} from "./usagecountdepth.js";
 
 /**
  * A change to one flow. A field left out keeps the value in force. Thresholds set on login or purchase start from the values in force, account_creation's while it inherits them. After the change, 0 < step_up < review <= 100 and block is off or review <= block <= 100.
@@ -10,7 +13,7 @@ export type FlowChange = {
   step_up?: number | undefined;
   review?: number | undefined;
   block?: number | null | undefined;
-  default_depth?: DefaultDepth | undefined;
+  default_depth?: UsageCountDepth | undefined;
   inherits_account_creation?: boolean | undefined;
   inherits_signup?: boolean | undefined;
   admission?: Admission | undefined;
@@ -25,8 +28,8 @@ export const FlowChange$zodSchema: z.ZodType<FlowChange> = z.object({
   block: z.int().nullable().optional().describe(
     "The score from which the decision is block; null turns blocking off.",
   ),
-  default_depth: DefaultDepth$zodSchema.optional().describe(
-    "The depth a request for this flow that names none is served at. Defaults: full for account_creation and purchase, quick for login.",
+  default_depth: UsageCountDepth$zodSchema.optional().describe(
+    "assessments only.",
   ),
   hold_seconds: z.int().optional().describe(
     "How long a held flow's assessment is held after it was created, 30 to 86400 seconds (default 300). Kept while the flow is immediate.",

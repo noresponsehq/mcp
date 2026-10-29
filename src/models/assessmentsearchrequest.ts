@@ -1,7 +1,12 @@
 import * as z from "zod";
 import { AnswerRevision, AnswerRevision$zodSchema } from "./answerrevision.js";
+import { Band, Band$zodSchema } from "./band.js";
 import { Decision, Decision$zodSchema } from "./decision.js";
 import { Flow, Flow$zodSchema } from "./flow.js";
+import { Impact, Impact$zodSchema } from "./impact.js";
+import { Lane, Lane$zodSchema } from "./lane.js";
+import { ListMatch, ListMatch$zodSchema } from "./listmatch.js";
+import { ReasonCode, ReasonCode$zodSchema } from "./reasoncode.js";
 import { Recommendation, Recommendation$zodSchema } from "./recommendation.js";
 import { ResponseMode, ResponseMode$zodSchema } from "./responsemode.js";
 import { Status, Status$zodSchema } from "./status.js";
@@ -21,6 +26,15 @@ export type AssessmentSearchRequest = {
   response_mode?: ResponseMode | undefined;
   decision?: Decision | undefined;
   revision?: AnswerRevision | undefined;
+  band?: Band | undefined;
+  reason?: ReasonCode | undefined;
+  impact?: Impact | undefined;
+  lane?: Lane | undefined;
+  country?: string | undefined;
+  asn?: number | undefined;
+  score_min?: number | undefined;
+  score_max?: number | undefined;
+  list_match?: ListMatch | undefined;
 };
 
 export const AssessmentSearchRequest$zodSchema: z.ZodType<
@@ -29,6 +43,9 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
   account_id: z.string().optional().describe(
     "Your own opaque identifier for the account being checked, scoped to your workspace. Use an id you mint, with no direct identifier (email, phone, name or national id) in it. '|' is accepted so an Auth0 user id such as 'auth0|64abc' passes unchanged; '@', '+', '$' and whitespace are refused by the pattern, as is an exact-shape JWT; a hex digest such as a SHA-256 is allowed, because hashing an internal id is a common pseudonymous scheme. A value such as '07700900123' or 'jane.doe.gmail.com' cannot be told apart from an opaque id. It travels in bodies, and in a URL only as the path segment of GET /v1/accounts/{account_id} and its /assessments. An assessment requested by a provider hook at pre_registration, which has no account yet, carries the server-issued account_id pre: followed by its assessment_id.",
   ),
+  asn: z.int().optional(),
+  band: Band$zodSchema.optional(),
+  country: z.string().optional(),
   cursor: z.string().optional().describe(
     "Opaque, expiring cursor bound to this environment, operation and every filter. Keep the filters unchanged.",
   ),
@@ -39,7 +56,19 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
     "The event an assessment is made for: account_creation (a user creates an account), login (a user returns to an existing account) or purchase (a payment or a credit grant). The account's risk is reported with the decision for this flow.",
   ),
   from: z.string(),
+  impact: Impact$zodSchema.optional().describe(
+    "The selected reason's served impact band. Requires reason.",
+  ),
+  lane: Lane$zodSchema.optional().describe(
+    "An evidence lane: accounts (account presence for email and username), phone, breach, domain (the email domain's registration) and ip.",
+  ),
   limit: z.int().default(20),
+  list_match: ListMatch$zodSchema.optional().describe(
+    "The list action captured at the first answer. Requires revision first. Older answers without captured list state do not match, including none.",
+  ),
+  reason: ReasonCode$zodSchema.optional().describe(
+    "A stable reason code. New codes may appear; ignore any you do not know.",
+  ),
   recommendation: Recommendation$zodSchema.optional().describe(
     "The recommended action: allow, step_up or review. Your application applies it.",
   ),
@@ -48,6 +77,12 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
   ),
   revision: AnswerRevision$zodSchema.optional().describe(
     "Which answer of each assessment the filters describe: latest, the latest stored revision, or first, the first answer, as served when the assessment was first answered (POST /v1/assessments/aggregate counts first answers). A cell of an aggregate drills down to POST /v1/assessments/search with the same filters, revision first and the cell's bucket as from and to.",
+  ),
+  score_max: z.int().optional().describe(
+    "Inclusive upper score bound, at least score_min when both are supplied.",
+  ),
+  score_min: z.int().optional().describe(
+    "Inclusive lower score bound. Pending answers without a score do not match.",
   ),
   status: Status$zodSchema.optional().describe(
     "complete: final; nothing is still running. A lane that failed or missed its 10 s deadline stays listed in incomplete_sources, and confidence is lower. partial: a recommendation exists and at least one lane is still running or did not settle (see incomplete_sources). pending: nothing usable before the deadline; no recommendation yet, poll or wait for the webhook.",

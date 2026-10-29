@@ -27,7 +27,9 @@ export const AccountRiskReason$zodSchema: z.ZodType<AccountRiskReason> = z
     identifier: ReasonIdentifier$zodSchema.optional().describe(
       "The submitted identifier or client context field a reason concerns; absent when it concerns the whole assessment. Client context is a claimed hint, not a device fingerprint.",
     ),
-    impact: Impact$zodSchema,
+    impact: Impact$zodSchema.describe(
+      "The selected reason's served impact band. Requires reason.",
+    ),
     list_entry_id: z.string().optional().describe(
       "The list entry a list_match reason applied. No other reason carries it.",
     ),

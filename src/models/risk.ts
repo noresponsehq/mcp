@@ -26,9 +26,7 @@ export type Risk = {
 };
 
 export const Risk$zodSchema: z.ZodType<Risk> = z.object({
-  band: Band$zodSchema.describe(
-    "low 0-29, medium 30-59, high 60-84, critical 85-100.",
-  ),
+  band: Band$zodSchema,
   block: z.boolean().optional().describe(
     "true when the workspace's block threshold is set and score reached it. A provider hook can deny the account creation on it; the provider decides and enforces. It does not change recommendation. It is false while blocking is off, the default, and a body from before the flag existed omits it: read absent as false.",
   ),

@@ -3,6 +3,7 @@
 // network; tests/mock-server.test.mjs runs the same tools against the mock
 // server generated from the SDK document.
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { after, before, describe, test } from "node:test";
 import { CALLER_KEY, fixture, httpClient, json, recordingAPI, stdioClient, workerServer } from "./helpers.mjs";
 
@@ -29,49 +30,8 @@ const SETTINGS = fixture("settings.json");
 const WORKSPACE = SETTINGS.workspace_id;
 const ID = PENDING.id;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
-const TOOLS = [
-  "aggregate_assessments",
-  "associate_account_credential",
-  "bind_provisional_account",
-  "create_assessment",
-  "create_integration",
-  "create_list_entry",
-  "create_webhook_endpoint",
-  "delete_account",
-  "delete_assessment",
-  "delete_integration",
-  "delete_list_entry",
-  "delete_webhook_endpoint",
-  "export_account",
-  "get_account",
-  "get_account_decision",
-  "get_assessment",
-  "get_assessment_version",
-  "get_settings",
-  "list_account_assessments",
-  "list_account_credentials",
-  "list_account_outcomes",
-  "list_changed_accounts",
-  "list_integrations",
-  "list_keys",
-  "list_list_entries",
-  "list_request_diagnostics",
-  "list_webhook_deliveries",
-  "list_webhook_endpoints",
-  "query_assessments",
-  "record_account_outcome",
-  "record_enforcement",
-  "record_outcome",
-  "replay_webhook_delivery",
-  "retire_account_credential",
-  "revoke_key",
-  "rotate_integration_secret",
-  "rotate_webhook_signing_key",
-  "search_assessments",
-  "send_webhook_test_event",
-  "update_settings",
-  "wait_for_assessment",
-];
+const TOOL_POLICY = JSON.parse(readFileSync(new URL("fixtures/mcp-tool-policy.json", import.meta.url), "utf8"));
+const TOOLS = TOOL_POLICY.map((tool) => tool.name).sort();
 
 // Answers by route; GET of the assessment answers `unsettled` (pending by
 // default) until `settleAfter` polls have been made.
@@ -124,56 +84,15 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
     await api?.close();
   });
 
-  test("exposes the assessment, webhook endpoint, integration, key, settings and list tools, and not API key rotation, key creation or key usage", async () => {
+  test("exposes exactly the reviewed customer tools without key or invite token issuance", async () => {
     const { tools } = await client.listTools();
     assert.deepEqual(tools.map((t) => t.name).sort(), TOOLS);
-    assert.ok(!tools.some((t) => /api_key|rotate_key|create_key|key_usage/i.test(t.name)));
-    const readOnly = Object.fromEntries(tools.map((t) => [t.name, t.annotations?.readOnlyHint === true]));
-    assert.deepEqual(readOnly, {
-      aggregate_assessments: true,
-      associate_account_credential: false,
-      bind_provisional_account: false,
-      export_account: true,
-      get_account_decision: true,
-      get_assessment_version: true,
-      list_account_credentials: true,
-      list_account_outcomes: true,
-      list_request_diagnostics: true,
-      record_account_outcome: false,
-      retire_account_credential: false,
-      search_assessments: true,
-      create_assessment: false,
-      create_webhook_endpoint: false,
-      delete_account: false,
-      delete_assessment: false,
-      delete_webhook_endpoint: false,
-      create_integration: false,
-      delete_integration: false,
-      get_account: true,
-      get_assessment: true,
-      get_settings: true,
-      list_keys: true,
-      revoke_key: false,
-      update_settings: false,
-      list_list_entries: true,
-      create_list_entry: false,
-      delete_list_entry: false,
-      list_account_assessments: true,
-      list_changed_accounts: true,
-      list_webhook_endpoints: true,
-      list_webhook_deliveries: true,
-      replay_webhook_delivery: false,
-      list_integrations: true,
-      query_assessments: true,
-      record_enforcement: false,
-      record_outcome: false,
-      rotate_webhook_signing_key: false,
-      send_webhook_test_event: false,
-      rotate_integration_secret: false,
-      wait_for_assessment: true,
-    });
-    const destructive = tools.filter((t) => t.annotations?.destructiveHint === true).map((t) => t.name);
-    assert.deepEqual(destructive.sort(), ["delete_account", "delete_assessment", "delete_integration", "delete_list_entry", "delete_webhook_endpoint", "retire_account_credential", "revoke_key"]);
+    assert.ok(!tools.some((t) => /api_key|rotate_key|create_key|key_usage|create_invite|resend_invite/i.test(t.name)));
+    for (const hint of ["readOnlyHint", "destructiveHint", "idempotentHint"]) {
+      const observed = Object.fromEntries(tools.map((tool) => [tool.name, tool.annotations?.[hint] === true]));
+      const expected = Object.fromEntries(TOOL_POLICY.map((tool) => [tool.name, tool[hint] === true]));
+      assert.deepEqual(observed, expected, hint);
+    }
   });
 
   test("the webhook endpoint tools call their routes with the caller's key", async () => {
@@ -236,6 +155,48 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
       arguments: { request: { idempotencyKey: key, body: { account_id: "acct_7f3a9c", flow: "account_creation", identifiers: { email: "new.user@example.com" } } } },
     });
     assert.equal(api.requests[0].headers["idempotency-key"], key);
+  });
+
+  test("outcome, bulk list and evaluation tools supply and preserve idempotency keys", async () => {
+    const workspace = { workspace_id: WORKSPACE, environment: "live" };
+    const cases = [
+      ["record_account_outcome", "/v1/accounts/acct_7f3a9c/outcomes", {
+        account_id: "acct_7f3a9c", body: { outcome: "confirmed_abuse" },
+      }],
+      ["change_lists", `/v1/workspaces/${WORKSPACE}/lists/live/bulk`, {
+        ...workspace, body: { add: [{ kind: "email_domain", value: "example.com", action: "block" }] },
+      }],
+      ["create_policy_evaluation", `/v1/workspaces/${WORKSPACE}/evaluations/live`, {
+        ...workspace,
+        body: {
+          expected_policy_version: 1, from: "2026-01-01T00:00:00Z", to: "2026-01-02T00:00:00Z",
+          candidates: [{ step_up: 30, review: 60, block: 90 }],
+          costs: { legitimate: { allow: 0, step_up: 1, review: 2, block: 10 }, abuse: { allow: 10, step_up: 2, review: 1, block: 0 } },
+          limits: { review_rate: 0.1, server_error_rate: 0.01, unavailable_result_rate: 0.01, p95_ms: 1000 },
+          label_collection: "reported_account_outcomes", split_seed: "evaluation-test-seed",
+        },
+      }],
+    ];
+    for (const [name, path, request] of cases) {
+      api.requests.length = 0;
+      const supplied = `customer-platform-${name}`;
+      for (const idempotencyKey of [undefined, supplied]) {
+        // These routes deliberately answer404 in this fake. Reaching the
+        // transport proves the generated argument validator admitted omission
+        // and the hook inserted the required header before the HTTP call.
+        const result = await client.callTool({ name, arguments: { request: { ...request, ...(idempotencyKey ? { idempotencyKey } : {}) } } });
+        assert.ok(result.isError, name);
+      }
+      assert.equal(api.requests.length, 2, name);
+      for (const recorded of api.requests) {
+        assert.equal(recorded.method, "POST", name);
+        assert.equal(recorded.path, path, name);
+        assert.equal(recorded.headers.authorization, `Bearer ${CALLER_KEY}`, name);
+        assert.deepEqual(recorded.body, request.body, name);
+      }
+      assert.match(api.requests[0].headers["idempotency-key"], UUID, name);
+      assert.equal(api.requests[1].headers["idempotency-key"], supplied, name);
+    }
   });
 
   test("record_outcome posts the outcome with the caller's key", async () => {

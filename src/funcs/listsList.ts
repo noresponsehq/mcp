@@ -1,5 +1,5 @@
 import { NoResponseCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
@@ -30,7 +30,7 @@ export enum ListAcceptEnum {
  * List an environment's list entries.
  *
  * @remarks
- * Lists every entry of the signing key's environment's list, newest first: each an email or an email domain that decides the accounts it matches, block or allow, whatever their score. Requires the management scope; the other environment answers 404 not_found. Read-only and safe to retry.
+ * Page through this environment allow and block entries, with canonical values, reasons and optional expiry. Requires settings or management. Follow the returned cursor until exhausted; a page is not the complete list. The cursor is bound to the environment and current filters.
  */
 export function listsList(
   client$: NoResponseCore,
@@ -98,6 +98,10 @@ async function $do(
   const path$ = pathToFunc("/v1/workspaces/{workspace_id}/lists/{environment}")(
     pathParams$,
   );
+  const query$ = encodeFormQuery({
+    "cursor": payload$.cursor,
+    "limit": payload$.limit,
+  });
 
   const headers$ = new Headers(compactMap({
     Accept: options?.acceptHeaderOverride
@@ -139,6 +143,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path$,
     headers: headers$,
+    query: query$,
     body: body$,
     userAgent: client$._options.userAgent,
     timeoutMs: options?.timeoutMs || client$._options.timeoutMs

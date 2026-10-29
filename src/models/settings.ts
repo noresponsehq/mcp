@@ -23,7 +23,7 @@ export const Settings$zodSchema: z.ZodType<Settings> = z.object({
   ),
   flows: SettingsFlows$zodSchema,
   policy_version: z.int().describe(
-    "How many times this environment's policy has changed; 0 while the defaults apply. A served risk.policy_version ends in +t<policy_version> once it is above 0.",
+    "The monotonic settings configuration epoch, including retention changes. Zero while defaults apply. Historical assessments keep their frozen policy version; the active version reaches new assessments within a minute.",
   ),
   refused_sources: z.array(SourceId$zodSchema).describe(
     "The sources this environment refuses, sorted; empty, the default, refuses none. An assessment leaves a refused source out: its coverage is missing (an identifier with no other source lists coverage-unavailable as unavailable) rather than not_found, and a stored result of a refused source is not reused.",

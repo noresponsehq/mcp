@@ -19,6 +19,7 @@ export type ListEntry = {
   note?: string | undefined;
   created_at: string;
   created_by: string;
+  expires_at?: string | undefined;
 };
 
 export const ListEntry$zodSchema: z.ZodType<ListEntry> = z.object({
@@ -31,6 +32,9 @@ export const ListEntry$zodSchema: z.ZodType<ListEntry> = z.object({
   ),
   environment: KeyEnvironment$zodSchema.describe(
     "The environment the key belongs to. A live key assesses with live sources; a test key answers from the deterministic simulator.",
+  ),
+  expires_at: z.string().optional().describe(
+    "Optional expiry. An expired entry stops matching immediately; bounded maintenance removes it and propagates account risk changes.",
   ),
   id: z.string().describe("The entry's id: lst_ and a ULID."),
   kind: ListEntryKind$zodSchema.describe(

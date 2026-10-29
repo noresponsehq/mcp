@@ -8,6 +8,10 @@ import {
   AggregateDimension,
   AggregateDimension$zodSchema,
 } from "./aggregatedimension.js";
+import {
+  AssessmentAggregateCoverage,
+  AssessmentAggregateCoverage$zodSchema,
+} from "./assessmentaggregatecoverage.js";
 import { Bucket, Bucket$zodSchema } from "./bucket.js";
 
 export const AssessmentAggregateMetric = {
@@ -39,6 +43,7 @@ export type AssessmentAggregate = {
   metrics: Array<AssessmentAggregateMetric>;
   retention_days?: number | undefined;
   groups_truncated: boolean;
+  coverage?: AssessmentAggregateCoverage | undefined;
   buckets: Array<AggregateBucket>;
 };
 
@@ -48,6 +53,9 @@ export const AssessmentAggregate$zodSchema: z.ZodType<AssessmentAggregate> = z
       "The period each count covers, in UTC; a week starts on Monday.",
     ),
     buckets: z.array(AggregateBucket$zodSchema),
+    coverage: AssessmentAggregateCoverage$zodSchema.optional().describe(
+      "Captured in the same database snapshot as the counts. Capture start times describe when counting began, not the earliest creation time counted: an older assessment may first answer later. Older outcomes are not inferred to be absent. Erased detail cannot be returned by drill-down even while its anonymous count remains.",
+    ),
     from: z.string(),
     group_by: z.array(AggregateDimension$zodSchema),
     groups_truncated: z.boolean().describe(

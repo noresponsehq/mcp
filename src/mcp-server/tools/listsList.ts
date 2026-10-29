@@ -10,7 +10,7 @@ export const tool$listsList: ToolDefinition<typeof args> = {
   name: "list_list_entries",
   description: `List an environment's list entries.
 
-Lists every entry of the signing key's environment's list, newest first: each an email or an email domain that decides the accounts it matches, block or allow, whatever their score. Requires the management scope; the other environment answers 404 not_found. Read-only and safe to retry.`,
+Page through this environment allow and block entries, with canonical values, reasons and optional expiry. Requires settings or management. Follow the returned cursor until exhausted; a page is not the complete list. The cursor is bound to the environment and current filters.`,
   annotations: {
     "title": "List this environment's allow and block list",
     "destructiveHint": false,

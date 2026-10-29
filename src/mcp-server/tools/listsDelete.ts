@@ -10,7 +10,7 @@ export const tool$listsDelete: ToolDefinition<typeof args> = {
   name: "delete_list_entry",
   description: `Remove an entry from an environment's list.
 
-Removes an entry from the signing key's environment's list and re-decides the accounts it matched, the 5,000 most recently assessed at most, each sending account.risk_changed when its decision changes. An unknown or already removed entry answers 404 not_found. Requires the management scope.`,
+Remove an override with settings plus policy_publish, or legacy management. The removal takes effect for new decisions and schedules resumable propagation across matching retained accounts. An unknown or already removed entry answers404. Account risk events announce changed decisions as propagation runs.`,
   annotations: {
     "title": "Delete an entry from the allow or block list",
     "destructiveHint": true,

@@ -13,12 +13,16 @@ export type ListEntryRequest = {
   value: string;
   action: ListEntryAction;
   note?: string | undefined;
+  expires_at?: string | undefined;
 };
 
 export const ListEntryRequest$zodSchema: z.ZodType<ListEntryRequest> = z.object(
   {
     action: ListEntryAction$zodSchema.describe(
       "block decides block for the accounts the entry matches; allow decides allow. Block wins when both match.",
+    ),
+    expires_at: z.string().optional().describe(
+      "Optional expiry. An expired entry stops matching immediately; bounded maintenance removes it and propagates account risk changes.",
     ),
     kind: ListEntryKind$zodSchema.describe(
       "email matches one address, whatever the case of its local part. email_domain matches every address of the registrable domain and of its subdomains.",

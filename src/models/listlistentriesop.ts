@@ -20,14 +20,18 @@ import { RateLimitError, RateLimitError$zodSchema } from "./ratelimiterror.js";
 export type ListListEntriesRequest = {
   workspace_id: string;
   environment: KeyEnvironment;
+  limit?: number | undefined;
+  cursor?: string | undefined;
 };
 
 export const ListListEntriesRequest$zodSchema: z.ZodType<
   ListListEntriesRequest
 > = z.object({
+  cursor: z.string().optional(),
   environment: KeyEnvironment$zodSchema.describe(
     "The environment: live or test. Each has its own settings. Any other value answers 400. An API key reads and changes only its own environment's; the other answers 404.",
   ),
+  limit: z.int().optional(),
   workspace_id: z.string().describe(
     "Your workspace id, as each key lists it in workspace_id. Another workspace, a malformed id and a test environment's id answer 404.",
   ),
