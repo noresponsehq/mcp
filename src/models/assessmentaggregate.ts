@@ -41,6 +41,7 @@ export type AssessmentAggregate = {
   bucket: Bucket;
   group_by: Array<AggregateDimension>;
   metrics: Array<AssessmentAggregateMetric>;
+  time_zone: string;
   retention_days?: number | undefined;
   groups_truncated: boolean;
   coverage?: AssessmentAggregateCoverage | undefined;
@@ -50,7 +51,7 @@ export type AssessmentAggregate = {
 export const AssessmentAggregate$zodSchema: z.ZodType<AssessmentAggregate> = z
   .object({
     bucket: Bucket$zodSchema.describe(
-      "The period each count covers, in UTC; a week starts on Monday.",
+      "The period each count covers: an hour, or a day or a week (from Monday) in time_zone. Hour buckets are whole UTC hours in any time zone.",
     ),
     buckets: z.array(AggregateBucket$zodSchema),
     coverage: AssessmentAggregateCoverage$zodSchema.optional().describe(
@@ -67,6 +68,9 @@ export const AssessmentAggregate$zodSchema: z.ZodType<AssessmentAggregate> = z
     ),
     schema_version: z.literal("1").default("1").optional().describe(
       "Version of the body shape.",
+    ),
+    time_zone: z.string().describe(
+      "The time zone whose local midnight started each day and week bucket, as requested; UTC when the request named none.",
     ),
     to: z.string(),
   }).describe(

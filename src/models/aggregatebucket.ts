@@ -34,5 +34,7 @@ export const AggregateBucket$zodSchema: z.ZodType<AggregateBucket> = z.object({
   score_outcomes: z.array(AggregateScoreOutcome$zodSchema).optional().describe(
     "With metric score_outcomes: the score_histogram's first answers whose assessment has a reported outcome, by its latest. A bin's count less its score_outcomes is the first answers with none reported.",
   ),
-  start: z.string(),
+  start: z.string().describe(
+    "The bucket's first instant, in UTC. A day or week bucket in a time zone starts at local midnight there, so in Asia/Tokyo a day starts at 15:00Z the day before.",
+  ),
 });

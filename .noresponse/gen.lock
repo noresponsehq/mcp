@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 03e9506f0462a5752c23d567486af0e8
+  docChecksum: d7e35c0b6dfbc0c5c84d2fc60b102109
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.8.0
-  configChecksum: 0bea59182bd863857260d577da8104e9
+  releaseVersion: 0.9.0
+  configChecksum: 53590d6973ee621f9af1aaca8025a807
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -36,11 +36,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:b392295ef2d463fd5ff59c441b2356e15d53a035
+    last_write_checksum: sha1:b6c7c62c5a172e17322eca647efe393b4d2afbec
   package.json:
-    last_write_checksum: sha1:82cf7f49810f1100e14d2e664e3abd2c14098567
+    last_write_checksum: sha1:272a5fae336d444980fb24158927a4ba46b82426
   server.json:
-    last_write_checksum: sha1:d10ea4d80f7eb3a0c050af769cd86e4d7e56ce82
+    last_write_checksum: sha1:aeb9c3fc63bf0870c1a0777abdc9ed901701ca71
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -74,7 +74,7 @@ trackedFiles:
   src/funcs/accountsRetrieveDecision.ts:
     last_write_checksum: sha1:aee3753f53e451f46f4e3fcbe941c53cd182a10c
   src/funcs/assessmentsAggregate.ts:
-    last_write_checksum: sha1:b76689494c18f85a20624134287a93ada5b6a797
+    last_write_checksum: sha1:623c5748377806e41e1a01aa5bcb64bdcd9ec5bc
   src/funcs/assessmentsBindAccount.ts:
     last_write_checksum: sha1:3084b9290ca073a2177dcd4e2b888afb510b3b85
   src/funcs/assessmentsCreate.ts:
@@ -250,7 +250,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:c225791d6be23c399eed174185986956c6b4ef84
+    last_write_checksum: sha1:889ec02c560d195016c6537c1c4a736703894d9f
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -294,7 +294,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:99c3989fc87f5110bc4cd0df982de7380f5aaf98
+    last_write_checksum: sha1:3ee4e40f47bf9053d87f1f6bdee5e4e758fc414c
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -302,7 +302,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:3ada46931f18e33f3d0c882b6b50f1fb9ee623e5
+    last_write_checksum: sha1:18d7c6401265c904fad6217829a9c7558b34c9cb
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -336,7 +336,7 @@ trackedFiles:
   src/mcp-server/tools/accountsRetrieveDecision.ts:
     last_write_checksum: sha1:2628a3be28df22684f54436ef74344100635b401
   src/mcp-server/tools/assessmentsAggregate.ts:
-    last_write_checksum: sha1:4267a3c00665423e2d3dc27845fe3919eee1ac36
+    last_write_checksum: sha1:bc8c410bcb51e2b94edc23dfc7995972ea7f50a0
   src/mcp-server/tools/assessmentsBindAccount.ts:
     last_write_checksum: sha1:ffdd038363161a0e33c7e7f9f3dca4a6990bf42f
   src/mcp-server/tools/assessmentsCreate.ts:
@@ -548,7 +548,7 @@ trackedFiles:
   src/models/aggregateassessmentsop.ts:
     last_write_checksum: sha1:edb6988fe456d62afe5f3f5946208ec11910744a
   src/models/aggregatebucket.ts:
-    last_write_checksum: sha1:509c8c4c30b5b12ee26cb35312a84093be30cf90
+    last_write_checksum: sha1:48cc094579382bb1bd140983ee4c4a145ba3b187
   src/models/aggregatedimension.ts:
     last_write_checksum: sha1:dabf41641f377f6aa6ff7a3d7d68d959102f134a
   src/models/aggregategroup.ts:
@@ -572,11 +572,11 @@ trackedFiles:
   src/models/assessment.ts:
     last_write_checksum: sha1:4118eea41a95621af2f39a0bd41847d0eee3f2fc
   src/models/assessmentaggregate.ts:
-    last_write_checksum: sha1:146ac1b77ffc20a6453060700352ec0a11915b53
+    last_write_checksum: sha1:3ba0d2a9ec1d1d88f70ed116e74aa179ea3809b2
   src/models/assessmentaggregatecoverage.ts:
     last_write_checksum: sha1:5cfdafdc94954455b1d20f7245a478a878a2a36a
   src/models/assessmentaggregaterequest.ts:
-    last_write_checksum: sha1:f3e26802beab92456bd822cabab2d04a2b8aff57
+    last_write_checksum: sha1:e88a55da946e3c7a8d4a72a213f7a01cf3dd799d
   src/models/assessmentdeletion.ts:
     last_write_checksum: sha1:44a6f562eeabb7ba07072ef3896342cf6a1d75ae
   src/models/assessmentdeletionaccount.ts:
@@ -676,7 +676,7 @@ trackedFiles:
   src/models/breachsummary.ts:
     last_write_checksum: sha1:0411d2bb8854ce635648748613e1efbdcc52379f
   src/models/bucket.ts:
-    last_write_checksum: sha1:13d46b1bbc888e595846f6f6b24a41b331d3ad9e
+    last_write_checksum: sha1:6c55712685944d48aaf8a5323600b420514d22c2
   src/models/cancelcustomerexportop.ts:
     last_write_checksum: sha1:8a8113ab409bccf795e88aa7fbe0ea0525e1597f
   src/models/cancelpolicyevaluationop.ts:
@@ -1352,7 +1352,7 @@ trackedFiles:
   src/models/workspaceoperationssummaryrequest.ts:
     last_write_checksum: sha1:3b708bc13bd5744f53045280ef67a67332bc29f7
   src/tool-names.ts:
-    last_write_checksum: sha1:40fe75df72ab30eabf6715ec8458bbfd1c10c222
+    last_write_checksum: sha1:fc40ffcb31b81c96190521a1d2d5d739f35725a1
   src/types/async.ts:
     last_write_checksum: sha1:ebc27b1229fbbe1835d89ec484c7fa28188b9cf4
   src/types/bigint.ts:
@@ -1618,10 +1618,10 @@ examples:
   aggregateAssessments:
     noresponse-default-aggregate-assessments:
       requestBody:
-        application/json: {"from": "2026-10-19T00:00:00Z", "to": "2026-10-26T00:00:00Z", "bucket": "week", "limit": 20, "country": "GB"}
+        application/json: {"from": "2026-10-19T00:00:00Z", "to": "2026-10-26T00:00:00Z", "bucket": "week", "time_zone": "UTC", "limit": 20, "country": "GB"}
       responses:
         "200":
-          application/json: {"schema_version": "1", "from": "2026-10-19T00:00:00.000Z", "to": "2026-10-26T00:00:00.000Z", "bucket": "week", "group_by": [], "metrics": [], "retention_days": 365, "groups_truncated": false, "coverage": {"as_of": "2026-01-01T00:00:00Z", "first_answers_started_at": "2026-01-01T00:00:00Z", "score_outcomes_started_at": "2026-01-01T00:00:00Z", "retained_from": "2026-01-01T00:00:00Z", "population": "first_answers", "erased_records_included": true, "overlapping_groups": false, "late_flip_unit": "decision_transitions", "historical_backfill": false}, "buckets": []}
+          application/json: {"schema_version": "1", "from": "2026-10-19T00:00:00.000Z", "to": "2026-10-26T00:00:00.000Z", "bucket": "week", "group_by": [], "metrics": [], "time_zone": "UTC", "retention_days": 365, "groups_truncated": false, "coverage": {"as_of": "2026-01-01T00:00:00Z", "first_answers_started_at": "2026-01-01T00:00:00Z", "score_outcomes_started_at": "2026-01-01T00:00:00Z", "retained_from": "2026-01-01T00:00:00Z", "population": "first_answers", "erased_records_included": true, "overlapping_groups": false, "late_flip_unit": "decision_transitions", "historical_backfill": false}, "buckets": []}
         "400":
           application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "invalid_idempotency_key", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
         "401":
