@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.1
+
+* `SDK.accounts.search()`: **Added**
+
 ## 0.10.0
 
 * `SDK.assessments.create()`:  `response.detail.risk.details.breach_names[]` **Changed**

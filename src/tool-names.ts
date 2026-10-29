@@ -93,6 +93,10 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Page through recorded account decisions\n\nList retained immutable risk decisions for one account with an authenticated cursor."
   },
   {
+    "name": "search_accounts",
+    "description": "Search distinct accounts by email or account ID\n\nSearch distinct accounts observed in retained assessments in this environment. Match an exact account_id or canonical email; an email matches any retained assessment belonging to the account. The response contains one row per account with its newest retained assessment, current decision when available, per-account assessment count, and total distinct-account count. Send next_cursor with unchanged filters to continue. Totals are exact below 10000 and capped at 10000. Results are live across pages. Requires history access and identifier access for email. Read-only and safe to retry."
+  },
+  {
     "name": "list_keys",
     "description": "List API keys.\n\nLists the keys of the signing key's environment, newest first, at most 200, revoked and expired keys included, without secrets: each key's id, prefix, scopes, status, and who created and revoked it. Requires the management scope. Read-only and safe to retry."
   },

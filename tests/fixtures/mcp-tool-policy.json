@@ -46,6 +46,12 @@
     "idempotentHint": true
   },
   {
+    "name": "search_accounts",
+    "title": "Search retained accounts by identifier",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
     "name": "record_enforcement",
     "title": "Record an enforcement of an account",
     "idempotentHint": true
