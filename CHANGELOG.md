@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.10.0
+
+* `SDK.assessments.create()`:  `response.detail.risk.details.breach_names[]` **Changed**
+* `SDK.assessments.get()`:  `response.detail.risk.details.breach_names[]` **Changed**
+* `SDK.assessments.query()`:  `response.items[].risk.details.breach_names[]` **Changed**
+* `SDK.assessments.search()`:  `response.items[].detail.risk.details.breach_names[]` **Changed**
+* `SDK.assessments.retrieveVersion()`:  `response.detail.risk.details.breach_names[]` **Changed**
+* `SDK.accounts.listAssessments()`:  `response.items[].risk.details.breach_names[]` **Changed**
+* `SDK.accounts.export()`:  `response.assessments[].detail.risk.details.breach_names[]` **Changed**
+
 ## 0.9.0
 
 * `SDK.assessments.aggregate()`: 

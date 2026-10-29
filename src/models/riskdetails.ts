@@ -25,7 +25,7 @@ export type RiskDetails = {
 
 export const RiskDetails$zodSchema: z.ZodType<RiskDetails> = z.object({
   breach_names: z.array(RiskDetailsBreachName$zodSchema).optional().describe(
-    "Names found next to the identifiers in breach records, merged, with the number of distinct tables each was seen in.",
+    "Names found next to the identifiers in breach records, merged, with the number of distinct tables each was seen in and the sites of those tables.",
   ),
   breaches: z.array(Breach$zodSchema).optional().describe(
     "The matching breach tables, newest first, at most 100.",
