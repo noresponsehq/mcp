@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 48c88d9dc6b20cf6f8f209c88d2d4153
+  docChecksum: 3f5605f058dc7cb053f694f86239b3f7
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.6.17
-  configChecksum: 48361a59620423b3463fd05493207eab
+  releaseVersion: 0.7.0
+  configChecksum: 2d83d34eaf89c5f06a2813ca55acc268
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -36,11 +36,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:25db92448217cc5ab97bb0553be2b357ca68bcaa
+    last_write_checksum: sha1:8dc5e5ccd5f191f430d50709bdef9354653a3d57
   package.json:
-    last_write_checksum: sha1:9676c89e75307f8a420364bb45d8052273f9d2b3
+    last_write_checksum: sha1:f5495d07428d66dcc1287ce3eebff358cdae1a80
   server.json:
-    last_write_checksum: sha1:e4355069467933038368fa1738f2b56096e58750
+    last_write_checksum: sha1:7d9f50f94a09da8ae2cc497c23da95146cb66e71
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -224,7 +224,7 @@ trackedFiles:
   src/funcs/settingsUpdate.ts:
     last_write_checksum: sha1:796efc1d38d743d0de86b9a429a0ed55526fc8a9
   src/funcs/usageGet.ts:
-    last_write_checksum: sha1:2f3a9d6f9c5fe0b78173312beeb3ad12ae7b2c99
+    last_write_checksum: sha1:84851511122cb4a596564691b5ced3bf73ffb4e3
   src/funcs/webhookEndpointsAggregate.ts:
     last_write_checksum: sha1:41fb8ac5bc7210fd4fb31374300b895800c07287
   src/funcs/webhookEndpointsCreate.ts:
@@ -250,7 +250,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:1eb396ecfb62b81b3339c4cd658b771efe8a8c48
+    last_write_checksum: sha1:975dc8145fc663cd70d6b535f7fdd4975c84f643
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -294,7 +294,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:177693c4cf87184ccb62186f0a4c12839fc9ebbd
+    last_write_checksum: sha1:979aae204fafd039916ab3dd0e473e8e76f928e1
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -302,7 +302,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:c3a63659928bbfcb2bd8af347df37963ad6f0ddd
+    last_write_checksum: sha1:23cd7b74e4f3f88b7c61d1e982bd45dd4521665a
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -476,7 +476,7 @@ trackedFiles:
   src/mcp-server/tools/settingsUpdate.ts:
     last_write_checksum: sha1:d775e2509b8a803310b9172bae202fd85b3b1791
   src/mcp-server/tools/usageGet.ts:
-    last_write_checksum: sha1:594e0403cb307d1fc4a785233dd224462a939c0b
+    last_write_checksum: sha1:020e836bc5adddbe5e49c3d77c5cd0154fff2ec7
   src/mcp-server/tools/webhookEndpointsAggregate.ts:
     last_write_checksum: sha1:2438bbf7fdd5777e290aed3aaa35c1b06e1417c2
   src/mcp-server/tools/webhookEndpointsCreate.ts:
@@ -697,6 +697,8 @@ trackedFiles:
     last_write_checksum: sha1:85079f3f94f86bcfa01f233fdcbf2e98caefa52a
   src/models/consistencyvalue.ts:
     last_write_checksum: sha1:c1b8c742ddd358c2ea78b6df8ed87dcca90e896f
+  src/models/consolelookups.ts:
+    last_write_checksum: sha1:6bb5460c178fdc2bbb2dbcb61703071e59de3e6b
   src/models/cost.ts:
     last_write_checksum: sha1:68d581029a2a4d87093bab1903bce4ff6ffbe696
   src/models/country.ts:
@@ -1290,7 +1292,7 @@ trackedFiles:
   src/models/updatesettingsop.ts:
     last_write_checksum: sha1:c80fd00dd95b515bcff921240d9f7f42fe61ec18
   src/models/usage.ts:
-    last_write_checksum: sha1:2ec80d1f8e48840bb158cbbafb1fc7aa21cc4b04
+    last_write_checksum: sha1:ec225d581d1780a165a02d12ee816ce232c0931c
   src/models/usagecount.ts:
     last_write_checksum: sha1:adc93d36c147f15aadd29c94c900ce82ed1f8522
   src/models/usagecountdepth.ts:
@@ -1348,7 +1350,7 @@ trackedFiles:
   src/models/workspaceoperationssummaryrequest.ts:
     last_write_checksum: sha1:3b708bc13bd5744f53045280ef67a67332bc29f7
   src/tool-names.ts:
-    last_write_checksum: sha1:78c7a94af610645fa16429cc2783d1a5f1b9bf25
+    last_write_checksum: sha1:29b2f6e607113d21f5fbb1f346abe346d6182249
   src/types/async.ts:
     last_write_checksum: sha1:ebc27b1229fbbe1835d89ec484c7fa28188b9cf4
   src/types/bigint.ts:
@@ -2581,7 +2583,7 @@ examples:
           workspace_id: "tnt_01JA2Z8K6Q4V7W9XBCDEFGHJKM"
       responses:
         "200":
-          application/json: {"workspace_id": "tnt_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "from": "2026-10-22", "to": "2026-10-23", "items": [{"environment": "live", "day": "2026-10-22", "metric": "assessments", "flow": "login", "depth": "quick", "count": 412}, {"environment": "live", "day": "2026-10-22", "metric": "assessments", "flow": "account_creation", "depth": "full", "count": 96}, {"environment": "live", "day": "2026-10-22", "metric": "webhook_deliveries", "count": 508}, {"environment": "live", "day": "2026-10-23", "metric": "assessments", "flow": "account_creation", "depth": "full", "count": 101}, {"environment": "live", "day": "2026-10-23", "metric": "key_usage_events", "count": 2330}, {"environment": "test", "day": "2026-10-23", "metric": "assessments", "flow": "purchase", "depth": "full", "count": 7}]}
+          application/json: {"workspace_id": "tnt_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "from": "2026-10-22", "to": "2026-10-23", "items": [{"environment": "live", "day": "2026-10-22", "metric": "assessments", "flow": "login", "depth": "quick", "count": 412}, {"environment": "live", "day": "2026-10-22", "metric": "assessments", "flow": "account_creation", "depth": "full", "count": 96}, {"environment": "live", "day": "2026-10-22", "metric": "webhook_deliveries", "count": 508}, {"environment": "live", "day": "2026-10-23", "metric": "assessments", "flow": "account_creation", "depth": "full", "count": 101}, {"environment": "live", "day": "2026-10-23", "metric": "key_usage_events", "count": 2330}, {"environment": "test", "day": "2026-10-23", "metric": "assessments", "flow": "purchase", "depth": "full", "count": 7}], "console_lookups": {"used": 12, "limit": 50, "resets_at": "2026-10-24T00:00:00.000Z"}}
   createInvite:
     open:
       parameters:

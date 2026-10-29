@@ -190,7 +190,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "get_workspace_usage",
-    "description": "Read a workspace's usage.\n\nRead daily usage units for the environments you can access. These counts are unpriced."
+    "description": "Read a workspace's usage.\n\nRead daily usage units for the environments you can access. These counts are unpriced. With live access it also returns the daily console lookup cap: used, limit and resets_at."
   },
   {
     "name": "list_invites",

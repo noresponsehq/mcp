@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0
+
+* `SDK.usage.get()`:  `response.console_lookups` **Added**
+
 ## 0.6.17
 
 * `SDK.assessments.create()`:  `response.code` **Changed** (Breaking ⚠️)
