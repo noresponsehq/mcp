@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.10.2
+
+* `SDK.assessments.create()`:  `response.account.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.account.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.items[].risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.assessments.aggregate()`: 
+  *  `request.reason.enum(no_email_matches)` **Added**
+  *  `response.buckets[].groups[].reason.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.assessments.search()`: 
+  *  `request.reason.enum(no_email_matches)` **Added**
+  *  `response.items[].detail.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.assessments.retrieveVersion()`:  `response.detail.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response.items[].risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.items[].risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.accounts.retrieveDecision()`:  `response.account.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.accounts.export()`:  `response.assessments[].detail.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.accounts.listDecisions()`:  `response.items[].account.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.accounts.search()`:  `response.items[].latest.detail.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+* `SDK.requests.list()`:  `response.items[].decision.account.risk.reasons[].code.enum(no_email_matches)` **Added** (Breaking ⚠️)
+
 ## 0.10.1
 
 * `SDK.accounts.search()`: **Added**

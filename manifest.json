@@ -40,7 +40,7 @@
       "type": "string"
     }
   },
-  "version": "0.10.1",
+  "version": "0.10.2",
   "tools": [
     {
       "name": "create_assessment",

@@ -37,7 +37,7 @@ export const Risk$zodSchema: z.ZodType<Risk> = z.object({
     "How much of the planned evidence answered; it says nothing about risk.",
   ),
   coverage: RiskCoverage$zodSchema.describe(
-    "Sources counted by state, not named.",
+    "Counts of planned source-identifier pairs by evidence outcome, deduplicated across signals and incomplete entries. These counts do not measure identity agreement or prove that processing is still running. A lane that was not searched is not an answered source.",
   ),
   details: RiskDetails$zodSchema.optional().describe(
     "Detailed view only (response_mode=detailed, which needs the detailed scope); a standard answer leaves it out. Merged observations without provider, source, origin, raw breach record, value or score.",

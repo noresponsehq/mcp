@@ -65,7 +65,7 @@ export const AssessmentDetail$zodSchema: z.ZodType<AssessmentDetail> = z.object(
       "The identity fields of the auth context the assessment was made with, echoed for the workspace's own correlation: the request's auth_context, or the one a hosted provider hook (POST /hooks/{integration_id}) built, with transport provider_hook and its hook_point. Present exactly when the request carried an auth_context, and the same on every revision of the assessment. Values are as the request or the hook sent them; tokens, timestamps, roles and scopes are not echoed, and the echo does not change the score.",
     ),
     confidence: Confidence$zodSchema.describe(
-      "Ordinal confidence in the recommendation under the current policy: low, medium, high or unavailable.",
+      "Evidence coverage: how much of the planned source evidence gave a definite answer. This is not confidence that an identity is genuine, agreement between identifiers, a risk score or a probability. unavailable means no usable evidence answered; a terminal uncovered assessment can have this value and recommend review.",
     ),
     created_at: z.string().describe(
       "When the assessment was created. Fixed for the life of the assessment: every revision carries the same created_at.",
@@ -103,7 +103,7 @@ export const AssessmentDetail$zodSchema: z.ZodType<AssessmentDetail> = z.object(
       "Detailed view only (response_mode=detailed, which needs the detailed scope): a standard answer omits signals[], and a detailed one always carries it, possibly empty. The body does not name its mode, so that rule is the serving gate's; the schema states the half it can: an answer with risk.details is a detailed view and carries signals[]. At most one signal per (type, source_id, identifier).",
     ),
     status: Status$zodSchema.describe(
-      "complete: final; nothing is still running. A lane that failed or missed its 10 s deadline stays listed in incomplete_sources, and confidence is lower. partial: a recommendation exists and at least one lane is still running or did not settle (see incomplete_sources). pending: nothing usable before the deadline; no recommendation yet, poll or wait for the webhook.",
+      "Processing state, separate from evidence coverage. complete: final; nothing is still running, but unsupported, failed or unanswered lanes remain in incomplete_sources. partial: a recommendation exists and evidence is incomplete; assessment_url identifies continuing work when present. pending: no recommendation yet; poll or wait for the webhook. Finished processing does not mean all sources answered.",
     ),
     timing: AssessmentDetailTiming$zodSchema,
     updated_at: z.string(),
