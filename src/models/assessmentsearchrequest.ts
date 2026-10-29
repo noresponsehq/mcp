@@ -18,6 +18,7 @@ export type AssessmentSearchRequest = {
   from: string;
   to: string;
   account_id?: string | undefined;
+  email?: string | undefined;
   flow?: Flow | undefined;
   status?: Status | undefined;
   recommendation?: Recommendation | undefined;
@@ -35,6 +36,7 @@ export type AssessmentSearchRequest = {
   score_min?: number | undefined;
   score_max?: number | undefined;
   list_match?: ListMatch | undefined;
+  changed?: boolean | undefined;
 };
 
 export const AssessmentSearchRequest$zodSchema: z.ZodType<
@@ -45,12 +47,18 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
   ),
   asn: z.int().optional(),
   band: Band$zodSchema.optional(),
+  changed: z.boolean().optional().describe(
+    "true returns only assessments whose latest stored revision's decision differs from their first answer's decision (see decision); false only the others. An assessment whose first answer or latest revision has no decision yet is not changed. Cannot be combined with revision first.",
+  ),
   country: z.string().optional(),
   cursor: z.string().optional().describe(
     "Opaque, expiring cursor bound to this environment, operation and every filter. Keep the filters unchanged.",
   ),
   decision: Decision$zodSchema.optional().describe(
     "An assessment's own decision: block when its stored risk.block is true, otherwise its recommendation. It is not the account's decision or held-admission state.",
+  ),
+  email: z.string().optional().describe(
+    "Assessments of every account that one of its retained admitted assessments sent this mailbox as identifiers.email, matched as lists match an email entry: case-insensitive, a +tag removed and, at gmail.com and googlemail.com, the dots of the local part ignored. Only assessments stored since email list matching began carry the mailbox. An address that is not a valid mailbox is refused with 400.",
   ),
   flow: Flow$zodSchema.optional().describe(
     "The event an assessment is made for: account_creation (a user creates an account), login (a user returns to an existing account) or purchase (a payment or a credit grant). The account's risk is reported with the decision for this flow.",
