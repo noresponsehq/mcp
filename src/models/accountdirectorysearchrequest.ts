@@ -4,6 +4,7 @@ import * as z from "zod";
  * Bounded distinct-account search for a single authenticated workspace/environment. Email matches any retained admitted assessment of an account, using assessment search's canonical mailbox rules. No assessment history download is required.
  */
 export type AccountDirectorySearchRequest = {
+  needs_action?: boolean | undefined;
   account_id?: string | undefined;
   email?: string | undefined;
   limit?: number | undefined;
@@ -23,6 +24,9 @@ export const AccountDirectorySearchRequest$zodSchema: z.ZodType<
     "Assessments of every account that one of its retained admitted assessments sent this mailbox as identifiers.email, matched as lists match an email entry: case-insensitive, a +tag removed and, at gmail.com and googlemail.com, the dots of the local part ignored. Only assessments stored since email list matching began carry the mailbox. An address that is not a valid mailbox is refused with 400.",
   ),
   limit: z.int().default(25),
+  needs_action: z.boolean().default(false).describe(
+    "Select accounts with a retained open or in-progress review, or a current review/block account decision with no retained effective account outcome. The server applies this filter before counting and pagination. Requires reviews.read as well as history.read for console members; API keys additionally require management.",
+  ),
 }).describe(
   "Bounded distinct-account search for a single authenticated workspace/environment. Email matches any retained admitted assessment of an account, using assessment search's canonical mailbox rules. No assessment history download is required.",
 );

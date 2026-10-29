@@ -3,6 +3,7 @@ import { Priority, Priority$zodSchema } from "./priority.js";
 import { ReviewStatus, ReviewStatus$zodSchema } from "./reviewstatus.js";
 
 export type Filter = {
+  account_id?: string | undefined;
   status?: ReviewStatus | undefined;
   priority?: Priority | undefined;
   assignee?: string | undefined;
@@ -11,6 +12,9 @@ export type Filter = {
 };
 
 export const Filter$zodSchema: z.ZodType<Filter> = z.object({
+  account_id: z.string().optional().describe(
+    "Only reviews of this exact account in the authenticated workspace and environment. Applied before pagination.",
+  ),
   assignee: z.string().optional(),
   assignee_principal_id: z.string().optional(),
   priority: Priority$zodSchema.optional(),

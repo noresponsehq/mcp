@@ -29,10 +29,14 @@ export type ListReviewsRequest = {
   assignee?: string | undefined;
   unassigned?: boolean | undefined;
   assignee_principal_id?: string | undefined;
+  account_id?: string | undefined;
 };
 
 export const ListReviewsRequest$zodSchema: z.ZodType<ListReviewsRequest> = z
   .object({
+    account_id: z.string().describe(
+      "Only reviews of this exact account in the authenticated workspace and environment. Applied before pagination and bound into the cursor.",
+    ).optional(),
     assignee: z.string().optional(),
     assignee_principal_id: z.string().describe(
       "Filter by immutable member ID. Mutually exclusive with assignee and unassigned=true.",

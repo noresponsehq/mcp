@@ -30,7 +30,7 @@ export enum ListAcceptEnum {
  * List retained account reviews.
  *
  * @remarks
- * List retained investigation reviews using filters and an authenticated cursor.
+ * List retained investigation reviews using filters and an authenticated cursor. Optional account_id selects one exact account in this environment before pagination. All filters are bound into the cursor.
  */
 export function reviewsList(
   client$: NoResponseCore,
@@ -101,6 +101,7 @@ async function $do(
     pathParams$,
   );
   const query$ = encodeFormQuery({
+    "account_id": payload$.account_id,
     "assignee": payload$.assignee,
     "assignee_principal_id": payload$.assignee_principal_id,
     "cursor": payload$.cursor,

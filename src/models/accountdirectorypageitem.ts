@@ -1,11 +1,24 @@
 import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
 import { Account, Account$zodSchema } from "./account.js";
 import {
   AssessmentRevision,
   AssessmentRevision$zodSchema,
 } from "./assessmentrevision.js";
 
+export const WaitingFor = {
+  Outcome: "outcome",
+  Review: "review",
+} as const;
+export type WaitingFor = ClosedEnum<typeof WaitingFor>;
+
+export const WaitingFor$zodSchema = z.enum([
+  "outcome",
+  "review",
+]);
+
 export type AccountDirectoryPageItem = {
+  waiting_for?: Array<WaitingFor> | undefined;
   account_id: string;
   latest: AssessmentRevision;
   current?: Account | undefined;
@@ -26,5 +39,8 @@ export const AccountDirectoryPageItem$zodSchema: z.ZodType<
   ),
   latest: AssessmentRevision$zodSchema.describe(
     "Retrieve a retained assessment version with its original decision, policy, flow and depth. This response excludes the current account decision. Current retention and response-mode permissions still apply.",
+  ),
+  waiting_for: z.array(WaitingFor$zodSchema).optional().describe(
+    "Present for needs_action searches. outcome means a current review/block decision lacks a retained effective outcome; review means a retained open or in-progress review. Both can apply.",
   ),
 });
