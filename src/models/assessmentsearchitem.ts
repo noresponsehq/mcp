@@ -6,6 +6,10 @@ import {
 import { Decision, Decision$zodSchema } from "./decision.js";
 import { Depth, Depth$zodSchema } from "./depth.js";
 import { Flow, Flow$zodSchema } from "./flow.js";
+import {
+  IdentifierMatch,
+  IdentifierMatch$zodSchema,
+} from "./identifiermatch.js";
 import { Status, Status$zodSchema } from "./status.js";
 
 /**
@@ -19,6 +23,7 @@ export type AssessmentSearchItem = {
   depth: Depth;
   detail: AssessmentDetail;
   first_decision?: Decision | undefined;
+  matched_identifier?: IdentifierMatch | undefined;
 };
 
 export const AssessmentSearchItem$zodSchema: z.ZodType<AssessmentSearchItem> = z
@@ -37,6 +42,9 @@ export const AssessmentSearchItem$zodSchema: z.ZodType<AssessmentSearchItem> = z
     ),
     id: z.string().describe(
       "This assessment's id, equal to detail.assessment_id.",
+    ),
+    matched_identifier: IdentifierMatch$zodSchema.optional().describe(
+      "Why this result matched a typed identifier search. value is the original value submitted in assessment_id. Provenance records a customer submission, not a source discovery or verified ownership. Equality is deterministic and has no inferred confidence score. An account result names its newest retained matching assessment, which can differ from latest.",
     ),
     schema_version: z.literal("1").default("1").optional().describe(
       "Version of the body shape.",

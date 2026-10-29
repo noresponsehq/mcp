@@ -5,6 +5,10 @@ import {
   AssessmentRevision,
   AssessmentRevision$zodSchema,
 } from "./assessmentrevision.js";
+import {
+  IdentifierMatch,
+  IdentifierMatch$zodSchema,
+} from "./identifiermatch.js";
 
 export const WaitingFor = {
   Outcome: "outcome",
@@ -23,6 +27,7 @@ export type AccountDirectoryPageItem = {
   latest: AssessmentRevision;
   current?: Account | undefined;
   assessments: number;
+  matched_identifier?: IdentifierMatch | undefined;
 };
 
 export const AccountDirectoryPageItem$zodSchema: z.ZodType<
@@ -39,6 +44,9 @@ export const AccountDirectoryPageItem$zodSchema: z.ZodType<
   ),
   latest: AssessmentRevision$zodSchema.describe(
     "Retrieve a retained assessment version with its original decision, policy, flow and depth. This response excludes the current account decision. Current retention and response-mode permissions still apply.",
+  ),
+  matched_identifier: IdentifierMatch$zodSchema.optional().describe(
+    "Why this result matched a typed identifier search. value is the original value submitted in assessment_id. Provenance records a customer submission, not a source discovery or verified ownership. Equality is deterministic and has no inferred confidence score. An account result names its newest retained matching assessment, which can differ from latest.",
   ),
   waiting_for: z.array(WaitingFor$zodSchema).optional().describe(
     "Present for needs_action searches. outcome means a current review/block decision lacks a retained effective outcome; review means a retained open or in-progress review. Both can apply.",
