@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.11.5
+
+* `SDK.assessments.create()`:  `response.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.aggregate()`: 
+  *  `request.reason` **Changed**
+  *  `response.buckets[].groups[].reason` **Changed** (Breaking ⚠️)
+* `SDK.assessments.search()`: 
+  *  `request.reason` **Changed**
+  *  `response.items[].detail.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.retrieveVersion()`:  `response.detail.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.retrieveDecision()`:  `response.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.export()`:  `response.assessments[].detail.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listDecisions()`:  `response.items[].account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.search()`:  `response.items[].latest.detail.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.settings.get()`:  `response.refused_sources[].enum(google)` **Added** (Breaking ⚠️)
+* `SDK.settings.update()`: 
+  *  `request.body.refused_sources[].enum(google)` **Added**
+  *  `response.refused_sources[].enum(google)` **Added** (Breaking ⚠️)
+* `SDK.settings.listHistory()`:  `response.items[].settings.refused_sources[].enum(google)` **Added** (Breaking ⚠️)
+* `SDK.settings.restore()`:  `response.refused_sources[].enum(google)` **Added** (Breaking ⚠️)
+* `SDK.requests.list()`:  `response.items[].decision.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.evaluations.publish()`:  `response.refused_sources[].enum(google)` **Added** (Breaking ⚠️)
+
 ## 0.11.4
 
 * `SDK.assessments.create()`:  `response.detail.risk.details.accounts` **Added**
