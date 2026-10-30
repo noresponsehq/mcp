@@ -87,3 +87,21 @@ Each [release](https://github.com/noresponsehq/mcp/releases) attaches `norespons
 ## Licence
 
 Apache-2.0. See [LICENSE](LICENSE).
+
+
+## Combine submitted identifiers
+
+Search accounts and assessments with explicit AND/OR combinations of submitted
+email, phone and customer-namespace username terms. Use `IdentifierExpression`
+and its required `scope`: `assessment` requires one submission to satisfy the
+whole expression; `account` can combine different retained submissions of the
+same account and is accepted only by account search. Pass the wire shape under `request.identifier_expression` to `search_accounts` or `search_assessments`.
+
+Expressions have at most eight raw terms and three group levels. The original
+exact, canonical and explicit mailbox matching rules still apply to each term.
+Expression results contain indexed `IdentifierTermMatch` records with the
+original submitted value and originating assessment, separate from current
+account risk. Single-identifier and legacy email filters retain their behavior.
+
+See the [combined-search contract and examples](https://docs.noresponse.org/reference/investigation#combine-submitted-identifiers)
+for the expression shape, scope differences, permissions and pagination.

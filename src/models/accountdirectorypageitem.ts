@@ -9,6 +9,10 @@ import {
   IdentifierMatch,
   IdentifierMatch$zodSchema,
 } from "./identifiermatch.js";
+import {
+  IdentifierTermMatch,
+  IdentifierTermMatch$zodSchema,
+} from "./identifiertermmatch.js";
 
 export const WaitingFor = {
   Outcome: "outcome",
@@ -28,6 +32,7 @@ export type AccountDirectoryPageItem = {
   current?: Account | undefined;
   assessments: number;
   matched_identifier?: IdentifierMatch | undefined;
+  matched_identifiers?: Array<IdentifierTermMatch> | undefined;
 };
 
 export const AccountDirectoryPageItem$zodSchema: z.ZodType<
@@ -48,6 +53,10 @@ export const AccountDirectoryPageItem$zodSchema: z.ZodType<
   matched_identifier: IdentifierMatch$zodSchema.optional().describe(
     "Why this result matched a typed identifier search. value is the original value submitted in assessment_id. Provenance records a customer submission, not a source discovery or verified ownership. Equality is deterministic and has no inferred confidence score. An account result names its newest retained matching assessment, which can differ from latest.",
   ),
+  matched_identifiers: z.array(IdentifierTermMatch$zodSchema).optional()
+    .describe(
+      "Present only for identifier_expression. All satisfied unique terms, ordered by term_index, with original submitted values and retained assessment witnesses. A duplicate normalized term appears once at its first raw leaf index. The legacy single identifier filter instead returns matched_identifier.",
+    ),
   waiting_for: z.array(WaitingFor$zodSchema).optional().describe(
     "Present for needs_action searches. outcome means a current review/block decision lacks a retained effective outcome; review means a retained open or in-progress review. Both can apply.",
   ),

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.11.0
+
+* `SDK.assessments.search()`: 
+  *  `request.identifier_expression` **Added**
+  *  `response.items[].matched_identifiers` **Added**
+* `SDK.accounts.search()`: 
+  *  `request.identifier_expression` **Added**
+  *  `response.items[].matched_identifiers` **Added**
+
 ## 0.10.4
 
 * `SDK.assessments.search()`: 

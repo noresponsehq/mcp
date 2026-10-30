@@ -4,6 +4,10 @@ import { Band, Band$zodSchema } from "./band.js";
 import { Decision, Decision$zodSchema } from "./decision.js";
 import { Flow, Flow$zodSchema } from "./flow.js";
 import {
+  IdentifierExpression,
+  IdentifierExpression$zodSchema,
+} from "./identifierexpression.js";
+import {
   IdentifierSearch,
   IdentifierSearch$zodSchema,
 } from "./identifiersearch.js";
@@ -16,7 +20,7 @@ import { ResponseMode, ResponseMode$zodSchema } from "./responsemode.js";
 import { Status, Status$zodSchema } from "./status.js";
 
 /**
- * Search retained assessments created in [from,to), at most 366 days. identifier matches the submitted value of each returned assessment directly. The legacy email filter keeps its account-wide mailbox semantics and cannot be combined with identifier. Other filters combine using AND and describe assessment decisions, separate from current account decisions. Results use newest-created order with an assessment-ID tie break and are live, not a snapshot across pages. Requires history or investigate authority; identifier/email filtering also requires identifier-read permission. Detailed response mode additionally requires detailed permission. No Idempotency-Key.
+ * Search retained assessments created in [from,to), at most 366 days. identifier matches the submitted value of each returned assessment directly. The legacy email filter keeps its account-wide mailbox semantics and cannot be combined with identifier. Other filters combine using AND and describe assessment decisions, separate from current account decisions. Results use newest-created order with an assessment-ID tie break and are live, not a snapshot across pages. Requires history or investigate authority; identifier, identifier_expression and email filtering also require identifier-read permission. Detailed response mode additionally requires detailed permission. No Idempotency-Key. identifier_expression requires scope assessment and matches the complete expression within each returned submission; account scope returns 400 invalid_request. At most 8 raw terms and 3 group levels. Mutually exclusive with identifier and email.
  */
 export type AssessmentSearchRequest = {
   from: string;
@@ -42,6 +46,7 @@ export type AssessmentSearchRequest = {
   list_match?: ListMatch | undefined;
   changed?: boolean | undefined;
   identifier?: IdentifierSearch | undefined;
+  identifier_expression?: IdentifierExpression | undefined;
 };
 
 export const AssessmentSearchRequest$zodSchema: z.ZodType<
@@ -57,7 +62,7 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
   ),
   country: z.string().optional(),
   cursor: z.string().optional().describe(
-    "Opaque, expiring cursor bound to this environment, operation and every filter. Keep the filters unchanged.",
+    "Opaque, expiring cursor bound to workspace, environment, operation and all filters, including expression scope, ordered structure and original term values. Keep grouping, operand order, matching modes and values unchanged; an omitted match is equivalent to exact. The page limit may change.",
   ),
   decision: Decision$zodSchema.optional().describe(
     "An assessment's own decision: block when its stored risk.block is true, otherwise its recommendation. It is not the account's decision or held-admission state.",
@@ -71,6 +76,9 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
   from: z.string(),
   identifier: IdentifierSearch$zodSchema.optional().describe(
     "One customer-submitted identifier. Defaults to exact comparison of the original submitted value. canonical uses the supported identifier normalisation without an ownership claim: email preserves local-part case, NFC-normalises it and lowercases the domain without removing dots or tags; phone uses international E.164 without extensions or an inferred region; username uses NFC and Unicode case folding within the customer namespace. mailbox is email-only and explicitly selects existing list rules: case-insensitive, remove +tag, and ignore local-part dots at gmail.com and googlemail.com; googlemail.com maps to gmail.com. Username requires namespace customer. Email and phone forbid namespace. Source-discovered identifiers and platform handles are not searched. Unsupported kinds, namespaces, modes and invalid values return 400. Search equality does not establish verified ownership or merge accounts.",
+  ),
+  identifier_expression: IdentifierExpression$zodSchema.optional().describe(
+    "A bounded AND/OR expression over submitted identifiers. Required scope assessment means the entire expression must match one retained assessment. Scope account permits each term to match a different retained assessment of the same account and is accepted only by account search. Exactly one of term, and or or is allowed at every node. Groups contain 2 to 8 operands, with at most 3 nested group levels and 8 raw term occurrences over the entire expression. A root term is allowed. Duplicate terms with the same kind, match rule, namespace and normalized comparison are idempotent, but count toward the raw limit. Match rules default to exact and preserve the existing identifier contract. Only retained submitted identifiers can satisfy a term. Unknown fields, unsupported scopes and malformed or oversized expressions return 400 invalid_request.",
   ),
   impact: Impact$zodSchema.optional().describe(
     "The selected reason's served impact band. Requires reason.",
@@ -105,5 +113,5 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
   ),
   to: z.string(),
 }).describe(
-  "Search retained assessments created in [from,to), at most 366 days. identifier matches the submitted value of each returned assessment directly. The legacy email filter keeps its account-wide mailbox semantics and cannot be combined with identifier. Other filters combine using AND and describe assessment decisions, separate from current account decisions. Results use newest-created order with an assessment-ID tie break and are live, not a snapshot across pages. Requires history or investigate authority; identifier/email filtering also requires identifier-read permission. Detailed response mode additionally requires detailed permission. No Idempotency-Key.",
+  "Search retained assessments created in [from,to), at most 366 days. identifier matches the submitted value of each returned assessment directly. The legacy email filter keeps its account-wide mailbox semantics and cannot be combined with identifier. Other filters combine using AND and describe assessment decisions, separate from current account decisions. Results use newest-created order with an assessment-ID tie break and are live, not a snapshot across pages. Requires history or investigate authority; identifier, identifier_expression and email filtering also require identifier-read permission. Detailed response mode additionally requires detailed permission. No Idempotency-Key. identifier_expression requires scope assessment and matches the complete expression within each returned submission; account scope returns 400 invalid_request. At most 8 raw terms and 3 group levels. Mutually exclusive with identifier and email.",
 );

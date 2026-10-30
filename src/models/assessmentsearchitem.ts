@@ -10,6 +10,10 @@ import {
   IdentifierMatch,
   IdentifierMatch$zodSchema,
 } from "./identifiermatch.js";
+import {
+  IdentifierTermMatch,
+  IdentifierTermMatch$zodSchema,
+} from "./identifiertermmatch.js";
 import { Status, Status$zodSchema } from "./status.js";
 
 /**
@@ -24,6 +28,7 @@ export type AssessmentSearchItem = {
   detail: AssessmentDetail;
   first_decision?: Decision | undefined;
   matched_identifier?: IdentifierMatch | undefined;
+  matched_identifiers?: Array<IdentifierTermMatch> | undefined;
 };
 
 export const AssessmentSearchItem$zodSchema: z.ZodType<AssessmentSearchItem> = z
@@ -46,6 +51,10 @@ export const AssessmentSearchItem$zodSchema: z.ZodType<AssessmentSearchItem> = z
     matched_identifier: IdentifierMatch$zodSchema.optional().describe(
       "Why this result matched a typed identifier search. value is the original value submitted in assessment_id. Provenance records a customer submission, not a source discovery or verified ownership. Equality is deterministic and has no inferred confidence score. An account result names its newest retained matching assessment, which can differ from latest.",
     ),
+    matched_identifiers: z.array(IdentifierTermMatch$zodSchema).optional()
+      .describe(
+        "Present only for identifier_expression. All satisfied unique terms, ordered by term_index, with original submitted values and retained assessment witnesses. A duplicate normalized term appears once at its first raw leaf index. The legacy single identifier filter instead returns matched_identifier.",
+      ),
     schema_version: z.literal("1").default("1").optional().describe(
       "Version of the body shape.",
     ),
