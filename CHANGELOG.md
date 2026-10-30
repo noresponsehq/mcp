@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.2
+
+* `SDK.accounts.listLinked()`: **Added**
+
 ## 0.11.1
 
 * `SDK.assessments.create()`:  `response.code` **Changed** (Breaking ⚠️)

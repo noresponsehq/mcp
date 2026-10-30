@@ -24,6 +24,7 @@ import { tool$accountsListChanged } from "./tools/accountsListChanged.js";
 import { tool$accountsListCredentials } from "./tools/accountsListCredentials.js";
 import { tool$accountsListDecisions } from "./tools/accountsListDecisions.js";
 import { tool$accountsListEnforcements } from "./tools/accountsListEnforcements.js";
+import { tool$accountsListLinked } from "./tools/accountsListLinked.js";
 import { tool$accountsListOutcomes } from "./tools/accountsListOutcomes.js";
 import { tool$accountsRecordEnforcement } from "./tools/accountsRecordEnforcement.js";
 import { tool$accountsRecordOutcome } from "./tools/accountsRecordOutcome.js";
@@ -123,7 +124,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.11.1",
+    version: "0.11.2",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -181,6 +182,7 @@ export function createMCPServer(deps: {
   tool(tool$accountsGet);
   tool(tool$accountsDelete);
   tool(tool$accountsListAssessments);
+  tool(tool$accountsListLinked);
   tool(tool$accountsRecordEnforcement);
   tool(tool$accountsListEnforcements);
   tool(tool$accountsRecordOutcome);

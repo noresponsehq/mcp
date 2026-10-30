@@ -52,6 +52,12 @@
     "idempotentHint": true
   },
   {
+    "name": "list_linked_accounts",
+    "title": "List accounts that share a submitted identifier",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
     "name": "record_enforcement",
     "title": "Record an enforcement of an account",
     "idempotentHint": true
