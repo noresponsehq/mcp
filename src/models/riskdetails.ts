@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { Breach, Breach$zodSchema } from "./breach.js";
+import { OnlineAccount, OnlineAccount$zodSchema } from "./onlineaccount.js";
 import {
   RiskDetailsBreachName,
   RiskDetailsBreachName$zodSchema,
@@ -21,9 +22,13 @@ export type RiskDetails = {
   breaches?: Array<Breach> | undefined;
   breach_names?: Array<RiskDetailsBreachName> | undefined;
   events?: Array<RiskDetailsEvent> | undefined;
+  accounts?: Array<OnlineAccount> | undefined;
 };
 
 export const RiskDetails$zodSchema: z.ZodType<RiskDetails> = z.object({
+  accounts: z.array(OnlineAccount$zodSchema).optional().describe(
+    "Every online-account search of the email or username: the platform, what the search came to and, for an account found, what the platform returned beside it. Found first, then not found, then searches that failed or are still running, each by platform name; at most 64. A failed or running search keeps its own outcome and is not reported as not_found.",
+  ),
   breach_names: z.array(RiskDetailsBreachName$zodSchema).optional().describe(
     "Names found next to the identifiers in breach records, merged, with the number of distinct tables each was seen in and the sites of those tables.",
   ),
