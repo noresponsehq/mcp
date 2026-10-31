@@ -16,6 +16,8 @@ export type Risk = {
   recommendation: Recommendation;
   block?: boolean | undefined;
   block_threshold?: number | undefined;
+  step_up_threshold?: number | undefined;
+  review_threshold?: number | undefined;
   confidence: RiskConfidence;
   policy_version: string;
   policy_basis?: "heuristic_unvalidated" | undefined;
@@ -56,7 +58,13 @@ export const Risk$zodSchema: z.ZodType<Risk> = z.object({
   recommendation: Recommendation$zodSchema.describe(
     "The recommended action: allow, step_up or review. Your application applies it.",
   ),
+  review_threshold: z.int().optional().describe(
+    "The score at which this answer's flow starts to recommend review. An answer nothing answered recommends review below it, with confidence unavailable. Absent from an answer stored before it was recorded.",
+  ),
   score: z.int(),
+  step_up_threshold: z.int().optional().describe(
+    "The score at which this answer's flow starts to recommend step_up. Absent from an answer stored before it was recorded.",
+  ),
   summary: RiskSummary$zodSchema.optional().describe(
     "A few typed facts per identifier. Every fact is optional: absent means the evidence did not answer and makes no claim, while false or 0 is a definite answer. Lanes that do not exist yet leave their members absent.",
   ),

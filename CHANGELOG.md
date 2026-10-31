@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.11.8
+
+* `SDK.assessments.create()`:  `response.detail.risk` **Changed**
+* `SDK.assessments.get()`:  `response.detail.risk` **Changed**
+* `SDK.assessments.query()`:  `response.items[].risk` **Changed**
+* `SDK.assessments.search()`:  `response.items[].detail.risk` **Changed**
+* `SDK.assessments.retrieveVersion()`:  `response.detail.risk` **Changed**
+* `SDK.accounts.listAssessments()`:  `response.items[].risk` **Changed**
+* `SDK.accounts.export()`:  `response.assessments[].detail.risk` **Changed**
+* `SDK.accounts.search()`:  `response.items[].latest.detail.risk` **Changed**
+
 ## 0.11.7
 
 No changes detected.
