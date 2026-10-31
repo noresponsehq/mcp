@@ -64,6 +64,8 @@ export const ReasonCode = {
   NationalityMismatch: "nationality_mismatch",
   MinorIdentity: "minor_identity",
   ReportedAccountAbuse: "reported_account_abuse",
+  BreachCityMatch: "breach_city_match",
+  BreachCityMismatch: "breach_city_mismatch",
 } as const;
 /**
  * A stable reason code. New codes may appear; ignore any you do not know.
@@ -130,6 +132,8 @@ export const ReasonCode$zodSchema = z.enum([
   "nationality_mismatch",
   "minor_identity",
   "reported_account_abuse",
+  "breach_city_match",
+  "breach_city_mismatch",
 ]).describe(
   "A stable reason code. New codes may appear; ignore any you do not know.",
 );

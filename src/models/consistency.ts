@@ -17,7 +17,7 @@ export type Consistency = {
 
 export const Consistency$zodSchema: z.ZodType<Consistency> = z.object({
   country: Country$zodSchema.optional().describe(
-    "IP country, phone country, breach countries and policy_context.region together.",
+    "IP country, phone country, breach countries and policy_context.region together. When the breach records give a country, the timezone and locale countries count too. The IP country of a proxy or hosting network does not count.",
   ),
   ip: ConsistencyValue$zodSchema.optional().describe(
     "How a submitted identifier agrees with what the evidence holds for the other identifiers. unknown is a definite 'cannot tell' (for example a truncated or too-common breach result); absent means the comparison was not made.",

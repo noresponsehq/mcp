@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.11.10
+
+* `SDK.assessments.create()`:  `response.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.get()`:  `response.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.query()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.aggregate()`: 
+  *  `request.reason` **Changed**
+  *  `response.buckets[].groups[].reason` **Changed** (Breaking ⚠️)
+* `SDK.assessments.search()`: 
+  *  `request.reason` **Changed**
+  *  `response.items[].detail.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.assessments.retrieveVersion()`:  `response.detail.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listChanged()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.get()`:  `response.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listAssessments()`:  `response.items[].risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.retrieveDecision()`:  `response.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.export()`:  `response.assessments[].detail.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.listDecisions()`:  `response.items[].account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.accounts.search()`:  `response.items[].latest.detail.risk.reasons[].code` **Changed** (Breaking ⚠️)
+* `SDK.requests.list()`:  `response.items[].decision.account.risk.reasons[].code` **Changed** (Breaking ⚠️)
+
 ## 0.11.9
 
 * `SDK.assessments.create()`:  `response.detail.risk.details.breaches[].conduct` **Added**
