@@ -10,7 +10,7 @@ export const tool$reviewsList: ToolDefinition<typeof args> = {
   name: "list_reviews",
   description: `List retained account reviews.
 
-List retained investigation reviews using filters and an authenticated cursor. Optional account_id selects one exact account in this environment before pagination. All filters are bound into the cursor.`,
+List retained investigation reviews using filters and an authenticated cursor. Use reviews.query to filter by account_id in a JSON body. All filters are bound into the cursor.`,
   annotations: {
     "title": "List retained account investigations",
     "destructiveHint": false,

@@ -347,6 +347,12 @@
     "idempotentHint": true
   },
   {
+    "name": "query_reviews",
+    "title": "Query retained account investigations with private body filters",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
     "name": "list_reviews",
     "title": "List retained account investigations",
     "readOnlyHint": true,

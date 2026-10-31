@@ -262,7 +262,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "list_reviews",
-    "description": "List retained account reviews.\n\nList retained investigation reviews using filters and an authenticated cursor. Optional account_id selects one exact account in this environment before pagination. All filters are bound into the cursor."
+    "description": "List retained account reviews.\n\nList retained investigation reviews using filters and an authenticated cursor. Use reviews.query to filter by account_id in a JSON body. All filters are bound into the cursor."
   },
   {
     "name": "create_review",
@@ -323,6 +323,10 @@ export const toolNames: Array<{ name: string; description: string }>= [
   {
     "name": "delete_review_subject",
     "description": "Remove a linked subject using the current review version.\n\nRemove a subject link with the expected review version. The linked account, assessment or key association remains unchanged."
+  },
+  {
+    "name": "query_reviews",
+    "description": "Query retained reviews without identifiers in URLs.\n\nQuery retained investigation reviews using a JSON body, including an exact account_id filter. All filters are bound into the cursor."
   },
   {
     "name": "get_erasure_receipt",

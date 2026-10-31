@@ -93,6 +93,7 @@ import { tool$reviewsListComments } from "./tools/reviewsListComments.js";
 import { tool$reviewsListResolutions } from "./tools/reviewsListResolutions.js";
 import { tool$reviewsListSubjects } from "./tools/reviewsListSubjects.js";
 import { tool$reviewsListViews } from "./tools/reviewsListViews.js";
+import { tool$reviewsQuery } from "./tools/reviewsQuery.js";
 import { tool$reviewsResolve } from "./tools/reviewsResolve.js";
 import { tool$reviewsUpdate } from "./tools/reviewsUpdate.js";
 import { tool$reviewsUpdateView } from "./tools/reviewsUpdateView.js";
@@ -124,7 +125,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.11.5",
+    version: "0.11.6",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -250,6 +251,7 @@ export function createMCPServer(deps: {
   tool(tool$reviewsListSubjects);
   tool(tool$reviewsAddSubject);
   tool(tool$reviewsDeleteSubject);
+  tool(tool$reviewsQuery);
   tool(tool$erasuresGet);
   tool(tool$exportsCreate);
   tool(tool$exportsList);
