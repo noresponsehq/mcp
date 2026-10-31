@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { BreachConduct, BreachConduct$zodSchema } from "./breachconduct.js";
 import { BreachExposed, BreachExposed$zodSchema } from "./breachexposed.js";
 import { BreachKind, BreachKind$zodSchema } from "./breachkind.js";
 import { BreachSelector, BreachSelector$zodSchema } from "./breachselector.js";
@@ -15,11 +16,15 @@ export type Breach = {
   month?: number | undefined;
   matched_on: BreachSelector;
   exposed?: Array<BreachExposed> | undefined;
+  conduct?: Array<BreachConduct> | undefined;
 };
 
 export const Breach$zodSchema: z.ZodType<Breach> = z.object({
   category: z.string().optional().describe(
     "The table's category from its name, lower case (social, gaming, combolist, ...).",
+  ),
+  conduct: z.array(BreachConduct$zodSchema).optional().describe(
+    "What this table's rows record against the matched email or username: the tables behind the forum_sanctioned and prior_payment_abuse reasons. Absent when the rows record none, for a table matched on an IP address, and from an answer stored before it was recorded.",
   ),
   domain: z.string().optional().describe(
     "The breached site's domain, lower case. Absent when the table has none (a credential list, for example).",
