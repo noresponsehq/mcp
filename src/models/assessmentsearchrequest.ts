@@ -14,6 +14,7 @@ import {
 import { Impact, Impact$zodSchema } from "./impact.js";
 import { Lane, Lane$zodSchema } from "./lane.js";
 import { ListMatch, ListMatch$zodSchema } from "./listmatch.js";
+import { Origin, Origin$zodSchema } from "./origin.js";
 import { ReasonCode, ReasonCode$zodSchema } from "./reasoncode.js";
 import { Recommendation, Recommendation$zodSchema } from "./recommendation.js";
 import { ResponseMode, ResponseMode$zodSchema } from "./responsemode.js";
@@ -29,6 +30,7 @@ export type AssessmentSearchRequest = {
   email?: string | undefined;
   flow?: Flow | undefined;
   status?: Status | undefined;
+  origin?: Origin | undefined;
   recommendation?: Recommendation | undefined;
   limit?: number | undefined;
   cursor?: string | undefined;
@@ -89,6 +91,9 @@ export const AssessmentSearchRequest$zodSchema: z.ZodType<
   limit: z.int().default(20),
   list_match: ListMatch$zodSchema.optional().describe(
     "The list action captured at the first answer. Requires revision first. Older answers without captured list state do not match, including none.",
+  ),
+  origin: Origin$zodSchema.optional().describe(
+    "api (the default) searches the assessments your integration sent. lookup searches the assessments your team ran by hand on the console's Lookup page. The API sets an assessment's origin from the credential that sent it. A lookup is not in any other list, count, webhook event or account.",
   ),
   reason: ReasonCode$zodSchema.optional().describe(
     "A stable reason code. New codes may appear; ignore any you do not know.",
