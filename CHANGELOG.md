@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.13
+
+* `SDK.accounts.search()`: 
+  *  `request.email_domain` **Added**
+* `SDK.webhookEndpoints.listDeliveries()`:  `response.items[]` **Changed**
+
 ## 0.11.12
 
 * `SDK.assessments.create()`:  `response.code.enum(owner_invite_pending)` **Added** (Breaking ⚠️)

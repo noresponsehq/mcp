@@ -8,6 +8,8 @@ import {
 export type WebhookDeliveryAttempt = {
   event_id: string;
   event_type: string;
+  assessment_id?: string | undefined;
+  account_id?: string | undefined;
   attempt: number;
   replay: boolean;
   status: WebhookDeliveryAttemptStatus;
@@ -20,6 +22,12 @@ export type WebhookDeliveryAttempt = {
 export const WebhookDeliveryAttempt$zodSchema: z.ZodType<
   WebhookDeliveryAttempt
 > = z.object({
+  account_id: z.string().optional().describe(
+    "The account an account.risk_changed event reported. Absent on every other event.",
+  ),
+  assessment_id: z.string().optional().describe(
+    "The assessment an assessment.updated event reported, while that assessment is held. Absent on every other event, on a test event and on a notice that the assessment was erased or expired.",
+  ),
   attempt: z.int().describe(
     "Which attempt of this delivery this was: 1 for the first send, up to 9 with retries. A replay counts its own attempts from 1.",
   ),
