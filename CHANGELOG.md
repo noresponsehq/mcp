@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.7
+
+No changes detected.
+
 ## 0.11.6
 
 * `SDK.assessments.create()`:  `response.code.enum(aggregate_erased_data)` **Added** (Breaking ⚠️)

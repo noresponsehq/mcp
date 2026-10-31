@@ -250,7 +250,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "preview_list",
-    "description": "Preview a list override change without side effects.\n\nPreview canonical list matches and current override effects with settings or management. The result states its bounded coverage and changes no list entries."
+    "description": "Preview a list override change without side effects.\n\nPreview canonical list matches and current override effects with settings or management, plus legacy history, or investigate with evidence or detailed. The result states its bounded coverage and changes no list entries."
   },
   {
     "name": "change_lists",
@@ -334,7 +334,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "create_export",
-    "description": "Request an asynchronous customer export.\n\nRequest an encrypted JSON Lines snapshot of retained account or audit records. Requires exports plus history or audit scope; detailed account data also needs evidence or detailed scope. Criteria are frozen and hashed. Each environment permits four active jobs, 64 MiB per artifact, and 256 KiB per chunk. Artifacts expire after 24 hours. Send an Idempotency-Key to safely repeat a request. Every operation checks current permissions and source retention."
+    "description": "Request an asynchronous customer export.\n\nRequest an encrypted JSON Lines snapshot of retained account or audit records. Requires exports plus history or audit scope. An account export without legacy history needs investigate with evidence or detailed, because it holds submitted identifiers; detailed account data always needs evidence or detailed. Criteria are frozen and hashed. Each environment permits four active jobs, 64 MiB per artifact, and 256 KiB per chunk. Artifacts expire after 24 hours. Send an Idempotency-Key to safely repeat a request. Every operation checks current permissions and source retention."
   },
   {
     "name": "list_exports",
