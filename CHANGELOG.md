@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.18
+
+No changes detected.
+
 ## 0.11.17
 
 * `SDK.assessments.create()`:  `response.code.enum(screening_cap_exceeded)` **Added** (Breaking ⚠️)

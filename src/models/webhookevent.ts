@@ -12,6 +12,14 @@ import {
   AssessmentUpdatedEvent$zodSchema,
 } from "./assessmentupdatedevent.js";
 import {
+  AttendeeDecidedEvent,
+  AttendeeDecidedEvent$zodSchema,
+} from "./attendeedecidedevent.js";
+import {
+  AttendeeFlaggedEvent,
+  AttendeeFlaggedEvent$zodSchema,
+} from "./attendeeflaggedevent.js";
+import {
   AuditEventEvent,
   AuditEventEvent$zodSchema,
 } from "./auditeventevent.js";
@@ -19,6 +27,10 @@ import {
   EndpointVerificationEvent,
   EndpointVerificationEvent$zodSchema,
 } from "./endpointverificationevent.js";
+import {
+  ScreeningCompletedEvent,
+  ScreeningCompletedEvent$zodSchema,
+} from "./screeningcompletedevent.js";
 import {
   WebhookEndpointDisabledEvent,
   WebhookEndpointDisabledEvent$zodSchema,
@@ -38,7 +50,10 @@ export type WebhookEvent =
   | (WorkspaceDeletedEvent & { type: "workspace.deleted" })
   | (WebhookEndpointDisabledEvent & { type: "webhook_endpoint.disabled" })
   | (AccountRiskChangedEvent & { type: "account.risk_changed" })
-  | (AuditEventEvent & { type: "audit.event" });
+  | (AuditEventEvent & { type: "audit.event" })
+  | (ScreeningCompletedEvent & { type: "screening.completed" })
+  | (AttendeeFlaggedEvent & { type: "attendee.flagged" })
+  | (AttendeeDecidedEvent & { type: "attendee.decided" });
 
 export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
   AssessmentUpdatedEvent$zodSchema.and(
@@ -74,6 +89,21 @@ export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
   AuditEventEvent$zodSchema.and(
     z.object({
       type: z.literal("audit.event"),
+    }).transform((v) => ({ type: v.type })),
+  ),
+  ScreeningCompletedEvent$zodSchema.and(
+    z.object({
+      type: z.literal("screening.completed"),
+    }).transform((v) => ({ type: v.type })),
+  ),
+  AttendeeFlaggedEvent$zodSchema.and(
+    z.object({
+      type: z.literal("attendee.flagged"),
+    }).transform((v) => ({ type: v.type })),
+  ),
+  AttendeeDecidedEvent$zodSchema.and(
+    z.object({
+      type: z.literal("attendee.decided"),
     }).transform((v) => ({ type: v.type })),
   ),
 ]).describe(

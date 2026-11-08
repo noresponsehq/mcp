@@ -1,0 +1,25 @@
+import * as z from "zod";
+import { ClosedEnum } from "../types/enums.js";
+
+/**
+ * completed reached every attendee; partial left some not fully covered (partial_coverage); failed covered nobody.
+ */
+export const ScreeningCompletedStatus = {
+  Completed: "completed",
+  Partial: "partial",
+  Failed: "failed",
+} as const;
+/**
+ * completed reached every attendee; partial left some not fully covered (partial_coverage); failed covered nobody.
+ */
+export type ScreeningCompletedStatus = ClosedEnum<
+  typeof ScreeningCompletedStatus
+>;
+
+export const ScreeningCompletedStatus$zodSchema = z.enum([
+  "completed",
+  "partial",
+  "failed",
+]).describe(
+  "completed reached every attendee; partial left some not fully covered (partial_coverage); failed covered nobody.",
+);
