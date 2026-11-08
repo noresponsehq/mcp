@@ -26,6 +26,6 @@ export const UsageCount$zodSchema: z.ZodType<UsageCount> = z.object({
   environment: AuditSettingsEnvironment$zodSchema,
   flow: UsageCountFlow$zodSchema.optional().describe("assessments only."),
   metric: Metric$zodSchema.describe(
-    "assessments: assessments admitted. webhook_deliveries: events sent to endpoints, one per event per endpoint. key_usage_events: key-usage events accepted.",
+    "assessments: assessments admitted. webhook_deliveries: events sent to endpoints, one per event per endpoint. key_usage_events: key-usage events accepted. screenings: attendees a screening recorded a final result for, one per attendee per screening; a failed attendee counts nothing.",
   ),
 });

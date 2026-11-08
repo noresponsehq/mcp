@@ -198,7 +198,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "get_workspace_usage",
-    "description": "Read a workspace's usage.\n\nRead daily usage units for the environments you can access. These counts are unpriced. With live access it also returns the daily console lookup cap: used, limit and resets_at."
+    "description": "Read a workspace's usage.\n\nRead daily usage units, screenings included, for the environments you can access. These counts are unpriced. With live access it also returns the daily console lookup cap: used, limit and resets_at."
   },
   {
     "name": "list_invites",
@@ -210,11 +210,11 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "get_settings",
-    "description": "Read an environment's settings.\n\nRead this environment retention, source selection and effective flow policies. A flow without its own thresholds inherits account_creation. Requires settings or management. Another environment answers404. Read-only and safe to retry."
+    "description": "Read an environment's settings.\n\nRead this environment retention, source selection, daily screening cap and effective flow policies. A flow without its own thresholds inherits account_creation. Requires settings or management. Another environment answers404. Read-only and safe to retry."
   },
   {
     "name": "update_settings",
-    "description": "Change an environment's settings.\n\nChange named retention, source or flow settings in one transaction. Requires settings or management; changes to active policy also require policy_publish, which legacy management includes. Use expected_policy_version to reject concurrent changes and record a change_reason. Each accepted change creates a fresh version and an atomic audit event. Retention-only edits do not require policy publication authority. Flow thresholds preserve their declared ordering and bounds."
+    "description": "Change an environment's settings.\n\nChange named retention, screening cap, source or flow settings in one transaction. Requires settings or management; changes to active policy also require policy_publish, which legacy management includes. Use expected_policy_version to reject concurrent changes and record a change_reason. Each accepted change creates a fresh version and an atomic audit event. Retention and screening cap edits do not require policy publication authority. Flow thresholds preserve their declared ordering and bounds."
   },
   {
     "name": "list_policy_history",
@@ -426,7 +426,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "start_screening",
-    "description": "Start a screening.\n\nStart a screening of new attendees and everyone on watch or escalated, with an Idempotency-Key. It finishes completed, partial or failed minutes to hours later; poll it. The test environment screens with stand-ins that find no accounts."
+    "description": "Start a screening.\n\nStart a screening of new attendees and everyone on watch or escalated, with an Idempotency-Key. It finishes completed, partial or failed minutes to hours later; poll it. The answer carries estimated_spend; a screening whose estimate exceeds what the daily screening cap has left answers 409 screening_cap_exceeded. The test environment screens with stand-ins that find no accounts."
   },
   {
     "name": "get_screening",

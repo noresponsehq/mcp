@@ -33,6 +33,7 @@ export const ConflictErrorCode = {
   AggregateErasedData: "aggregate_erased_data",
   EventConflict: "event_conflict",
   EventLimitReached: "event_limit_reached",
+  ScreeningCapExceeded: "screening_cap_exceeded",
   ScreeningUnavailable: "screening_unavailable",
 } as const;
 /**
@@ -69,5 +70,6 @@ export const ConflictErrorCode$zodSchema = z.enum([
   "aggregate_erased_data",
   "event_conflict",
   "event_limit_reached",
+  "screening_cap_exceeded",
   "screening_unavailable",
 ]).describe("Machine codes an HTTP 409 answer can carry.");

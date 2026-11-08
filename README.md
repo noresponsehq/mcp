@@ -35,7 +35,7 @@ The server uses the API key you give it and stores nothing. API key rotation and
 | `rotate_integration_secret` | Replace an integration's secret. The old one is accepted for 24 hours. Never retried. | `POST /v1/integrations/{integration_id}/rotate` |
 | `list_keys` | List the keys of the key's environment, newest first, with no secrets. Needs the `management` scope. | `GET /v1/workspaces/{workspace_id}/keys` |
 | `revoke_key` | Revoke a key of the key's environment at once. A key cannot revoke itself. Needs the `management` scope; marked destructive. | `DELETE /v1/workspaces/{workspace_id}/keys/{key_id}` |
-| `get_settings` | Read the environment's retention, flow thresholds, admission and refused sources. Needs the `management` scope. | `GET /v1/workspaces/{workspace_id}/settings/{environment}` |
+| `get_settings` | Read the environment's retention, flow thresholds, admission, refused sources and daily screening cap. Needs the `management` scope. | `GET /v1/workspaces/{workspace_id}/settings/{environment}` |
 | `update_settings` | Change only what the body names, in one transaction. Needs the `management` scope. | `PATCH /v1/workspaces/{workspace_id}/settings/{environment}` |
 | `list_list_entries` | List the environment's allow and block list, oldest first. Needs the `management` scope. | `GET /v1/workspaces/{workspace_id}/lists/{environment}` |
 | `create_list_entry` | Add an email or email domain to the block or allow list; the accounts it matches are decided again. Needs the `management` scope. | `POST /v1/workspaces/{workspace_id}/lists/{environment}` |

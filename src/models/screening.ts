@@ -56,6 +56,8 @@ export type Screening = {
   attendees_done: number;
   attendees_flagged: number;
   attendees_failed: number;
+  estimated_spend: number;
+  spent: number;
   error_code?: string | undefined;
 };
 
@@ -74,6 +76,9 @@ export const Screening$zodSchema: z.ZodType<Screening> = z.object({
   error_code: z.string().optional().describe(
     "Why a failed or cancelled screening stopped.",
   ),
+  estimated_spend: z.int().describe(
+    "What the screening was estimated to cost when it started, in minor units of USD (cents): its attendees at its depth and platforms. Until the screening finishes, what it has not yet spent counts against the environment's screening_daily_cap.",
+  ),
   event_id: z.string(),
   expires_at: z.string().describe(
     "A screening still running then fails with error_code expired.",
@@ -82,6 +87,9 @@ export const Screening$zodSchema: z.ZodType<Screening> = z.object({
   id: z.string(),
   platforms: z.array(ScreeningPlatform$zodSchema),
   requested_by: z.string(),
+  spent: z.int().describe(
+    "What the attendees it has screened recorded, in minor units of USD. Each counts toward the UTC day it was recorded on; a failed attendee records nothing.",
+  ),
   started_at: z.string().optional(),
   status: ScreeningStatus$zodSchema.describe(
     "partial finished with some attendees not covered; attendees_failed counts them.",

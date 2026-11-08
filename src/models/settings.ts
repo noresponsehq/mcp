@@ -4,7 +4,7 @@ import { SettingsFlows, SettingsFlows$zodSchema } from "./settingsflows.js";
 import { SourceId, SourceId$zodSchema } from "./sourceid.js";
 
 /**
- * One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, and the sources it refuses. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.
+ * One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, the sources it refuses, and the daily cap on screening spend. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.
  */
 export type Settings = {
   workspace_id: string;
@@ -15,6 +15,7 @@ export type Settings = {
   updated_at?: string | undefined;
   flows: SettingsFlows;
   refused_sources: Array<SourceId>;
+  screening_daily_cap: number | null;
 };
 
 export const Settings$zodSchema: z.ZodType<Settings> = z.object({
@@ -31,6 +32,9 @@ export const Settings$zodSchema: z.ZodType<Settings> = z.object({
   retention_days: z.int().describe(
     "Days an assessment is kept after it is created, 1 to 365 (default 365). Shortening hides older assessments at once.",
   ),
+  screening_daily_cap: z.int().nullable().describe(
+    "The most the environment's screenings may spend in one UTC day, in minor units of USD (cents), 0 to 100000000; null is no cap. Default 50000. A screening whose estimated_spend exceeds the cap less the day's recorded spend and what open screenings may still spend answers 409 screening_cap_exceeded.",
+  ),
   updated_at: z.string().optional().describe(
     "When the policy last changed. Absent while the defaults apply.",
   ),
@@ -41,5 +45,5 @@ export const Settings$zodSchema: z.ZodType<Settings> = z.object({
     "The workspace id, which is also its live environment's workspace id; the test environment's is the same id with :test appended. A workspace created through the API is tnt_ and a 26-character ULID.",
   ),
 }).describe(
-  "One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, and the sources it refuses. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.",
+  "One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, the sources it refuses, and the daily cap on screening spend. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.",
 );
