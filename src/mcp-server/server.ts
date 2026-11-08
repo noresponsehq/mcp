@@ -54,6 +54,19 @@ import { tool$evaluationsGet } from "./tools/evaluationsGet.js";
 import { tool$evaluationsGetResult } from "./tools/evaluationsGetResult.js";
 import { tool$evaluationsList } from "./tools/evaluationsList.js";
 import { tool$evaluationsPublish } from "./tools/evaluationsPublish.js";
+import { tool$eventsAddAttendees } from "./tools/eventsAddAttendees.js";
+import { tool$eventsCancelScreening } from "./tools/eventsCancelScreening.js";
+import { tool$eventsCreate } from "./tools/eventsCreate.js";
+import { tool$eventsDelete } from "./tools/eventsDelete.js";
+import { tool$eventsGet } from "./tools/eventsGet.js";
+import { tool$eventsGetAttendee } from "./tools/eventsGetAttendee.js";
+import { tool$eventsGetScreening } from "./tools/eventsGetScreening.js";
+import { tool$eventsList } from "./tools/eventsList.js";
+import { tool$eventsListAttendees } from "./tools/eventsListAttendees.js";
+import { tool$eventsListScreenings } from "./tools/eventsListScreenings.js";
+import { tool$eventsReviewAttendee } from "./tools/eventsReviewAttendee.js";
+import { tool$eventsStartScreening } from "./tools/eventsStartScreening.js";
+import { tool$eventsUpdate } from "./tools/eventsUpdate.js";
 import { tool$exportsCancel } from "./tools/exportsCancel.js";
 import { tool$exportsCreate } from "./tools/exportsCreate.js";
 import { tool$exportsDownloadChunk } from "./tools/exportsDownloadChunk.js";
@@ -125,7 +138,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.11.15",
+    version: "0.11.16",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -266,6 +279,19 @@ export function createMCPServer(deps: {
   tool(tool$evaluationsCancel);
   tool(tool$evaluationsPublish);
   tool(tool$operationsSummarize);
+  tool(tool$eventsList);
+  tool(tool$eventsCreate);
+  tool(tool$eventsGet);
+  tool(tool$eventsUpdate);
+  tool(tool$eventsDelete);
+  tool(tool$eventsListAttendees);
+  tool(tool$eventsAddAttendees);
+  tool(tool$eventsGetAttendee);
+  tool(tool$eventsReviewAttendee);
+  tool(tool$eventsListScreenings);
+  tool(tool$eventsStartScreening);
+  tool(tool$eventsGetScreening);
+  tool(tool$eventsCancelScreening);
 
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);

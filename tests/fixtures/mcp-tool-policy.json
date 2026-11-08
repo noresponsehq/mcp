@@ -576,6 +576,91 @@
     "destructiveHint": true
   },
   {
+    "name": "list_events",
+    "title": "Read this environment's events",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "create_event",
+    "title": "Create an event with its principals and sensitive topics",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "get_event",
+    "title": "Read an event and its attendee count",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "update_event",
+    "title": "Change an event's details",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
+    "name": "delete_event",
+    "title": "Delete an event with its attendees, decisions and screenings",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "list_attendees",
+    "title": "Read an event's roster with match states, bands and decisions",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "add_attendees",
+    "title": "Add or update up to 500 attendees with an idempotency key",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
+    "name": "get_attendee",
+    "title": "Read an attendee's profiles, findings and decisions",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "review_attendee",
+    "title": "Mark an attendee cleared, watch or escalated with a note",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "list_screenings",
+    "title": "Read an event's screenings",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "start_screening",
+    "title": "Screen new attendees and everyone on watch or escalated",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
+    "name": "get_screening",
+    "title": "Read a screening's status and progress",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "cancel_screening",
+    "title": "Stop a queued or running screening",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
     "name": "wait_for_assessment",
     "readOnlyHint": true,
     "idempotentHint": true
