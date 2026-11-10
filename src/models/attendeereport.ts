@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { Attendee, Attendee$zodSchema } from "./attendee.js";
 import { AttendeeReview, AttendeeReview$zodSchema } from "./attendeereview.js";
+import { OtherEvents, OtherEvents$zodSchema } from "./otherevents.js";
 import {
   ScreeningFinding,
   ScreeningFinding$zodSchema,
@@ -13,7 +14,7 @@ import {
 } from "./screeningprofile.js";
 
 /**
- * Everything known about one attendee.
+ * Everything known about one attendee, and where else in the environment they appear.
  */
 export type AttendeeReport = {
   attendee: Attendee;
@@ -22,6 +23,7 @@ export type AttendeeReport = {
   posts: Array<ScreeningPost>;
   media: Array<ScreeningMedia>;
   reviews: Array<AttendeeReview>;
+  other_events: OtherEvents;
 };
 
 export const AttendeeReport$zodSchema: z.ZodType<AttendeeReport> = z.object({
@@ -34,6 +36,9 @@ export const AttendeeReport$zodSchema: z.ZodType<AttendeeReport> = z.object({
   media: z.array(ScreeningMedia$zodSchema).describe(
     "The images and videos the findings cite.",
   ),
+  other_events: OtherEvents$zodSchema.describe(
+    "Where else in the environment the attendee appears, read live from those events: deleting one removes it here.",
+  ),
   posts: z.array(ScreeningPost$zodSchema).describe(
     "The posts the findings cite.",
   ),
@@ -43,4 +48,6 @@ export const AttendeeReport$zodSchema: z.ZodType<AttendeeReport> = z.object({
   reviews: z.array(AttendeeReview$zodSchema).describe(
     "Every recorded decision, oldest first.",
   ),
-}).describe("Everything known about one attendee.");
+}).describe(
+  "Everything known about one attendee, and where else in the environment they appear.",
+);

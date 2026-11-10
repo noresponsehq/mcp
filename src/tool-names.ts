@@ -414,7 +414,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "get_attendee",
-    "description": "Read an attendee's report.\n\nRead an attendee's report: matched profiles, findings with their evidence and every recorded decision."
+    "description": "Read an attendee's report.\n\nRead an attendee's report: matched profiles, findings with their evidence, every recorded decision, and the other events where the same email or phone appears."
   },
   {
     "name": "review_attendee",

@@ -623,7 +623,7 @@
   },
   {
     "name": "get_attendee",
-    "title": "Read an attendee's profiles, findings and decisions",
+    "title": "Read an attendee's profiles, findings, decisions and other events",
     "readOnlyHint": true,
     "idempotentHint": true
   },
