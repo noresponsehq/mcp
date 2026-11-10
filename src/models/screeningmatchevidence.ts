@@ -20,7 +20,7 @@ export const ScreeningMatchEvidence$zodSchema: z.ZodType<
     "Where the match was seen, such as the profile field that carried it.",
   ),
   kind: ScreeningMatchEvidenceKind$zodSchema.describe(
-    "What matched. email, phone, supplied_handle and source_fact are hard identifiers; company, city and school are soft.",
+    "What matched. email, phone, supplied_handle and source_fact are hard identifiers; company, city and school are soft. supplied_handle is a handle on the attendee row; source_fact is an account a profile found by the attendee's lookups lists.",
   ),
   resolver: z.string().describe(
     "The resolver, collector or analyser that produced a record, by its catalogue name.",

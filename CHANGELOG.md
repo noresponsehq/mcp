@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.25
+
+No changes detected.
+
 ## 0.11.24
 
 * `SDK.events.getAttendee()`:  `response.lookup` **Added**
