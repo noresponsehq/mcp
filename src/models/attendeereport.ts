@@ -6,6 +6,10 @@ import {
   ScreeningFinding,
   ScreeningFinding$zodSchema,
 } from "./screeningfinding.js";
+import {
+  ScreeningLookup,
+  ScreeningLookup$zodSchema,
+} from "./screeninglookup.js";
 import { ScreeningMedia, ScreeningMedia$zodSchema } from "./screeningmedia.js";
 import { ScreeningPost, ScreeningPost$zodSchema } from "./screeningpost.js";
 import {
@@ -23,6 +27,7 @@ export type AttendeeReport = {
   posts: Array<ScreeningPost>;
   media: Array<ScreeningMedia>;
   reviews: Array<AttendeeReview>;
+  lookup?: ScreeningLookup | undefined;
   other_events: OtherEvents;
 };
 
@@ -32,6 +37,9 @@ export const AttendeeReport$zodSchema: z.ZodType<AttendeeReport> = z.object({
   ),
   findings: z.array(ScreeningFinding$zodSchema).describe(
     "What the latest screening flagged, most severe first, each citing its evidence.",
+  ),
+  lookup: ScreeningLookup$zodSchema.optional().describe(
+    "What the signup check's lookups found for an attendee: account presence for the email, phone and usernames (the attendee's handles), the phone lookup, the email domain's registration and the breach search. Context and coverage for the reviewer, not a finding: nothing here sets a band or a match state.",
   ),
   media: z.array(ScreeningMedia$zodSchema).describe(
     "The images and videos the findings cite.",
