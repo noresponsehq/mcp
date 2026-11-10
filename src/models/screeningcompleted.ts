@@ -9,7 +9,7 @@ import {
 } from "./screeningcompletedstatus.js";
 
 /**
- * A screening of an event finished. It counts only the attendees this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/events/{environment}/{event_id}/attendees, filtered by band, to act on them. attendees_screened + partial_coverage = attendees_total, attendees_flagged is the sum of by_band, and no_footprint counts screened attendees with no flag whose accounts were not found. A cancelled screening sends no event.
+ * A screening of an event finished. It counts only the attendees this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/events/{environment}/{event_id}/attendees, filtered by band, to act on them. attendees_screened + partial_coverage = attendees_total, attendees_flagged is the sum of by_band, no_footprint counts screened attendees with no flag whose accounts were not found, and no_profile_to_check those the screening had nothing to look up for on any requested platform. A cancelled screening sends no event.
  */
 export type ScreeningCompleted = {
   screening_id: string;
@@ -21,6 +21,7 @@ export type ScreeningCompleted = {
   attendees_flagged: number;
   by_band: ScreeningCompletedByBand;
   no_footprint: number;
+  no_profile_to_check?: number | undefined;
   partial_coverage: number;
   finished_at: string;
 };
@@ -49,6 +50,9 @@ export const ScreeningCompleted$zodSchema: z.ZodType<ScreeningCompleted> = z
     no_footprint: z.int().describe(
       "Screened attendees with no finding whose accounts were not found (match_state none_found). A clean result for someone with no visible accounts is not the same as a clean result for someone whose accounts were read.",
     ),
+    no_profile_to_check: z.int().optional().describe(
+      "Screened attendees with no profile to check: the list gave nothing to look up on any requested platform, such as no handle, so nobody looked for a profile (no_profile_to_check on the attendee). Not in no_footprint, and not partial: nothing failed. Their lookups are on their reports.",
+    ),
     partial_coverage: z.int().describe(
       "Attendees the screening did not fully cover. Read each one's coverage on its attendee.",
     ),
@@ -57,5 +61,5 @@ export const ScreeningCompleted$zodSchema: z.ZodType<ScreeningCompleted> = z
       "completed reached every attendee; partial left some not fully covered (partial_coverage); failed covered nobody.",
     ),
   }).describe(
-    "A screening of an event finished. It counts only the attendees this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/events/{environment}/{event_id}/attendees, filtered by band, to act on them. attendees_screened + partial_coverage = attendees_total, attendees_flagged is the sum of by_band, and no_footprint counts screened attendees with no flag whose accounts were not found. A cancelled screening sends no event.",
+    "A screening of an event finished. It counts only the attendees this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/events/{environment}/{event_id}/attendees, filtered by band, to act on them. attendees_screened + partial_coverage = attendees_total, attendees_flagged is the sum of by_band, no_footprint counts screened attendees with no flag whose accounts were not found, and no_profile_to_check those the screening had nothing to look up for on any requested platform. A cancelled screening sends no event.",
   );

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.27
+
+* `SDK.events.listAttendees()`:  `response.items[].no_profile_to_check` **Added**
+* `SDK.events.getAttendee()`:  `response` **Changed**
+* `SDK.events.reviewAttendee()`:  `response.no_profile_to_check` **Added**
+
 ## 0.11.26
 
 * `SDK.events.listAttendees()`:  `response.items[].coverage.not_analysed_by_reason` **Added**

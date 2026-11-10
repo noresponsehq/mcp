@@ -28,6 +28,7 @@ export type Attendee = {
   handles?: Array<Handle> | undefined;
   role?: AttendeeRole | undefined;
   match_state: MatchState;
+  no_profile_to_check?: boolean | undefined;
   highest_band: HighestBand | null;
   decision: AttendeeDecision | null;
   decision_note?: string | undefined;
@@ -68,9 +69,12 @@ export const Attendee$zodSchema: z.ZodType<Attendee> = z.object({
   id: z.string(),
   last_screening_id: z.string().optional(),
   match_state: MatchState$zodSchema.describe(
-    "How sure the latest screening is that it found the attendee's accounts. unscreened until a screening reaches the attendee.",
+    "How sure the latest screening is that it found the attendee's accounts. unscreened until a screening reaches the attendee, and after one that had no profile to check (no_profile_to_check).",
   ),
   name: z.string().describe("The attendee's full name."),
+  no_profile_to_check: z.boolean().optional().describe(
+    "true when the latest screening reached the attendee but the list gave nothing to look up on any requested platform, such as no handle for a platform that reads supplied handles only: nobody looked for a profile. match_state stays unscreened, every platform is in coverage.not_searched, and the attendee is neither none_found nor failed and does not make the screening partial. Its lookups are on its report. Left out otherwise.",
+  ),
   phone: z.string().optional().describe("The attendee's phone in E.164 form."),
   role: AttendeeRole$zodSchema.optional().describe(
     "The attendee's role at the event: guest (a ticket holder), crew, vendor or press. Leave it out when you do not know it: an attendee without one has no role, not guest. A later row naming the same attendee replaces it, and a change of role alone keeps the attendee's screening results.",

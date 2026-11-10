@@ -2,7 +2,7 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 
 /**
- * assessments: assessments admitted. webhook_deliveries: events sent to endpoints, one per event per endpoint. key_usage_events: key-usage events accepted. screenings: attendees a screening recorded a final result for, one per attendee per screening; a failed attendee counts nothing.
+ * assessments: assessments admitted. webhook_deliveries: events sent to endpoints, one per event per endpoint. key_usage_events: key-usage events accepted. screenings: attendees a screening recorded a final result for, one per attendee per screening; a failed attendee counts only when its lookups were kept.
  */
 export const Metric = {
   Assessments: "assessments",
@@ -11,7 +11,7 @@ export const Metric = {
   Screenings: "screenings",
 } as const;
 /**
- * assessments: assessments admitted. webhook_deliveries: events sent to endpoints, one per event per endpoint. key_usage_events: key-usage events accepted. screenings: attendees a screening recorded a final result for, one per attendee per screening; a failed attendee counts nothing.
+ * assessments: assessments admitted. webhook_deliveries: events sent to endpoints, one per event per endpoint. key_usage_events: key-usage events accepted. screenings: attendees a screening recorded a final result for, one per attendee per screening; a failed attendee counts only when its lookups were kept.
  */
 export type Metric = ClosedEnum<typeof Metric>;
 
@@ -21,5 +21,5 @@ export const Metric$zodSchema = z.enum([
   "key_usage_events",
   "screenings",
 ]).describe(
-  "assessments: assessments admitted. webhook_deliveries: events sent to endpoints, one per event per endpoint. key_usage_events: key-usage events accepted. screenings: attendees a screening recorded a final result for, one per attendee per screening; a failed attendee counts nothing.",
+  "assessments: assessments admitted. webhook_deliveries: events sent to endpoints, one per event per endpoint. key_usage_events: key-usage events accepted. screenings: attendees a screening recorded a final result for, one per attendee per screening; a failed attendee counts only when its lookups were kept.",
 );

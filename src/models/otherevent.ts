@@ -30,6 +30,7 @@ export type OtherEvent = {
   attendee_id: string;
   matched_on: Array<MatchedOn>;
   match_state: MatchState;
+  no_profile_to_check?: boolean | undefined;
   highest_band: HighestBand | null;
   decision: AttendeeDecision | null;
   decided_by?: string | undefined;
@@ -50,10 +51,13 @@ export const OtherEvent$zodSchema: z.ZodType<OtherEvent> = z.object({
     "That attendee's most severe band at that event, or null.",
   ),
   match_state: MatchState$zodSchema.describe(
-    "How sure the latest screening is that it found the attendee's accounts. unscreened until a screening reaches the attendee.",
+    "How sure the latest screening is that it found the attendee's accounts. unscreened until a screening reaches the attendee, and after one that had no profile to check (no_profile_to_check).",
   ),
   matched_on: z.array(MatchedOn$zodSchema).describe(
     "Which identifiers match, in this order. external_id appears only beside email or phone: the same external id alone is not a match, since ticket numbers may be reused across events.",
+  ),
+  no_profile_to_check: z.boolean().optional().describe(
+    "true when that attendee's latest screening had no profile to check (see the attendee's no_profile_to_check). Left out otherwise.",
   ),
 }).describe(
   "An attendee of another event in the same environment who shares an email or phone with this one, as that event recorded them.",
