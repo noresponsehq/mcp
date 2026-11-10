@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { HandlePlatform, HandlePlatform$zodSchema } from "./handleplatform.js";
 import {
   ScreeningPlatformCoverage,
   ScreeningPlatformCoverage$zodSchema,
@@ -15,6 +16,7 @@ export type ScreeningCoverage = {
   period_from?: string | undefined;
   period_to?: string | undefined;
   platforms: Array<ScreeningPlatformCoverage>;
+  not_searched?: Array<HandlePlatform> | undefined;
 };
 
 export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
@@ -25,6 +27,9 @@ export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
       "Items read that the analyser could not analyse. Above zero, the attendee is partial: a finding may be missing from them.",
     ),
     items_read: z.int(),
+    not_searched: z.array(HandlePlatform$zodSchema).optional().describe(
+      "Requested platforms where the attendee gave the screening nothing to look up, such as no handle for a platform that reads supplied handles only. Nothing looked and nothing failed: such a platform is not in platforms, is not none_found and does not make the attendee partial.",
+    ),
     period_from: z.string().optional().describe(
       "The oldest item read on any platform.",
     ),
