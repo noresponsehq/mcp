@@ -15,6 +15,7 @@ export type ScreeningFinding = {
   capped_from?: FindingBand | undefined;
   confidence: number;
   rationale: string;
+  quote?: string | undefined;
   evidence: Array<string>;
   analyser: string;
   model: string;
@@ -43,6 +44,9 @@ export const ScreeningFinding$zodSchema: z.ZodType<ScreeningFinding> = z.object(
     ),
     id: z.string(),
     model: z.string(),
+    quote: z.string().optional().describe(
+      "The exact words of the first evidence item that the finding rests on, as the analyser quoted them.",
+    ),
     rationale: z.string(),
     spend_minor: z.int().describe("What the analysis cost, in US cents."),
   },

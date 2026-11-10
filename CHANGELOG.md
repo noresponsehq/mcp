@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.21
+
+* `SDK.events.listAttendees()`:  `response.items[].coverage.items_not_analysed` **Added**
+* `SDK.events.getAttendee()`:  `response` **Changed**
+* `SDK.events.reviewAttendee()`:  `response.coverage.items_not_analysed` **Added**
+
 ## 0.11.20
 
 * `SDK.events.listAttendees()`: 
