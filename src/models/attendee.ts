@@ -3,6 +3,7 @@ import {
   AttendeeDecision,
   AttendeeDecision$zodSchema,
 } from "./attendeedecision.js";
+import { AttendeeRole, AttendeeRole$zodSchema } from "./attendeerole.js";
 import { Handle, Handle$zodSchema } from "./handle.js";
 import { HighestBand, HighestBand$zodSchema } from "./highestband.js";
 import { MatchState, MatchState$zodSchema } from "./matchstate.js";
@@ -25,6 +26,7 @@ export type Attendee = {
   company?: string | undefined;
   city?: string | undefined;
   handles?: Array<Handle> | undefined;
+  role?: AttendeeRole | undefined;
   match_state: MatchState;
   highest_band: HighestBand | null;
   decision: AttendeeDecision | null;
@@ -70,6 +72,9 @@ export const Attendee$zodSchema: z.ZodType<Attendee> = z.object({
   ),
   name: z.string().describe("The attendee's full name."),
   phone: z.string().optional().describe("The attendee's phone in E.164 form."),
+  role: AttendeeRole$zodSchema.optional().describe(
+    "The attendee's role at the event: guest (a ticket holder), crew, vendor or press. Leave it out when you do not know it: an attendee without one has no role, not guest. A later row naming the same attendee replaces it, and a change of role alone keeps the attendee's screening results.",
+  ),
   screened_at: z.string().optional(),
   spend: ScreeningSpend$zodSchema.describe(
     "What screening cost, in US cents, in total and per implementation.",

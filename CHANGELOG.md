@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.11.20
+
+* `SDK.events.listAttendees()`: 
+  *  `request.role` **Added**
+  *  `response.items[].role` **Added**
+* `SDK.events.addAttendees()`: 
+  *  `request.body.attendees[].role` **Added**
+* `SDK.events.getAttendee()`:  `response.attendee.role` **Added**
+* `SDK.events.reviewAttendee()`:  `response.role` **Added**
+
 ## 0.11.19
 
 * `SDK.events.listAttendees()`:  `response.items[]` **Changed** (Breaking ⚠️)

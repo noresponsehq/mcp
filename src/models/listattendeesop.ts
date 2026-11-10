@@ -18,6 +18,10 @@ import {
   ListAttendeesDecision,
   ListAttendeesDecision$zodSchema,
 } from "./listattendeesdecision.js";
+import {
+  ListAttendeesRole,
+  ListAttendeesRole$zodSchema,
+} from "./listattendeesrole.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 import {
   PermissionDeniedError,
@@ -33,6 +37,7 @@ export type ListAttendeesRequest = {
   after?: string | undefined;
   band?: ListAttendeesBand | undefined;
   decision?: ListAttendeesDecision | undefined;
+  role?: ListAttendeesRole | undefined;
 };
 
 export const ListAttendeesRequest$zodSchema: z.ZodType<ListAttendeesRequest> = z
@@ -49,6 +54,9 @@ export const ListAttendeesRequest$zodSchema: z.ZodType<ListAttendeesRequest> = z
     ),
     event_id: z.string(),
     limit: z.int().default(100).describe("At most this many attendees."),
+    role: ListAttendeesRole$zodSchema.optional().describe(
+      "Only attendees with this role; unstated for attendees whose role was not given.",
+    ),
     workspace_id: z.string().describe(
       "Your workspace id, as each key lists it in workspace_id. Another workspace, a malformed id and a test environment's id answer 404.",
     ),

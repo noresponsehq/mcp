@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { AttendeeRole, AttendeeRole$zodSchema } from "./attendeerole.js";
 import { Handle, Handle$zodSchema } from "./handle.js";
 
 /**
@@ -12,6 +13,7 @@ export type AttendeeIdentity = {
   company?: string | undefined;
   city?: string | undefined;
   handles?: Array<Handle> | undefined;
+  role?: AttendeeRole | undefined;
 };
 
 export const AttendeeIdentity$zodSchema: z.ZodType<AttendeeIdentity> = z.object(
@@ -28,6 +30,9 @@ export const AttendeeIdentity$zodSchema: z.ZodType<AttendeeIdentity> = z.object(
     name: z.string().describe("The attendee's full name."),
     phone: z.string().optional().describe(
       "The attendee's phone in E.164 form.",
+    ),
+    role: AttendeeRole$zodSchema.optional().describe(
+      "The attendee's role at the event: guest (a ticket holder), crew, vendor or press. Leave it out when you do not know it: an attendee without one has no role, not guest. A later row naming the same attendee replaces it, and a change of role alone keeps the attendee's screening results.",
     ),
   },
 ).describe(
