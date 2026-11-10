@@ -37,48 +37,48 @@ export const GetAttendeeRequest$zodSchema: z.ZodType<GetAttendeeRequest> = z
   });
 
 export type GetAttendeeResponseResult =
+  | AttendeeReport
   | BadRequestError
   | AuthenticationError
   | PermissionDeniedError
   | NotFoundError
   | ConflictError
-  | RateLimitError
-  | AttendeeReport;
+  | RateLimitError;
 
 export const GetAttendeeResponseResult$zodSchema: z.ZodType<
   GetAttendeeResponseResult
 > = z.union([
+  AttendeeReport$zodSchema,
   BadRequestError$zodSchema,
   AuthenticationError$zodSchema,
   PermissionDeniedError$zodSchema,
   NotFoundError$zodSchema,
   ConflictError$zodSchema,
   RateLimitError$zodSchema,
-  AttendeeReport$zodSchema,
 ]);
 
 export type GetAttendeeResponse = {
   Headers: { [k: string]: Array<string> };
   Result:
+    | AttendeeReport
     | BadRequestError
     | AuthenticationError
     | PermissionDeniedError
     | NotFoundError
     | ConflictError
-    | RateLimitError
-    | AttendeeReport;
+    | RateLimitError;
 };
 
 export const GetAttendeeResponse$zodSchema: z.ZodType<GetAttendeeResponse> = z
   .object({
     Headers: z.record(z.string(), z.array(z.string())).default({}),
     Result: z.union([
+      AttendeeReport$zodSchema,
       BadRequestError$zodSchema,
       AuthenticationError$zodSchema,
       PermissionDeniedError$zodSchema,
       NotFoundError$zodSchema,
       ConflictError$zodSchema,
       RateLimitError$zodSchema,
-      AttendeeReport$zodSchema,
     ]),
   });

@@ -6,15 +6,11 @@ import {
 import { Handle, Handle$zodSchema } from "./handle.js";
 import { HighestBand, HighestBand$zodSchema } from "./highestband.js";
 import { MatchState, MatchState$zodSchema } from "./matchstate.js";
-
-/**
- * What the latest screening read, per platform.
- */
-export type AttendeeCoverage = {};
-
-export const AttendeeCoverage$zodSchema: z.ZodType<AttendeeCoverage> = z.object(
-  {},
-).describe("What the latest screening read, per platform.");
+import {
+  ScreeningCoverage,
+  ScreeningCoverage$zodSchema,
+} from "./screeningcoverage.js";
+import { ScreeningSpend, ScreeningSpend$zodSchema } from "./screeningspend.js";
 
 /**
  * An attendee and where their screening and review stand.
@@ -35,18 +31,19 @@ export type Attendee = {
   decision_note?: string | undefined;
   decided_by?: string | undefined;
   decided_at?: string | undefined;
-  coverage: AttendeeCoverage;
+  coverage: ScreeningCoverage;
   last_screening_id?: string | undefined;
   screened_at?: string | undefined;
   created_at: string;
   updated_at: string;
+  spend: ScreeningSpend;
 };
 
 export const Attendee$zodSchema: z.ZodType<Attendee> = z.object({
   city: z.string().optional().describe("Where the attendee lives."),
   company: z.string().optional().describe("Where the attendee works."),
-  coverage: z.lazy(() => AttendeeCoverage$zodSchema).describe(
-    "What the latest screening read, per platform.",
+  coverage: ScreeningCoverage$zodSchema.describe(
+    "The denominator of a screening: accounts found, how many could be read, items read and the period they span, so a clean result is distinct from a person nobody could see.",
   ),
   created_at: z.string(),
   decided_at: z.string().optional(),
@@ -74,5 +71,8 @@ export const Attendee$zodSchema: z.ZodType<Attendee> = z.object({
   name: z.string().describe("The attendee's full name."),
   phone: z.string().optional().describe("The attendee's phone in E.164 form."),
   screened_at: z.string().optional(),
+  spend: ScreeningSpend$zodSchema.describe(
+    "What screening cost, in US cents, in total and per implementation.",
+  ),
   updated_at: z.string(),
 }).describe("An attendee and where their screening and review stand.");

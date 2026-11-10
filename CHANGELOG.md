@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.11.19
+
+* `SDK.events.listAttendees()`:  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.events.getAttendee()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.events.reviewAttendee()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.events.listScreenings()`:  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.events.startScreening()`: 
+  *  `request.body.platforms[].enum(synthetic)` **Added**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.events.getScreening()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.events.cancelScreening()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.events.addAttendees()`: 
+  *  `request.body.attendees[].handles[].platform.enum(synthetic)` **Added**
+
 ## 0.11.18
 
 No changes detected.
