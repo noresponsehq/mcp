@@ -4,6 +4,10 @@ import {
   FindingCategory,
   FindingCategory$zodSchema,
 } from "./findingcategory.js";
+import {
+  ScreeningMediaObservation,
+  ScreeningMediaObservation$zodSchema,
+} from "./screeningmediaobservation.js";
 
 /**
  * Something the analyser flagged. band is capped by the strongest match among the profiles of its evidence: possible at most moderate, probable at most high. capped_from is the band the analyser gave when the cap lowered it.
@@ -17,6 +21,7 @@ export type ScreeningFinding = {
   rationale: string;
   quote?: string | undefined;
   evidence: Array<string>;
+  media_observations?: Array<ScreeningMediaObservation> | undefined;
   analyser: string;
   model: string;
   spend_minor: number;
@@ -43,6 +48,10 @@ export const ScreeningFinding$zodSchema: z.ZodType<ScreeningFinding> = z.object(
       "The posts and media that support the finding.",
     ),
     id: z.string(),
+    media_observations: z.array(ScreeningMediaObservation$zodSchema).optional()
+      .describe(
+        "What the analyser saw in each image among evidence that the finding rests on. Unlike quote, an observation cannot be checked against the record: judge it against the image at the media item's permalink.",
+      ),
     model: z.string(),
     quote: z.string().optional().describe(
       "The exact words of the first evidence item that the finding rests on, as the analyser quoted them.",

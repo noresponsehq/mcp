@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.26
+
+* `SDK.events.listAttendees()`:  `response.items[].coverage.not_analysed_by_reason` **Added**
+* `SDK.events.getAttendee()`:  `response` **Changed**
+* `SDK.events.reviewAttendee()`:  `response.coverage.not_analysed_by_reason` **Added**
+
 ## 0.11.25
 
 No changes detected.

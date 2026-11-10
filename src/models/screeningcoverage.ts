@@ -1,6 +1,10 @@
 import * as z from "zod";
 import { HandlePlatform, HandlePlatform$zodSchema } from "./handleplatform.js";
 import {
+  ScreeningNotAnalysedCount,
+  ScreeningNotAnalysedCount$zodSchema,
+} from "./screeningnotanalysedcount.js";
+import {
   ScreeningPlatformCoverage,
   ScreeningPlatformCoverage$zodSchema,
 } from "./screeningplatformcoverage.js";
@@ -13,6 +17,7 @@ export type ScreeningCoverage = {
   accounts_accessible: number;
   items_read: number;
   items_not_analysed?: number | undefined;
+  not_analysed_by_reason?: Array<ScreeningNotAnalysedCount> | undefined;
   period_from?: string | undefined;
   period_to?: string | undefined;
   platforms: Array<ScreeningPlatformCoverage>;
@@ -27,6 +32,10 @@ export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
       "Items read that the analyser could not analyse. Above zero, the attendee is partial: a finding may be missing from them.",
     ),
     items_read: z.int(),
+    not_analysed_by_reason: z.array(ScreeningNotAnalysedCount$zodSchema)
+      .optional().describe(
+        "items_not_analysed split by reason, each reason once with at least one item.",
+      ),
     not_searched: z.array(HandlePlatform$zodSchema).optional().describe(
       "Requested platforms where the attendee gave the screening nothing to look up, such as no handle for a platform that reads supplied handles only. Nothing looked and nothing failed: such a platform is not in platforms, is not none_found and does not make the attendee partial.",
     ),
