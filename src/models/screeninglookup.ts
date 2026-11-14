@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { RecordT, RecordT$zodSchema } from "./record.js";
 import { RiskDetails, RiskDetails$zodSchema } from "./riskdetails.js";
 import { RiskSummary, RiskSummary$zodSchema } from "./risksummary.js";
 import {
@@ -13,6 +14,7 @@ export type ScreeningLookup = {
   checks: Array<ScreeningLookupCheck>;
   summary?: RiskSummary | undefined;
   details?: RiskDetails | undefined;
+  records?: Array<RecordT> | undefined;
   looked_at: string;
 };
 
@@ -24,6 +26,9 @@ export const ScreeningLookup$zodSchema: z.ZodType<ScreeningLookup> = z.object({
     "Merged observations behind the summary, served only to a caller who may read evidence: no provider, source, origin, raw breach record or score.",
   ),
   looked_at: z.string().describe("When the lookups ran."),
+  records: z.array(RecordT$zodSchema).optional().describe(
+    "What each source that found an account answered, whole: every field under the source's own names, each answer once. Served only to a caller who may read evidence, as details are.",
+  ),
   summary: RiskSummary$zodSchema.optional().describe(
     "A few typed facts per identifier: an assessment's risk.summary, and a screened person's lookup summary. Every fact is optional: absent means the evidence did not answer and makes no claim, while false or 0 is a definite answer.",
   ),
