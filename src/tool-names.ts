@@ -385,48 +385,48 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Summarize retained account outcomes, enforcement reports and reviews.\n\nRead one retained snapshot of account outcomes, enforcement reports and review states for the environment and a window of at most 31 days. Each section declares its own population, numerator, denominator and label coverage. Current outcome heads preserve explicit unknown labels. Enforcement rows are reports from your application and do not independently verify execution. Requires history or investigate together with management scope. A result exceeding 100000 population rows or the query budget is refused without truncation."
   },
   {
-    "name": "list_events",
-    "description": "List an environment's events.\n\nList this environment's events, newest first. Pass next_before back as before for the next page. Requires the events scope."
+    "name": "list_groups",
+    "description": "List an environment's groups.\n\nList this environment's groups, newest first. Pass next_before back as before for the next page. Requires the groups scope."
   },
   {
-    "name": "create_event",
-    "description": "Create an event to screen.\n\nCreate an event to screen: its name, start, venue, host, the principals it protects and the sensitive topics posts are read against. An environment holds at most 1000 events."
+    "name": "create_group",
+    "description": "Create a group to screen.\n\nCreate a group to screen: its name, start, venue, host, the principals it protects and the sensitive topics posts are read against. An environment holds at most 1000 groups."
   },
   {
-    "name": "get_event",
-    "description": "Read an event.\n\nRead an event and how many attendees it holds."
+    "name": "get_group",
+    "description": "Read a group.\n\nRead a group and how many people it holds."
   },
   {
-    "name": "update_event",
-    "description": "Change an event.\n\nChange the fields you name. Send expected_version to apply the change only to that version."
+    "name": "update_group",
+    "description": "Change a group.\n\nChange the fields you name. Send expected_version to apply the change only to that version."
   },
   {
-    "name": "delete_event",
-    "description": "Erase an event.\n\nErase an event with its attendees, their decisions and its screenings, and stop any screening still running."
+    "name": "delete_group",
+    "description": "Erase a group.\n\nErase a group with its people, their decisions and its screenings, and stop any screening still running."
   },
   {
-    "name": "list_attendees",
-    "description": "List an event's attendees.\n\nRead an event's roster in upload order, with each attendee's match state, highest finding band and decision. Filter by band or decision; pass next_after back as after."
+    "name": "list_people",
+    "description": "List a group's people.\n\nRead a group's roster in upload order, with each person's match state, highest finding band and decision. Filter by band or decision; pass next_after back as after."
   },
   {
-    "name": "add_attendees",
-    "description": "Add or update a batch of attendees.\n\nAdd or update 1 to 500 attendees with an Idempotency-Key. A row with the same external_id, else email, else phone as an existing attendee updates it. Identities are stored encrypted."
+    "name": "add_people",
+    "description": "Add or update a batch of people.\n\nAdd or update 1 to 500 people with an Idempotency-Key. A row with the same external_id, else email, else phone as an existing person updates it. Identities are stored encrypted."
   },
   {
-    "name": "get_attendee",
-    "description": "Read an attendee's report.\n\nRead an attendee's report: matched profiles, findings with their evidence, every recorded decision, and the other events where the same email or phone appears."
+    "name": "get_person",
+    "description": "Read a person's report.\n\nRead a person's report: matched profiles, findings with their evidence, every recorded decision, and the other groups where the same email or phone appears."
   },
   {
-    "name": "review_attendee",
-    "description": "Record a decision on an attendee.\n\nRecord a cleared, watch or escalated decision with a note. The latest decision is the attendee's; the next screening refreshes everyone on watch or escalated."
+    "name": "review_person",
+    "description": "Record a decision on a person.\n\nRecord a cleared, watch or escalated decision with a note. The latest decision is the person's; the next screening refreshes everyone on watch or escalated."
   },
   {
     "name": "list_screenings",
-    "description": "List an event's screenings.\n\nList an event's screenings, newest first."
+    "description": "List a group's screenings.\n\nList a group's screenings, newest first."
   },
   {
     "name": "start_screening",
-    "description": "Start a screening.\n\nStart a screening of new attendees and everyone on watch or escalated, with an Idempotency-Key. It finishes completed, partial or failed minutes to hours later; poll it. The answer carries estimated_spend; a screening whose estimate exceeds what the daily screening cap has left answers 409 screening_cap_exceeded. The test environment screens with the synthetic connector, which makes up deterministic profiles, posts and findings."
+    "description": "Start a screening.\n\nStart a screening of new people and everyone on watch or escalated, with an Idempotency-Key. It finishes completed, partial or failed minutes to hours later; poll it. The answer carries estimated_spend; a screening whose estimate exceeds what the daily screening cap has left answers 409 screening_cap_exceeded. The test environment screens with the synthetic connector, which makes up deterministic profiles, posts and findings."
   },
   {
     "name": "get_screening",
@@ -434,7 +434,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "cancel_screening",
-    "description": "Cancel a screening.\n\nStop a queued or running screening. Attendees already screened keep their results."
+    "description": "Cancel a screening.\n\nStop a queued or running screening. People already screened keep their results."
   },
   {
     "name": "wait_for_assessment",

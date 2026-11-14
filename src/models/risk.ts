@@ -66,7 +66,7 @@ export const Risk$zodSchema: z.ZodType<Risk> = z.object({
     "The score at which this answer's flow starts to recommend step_up. Absent from an answer stored before it was recorded.",
   ),
   summary: RiskSummary$zodSchema.optional().describe(
-    "A few typed facts per identifier: an assessment's risk.summary, and an event screening attendee's lookup summary. Every fact is optional: absent means the evidence did not answer and makes no claim, while false or 0 is a definite answer.",
+    "A few typed facts per identifier: an assessment's risk.summary, and a screened person's lookup summary. Every fact is optional: absent means the evidence did not answer and makes no claim, while false or 0 is a definite answer.",
   ),
 }).describe(
   "The one risk decision for this event. score is 0 (safe) to 100 (risky), set by the reasons that fired under a hand-set, versioned heuristic policy. Each reason carries its direction and impact band; the policy's weights are not published. Every answer with a recommendation carries it, and the top-level recommendation equals risk.recommendation. It names no source or provider.",

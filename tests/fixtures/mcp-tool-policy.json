@@ -576,73 +576,73 @@
     "destructiveHint": true
   },
   {
-    "name": "list_events",
-    "title": "Read this environment's events",
+    "name": "list_groups",
+    "title": "Read this environment's groups",
     "readOnlyHint": true,
     "idempotentHint": true
   },
   {
-    "name": "create_event",
-    "title": "Create an event with its principals and sensitive topics",
+    "name": "create_group",
+    "title": "Create a group with its principals and sensitive topics",
     "readOnlyHint": false,
     "idempotentHint": false,
     "destructiveHint": false
   },
   {
-    "name": "get_event",
-    "title": "Read an event and its attendee count",
+    "name": "get_group",
+    "title": "Read a group and how many people it holds",
     "readOnlyHint": true,
     "idempotentHint": true
   },
   {
-    "name": "update_event",
-    "title": "Change an event's details",
+    "name": "update_group",
+    "title": "Change a group's details",
     "readOnlyHint": false,
     "idempotentHint": true,
     "destructiveHint": false
   },
   {
-    "name": "delete_event",
-    "title": "Delete an event with its attendees, decisions and screenings",
+    "name": "delete_group",
+    "title": "Delete a group with its people, decisions and screenings",
     "readOnlyHint": false,
     "idempotentHint": true,
     "destructiveHint": true
   },
   {
-    "name": "list_attendees",
-    "title": "Read an event's roster with match states, bands and decisions",
+    "name": "list_people",
+    "title": "Read a group's roster with match states, bands and decisions",
     "readOnlyHint": true,
     "idempotentHint": true
   },
   {
-    "name": "add_attendees",
-    "title": "Add or update up to 500 attendees with an idempotency key",
+    "name": "add_people",
+    "title": "Add or update up to 500 people with an idempotency key",
     "readOnlyHint": false,
     "idempotentHint": true,
     "destructiveHint": false
   },
   {
-    "name": "get_attendee",
-    "title": "Read an attendee's profiles, findings, decisions and other events",
+    "name": "get_person",
+    "title": "Read a person's profiles, findings, decisions and other groups",
     "readOnlyHint": true,
     "idempotentHint": true
   },
   {
-    "name": "review_attendee",
-    "title": "Mark an attendee cleared, watch or escalated with a note",
+    "name": "review_person",
+    "title": "Mark a person cleared, watch or escalated with a note",
     "readOnlyHint": false,
     "idempotentHint": false,
     "destructiveHint": false
   },
   {
     "name": "list_screenings",
-    "title": "Read an event's screenings",
+    "title": "Read a group's screenings",
     "readOnlyHint": true,
     "idempotentHint": true
   },
   {
     "name": "start_screening",
-    "title": "Screen new attendees and everyone on watch or escalated",
+    "title": "Screen new people and everyone on watch or escalated",
     "readOnlyHint": false,
     "idempotentHint": true,
     "destructiveHint": false

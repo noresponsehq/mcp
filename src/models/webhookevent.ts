@@ -12,14 +12,6 @@ import {
   AssessmentUpdatedEvent$zodSchema,
 } from "./assessmentupdatedevent.js";
 import {
-  AttendeeDecidedEvent,
-  AttendeeDecidedEvent$zodSchema,
-} from "./attendeedecidedevent.js";
-import {
-  AttendeeFlaggedEvent,
-  AttendeeFlaggedEvent$zodSchema,
-} from "./attendeeflaggedevent.js";
-import {
   AuditEventEvent,
   AuditEventEvent$zodSchema,
 } from "./auditeventevent.js";
@@ -27,6 +19,14 @@ import {
   EndpointVerificationEvent,
   EndpointVerificationEvent$zodSchema,
 } from "./endpointverificationevent.js";
+import {
+  PersonDecidedEvent,
+  PersonDecidedEvent$zodSchema,
+} from "./persondecidedevent.js";
+import {
+  PersonFlaggedEvent,
+  PersonFlaggedEvent$zodSchema,
+} from "./personflaggedevent.js";
 import {
   ScreeningCompletedEvent,
   ScreeningCompletedEvent$zodSchema,
@@ -52,8 +52,8 @@ export type WebhookEvent =
   | (AccountRiskChangedEvent & { type: "account.risk_changed" })
   | (AuditEventEvent & { type: "audit.event" })
   | (ScreeningCompletedEvent & { type: "screening.completed" })
-  | (AttendeeFlaggedEvent & { type: "attendee.flagged" })
-  | (AttendeeDecidedEvent & { type: "attendee.decided" });
+  | (PersonFlaggedEvent & { type: "person.flagged" })
+  | (PersonDecidedEvent & { type: "person.decided" });
 
 export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
   AssessmentUpdatedEvent$zodSchema.and(
@@ -96,14 +96,14 @@ export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
       type: z.literal("screening.completed"),
     }).transform((v) => ({ type: v.type })),
   ),
-  AttendeeFlaggedEvent$zodSchema.and(
+  PersonFlaggedEvent$zodSchema.and(
     z.object({
-      type: z.literal("attendee.flagged"),
+      type: z.literal("person.flagged"),
     }).transform((v) => ({ type: v.type })),
   ),
-  AttendeeDecidedEvent$zodSchema.and(
+  PersonDecidedEvent$zodSchema.and(
     z.object({
-      type: z.literal("attendee.decided"),
+      type: z.literal("person.decided"),
     }).transform((v) => ({ type: v.type })),
   ),
 ]).describe(

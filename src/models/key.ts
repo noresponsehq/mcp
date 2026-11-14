@@ -22,7 +22,7 @@ export const KeyScope = {
   PolicyPublish: "policy_publish",
   Members: "members",
   MembersManage: "members_manage",
-  Events: "events",
+  Groups: "groups",
 } as const;
 export type KeyScope = ClosedEnum<typeof KeyScope>;
 
@@ -44,7 +44,7 @@ export const KeyScope$zodSchema = z.enum([
   "policy_publish",
   "members",
   "members_manage",
-  "events",
+  "groups",
 ]);
 
 /**

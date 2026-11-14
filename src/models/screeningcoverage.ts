@@ -29,7 +29,7 @@ export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
     accounts_accessible: z.int(),
     accounts_found: z.int(),
     items_not_analysed: z.int().optional().describe(
-      "Items read that the analyser could not analyse. Above zero, the attendee is partial: a finding may be missing from them.",
+      "Items read that the analyser could not analyse. Above zero, the person is partial: a finding may be missing from them.",
     ),
     items_read: z.int(),
     not_analysed_by_reason: z.array(ScreeningNotAnalysedCount$zodSchema)
@@ -37,7 +37,7 @@ export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
         "items_not_analysed split by reason, each reason once with at least one item.",
       ),
     not_searched: z.array(HandlePlatform$zodSchema).optional().describe(
-      "Requested platforms where the attendee gave the screening nothing to look up, such as no handle for a platform that reads supplied handles only. Nothing looked and nothing failed: such a platform is not in platforms, is not none_found and does not make the attendee partial.",
+      "Requested platforms where the person gave the screening nothing to look up, such as no handle for a platform that reads supplied handles only. Nothing looked and nothing failed: such a platform is not in platforms, is not none_found and does not make the person partial.",
     ),
     period_from: z.string().optional().describe(
       "The oldest item read on any platform.",

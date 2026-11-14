@@ -9,16 +9,16 @@ import {
 } from "./screeningcompletedstatus.js";
 
 /**
- * A screening of an event finished. It counts only the attendees this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/events/{environment}/{event_id}/attendees, filtered by band, to act on them. attendees_screened + partial_coverage = attendees_total, attendees_flagged is the sum of by_band, no_footprint counts screened attendees with no flag whose accounts were not found, and no_profile_to_check those the screening had nothing to look up for on any requested platform. A cancelled screening sends no event.
+ * A screening of a group finished. It counts only the people this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/groups/{environment}/{group_id}/people, filtered by band, to act on them. people_screened + partial_coverage = people_total, people_flagged is the sum of by_band, no_footprint counts screened people with no flag whose accounts were not found, and no_profile_to_check those the screening had nothing to look up for on any requested platform. A cancelled screening sends no event.
  */
 export type ScreeningCompleted = {
   screening_id: string;
-  event_id: string;
+  group_id: string;
   status: ScreeningCompletedStatus;
   error_code?: string | undefined;
-  attendees_total: number;
-  attendees_screened: number;
-  attendees_flagged: number;
+  people_total: number;
+  people_screened: number;
+  people_flagged: number;
   by_band: ScreeningCompletedByBand;
   no_footprint: number;
   no_profile_to_check?: number | undefined;
@@ -28,38 +28,38 @@ export type ScreeningCompleted = {
 
 export const ScreeningCompleted$zodSchema: z.ZodType<ScreeningCompleted> = z
   .object({
-    attendees_flagged: z.int().describe(
-      "Screened attendees with a finding: the sum of by_band.",
-    ),
-    attendees_screened: z.int().describe(
-      "Attendees the screening covered, flagged or not.",
-    ),
-    attendees_total: z.int().describe(
-      "Every attendee the screening set out to reach: those no screening had reached and those on watch or escalated.",
-    ),
     by_band: ScreeningCompletedByBand$zodSchema.describe(
-      "Screened attendees by the band of their most severe finding.",
+      "Screened people by the band of their most severe finding.",
     ),
     error_code: z.string().optional().describe(
       "Why a partial or failed screening stopped before reaching everyone, as the screening resource says: expired, worker_attempts_exhausted, attempts_exhausted or screening_unavailable.",
     ),
-    event_id: z.string().describe("The event it screened."),
     finished_at: z.string().describe(
       "When the screening finished; equal to the event's created_at.",
     ),
+    group_id: z.string().describe("The group it screened."),
     no_footprint: z.int().describe(
-      "Screened attendees with no finding whose accounts were not found (match_state none_found). A clean result for someone with no visible accounts is not the same as a clean result for someone whose accounts were read.",
+      "Screened people with no finding whose accounts were not found (match_state none_found). A clean result for someone with no visible accounts is not the same as a clean result for someone whose accounts were read.",
     ),
     no_profile_to_check: z.int().optional().describe(
-      "Screened attendees with no profile to check: the list gave nothing to look up on any requested platform, such as no handle, so nobody looked for a profile (no_profile_to_check on the attendee). Not in no_footprint, and not partial: nothing failed. Their lookups are on their reports.",
+      "Screened people with no profile to check: the list gave nothing to look up on any requested platform, such as no handle, so nobody looked for a profile (no_profile_to_check on the person). Not in no_footprint, and not partial: nothing failed. Their lookups are on their reports.",
     ),
     partial_coverage: z.int().describe(
-      "Attendees the screening did not fully cover. Read each one's coverage on its attendee.",
+      "People the screening did not fully cover. Read each one's coverage on its person.",
+    ),
+    people_flagged: z.int().describe(
+      "Screened people with a finding: the sum of by_band.",
+    ),
+    people_screened: z.int().describe(
+      "People the screening covered, flagged or not.",
+    ),
+    people_total: z.int().describe(
+      "Every person the screening set out to reach: those no screening had reached and those on watch or escalated.",
     ),
     screening_id: z.string().describe("The screening that finished."),
     status: ScreeningCompletedStatus$zodSchema.describe(
-      "completed reached every attendee; partial left some not fully covered (partial_coverage); failed covered nobody.",
+      "completed reached every person; partial left some not fully covered (partial_coverage); failed covered nobody.",
     ),
   }).describe(
-    "A screening of an event finished. It counts only the attendees this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/events/{environment}/{event_id}/attendees, filtered by band, to act on them. attendees_screened + partial_coverage = attendees_total, attendees_flagged is the sum of by_band, no_footprint counts screened attendees with no flag whose accounts were not found, and no_profile_to_check those the screening had nothing to look up for on any requested platform. A cancelled screening sends no event.",
+    "A screening of a group finished. It counts only the people this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/groups/{environment}/{group_id}/people, filtered by band, to act on them. people_screened + partial_coverage = people_total, people_flagged is the sum of by_band, no_footprint counts screened people with no flag whose accounts were not found, and no_profile_to_check those the screening had nothing to look up for on any requested platform. A cancelled screening sends no event.",
   );

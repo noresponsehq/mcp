@@ -4,7 +4,7 @@ import { HandlePlatform, HandlePlatform$zodSchema } from "./handleplatform.js";
 import { ScreeningMatch, ScreeningMatch$zodSchema } from "./screeningmatch.js";
 
 /**
- * An account the screening matched to the attendee, how it was matched, and how much of it was read.
+ * An account the screening matched to the person, how it was matched, and how much of it was read.
  */
 export type ScreeningProfile = {
   id: string;
@@ -43,7 +43,7 @@ export const ScreeningProfile$zodSchema: z.ZodType<ScreeningProfile> = z.object(
     id: z.string(),
     items_read: z.int(),
     match: ScreeningMatch$zodSchema.describe(
-      "How a profile was matched to the attendee: the state its evidence earns, and the evidence.",
+      "How a profile was matched to the person: the state its evidence earns, and the evidence.",
     ),
     period_from: z.string().optional().describe("The oldest item read."),
     period_to: z.string().optional().describe("The newest item read."),
@@ -53,5 +53,5 @@ export const ScreeningProfile$zodSchema: z.ZodType<ScreeningProfile> = z.object(
     url: z.string(),
   },
 ).describe(
-  "An account the screening matched to the attendee, how it was matched, and how much of it was read.",
+  "An account the screening matched to the person, how it was matched, and how much of it was read.",
 );

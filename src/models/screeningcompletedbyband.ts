@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 /**
- * Screened attendees by the band of their most severe finding.
+ * Screened people by the band of their most severe finding.
  */
 export type ScreeningCompletedByBand = {
   critical: number;
@@ -19,4 +19,4 @@ export const ScreeningCompletedByBand$zodSchema: z.ZodType<
   info: z.int(),
   low: z.int(),
   moderate: z.int(),
-}).describe("Screened attendees by the band of their most severe finding.");
+}).describe("Screened people by the band of their most severe finding.");

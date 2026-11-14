@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 /**
- * A person the event protects.
+ * A person the group protects.
  */
 export type Principal = { name: string; aliases?: Array<string> | undefined };
 
@@ -10,4 +10,4 @@ export const Principal$zodSchema: z.ZodType<Principal> = z.object({
     "Other names the principal goes by, at most 10.",
   ),
   name: z.string().describe("The principal's name."),
-}).describe("A person the event protects.");
+}).describe("A person the group protects.");

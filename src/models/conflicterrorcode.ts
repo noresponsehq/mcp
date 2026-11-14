@@ -31,8 +31,8 @@ export const ConflictErrorCode = {
   MemberLimitReached: "member_limit_reached",
   OwnerInvitePending: "owner_invite_pending",
   AggregateErasedData: "aggregate_erased_data",
-  EventConflict: "event_conflict",
-  EventLimitReached: "event_limit_reached",
+  GroupConflict: "group_conflict",
+  GroupLimitReached: "group_limit_reached",
   ScreeningCapExceeded: "screening_cap_exceeded",
   ScreeningUnavailable: "screening_unavailable",
 } as const;
@@ -68,8 +68,8 @@ export const ConflictErrorCode$zodSchema = z.enum([
   "member_limit_reached",
   "owner_invite_pending",
   "aggregate_erased_data",
-  "event_conflict",
-  "event_limit_reached",
+  "group_conflict",
+  "group_limit_reached",
   "screening_cap_exceeded",
   "screening_unavailable",
 ]).describe("Machine codes an HTTP 409 answer can carry.");

@@ -54,25 +54,25 @@ import { tool$evaluationsGet } from "./tools/evaluationsGet.js";
 import { tool$evaluationsGetResult } from "./tools/evaluationsGetResult.js";
 import { tool$evaluationsList } from "./tools/evaluationsList.js";
 import { tool$evaluationsPublish } from "./tools/evaluationsPublish.js";
-import { tool$eventsAddAttendees } from "./tools/eventsAddAttendees.js";
-import { tool$eventsCancelScreening } from "./tools/eventsCancelScreening.js";
-import { tool$eventsCreate } from "./tools/eventsCreate.js";
-import { tool$eventsDelete } from "./tools/eventsDelete.js";
-import { tool$eventsGet } from "./tools/eventsGet.js";
-import { tool$eventsGetAttendee } from "./tools/eventsGetAttendee.js";
-import { tool$eventsGetScreening } from "./tools/eventsGetScreening.js";
-import { tool$eventsList } from "./tools/eventsList.js";
-import { tool$eventsListAttendees } from "./tools/eventsListAttendees.js";
-import { tool$eventsListScreenings } from "./tools/eventsListScreenings.js";
-import { tool$eventsReviewAttendee } from "./tools/eventsReviewAttendee.js";
-import { tool$eventsStartScreening } from "./tools/eventsStartScreening.js";
-import { tool$eventsUpdate } from "./tools/eventsUpdate.js";
 import { tool$exportsCancel } from "./tools/exportsCancel.js";
 import { tool$exportsCreate } from "./tools/exportsCreate.js";
 import { tool$exportsDownloadChunk } from "./tools/exportsDownloadChunk.js";
 import { tool$exportsGet } from "./tools/exportsGet.js";
 import { tool$exportsList } from "./tools/exportsList.js";
 import { tool$exportsRetry } from "./tools/exportsRetry.js";
+import { tool$groupsAddPeople } from "./tools/groupsAddPeople.js";
+import { tool$groupsCancelScreening } from "./tools/groupsCancelScreening.js";
+import { tool$groupsCreate } from "./tools/groupsCreate.js";
+import { tool$groupsDelete } from "./tools/groupsDelete.js";
+import { tool$groupsGet } from "./tools/groupsGet.js";
+import { tool$groupsGetPerson } from "./tools/groupsGetPerson.js";
+import { tool$groupsGetScreening } from "./tools/groupsGetScreening.js";
+import { tool$groupsList } from "./tools/groupsList.js";
+import { tool$groupsListPeople } from "./tools/groupsListPeople.js";
+import { tool$groupsListScreenings } from "./tools/groupsListScreenings.js";
+import { tool$groupsReviewPerson } from "./tools/groupsReviewPerson.js";
+import { tool$groupsStartScreening } from "./tools/groupsStartScreening.js";
+import { tool$groupsUpdate } from "./tools/groupsUpdate.js";
 import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
 import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
 import { tool$integrationsList } from "./tools/integrationsList.js";
@@ -138,7 +138,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.11.27",
+    version: "0.12.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -279,19 +279,19 @@ export function createMCPServer(deps: {
   tool(tool$evaluationsCancel);
   tool(tool$evaluationsPublish);
   tool(tool$operationsSummarize);
-  tool(tool$eventsList);
-  tool(tool$eventsCreate);
-  tool(tool$eventsGet);
-  tool(tool$eventsUpdate);
-  tool(tool$eventsDelete);
-  tool(tool$eventsListAttendees);
-  tool(tool$eventsAddAttendees);
-  tool(tool$eventsGetAttendee);
-  tool(tool$eventsReviewAttendee);
-  tool(tool$eventsListScreenings);
-  tool(tool$eventsStartScreening);
-  tool(tool$eventsGetScreening);
-  tool(tool$eventsCancelScreening);
+  tool(tool$groupsList);
+  tool(tool$groupsCreate);
+  tool(tool$groupsGet);
+  tool(tool$groupsUpdate);
+  tool(tool$groupsDelete);
+  tool(tool$groupsListPeople);
+  tool(tool$groupsAddPeople);
+  tool(tool$groupsGetPerson);
+  tool(tool$groupsReviewPerson);
+  tool(tool$groupsListScreenings);
+  tool(tool$groupsStartScreening);
+  tool(tool$groupsGetScreening);
+  tool(tool$groupsCancelScreening);
 
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);

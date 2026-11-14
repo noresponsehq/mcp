@@ -24,7 +24,7 @@ import {
 export type CancelScreeningRequest = {
   workspace_id: string;
   environment: KeyEnvironment;
-  event_id: string;
+  group_id: string;
   screening_id: string;
   body: ScreeningCancelRequest;
 };
@@ -36,7 +36,7 @@ export const CancelScreeningRequest$zodSchema: z.ZodType<
   environment: KeyEnvironment$zodSchema.describe(
     "The environment: live or test. Each has its own settings. Any other value answers 400. An API key reads and changes only its own environment's; the other answers 404.",
   ),
-  event_id: z.string(),
+  group_id: z.string(),
   screening_id: z.string(),
   workspace_id: z.string().describe(
     "Your workspace id, as each key lists it in workspace_id. Another workspace, a malformed id and a test environment's id answer 404.",
