@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.12.1
+
+No changes detected.
+
 ## 0.12.0
 
 * `SDK.webhookEndpoints.aggregate()`:  `response.code` **Changed** (Breaking ⚠️)

@@ -47,7 +47,7 @@ export type Invite = {
 export const Invite$zodSchema: z.ZodType<Invite> = z.object({
   created_at: z.string(),
   created_by: z.string().describe(
-    "The stable member id that issued this invite, or the authenticated live API key prefix for members_manage automation. Reissuing preserves the original creator; the audit event names the reissuing actor.",
+    "The stable member id that issued this invite, the authenticated live API key prefix for members_manage automation, or, for an invite NoResponse issued for the workspace, NoResponse's own id (adm_ or nrc_). Reissuing preserves the original creator; the audit event names the reissuing actor.",
   ),
   denied_actions: z.array(InviteDeniedAction$zodSchema).optional().describe(
     "Independent removals from a built-in preset: sensitive evidence, exports, or active policy publication. Owners retain full authority. Omitted member updates preserve exclusions.",
