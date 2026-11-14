@@ -1,4 +1,8 @@
 import * as z from "zod";
+import {
+  RecordDistinctive,
+  RecordDistinctive$zodSchema,
+} from "./recorddistinctive.js";
 import { RecordKind, RecordKind$zodSchema } from "./recordkind.js";
 import { RecordRole, RecordRole$zodSchema } from "./recordrole.js";
 
@@ -12,11 +16,15 @@ export type RecordField = {
   role?: RecordRole | undefined;
   value?: string | undefined;
   detail?: string | undefined;
+  distinctive?: RecordDistinctive | undefined;
 };
 
 export const RecordField$zodSchema: z.ZodType<RecordField> = z.object({
   detail: z.string().optional().describe(
     "What the value shows of itself beyond its kind: the likely algorithm of a hash, the likely coin of a crypto address or the currency of an amount.",
+  ),
+  distinctive: RecordDistinctive$zodSchema.optional().describe(
+    "How distinctive a searchable value is: an email, phone, username, password, hash, person name or IP. Absent for other values, and when its rating could not be worked out, such as when a count failed.",
   ),
   field: z.string().describe(
     "The source's own name for the field. A nested value's name is dotted, and a list element's carries its index.",
