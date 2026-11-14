@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.3
+
+* `SDK.groups.getPerson()`:  `response.profiles[].record.fields[]` **Changed** (Breaking ⚠️)
+
 ## 0.13.2
 
 * `SDK.groups.getPerson()`:  `response.lookup.remaining` **Added**
