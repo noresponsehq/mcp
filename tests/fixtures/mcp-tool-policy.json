@@ -635,6 +635,13 @@
     "destructiveHint": false
   },
   {
+    "name": "judge_record",
+    "title": "Join one of a person's records to them, or reject it",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
     "name": "list_screenings",
     "title": "Read a group's screenings",
     "readOnlyHint": true,

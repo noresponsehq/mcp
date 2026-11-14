@@ -58,7 +58,7 @@ export const ScreeningProfile$zodSchema: z.ZodType<ScreeningProfile> = z.object(
       "Why fewer posts were read than the screening's depth asks for while the account holds more. platform_limit: the platform shows the screening no more of them. page_limit: the pages a screening reads ran out first. rate_limited or unavailable: a later page was held back or failed; the posts before it are kept and the person is partial. Absent when the account was read to its end or to the depth.",
     ),
     record: RecordT$zodSchema.optional().describe(
-      "One answer from one source: where it came from, what found it and every field it holds.",
+      "One answer from one source: where it came from, what found it and every field it holds. A person's lookup records also say how likely each is the person.",
     ),
     url: z.string(),
   },

@@ -421,6 +421,10 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Record a decision on a person.\n\nRecord a cleared, watch or escalated decision with a note. The latest decision is the person's; the next screening refreshes everyone on watch or escalated."
   },
   {
+    "name": "judge_record",
+    "description": "Join one of a person's records to them, or reject it.\n\nJoin one of a person's lookup records to them whatever its likelihood, or reject it so it stays a lead. The verdict sticks while lookups find the same record."
+  },
+  {
     "name": "list_screenings",
     "description": "List a group's screenings.\n\nList a group's screenings, newest first."
   },
