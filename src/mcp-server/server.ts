@@ -72,7 +72,9 @@ import { tool$groupsList } from "./tools/groupsList.js";
 import { tool$groupsListPeople } from "./tools/groupsListPeople.js";
 import { tool$groupsListScreenings } from "./tools/groupsListScreenings.js";
 import { tool$groupsReviewPerson } from "./tools/groupsReviewPerson.js";
+import { tool$groupsRunSearch } from "./tools/groupsRunSearch.js";
 import { tool$groupsStartScreening } from "./tools/groupsStartScreening.js";
+import { tool$groupsStartSearch } from "./tools/groupsStartSearch.js";
 import { tool$groupsUpdate } from "./tools/groupsUpdate.js";
 import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
 import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
@@ -139,7 +141,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.13.7",
+    version: "0.13.8",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -290,6 +292,8 @@ export function createMCPServer(deps: {
   tool(tool$groupsGetPerson);
   tool(tool$groupsReviewPerson);
   tool(tool$groupsJudgeRecord);
+  tool(tool$groupsStartSearch);
+  tool(tool$groupsRunSearch);
   tool(tool$groupsListScreenings);
   tool(tool$groupsStartScreening);
   tool(tool$groupsGetScreening);

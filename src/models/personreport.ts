@@ -16,6 +16,7 @@ import {
   ScreeningProfile,
   ScreeningProfile$zodSchema,
 } from "./screeningprofile.js";
+import { Search, Search$zodSchema } from "./search.js";
 
 /**
  * Everything known about one person, and where else in the environment they appear.
@@ -28,6 +29,7 @@ export type PersonReport = {
   media: Array<ScreeningMedia>;
   reviews: Array<PersonReview>;
   lookup?: ScreeningLookup | undefined;
+  searches?: Array<Search> | undefined;
   other_groups: OtherGroups;
 };
 
@@ -55,6 +57,9 @@ export const PersonReport$zodSchema: z.ZodType<PersonReport> = z.object({
   ),
   reviews: z.array(PersonReview$zodSchema).describe(
     "Every recorded decision, oldest first.",
+  ),
+  searches: z.array(Search$zodSchema).optional().describe(
+    "The searches people started on this person's values, newest first: each names the value, and the record and field it came from. Absent when nobody searched.",
   ),
 }).describe(
   "Everything known about one person, and where else in the environment they appear.",

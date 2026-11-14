@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.13.8
+
+* `SDK.groups.startSearch()`: **Added**
+* `SDK.groups.runSearch()`: **Added**
+* `SDK.groups.getPerson()`:  `response` **Changed**
+
 ## 0.13.7
 
 No changes detected.

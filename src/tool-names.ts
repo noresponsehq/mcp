@@ -425,6 +425,14 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Join one of a person's records to them, or reject it.\n\nJoin one of a person's lookup records to them whatever its likelihood, or reject it so it stays a lead. The verdict sticks while lookups find the same record."
   },
   {
+    "name": "start_search",
+    "description": "Search again on a value of one of a person's records.\n\nSearch again on the value of one field of one of a person's records, named by the record and field. Nothing searches again by itself. A password or hash search counts its breach rows first and runs only when you run it; read the person to see each search and what it found."
+  },
+  {
+    "name": "run_search",
+    "description": "Run a counted password or hash search.\n\nRun a counted password or hash search once you have seen how many breach rows hold the value."
+  },
+  {
     "name": "list_screenings",
     "description": "List a group's screenings.\n\nList a group's screenings, newest first."
   },

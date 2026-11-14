@@ -7,6 +7,7 @@ import { RecordSource, RecordSource$zodSchema } from "./recordsource.js";
 export type RecordRemaining = {
   source: RecordSource;
   by: string;
+  search?: string | undefined;
   rows: number;
 };
 
@@ -16,6 +17,9 @@ export const RecordRemaining$zodSchema: z.ZodType<RecordRemaining> = z.object({
   ),
   rows: z.int().describe(
     "How many rows of the source that search matched beyond the records the lookup carries.",
+  ),
+  search: z.string().optional().describe(
+    "The search a person started that matched the rows. Searching the same field again with this source's table fetches them.",
   ),
   source: RecordSource$zodSchema.describe("Where a record came from."),
 }).describe(
