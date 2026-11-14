@@ -110,7 +110,7 @@ for (const transport of ["stdio", "worker"]) {
       assert.deepEqual(json(result).items[0].shared_identifiers, page.items[0].shared_identifiers);
       assert.equal(api.requests.length, 1);
       const url = new URL(api.requests[0].path, "https://example.com");
-      assert.equal(url.pathname, `/v1/accounts/${page.account_id}/linked_accounts`);
+      assert.equal(url.pathname, `/v1/accounts/${page.account_id}/links`);
       assert.equal(url.searchParams.get("limit"), "1");
       assert.equal(url.searchParams.get("cursor"), "next_fixture");
       assert.equal(api.requests[0].headers.authorization, `Bearer ${CALLER_KEY}`);

@@ -91,7 +91,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc("/v1/workspaces/{workspace_id}/audit_events")(
+  const path$ = pathToFunc("/v1/workspaces/{workspace_id}/audit")(
     pathParams$,
   );
   const query$ = encodeFormQuery({

@@ -95,9 +95,7 @@ async function $do(
       charEncoding: "percent",
     }),
   };
-  const path$ = pathToFunc(
-    "/v1/workspaces/{workspace_id}/review_views/{environment}",
-  )(
+  const path$ = pathToFunc("/v1/workspaces/{workspace_id}/views/{environment}")(
     pathParams$,
   );
 
