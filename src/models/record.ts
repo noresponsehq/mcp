@@ -16,7 +16,7 @@ export type RecordT = {
 
 export const RecordT$zodSchema: z.ZodType<RecordT> = z.object({
   fields: z.array(RecordField$zodSchema).describe(
-    "Every field the source returned, in the order the source's connector lists them.",
+    "Every field the source returned, in the order the source's connector lists them; a breach row's columns in name order. Nothing is withheld: a breach row's passwords, hashes and salts are fields like any other.",
   ),
   id: z.string().describe(
     "Made from the source and the fields' names and original values, so the same answer found twice is one record with the same id.",

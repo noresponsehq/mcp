@@ -19,7 +19,7 @@ export const RecordField$zodSchema: z.ZodType<RecordField> = z.object({
     "What sort of value the field holds. Absent until the field's kind is known.",
   ),
   original: z.string().describe(
-    "The value as the source wrote it. A count is written in decimal and a time in RFC 3339.",
+    "The value as the source wrote it. A count is written in decimal and a time in RFC 3339; a breach column's value is as the leak holds it.",
   ),
   role: z.string().optional().describe(
     "Which common field it is, where many sources share it, such as handle, display_name, account_id, profile_link, picture, bio, website, linked_account (named by its network), account_status, joined, last_updated, organisation, location, followers, following or posts. Absent for a field only this source returns.",

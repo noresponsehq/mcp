@@ -1,5 +1,9 @@
 import * as z from "zod";
 import { RecordT, RecordT$zodSchema } from "./record.js";
+import {
+  RecordRemaining,
+  RecordRemaining$zodSchema,
+} from "./recordremaining.js";
 import { RiskDetails, RiskDetails$zodSchema } from "./riskdetails.js";
 import { RiskSummary, RiskSummary$zodSchema } from "./risksummary.js";
 import {
@@ -15,6 +19,7 @@ export type ScreeningLookup = {
   summary?: RiskSummary | undefined;
   details?: RiskDetails | undefined;
   records?: Array<RecordT> | undefined;
+  remaining?: Array<RecordRemaining> | undefined;
   looked_at: string;
 };
 
@@ -27,7 +32,10 @@ export const ScreeningLookup$zodSchema: z.ZodType<ScreeningLookup> = z.object({
   ),
   looked_at: z.string().describe("When the lookups ran."),
   records: z.array(RecordT$zodSchema).optional().describe(
-    "What each source that found an account answered, whole: every field under the source's own names, each answer once. Served only to a caller who may read evidence, as details are.",
+    "What each source answered, whole, each answer once: every field of each account a connector found, and every column of each breach row the person's email or usernames matched, under the source's own names. Anyone who may read the person reads them: no extra permission applies, breach passwords and hashes included.",
+  ),
+  remaining: z.array(RecordRemaining$zodSchema).optional().describe(
+    "For each search and source whose matched rows records leave out, how many: a breach search returns at most 20 rows of a table and 100 in all, from its first 64 tables by name. Absent when records hold every matched row.",
   ),
   summary: RiskSummary$zodSchema.optional().describe(
     "A few typed facts per identifier: an assessment's risk.summary, and a screened person's lookup summary. Every fact is optional: absent means the evidence did not answer and makes no claim, while false or 0 is a definite answer.",
