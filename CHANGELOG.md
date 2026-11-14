@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.7
+
+No changes detected.
+
 ## 0.13.6
 
 * `SDK.groups.judgeRecord()`: **Added**
