@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.4
+
+* `SDK.groups.getPerson()`:  `response` **Changed**
+
 ## 0.13.3
 
 * `SDK.groups.getPerson()`:  `response.profiles[].record.fields[]` **Changed** (Breaking ⚠️)
