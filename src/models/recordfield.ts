@@ -39,6 +39,6 @@ export const RecordField$zodSchema: z.ZodType<RecordField> = z.object({
     "Which common field a value is, where many sources share it: a join date and a birth date are both dates, with the roles joined and born. A platform account's field and a breach row's column with the same meaning carry the same kind and role. A linked_account field is named by its network. Absent for a field only its source returns. Each role's description names the kinds its values have.",
   ),
   value: z.string().optional().describe(
-    "The value cleaned to its kind's one form: an email in lower case, a phone number in international form when its country is known, a date in ISO form, a country as its two-letter code, a flag as true or false. Absent when the value cannot be cleaned as its kind; original still holds it.",
+    "The value cleaned to its kind's one form: an email in lower case, a phone number in international form when its country is known, a date in ISO form, a country as its two-letter code, a flag as true or false. Absent when the value cannot be cleaned as its kind, or when the source masked it or cut it short, with a run of asterisks or bullets or a trailing ellipsis, in a kind that links people or is searched again; original still holds it.",
   ),
 }).describe("One value a source returned.");
