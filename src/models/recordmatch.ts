@@ -11,7 +11,7 @@ export type RecordMatch = {
 
 export const RecordMatch$zodSchema: z.ZodType<RecordMatch> = z.object({
   by: z.string().describe(
-    "The kind of searched value: email, phone, username, ip, name, password, hash, or handle for a profile read of a handle.",
+    "The kind of searched value: email, phone, username, ip, name, password, hash, domain, or handle for a profile read of a handle.",
   ),
   field: z.string().optional().describe(
     "The field the searched value hit, when the record holds it.",

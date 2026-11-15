@@ -42,7 +42,9 @@ export const Search$zodSchema: z.ZodType<Search> = z.object({
   found: z.int().describe(
     "How many records the search found. They are among the person report's lookup records, each match naming this search.",
   ),
-  kind: SearchKind$zodSchema.describe("The kind of the value searched."),
+  kind: SearchKind$zodSchema.describe(
+    "The kind of the value searched. A domain search finds the leaked rows of every email address at the domain.",
+  ),
   record_id: z.string().describe("The record whose value led to the search."),
   requested_by: z.string().describe("Who started the search."),
   rows: z.int().optional().describe(

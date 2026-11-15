@@ -2,7 +2,7 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 
 /**
- * The kind of the value searched.
+ * The kind of the value searched. A domain search finds the leaked rows of every email address at the domain.
  */
 export const SearchKind = {
   Email: "email",
@@ -12,9 +12,10 @@ export const SearchKind = {
   Password: "password",
   Hash: "hash",
   Ip: "ip",
+  Domain: "domain",
 } as const;
 /**
- * The kind of the value searched.
+ * The kind of the value searched. A domain search finds the leaked rows of every email address at the domain.
  */
 export type SearchKind = ClosedEnum<typeof SearchKind>;
 
@@ -26,4 +27,7 @@ export const SearchKind$zodSchema = z.enum([
   "password",
   "hash",
   "ip",
-]).describe("The kind of the value searched.");
+  "domain",
+]).describe(
+  "The kind of the value searched. A domain search finds the leaked rows of every email address at the domain.",
+);

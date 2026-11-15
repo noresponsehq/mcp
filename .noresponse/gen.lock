@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 67cdab0319ac051a26295a11fa860d60
+  docChecksum: cb74c8fd7c7ac463493a1e14e4572b01
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.13.21
-  configChecksum: 1e04ebab562191cbb524520b4e3efcf4
+  releaseVersion: 0.13.22
+  configChecksum: f9fc9f3d0778ff9d6657b40747e22d00
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -36,11 +36,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:f9e3ede59b48f59576662093764e5eeb5235161b
+    last_write_checksum: sha1:6474eac14b0bb3891b10086a5e69279da67df89a
   package.json:
-    last_write_checksum: sha1:d889e47e3935ca4563ee16c18e3ee480b1d38fb2
+    last_write_checksum: sha1:1bd4848c52eecfdfc37510c7eb93c19da390550b
   server.json:
-    last_write_checksum: sha1:11958f93ee2ac496725bef52cde56a731a7cef85
+    last_write_checksum: sha1:b7bc6e24155e34181464304c4c8acb08b331dc7b
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -288,7 +288,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:f9fdc3641f40b3c490204d1035412cdcff071c39
+    last_write_checksum: sha1:e0d1fe8670f45ac205466a64be4e68e261214887
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -332,7 +332,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:bfacf546019ae5979a84e9ff39f7c94f9807dab9
+    last_write_checksum: sha1:75e4e01827666d3ddd1fbc8a163c54060ab40c15
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -340,7 +340,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:27df26e93e9e70bd3a1f1415a7290ece43b4eb88
+    last_write_checksum: sha1:639a2827248fe5812081418099562a55c285aeb8
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -1368,7 +1368,7 @@ trackedFiles:
   src/models/recordkind.ts:
     last_write_checksum: sha1:47ff556ebae2a27c82da1d07907a491f97083b29
   src/models/recordmatch.ts:
-    last_write_checksum: sha1:d56a84fff18f2c3e682c68f776e893e32af25a1b
+    last_write_checksum: sha1:98da470c756494095a335cec5b7f301278b458c6
   src/models/recordremaining.ts:
     last_write_checksum: sha1:7304377a7c0e7f3bfa48694417b00c16dc9d832d
   src/models/recordrole.ts:
@@ -1564,13 +1564,13 @@ trackedFiles:
   src/models/screeningstatus.ts:
     last_write_checksum: sha1:8d5d8862e7f3d620fb7c315d4ec91810b910081d
   src/models/search.ts:
-    last_write_checksum: sha1:24abb0039677836feb171e1f5c8f556cb561550d
+    last_write_checksum: sha1:ca098f0c57f80c420a3978410ce88a99ac2aef19
   src/models/searchaccountsop.ts:
     last_write_checksum: sha1:63d4414d7a0fc9340bf43d8b0cb56d8ebe33b76a
   src/models/searchassessmentsop.ts:
     last_write_checksum: sha1:0accde40833eefbb3740b910dcf1a8aa99b06755
   src/models/searchkind.ts:
-    last_write_checksum: sha1:c03ec2c9f0c7b7da783f74213ab3c65ea6dc7207
+    last_write_checksum: sha1:255738071139141e16f04b58786a31f8dc48e787
   src/models/searchrequest.ts:
     last_write_checksum: sha1:153046eb6f767b1312e9c2af24130416ca8ac1fe
   src/models/searchstatus.ts:
@@ -4259,7 +4259,7 @@ examples:
         application/json: {"record_id": "rec_3f9a1c22d4e5b6a73f9a1c22d4e5b6a7", "field": "username", "table": "FORUM_EXAMPLE_COM_2019"}
       responses:
         "202":
-          application/json: {"search_id": "srh_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "record_id": "rec_3f9a1c22d4e5b6a73f9a1c22d4e5b6a7", "field": "username", "table": "FORUM_EXAMPLE_COM_2019", "kind": "email", "value": "jordanexample42", "status": "completed", "sources": 369225, "answered": 317146, "found": 776513, "estimated_spend": 346465, "spent": 341223, "requested_by": "user_2abc", "created_at": "2026-01-01T00:00:00Z", "finished_at": "2026-01-01T00:00:05Z"}
+          application/json: {"search_id": "srh_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "record_id": "rec_3f9a1c22d4e5b6a73f9a1c22d4e5b6a7", "field": "username", "table": "FORUM_EXAMPLE_COM_2019", "kind": "phone", "value": "jordanexample42", "status": "completed", "sources": 369225, "answered": 317146, "found": 776513, "estimated_spend": 346465, "spent": 341223, "requested_by": "user_2abc", "created_at": "2026-01-01T00:00:00Z", "finished_at": "2026-01-01T00:00:05Z"}
         "400":
           application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "webhook_url_refused", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
         "401":
