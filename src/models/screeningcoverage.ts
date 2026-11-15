@@ -18,6 +18,7 @@ export type ScreeningCoverage = {
   items_read: number;
   items_not_analysed?: number | undefined;
   not_analysed_by_reason?: Array<ScreeningNotAnalysedCount> | undefined;
+  items_frame_only?: number | undefined;
   period_from?: string | undefined;
   period_to?: string | undefined;
   platforms: Array<ScreeningPlatformCoverage>;
@@ -28,6 +29,9 @@ export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
   .object({
     accounts_accessible: z.int(),
     accounts_found: z.int(),
+    items_frame_only: z.int().optional().describe(
+      "Videos the analyser read from their cover frame and caption alone, without their sound or later frames. They count as analysed and do not make the person partial. Left out when none.",
+    ),
     items_not_analysed: z.int().optional().describe(
       "Items read that the analyser could not analyse. Above zero, the person is partial: a finding may be missing from them.",
     ),
