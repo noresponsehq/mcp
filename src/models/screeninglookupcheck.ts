@@ -9,6 +9,10 @@ import {
   ScreeningLookupCheckStatus,
   ScreeningLookupCheckStatus$zodSchema,
 } from "./screeninglookupcheckstatus.js";
+import {
+  ScreeningLookupCheckUnansweredItem,
+  ScreeningLookupCheckUnansweredItem$zodSchema,
+} from "./screeninglookupcheckunanswereditem.js";
 
 /**
  * What came of one lane of the lookups for one identifier.
@@ -21,6 +25,7 @@ export type ScreeningLookupCheck = {
   answered: number;
   found: number;
   reason?: FailureReason | undefined;
+  unanswered?: Array<ScreeningLookupCheckUnansweredItem> | undefined;
 };
 
 export const ScreeningLookupCheck$zodSchema: z.ZodType<ScreeningLookupCheck> = z
@@ -40,4 +45,8 @@ export const ScreeningLookupCheck$zodSchema: z.ZodType<ScreeningLookupCheck> = z
     status: ScreeningLookupCheckStatus$zodSchema.describe(
       "found: a source found the identifier. not_found: every source answered and none found it. partial: the sources that answered found nothing and the others did not answer. not_covered: no source answered. A lookup that failed reads partial or not_covered, not not_found.",
     ),
+    unanswered: z.array(ScreeningLookupCheckUnansweredItem$zodSchema).optional()
+      .describe(
+        "Each source that did not give a definite answer, by connector, with why: the same connector id a record's source names. A source of the lane that no connector covers is counted in sources and not named here.",
+      ),
   }).describe("What came of one lane of the lookups for one identifier.");
