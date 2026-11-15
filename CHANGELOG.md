@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.27
+
+No changes detected.
+
 ## 0.13.26
 
 * `SDK.groups.listScreenings()`:  `response.items[].platforms[].enum(chesscom)` **Added** (Breaking ⚠️)

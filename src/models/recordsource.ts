@@ -16,7 +16,7 @@ export const RecordSource$zodSchema: z.ZodType<RecordSource> = z.object({
     "The id of the connector that read the record: breach for a breach row.",
   ),
   date: z.string().optional().describe(
-    "When the source's data dates from, at the precision it is known: YYYY or YYYY-MM for a breach table.",
+    "When the source's data dates from, at the precision it is known: YYYY or YYYY-MM for a breach table, and YYYY-MM-DD, the day the computer was infected, for a row of a stealer log.",
   ),
   kind: z.string().describe(
     "The kind of source: platform for an account read off a live platform; for a breach row, the kind of leak its table is: site_breach, credential_list, stealer_log, scrape, hacking_forum, abuse_service or darkweb_site; domain_registry for an email domain's registry record and domain_dns for its mail records.",
