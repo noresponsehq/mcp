@@ -31,7 +31,7 @@ export const RecordT$zodSchema: z.ZodType<RecordT> = z.object({
     "Every field the source returned, in the order the source's connector lists them; a breach row's columns in name order. Nothing is withheld: a breach row's passwords, hashes and salts are fields like any other.",
   ),
   id: z.string().describe(
-    "Made from the source and the fields' names and original values, so the same answer found twice is one record with the same id.",
+    "Made from the source and the fields' names and original values, so the same answer found twice is one record with the same id. Its fields are typed as its latest finding typed them.",
   ),
   joined: z.boolean().optional().describe(
     "Whether the record joins the person: its likelihood reached 0.9 or a reviewer joined it, and no reviewer rejected it. A record that does not join stays a lead.",
