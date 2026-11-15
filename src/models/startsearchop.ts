@@ -23,6 +23,7 @@ export type StartSearchRequest = {
   environment: KeyEnvironment;
   group_id: string;
   person_id: string;
+  idempotencyKey?: string | undefined;
   body: SearchRequest;
 };
 
@@ -33,6 +34,9 @@ export const StartSearchRequest$zodSchema: z.ZodType<StartSearchRequest> = z
       "The environment: live or test. Each has its own settings. Any other value answers 400. An API key reads and changes only its own environment's; the other answers 404.",
     ),
     group_id: z.string(),
+    idempotencyKey: z.string().describe(
+      "Opaque request key, 16 to 128 characters. Repeating the key and request returns the same resource in its current state while it is retained. A different request with the same key answers 409. Use a new key for a deliberate new operation. Keys are scoped to the environment and operation; person searches also scope them to the group and person.",
+    ).optional(),
     person_id: z.string(),
     workspace_id: z.string().describe(
       "Your workspace id, as each key lists it in workspace_id. Another workspace, a malformed id and a test environment's id answer 404.",

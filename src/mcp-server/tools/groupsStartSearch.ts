@@ -10,7 +10,7 @@ export const tool$groupsStartSearch: ToolDefinition<typeof args> = {
   name: "start_search",
   description: `Search again on a value of one of a person's records.
 
-Search again on the value of one field of one of a person's records, named by the record and field. Nothing searches again by itself. A password or hash search counts its breach rows first and runs only when you run it; read the person to see each search and what it found.`,
+Search again on the value of one field of one of a person's records, named by the record and field. Nothing searches again by itself. A password or hash search counts its breach rows first and runs only when you run it; read the person to see each search and what it found. Send an Idempotency-Key to return the same search after a lost answer, even after it completes. A different request with the same key returns 409. Use a new key for a deliberate new search.`,
   annotations: {
     "title": "Search again on a value of one of a person's records",
     "destructiveHint": false,

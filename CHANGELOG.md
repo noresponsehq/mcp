@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.13.40
+
+* `SDK.groups.create()`: 
+  *  `request.Idempotency-Key` **Added**
+* `SDK.groups.startSearch()`: 
+  *  `request.Idempotency-Key` **Added**
+
 ## 0.13.39
 
 No changes detected.

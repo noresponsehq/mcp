@@ -10,7 +10,7 @@ export const tool$groupsCreate: ToolDefinition<typeof args> = {
   name: "create_group",
   description: `Create a group to screen.
 
-Create a group to screen: its name, start, venue, host, the principals it protects and the sensitive topics posts are read against. An environment holds at most 1000 groups.`,
+Create a group to screen: its name, start, venue, host, the principals it protects and the sensitive topics posts are read against. An environment holds at most 1000 groups. Send an Idempotency-Key to repeat a request safely while the group is retained. A replay returns the same group in its current state; changed input returns 409.`,
   annotations: {
     "title": "Create a group with its principals and sensitive topics",
     "destructiveHint": false,

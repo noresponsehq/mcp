@@ -30,7 +30,7 @@ export enum StartSearchAcceptEnum {
  * Search again on a value of one of a person's records.
  *
  * @remarks
- * Search again on the value of one field of one of a person's records, named by the record and field. Nothing searches again by itself. A password or hash search counts its breach rows first and runs only when you run it; read the person to see each search and what it found.
+ * Search again on the value of one field of one of a person's records, named by the record and field. Nothing searches again by itself. A password or hash search counts its breach rows first and runs only when you run it; read the person to see each search and what it found. Send an Idempotency-Key to return the same search after a lost answer, even after it completes. A different request with the same key returns 409. Use a new key for a deliberate new search.
  */
 export function groupsStartSearch(
   client$: NoResponseCore,
@@ -113,6 +113,11 @@ async function $do(
     "Content-Type": "application/json",
     Accept: options?.acceptHeaderOverride
       || "application/json;q=1, application/problem+json;q=0",
+    "Idempotency-Key": encodeSimple(
+      "Idempotency-Key",
+      payload$.idempotencyKey,
+      { explode: false, charEncoding: "none" },
+    ),
   }));
   const securityInput = await extractSecurity(client$._options.security);
   const requestSecurity = resolveGlobalSecurity(securityInput);
@@ -124,24 +129,8 @@ async function $do(
     oAuth2Scopes: null,
     resolvedSecurity: requestSecurity,
     securitySource: client$._options.security,
-    retryConfig: options?.retries
-      || client$._options.retryConfig
-      || {
-        strategy: "backoff",
-        backoff: {
-          initialInterval: 500,
-          maxInterval: 8000,
-          exponent: 2,
-          maxElapsedTime: 30000,
-        },
-        retryConnectionErrors: true,
-      }
-      || { strategy: "none" },
-    retryCodes: options?.retryCodes || [
-      "408",
-      "429",
-      "5XX",
-    ],
+    retryConfig: options?.retries || { strategy: "none" },
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
 
   const requestRes = client$._createRequest(context, {

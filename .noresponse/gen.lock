@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: df9d46860b33557f4e2e1a60145b4912
+  docChecksum: 742b60f7aae19db92f8b3965d218c2bb
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.13.39
-  configChecksum: 22445ed60a399cb36fae907f6af90ad4
+  releaseVersion: 0.13.40
+  configChecksum: 19dd969d47be3abbbe30434232deb7a8
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -36,11 +36,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:ceb1516ee850a8e43ef00df33753fdab1094a3a0
+    last_write_checksum: sha1:c7475801b075980c5df1af32ecdecf0ebb790fc2
   package.json:
-    last_write_checksum: sha1:947ee655a950baad08d312b79927b862a9462c46
+    last_write_checksum: sha1:8fc8cb86d011ae63dd300ea04540d599d93e3b20
   server.json:
-    last_write_checksum: sha1:eb93dc8ca99149474ff326e9812bd0fd130f2008
+    last_write_checksum: sha1:07576208413bd4c18e0d6114f75a718b278a7c99
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -140,7 +140,7 @@ trackedFiles:
   src/funcs/groupsCancelScreening.ts:
     last_write_checksum: sha1:b2e59035b3394314c20e41d097af897f388b4bc6
   src/funcs/groupsCreate.ts:
-    last_write_checksum: sha1:a57b6f665af09a261d240e3e3e517342b889a368
+    last_write_checksum: sha1:4c4e8806b90d320afe3140c89925ffee7e5342cd
   src/funcs/groupsDelete.ts:
     last_write_checksum: sha1:846f9ddaba130c926993f6afd271d0b8dc3d5679
   src/funcs/groupsGet.ts:
@@ -164,7 +164,7 @@ trackedFiles:
   src/funcs/groupsStartScreening.ts:
     last_write_checksum: sha1:c92ec98df588aba5d1a623ba6bff8c587c297965
   src/funcs/groupsStartSearch.ts:
-    last_write_checksum: sha1:2ddd1d90a6b3444c6d286934c452709373f3e989
+    last_write_checksum: sha1:4347464f01bd0aa01e52e8152622daa32e3a4ff0
   src/funcs/groupsUpdate.ts:
     last_write_checksum: sha1:2c580a68ae02d5255df3f8acef58bd6aa6023015
   src/funcs/integrationsCreate.ts:
@@ -288,7 +288,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:e9f64c3b7244a6ec0367d01da2eae8deb209bb15
+    last_write_checksum: sha1:b445f726668c9130c9ad5f356334f97f6ddff475
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -332,7 +332,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:a34aaab0905bd693499541f98b6669419507a910
+    last_write_checksum: sha1:8968de01573e5bad3ada2ccc5f493558790d49db
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -340,7 +340,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:ca74854fd3ca617f81eb7b9d16ff21822d3da2e7
+    last_write_checksum: sha1:42c4bc5e5ff4c0ee4afe342db3a02bb292730763
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -440,7 +440,7 @@ trackedFiles:
   src/mcp-server/tools/groupsCancelScreening.ts:
     last_write_checksum: sha1:2b8a198b938a3ac0d3ee4eb031a0bd20a2968d7a
   src/mcp-server/tools/groupsCreate.ts:
-    last_write_checksum: sha1:5b5f0712a8c7d8cf816223cb8e3b9f5d558b4acf
+    last_write_checksum: sha1:f8ec991df98ae803651ad92a80bcb9a44b40b9c4
   src/mcp-server/tools/groupsDelete.ts:
     last_write_checksum: sha1:c75296e7ac6e54754dedfa165416fa177c6a9e36
   src/mcp-server/tools/groupsGet.ts:
@@ -464,7 +464,7 @@ trackedFiles:
   src/mcp-server/tools/groupsStartScreening.ts:
     last_write_checksum: sha1:09606e4f324d94b7580a9f50f080000407d05492
   src/mcp-server/tools/groupsStartSearch.ts:
-    last_write_checksum: sha1:18b86a0ab3fee39304d8d3969d548cd3cd1b2464
+    last_write_checksum: sha1:b58385c7ab057ad4c1939c0ee9eee6bbe19460ab
   src/mcp-server/tools/groupsUpdate.ts:
     last_write_checksum: sha1:a6041d9eb4fd738530104497d0064949d9b7cca8
   src/mcp-server/tools/integrationsCreate.ts:
@@ -806,7 +806,7 @@ trackedFiles:
   src/models/createcustomerexportop.ts:
     last_write_checksum: sha1:b9ea79fb1a097930740502f18781e82ed9824af9
   src/models/creategroupop.ts:
-    last_write_checksum: sha1:15d093695263c5ade4a472b6c59270a1972f27a7
+    last_write_checksum: sha1:2b39841c6310661579296d54100308cc5e0f28dc
   src/models/createintegrationop.ts:
     last_write_checksum: sha1:d43d033cfa81b19b9dc1f5151951227070e435d8
   src/models/createinviteop.ts:
@@ -1606,7 +1606,7 @@ trackedFiles:
   src/models/startscreeningop.ts:
     last_write_checksum: sha1:1509566d6e52d75a8ed359d1be3c4b27979601e3
   src/models/startsearchop.ts:
-    last_write_checksum: sha1:3e0144e1f80745d6e79199b7cf1010c4389d0f00
+    last_write_checksum: sha1:04b9f8c5c2b58b8f972a18a78d673d4414897e40
   src/models/status.ts:
     last_write_checksum: sha1:a62874af3b975b8b60a56cfbb1aa812906946692
   src/models/summarizeworkspaceoperationsop.ts:
@@ -1688,7 +1688,7 @@ trackedFiles:
   src/models/workspaceoperationssummaryrequest.ts:
     last_write_checksum: sha1:3b708bc13bd5744f53045280ef67a67332bc29f7
   src/tool-names.ts:
-    last_write_checksum: sha1:4d83c5750b8384a07334f6fbfc36092c12cea635
+    last_write_checksum: sha1:7da3228f297f86ce103d40edb2b83e40d74cfa56
   src/types/async.ts:
     last_write_checksum: sha1:ebc27b1229fbbe1835d89ec484c7fa28188b9cf4
   src/types/bigint.ts:
@@ -4053,6 +4053,8 @@ examples:
         path:
           workspace_id: "tnt_01JA2Z8K6Q4V7W9XBCDEFGHJKM"
           environment: "live"
+        header:
+          Idempotency-Key: "request-01JA2Z8K6Q4V7W9XBCDEFGHJKM"
       requestBody:
         application/json: {"name": "Annual shareholder meeting", "starts_at": "2026-01-01T00:00:00Z", "ends_at": "2026-01-02T00:00:00Z", "venue": "Example Convention Centre", "host": "Example Holdings", "principals": [{"name": "Alex Principal", "aliases": ["Alex P"]}], "topics": ["executive pay"]}
       responses:
@@ -4255,6 +4257,8 @@ examples:
           environment: "live"
           group_id: "grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM"
           person_id: "per_01JA2Z8K6Q4V7W9XBCDEFGHJKM"
+        header:
+          Idempotency-Key: "request-01JA2Z8K6Q4V7W9XBCDEFGHJKM"
       requestBody:
         application/json: {"record_id": "rec_3f9a1c22d4e5b6a73f9a1c22d4e5b6a7", "field": "username", "table": "FORUM_EXAMPLE_COM_2019"}
       responses:
