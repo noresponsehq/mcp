@@ -30,7 +30,7 @@ export enum UpdateAcceptEnum {
  * Change a group.
  *
  * @remarks
- * Changes the fields the body names. With expected_version, the change applies only to that version (409 group_conflict otherwise). The people_write scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations.
+ * Changes the fields the body names. With expected_version, the change applies only to that version (409 group_conflict otherwise). The people_write scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment.
  */
 export function groupsUpdate(
   client$: NoResponseCore,
@@ -86,22 +86,12 @@ async function $do(
   const body$ = encodeJSON("body", payload$.body, { explode: true });
 
   const pathParams$ = {
-    environment: encodeSimple("environment", payload$.environment, {
-      explode: false,
-      charEncoding: "percent",
-    }),
     group_id: encodeSimple("group_id", payload$.group_id, {
       explode: false,
       charEncoding: "percent",
     }),
-    workspace_id: encodeSimple("workspace_id", payload$.workspace_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
   };
-  const path$ = pathToFunc(
-    "/v1/workspaces/{workspace_id}/groups/{environment}/{group_id}",
-  )(
+  const path$ = pathToFunc("/v1/groups/{group_id}")(
     pathParams$,
   );
 

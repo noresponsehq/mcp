@@ -39,13 +39,13 @@ export const PersonReport$zodSchema: z.ZodType<PersonReport> = z.object({
     "True when evidence.read is explicitly denied. Submitted details, coverage, job status and decisions remain available. Collected records, profiles, findings, posts, media, discovered values and free-text decision notes are withheld.",
   ),
   findings: z.array(ScreeningFinding$zodSchema).describe(
-    "What the latest screening flagged, most severe first, each citing its evidence.",
+    "What this result flagged, most severe first, each citing its evidence.",
   ),
   lookup: ScreeningLookup$zodSchema.optional().describe(
     "What the signup check's lookups found for a person: account presence for the email, phone and usernames (the person's handles), the phone lookup, the email domain's registration and the breach search. Context and coverage for the reviewer, not a finding: nothing here sets a band or a match state.",
   ),
   media: z.array(ScreeningMedia$zodSchema).describe(
-    "The images and videos the findings cite.",
+    "All images and videos retained for this result, including media that no finding cites.",
   ),
   other_groups: OtherGroups$zodSchema.describe(
     "Where else in the environment the person appears, read live from those groups: deleting one removes it here.",
@@ -54,10 +54,10 @@ export const PersonReport$zodSchema: z.ZodType<PersonReport> = z.object({
     "A person and where their screening and review stand.",
   ),
   posts: z.array(ScreeningPost$zodSchema).describe(
-    "The posts the findings cite.",
+    "All posts retained for this result, including posts that no finding cites.",
   ),
   profiles: z.array(ScreeningProfile$zodSchema).describe(
-    "The accounts the latest screening matched, with how each was matched.",
+    "The accounts this result matched, with how each was matched.",
   ),
   reviews: z.array(PersonReview$zodSchema).describe(
     "Every recorded decision, oldest first.",

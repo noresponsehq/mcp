@@ -8,7 +8,6 @@ import {
   BadRequestError$zodSchema,
 } from "./badrequesterror.js";
 import { ConflictError, ConflictError$zodSchema } from "./conflicterror.js";
-import { KeyEnvironment, KeyEnvironment$zodSchema } from "./keyenvironment.js";
 import { ListPeopleBand, ListPeopleBand$zodSchema } from "./listpeopleband.js";
 import {
   ListPeopleDecision,
@@ -24,8 +23,6 @@ import { PersonList, PersonList$zodSchema } from "./personlist.js";
 import { RateLimitError, RateLimitError$zodSchema } from "./ratelimiterror.js";
 
 export type ExportPeopleRequest = {
-  workspace_id: string;
-  environment: KeyEnvironment;
   group_id: string;
   limit?: number | undefined;
   after?: string | undefined;
@@ -43,16 +40,10 @@ export const ExportPeopleRequest$zodSchema: z.ZodType<ExportPeopleRequest> = z
     decision: ListPeopleDecision$zodSchema.optional().describe(
       "Only people with this decision; undecided for none yet.",
     ),
-    environment: KeyEnvironment$zodSchema.describe(
-      "The environment: live or test. Each has its own settings. Any other value answers 400. An API key reads and changes only its own environment's; the other answers 404.",
-    ),
     group_id: z.string(),
     limit: z.int().default(100).describe("At most this many people."),
     role: ListPeopleRole$zodSchema.optional().describe(
       "Only people with this role; unstated for people whose role was not given.",
-    ),
-    workspace_id: z.string().describe(
-      "Your workspace id, as each key lists it in workspace_id. Another workspace, a malformed id and a test environment's id answer 404.",
     ),
   });
 

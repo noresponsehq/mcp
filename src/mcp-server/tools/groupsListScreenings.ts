@@ -10,7 +10,7 @@ export const tool$groupsListScreenings: ToolDefinition<typeof args> = {
   name: "list_screenings",
   description: `List a group's screenings.
 
-Screenings, newest first. The people scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations.`,
+Screenings, newest first. The people scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment.`,
   annotations: {
     "title": "Read a group's screenings",
     "destructiveHint": false,

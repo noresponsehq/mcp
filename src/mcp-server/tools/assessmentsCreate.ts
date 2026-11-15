@@ -14,7 +14,7 @@ Assesses one account creation, login or purchase (flow) and answers with the acc
   annotations: {
     "title": "Assess an account creation, login or purchase",
     "destructiveHint": false,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "openWorldHint": false,
     "readOnlyHint": false,
   },

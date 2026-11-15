@@ -25,7 +25,7 @@ import { Result } from "../types/fp.js";
  * Erase a group.
  *
  * @remarks
- * Erases the group with its people, their reviews and its screenings, and stops any screening still running. The delete scope is required; group read, write, investigation and review access do not grant deletion.
+ * Deletes the group, its memberships and its review context, and cancels unfinished group work. Workspace people, source evidence and completed investigations remain available. Retained investigations no longer name the deleted group. The delete scope is required; group read, write, investigation and review access do not grant deletion. The API key selects the workspace and environment.
  */
 export function groupsDelete(
   client$: NoResponseCore,
@@ -81,22 +81,12 @@ async function $do(
   const body$ = null;
 
   const pathParams$ = {
-    environment: encodeSimple("environment", payload$.environment, {
-      explode: false,
-      charEncoding: "percent",
-    }),
     group_id: encodeSimple("group_id", payload$.group_id, {
       explode: false,
       charEncoding: "percent",
     }),
-    workspace_id: encodeSimple("workspace_id", payload$.workspace_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
   };
-  const path$ = pathToFunc(
-    "/v1/workspaces/{workspace_id}/groups/{environment}/{group_id}",
-  )(
+  const path$ = pathToFunc("/v1/groups/{group_id}")(
     pathParams$,
   );
 

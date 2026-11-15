@@ -8,7 +8,6 @@ import {
   BadRequestError$zodSchema,
 } from "./badrequesterror.js";
 import { ConflictError, ConflictError$zodSchema } from "./conflicterror.js";
-import { KeyEnvironment, KeyEnvironment$zodSchema } from "./keyenvironment.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 import {
   PermissionDeniedError,
@@ -17,23 +16,12 @@ import {
 import { RateLimitError, RateLimitError$zodSchema } from "./ratelimiterror.js";
 import { Screening, Screening$zodSchema } from "./screening.js";
 
-export type GetScreeningRequest = {
-  workspace_id: string;
-  environment: KeyEnvironment;
-  group_id: string;
-  screening_id: string;
-};
+export type GetScreeningRequest = { group_id: string; screening_id: string };
 
 export const GetScreeningRequest$zodSchema: z.ZodType<GetScreeningRequest> = z
   .object({
-    environment: KeyEnvironment$zodSchema.describe(
-      "The environment: live or test. Each has its own settings. Any other value answers 400. An API key reads and changes only its own environment's; the other answers 404.",
-    ),
     group_id: z.string(),
     screening_id: z.string(),
-    workspace_id: z.string().describe(
-      "Your workspace id, as each key lists it in workspace_id. Another workspace, a malformed id and a test environment's id answer 404.",
-    ),
   });
 
 export type GetScreeningResponseResult =

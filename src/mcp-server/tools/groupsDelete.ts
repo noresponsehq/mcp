@@ -10,9 +10,10 @@ export const tool$groupsDelete: ToolDefinition<typeof args> = {
   name: "delete_group",
   description: `Erase a group.
 
-Erases the group with its people, their reviews and its screenings, and stops any screening still running. The delete scope is required; group read, write, investigation and review access do not grant deletion.`,
+Deletes the group, its memberships and its review context, and cancels unfinished group work. Workspace people, source evidence and completed investigations remain available. Retained investigations no longer name the deleted group. The delete scope is required; group read, write, investigation and review access do not grant deletion. The API key selects the workspace and environment.`,
   annotations: {
-    "title": "Delete a group with its people, decisions and screenings",
+    "title":
+      "Delete a group and its review context, keeping people and completed investigations",
     "destructiveHint": true,
     "idempotentHint": true,
     "openWorldHint": false,

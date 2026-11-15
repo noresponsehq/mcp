@@ -20,7 +20,6 @@ export type Group = {
   topics: Array<string>;
   people: number;
   version: number;
-  purge_after: string;
   created_by: string;
   created_at: string;
   updated_at: string;
@@ -41,9 +40,6 @@ export const Group$zodSchema: z.ZodType<Group> = z.object({
   people: z.int().describe("How many people the group holds."),
   principals: z.array(Principal$zodSchema).describe(
     "The people the group protects.",
-  ),
-  purge_after: z.string().describe(
-    "When raw collected items and unmatched candidate profiles are purged: 30 days after the group ends.",
   ),
   starts_at: z.string().describe("When the group starts."),
   topics: z.array(z.string()).describe("Sensitive topics."),

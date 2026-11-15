@@ -30,7 +30,7 @@ export enum ExportPeopleAcceptEnum {
  * Export the people in a group.
  *
  * @remarks
- * Returns one page for export. Each returned person is durably audited as person.exported with the actor, group, person ID and request ID. Requires both people read access and exports. Explicit evidence restrictions also hide free-text decision notes. No raw evidence enters audit logs. Follow next_after until absent for a complete export.
+ * Returns one page for export. Each returned person is durably audited as person.exported with the actor, group, person ID and request ID. Requires both people read access and exports. Explicit evidence restrictions also hide free-text decision notes. No raw evidence enters audit logs. Follow next_after until absent for a complete export. The API key selects the workspace and environment.
  */
 export function groupsExportPeople(
   client$: NoResponseCore,
@@ -86,22 +86,12 @@ async function $do(
   const body$ = null;
 
   const pathParams$ = {
-    environment: encodeSimple("environment", payload$.environment, {
-      explode: false,
-      charEncoding: "percent",
-    }),
     group_id: encodeSimple("group_id", payload$.group_id, {
       explode: false,
       charEncoding: "percent",
     }),
-    workspace_id: encodeSimple("workspace_id", payload$.workspace_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
   };
-  const path$ = pathToFunc(
-    "/v1/workspaces/{workspace_id}/groups/{environment}/{group_id}/export",
-  )(
+  const path$ = pathToFunc("/v1/groups/{group_id}/export")(
     pathParams$,
   );
   const query$ = encodeFormQuery({

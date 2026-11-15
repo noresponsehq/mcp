@@ -1,8 +1,74 @@
 [
   {
+    "name": "list_investigations",
+    "title": "List retained investigation history",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "create_investigation",
+    "title": "Investigate a workspace person with a stable request key",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "get_investigation",
+    "title": "Read an investigation and its retained evidence",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "review_investigation",
+    "title": "Record a decision in this investigation's context",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "cancel_investigation",
+    "title": "Cancel a queued or running investigation",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "remove_group_person",
+    "title": "Delete a group membership and its review context, keeping the person",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
+    "name": "list_workspace_people",
+    "title": "List retained workspace people",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "create_workspace_person",
+    "title": "Create or reuse a workspace person",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "get_workspace_person",
+    "title": "Read a workspace person, expiry and permitted evidence",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
+    "name": "delete_workspace_person",
+    "title": "Delete a workspace person and investigation history",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": true
+  },
+  {
     "name": "create_assessment",
     "title": "Assess an account creation, login or purchase",
-    "idempotentHint": true
+    "idempotentHint": false
   },
   {
     "name": "get_assessment",
@@ -13,7 +79,7 @@
   {
     "name": "record_outcome",
     "title": "Record what you learned about an account",
-    "idempotentHint": true
+    "idempotentHint": false
   },
   {
     "name": "query_assessments",
@@ -88,7 +154,7 @@
   {
     "name": "record_account_outcome",
     "title": "Report or correct an account outcome",
-    "idempotentHint": true
+    "idempotentHint": false
   },
   {
     "name": "list_account_outcomes",
@@ -337,7 +403,7 @@
     "name": "change_lists",
     "title": "Apply a bounded atomic list change with an idempotency key",
     "readOnlyHint": false,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "destructiveHint": true
   },
   {
@@ -546,7 +612,7 @@
     "name": "create_policy_evaluation",
     "title": "Evaluate retained evidence with saved criteria and an idempotency key",
     "readOnlyHint": false,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "destructiveHint": false
   },
   {
@@ -603,7 +669,7 @@
   },
   {
     "name": "delete_group",
-    "title": "Delete a group with its people, decisions and screenings",
+    "title": "Delete a group and its review context, keeping people and completed investigations",
     "readOnlyHint": false,
     "idempotentHint": true,
     "destructiveHint": true
@@ -624,7 +690,7 @@
     "name": "add_people",
     "title": "Add or update up to 500 people with an idempotency key",
     "readOnlyHint": false,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "destructiveHint": false
   },
   {
@@ -671,7 +737,7 @@
     "name": "start_screening",
     "title": "Screen new people and everyone on watch or escalated",
     "readOnlyHint": false,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "destructiveHint": false
   },
   {

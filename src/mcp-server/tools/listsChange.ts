@@ -14,7 +14,7 @@ Atomically add and remove a bounded batch of entries with an idempotency key. Re
   annotations: {
     "title": "Apply a bounded atomic list change with an idempotency key",
     "destructiveHint": true,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "openWorldHint": false,
     "readOnlyHint": false,
   },

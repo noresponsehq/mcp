@@ -14,7 +14,7 @@ Record a factual report, not an enforcement action. A known outcome replaces the
   annotations: {
     "title": "Report or correct an account outcome",
     "destructiveHint": false,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "openWorldHint": false,
     "readOnlyHint": false,
   },

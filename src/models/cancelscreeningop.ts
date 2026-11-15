@@ -8,7 +8,6 @@ import {
   BadRequestError$zodSchema,
 } from "./badrequesterror.js";
 import { ConflictError, ConflictError$zodSchema } from "./conflicterror.js";
-import { KeyEnvironment, KeyEnvironment$zodSchema } from "./keyenvironment.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 import {
   PermissionDeniedError,
@@ -22,8 +21,6 @@ import {
 } from "./screeningcancelrequest.js";
 
 export type CancelScreeningRequest = {
-  workspace_id: string;
-  environment: KeyEnvironment;
   group_id: string;
   screening_id: string;
   body: ScreeningCancelRequest;
@@ -33,14 +30,8 @@ export const CancelScreeningRequest$zodSchema: z.ZodType<
   CancelScreeningRequest
 > = z.object({
   body: ScreeningCancelRequest$zodSchema,
-  environment: KeyEnvironment$zodSchema.describe(
-    "The environment: live or test. Each has its own settings. Any other value answers 400. An API key reads and changes only its own environment's; the other answers 404.",
-  ),
   group_id: z.string(),
   screening_id: z.string(),
-  workspace_id: z.string().describe(
-    "Your workspace id, as each key lists it in workspace_id. Another workspace, a malformed id and a test environment's id answer 404.",
-  ),
 });
 
 export type CancelScreeningResponseResult =

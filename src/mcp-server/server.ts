@@ -72,6 +72,7 @@ import { tool$groupsJudgeRecord } from "./tools/groupsJudgeRecord.js";
 import { tool$groupsList } from "./tools/groupsList.js";
 import { tool$groupsListPeople } from "./tools/groupsListPeople.js";
 import { tool$groupsListScreenings } from "./tools/groupsListScreenings.js";
+import { tool$groupsRemovePerson } from "./tools/groupsRemovePerson.js";
 import { tool$groupsReviewPerson } from "./tools/groupsReviewPerson.js";
 import { tool$groupsRunSearch } from "./tools/groupsRunSearch.js";
 import { tool$groupsStartScreening } from "./tools/groupsStartScreening.js";
@@ -81,6 +82,11 @@ import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
 import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
 import { tool$integrationsList } from "./tools/integrationsList.js";
 import { tool$integrationsRotate } from "./tools/integrationsRotate.js";
+import { tool$investigationsCancel } from "./tools/investigationsCancel.js";
+import { tool$investigationsCreate } from "./tools/investigationsCreate.js";
+import { tool$investigationsGet } from "./tools/investigationsGet.js";
+import { tool$investigationsList } from "./tools/investigationsList.js";
+import { tool$investigationsReview } from "./tools/investigationsReview.js";
 import { tool$invitesList } from "./tools/invitesList.js";
 import { tool$invitesRevoke } from "./tools/invitesRevoke.js";
 import { tool$keysList } from "./tools/keysList.js";
@@ -95,6 +101,10 @@ import { tool$membersList } from "./tools/membersList.js";
 import { tool$membersRemove } from "./tools/membersRemove.js";
 import { tool$membersUpdate } from "./tools/membersUpdate.js";
 import { tool$operationsSummarize } from "./tools/operationsSummarize.js";
+import { tool$peopleCreate } from "./tools/peopleCreate.js";
+import { tool$peopleDelete } from "./tools/peopleDelete.js";
+import { tool$peopleGet } from "./tools/peopleGet.js";
+import { tool$peopleList } from "./tools/peopleList.js";
 import { tool$requestsAggregate } from "./tools/requestsAggregate.js";
 import { tool$requestsList } from "./tools/requestsList.js";
 import { tool$reviewsAddSubject } from "./tools/reviewsAddSubject.js";
@@ -142,7 +152,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.13.42",
+    version: "0.14.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -291,6 +301,7 @@ export function createMCPServer(deps: {
   tool(tool$groupsListPeople);
   tool(tool$groupsAddPeople);
   tool(tool$groupsGetPerson);
+  tool(tool$groupsRemovePerson);
   tool(tool$groupsReviewPerson);
   tool(tool$groupsJudgeRecord);
   tool(tool$groupsStartSearch);
@@ -300,6 +311,15 @@ export function createMCPServer(deps: {
   tool(tool$groupsGetScreening);
   tool(tool$groupsCancelScreening);
   tool(tool$groupsExportPeople);
+  tool(tool$peopleList);
+  tool(tool$peopleCreate);
+  tool(tool$peopleGet);
+  tool(tool$peopleDelete);
+  tool(tool$investigationsList);
+  tool(tool$investigationsCreate);
+  tool(tool$investigationsGet);
+  tool(tool$investigationsReview);
+  tool(tool$investigationsCancel);
 
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);

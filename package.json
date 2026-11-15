@@ -1,6 +1,6 @@
 {
   "name": "@noresponse/mcp",
-  "version": "0.13.42",
+  "version": "0.14.0",
   "mcpName": "org.noresponse/mcp",
   "author": "NoResponse",
   "type": "module",

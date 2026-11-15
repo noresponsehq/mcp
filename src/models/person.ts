@@ -37,6 +37,7 @@ export type Person = {
   created_at: string;
   updated_at: string;
   spend: ScreeningSpend;
+  expires_at: string;
 };
 
 export const Person$zodSchema: z.ZodType<Person> = z.object({
@@ -53,8 +54,11 @@ export const Person$zodSchema: z.ZodType<Person> = z.object({
   ),
   decision_note: z.string().optional(),
   email: z.string().optional().describe("The person's email."),
+  expires_at: z.string().describe(
+    "When workspace retention removes the person and their investigation history.",
+  ),
   external_id: z.string().optional().describe(
-    "Your own id for the person, unique within the group. A later row with the same external id updates this person.",
+    "Your reference for the person in this workspace environment.",
   ),
   group_id: z.string(),
   handles: z.array(Handle$zodSchema).optional().describe(

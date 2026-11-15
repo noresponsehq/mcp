@@ -35,6 +35,7 @@ export const ConflictErrorCode = {
   GroupLimitReached: "group_limit_reached",
   ScreeningCapExceeded: "screening_cap_exceeded",
   ScreeningUnavailable: "screening_unavailable",
+  PersonReferenceConflict: "person_reference_conflict",
 } as const;
 /**
  * Machine codes an HTTP 409 answer can carry.
@@ -72,4 +73,5 @@ export const ConflictErrorCode$zodSchema = z.enum([
   "group_limit_reached",
   "screening_cap_exceeded",
   "screening_unavailable",
+  "person_reference_conflict",
 ]).describe("Machine codes an HTTP 409 answer can carry.");

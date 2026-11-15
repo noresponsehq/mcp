@@ -2,21 +2,34 @@
 
 # NoResponse MCP server
 
-An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can investigate people: create a group, add people, screen them, read every account and leaked row that the lookups found, and search again on a value. It also assesses an account creation, login or purchase and records what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
+An [MCP](https://modelcontextprotocol.io) server for the NoResponse identity engine. An agent can create a workspace person, start an investigation, read source records and review a result. Groups organize people for shared screening. Signup assessment uses the same engine. The server is generated from the same OpenAPI document as the SDKs.
 
-The server uses the API key you give it and stores nothing. API key rotation and key creation are not tools: rotate and create keys from your own backend. The integration tools need a key with the `integrations` scope, the key, settings and list tools a key with the `management` scope, and the group, people, search and screening tools a key with the `groups` scope; give the server a key without them to keep them unusable.
+The server uses the API key you give it and stores nothing. That key selects the workspace and environment. Give it only the scopes needed: `people` for reads, `people_write` for submitted people and group changes, `investigations` for new work, `decisions` for reviews, `exports` for exports and `delete` for deletion. Explicit evidence restrictions still apply. Integration tools use `integrations`, and settings, lists and key administration use `management`. API key creation and rotation stay in your backend.
+
+Keep a stored idempotency key for each deliberate investigation. `create_investigation` generates one when omitted and keeps it unchanged during transport retries; supply the same key yourself when repeating a tool call after an uncertain result. `create_workspace_person` accepts an optional key but does not retry automatically. Reviews also do not retry automatically.
 
 ## Tools
 
 | Tool | What it does | API call |
 |---|---|---|
-| `create_group` | Create a group: one list of people to investigate or screen together. Needs the `groups` scope. | `POST /v1/workspaces/{workspace_id}/groups/{environment}` |
-| `add_people` | Add or update up to 500 people, each with a name and the identifiers you have. Needs the `groups` scope. | `POST .../groups/{environment}/{group_id}/people` |
-| `start_screening` | Run the lookups and the analysis for the group's people. Needs the `groups` scope. | `POST .../groups/{environment}/{group_id}/screenings` |
-| `get_screening` | Read a screening's status and progress. Needs the `groups` scope. | `GET .../screenings/{screening_id}` |
-| `get_person` | Read a person's report: every account and leaked row as a record with its source, and the findings. Needs the `groups` scope. | `GET .../people/{person_id}` |
-| `start_search` | Search again on a value of one of the person's records. Needs the `groups` scope. | `POST .../people/{person_id}/searches` |
-| `review_person` | Record your team's decision on a person: `cleared`, `watch` or `escalated`. Needs the `groups` scope. | `POST .../people/{person_id}/review` |
+| `create_workspace_person` | Create or explicitly reuse a person without a group. Returns possible matches without merging them. Needs `people_write`. | `POST /v1/people` |
+| `list_workspace_people` | List people in the key's workspace and environment. Needs `people`. | `GET /v1/people` |
+| `get_workspace_person` | Read submitted details, retention expiry and permitted source evidence. Needs `people`. | `GET /v1/people/{person_id}` |
+| `delete_workspace_person` | Delete a person and their investigation history. Needs `delete`; marked destructive. | `DELETE /v1/people/{person_id}` |
+| `create_investigation` | Start work against a person, with an optional group review context. Needs `investigations`. | `POST /v1/investigations` |
+| `list_investigations` | List retained investigation history. Needs `people`. | `GET /v1/investigations` |
+| `get_investigation` | Read a specific job's status, coverage, evidence and review history. Needs `people`. | `GET /v1/investigations/{investigation_id}` |
+| `review_investigation` | Record a decision within this investigation. Needs `decisions`. | `POST /v1/investigations/{investigation_id}/reviews` |
+| `cancel_investigation` | Cancel an unfinished investigation. Needs `investigations`. | `POST /v1/investigations/{investigation_id}/cancel` |
+| `create_group` | Create a group for people to screen together. Needs `people_write`. | `POST /v1/groups` |
+| `add_people` | Add or explicitly reuse up to 500 people. Needs `people_write`. | `POST /v1/groups/{group_id}/people` |
+| `remove_group_person` | Remove membership and its review context, preserving the person and investigations. Needs `delete`. | `DELETE /v1/groups/{group_id}/people/{person_id}` |
+| `delete_group` | Delete a group and its review context, preserving people and completed investigations. Needs `delete`. | `DELETE /v1/groups/{group_id}` |
+| `start_screening` | Run lookups and analysis for a group's people. Needs `investigations`. | `POST /v1/groups/{group_id}/screenings` |
+| `get_screening` | Read a screening's status and progress. Needs `people`. | `GET /v1/groups/{group_id}/screenings/{screening_id}` |
+| `get_person` | Read a person within a group's review context. Needs `people`. | `GET /v1/groups/{group_id}/people/{person_id}` |
+| `start_search` | Search a value in the person's collected records. Needs `investigations` and evidence access. | `POST /v1/groups/{group_id}/people/{person_id}/searches` |
+| `review_person` | Record the group's decision: `cleared`, `watch` or `escalated`. Needs `decisions`. | `POST /v1/groups/{group_id}/people/{person_id}/review` |
 | `create_assessment` | Assess identifiers (email, phone, username, name, IP) for an `account_creation`, `login` or `purchase` flow. Sends a fresh Idempotency-Key when you give none. | `POST /v1/assessments` |
 | `get_assessment` | Read the latest version of one assessment. | `GET /v1/assessments/{assessment_id}` |
 | `wait_for_assessment` | Poll a pending assessment, at the interval Retry-After asks for, until it settles or `timeout_seconds` (default 25, at most 55) pass. | `GET /v1/assessments/{assessment_id}` |

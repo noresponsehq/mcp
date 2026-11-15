@@ -10,7 +10,7 @@ export const tool$groupsCancelScreening: ToolDefinition<typeof args> = {
   name: "cancel_screening",
   description: `Cancel a screening.
 
-Stops a queued or running screening. People it already screened keep their results. Cancelling a finished screening answers it unchanged. The body is an empty object. The investigations scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations.`,
+Stops a queued or running screening. People it already screened keep their results. Cancelling a finished screening answers it unchanged. The body is an empty object. The investigations scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment.`,
   annotations: {
     "title": "Stop a queued or running screening",
     "destructiveHint": true,

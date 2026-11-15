@@ -9,7 +9,6 @@ import {
 } from "./badrequesterror.js";
 import { ConflictError, ConflictError$zodSchema } from "./conflicterror.js";
 import { GroupList, GroupList$zodSchema } from "./grouplist.js";
-import { KeyEnvironment, KeyEnvironment$zodSchema } from "./keyenvironment.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
 import {
   PermissionDeniedError,
@@ -18,8 +17,6 @@ import {
 import { RateLimitError, RateLimitError$zodSchema } from "./ratelimiterror.js";
 
 export type ListGroupsRequest = {
-  workspace_id: string;
-  environment: KeyEnvironment;
   limit?: number | undefined;
   before?: string | undefined;
 };
@@ -27,13 +24,7 @@ export type ListGroupsRequest = {
 export const ListGroupsRequest$zodSchema: z.ZodType<ListGroupsRequest> = z
   .object({
     before: z.string().describe("Read groups older than this one.").optional(),
-    environment: KeyEnvironment$zodSchema.describe(
-      "The environment: live or test. Each has its own settings. Any other value answers 400. An API key reads and changes only its own environment's; the other answers 404.",
-    ),
     limit: z.int().default(20).describe("At most this many items."),
-    workspace_id: z.string().describe(
-      "Your workspace id, as each key lists it in workspace_id. Another workspace, a malformed id and a test environment's id answer 404.",
-    ),
   });
 
 export type ListGroupsResponseResult =

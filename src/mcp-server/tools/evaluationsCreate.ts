@@ -15,7 +15,7 @@ Create a bounded evaluation with an Idempotency-Key, expected policy version, fi
     "title":
       "Evaluate retained evidence with saved criteria and an idempotency key",
     "destructiveHint": false,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "openWorldHint": false,
     "readOnlyHint": false,
   },

@@ -10,7 +10,7 @@ export const tool$groupsGetPerson: ToolDefinition<typeof args> = {
   name: "get_person",
   description: `Read a person's report.
 
-The person, the profiles the screening matched with how each was matched, its findings with their evidence, every recorded decision, and the other groups in the environment where a person with the same email or phone appears, with the decision recorded there. Profiles and findings fill in as the screening pipeline ships. The people scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. Each successful read is durably audited as person.viewed. Restricted responses keep submitted details, coverage, job status and decision summaries and set evidence_restricted to true.`,
+Returns submitted details, this group's latest screening evidence and contextual decisions, and the other groups that explicitly include the same workspace person. Membership requires an explicit person or customer reference. The people scope grants this operation; groups is also accepted. Each successful read is durably audited as person.viewed. Full source records, posts and media are returned by default. Explicit evidence.read denial keeps submitted details, coverage, job status and decision summaries, hides collected evidence and free-text notes, and sets evidence_restricted to true. The API key selects the workspace and environment.`,
   annotations: {
     "title": "Read a person's profiles, findings, decisions and other groups",
     "destructiveHint": false,

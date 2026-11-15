@@ -14,7 +14,7 @@ Records what you later learned about an assessed account: confirmed_abuse, accou
   annotations: {
     "title": "Record what you learned about an account",
     "destructiveHint": false,
-    "idempotentHint": true,
+    "idempotentHint": false,
     "openWorldHint": false,
     "readOnlyHint": false,
   },
