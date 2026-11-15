@@ -30,7 +30,7 @@ export const RecordField$zodSchema: z.ZodType<RecordField> = z.object({
     "The source's own name for the field. A nested value's name is dotted, and a list element's carries its index.",
   ),
   kind: RecordKind$zodSchema.optional().describe(
-    "What sort of value a field holds, which decides how it is cleaned, compared and searched again. It comes from the value itself where its shape is certain (an email, an IP, a URL, an international phone number), else from the answer stored for the source's column, else text. A value of any kind is returned. Each kind's description says what it holds and the form value takes.",
+    "What sort of value a field holds, which decides how it is cleaned, compared and searched again. It comes from the value itself where its shape is certain (an email, an IP, a URL, an international phone number), else from the answer committed for the source's column, else from the answer stored for it, else text. A value of any kind is returned. Each kind's description says what it holds and the form value takes.",
   ),
   original: z.string().describe(
     "The value as the source wrote it. A count is written in decimal and a time in RFC 3339; a breach column's value is as the leak holds it.",
