@@ -2,7 +2,7 @@
   "author": {
     "name": "NoResponse"
   },
-  "description": "Assess signups and gateway events for abuse risk, wait for pending assessments, page an account's history and record outcomes.",
+  "description": "Investigate people. Create groups, add people, screen them, read every account and leaked row the lookups found, and search again on a value. Also assess signups and record outcomes.",
   "display_name": "NoResponse",
   "homepage": "https://docs.noresponse.org",
   "keywords": [
@@ -40,7 +40,7 @@
       "type": "string"
     }
   },
-  "version": "0.13.24",
+  "version": "0.13.25",
   "tools": [
     {
       "name": "create_assessment",

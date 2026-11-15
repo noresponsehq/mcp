@@ -2,14 +2,21 @@
 
 # NoResponse MCP server
 
-An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can assess an account creation, login or purchase, wait for a pending assessment, page through an account's history and record what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
+An [MCP](https://modelcontextprotocol.io) server for the NoResponse API, so an agent can investigate people: create a group, add people, screen them, read every account and leaked row that the lookups found, and search again on a value. It also assesses an account creation, login or purchase and records what you later learned. It is generated from the same OpenAPI document as the NoResponse SDKs.
 
-The server uses the API key you give it and stores nothing. API key rotation and key creation are not tools: rotate and create keys from your own backend. The integration tools need a key with the `integrations` scope, the key, settings and list tools a key with the `management` scope, and the event tools a key with the `events` scope; give the server a key without them to keep them unusable.
+The server uses the API key you give it and stores nothing. API key rotation and key creation are not tools: rotate and create keys from your own backend. The integration tools need a key with the `integrations` scope, the key, settings and list tools a key with the `management` scope, and the group, people, search and screening tools a key with the `groups` scope; give the server a key without them to keep them unusable.
 
 ## Tools
 
 | Tool | What it does | API call |
 |---|---|---|
+| `create_group` | Create a group: one list of people to investigate or screen together. Needs the `groups` scope. | `POST /v1/workspaces/{workspace_id}/groups/{environment}` |
+| `add_people` | Add or update up to 500 people, each with a name and the identifiers you have. Needs the `groups` scope. | `POST .../groups/{environment}/{group_id}/people` |
+| `start_screening` | Run the lookups and the analysis for the group's people. Needs the `groups` scope. | `POST .../groups/{environment}/{group_id}/screenings` |
+| `get_screening` | Read a screening's status and progress. Needs the `groups` scope. | `GET .../screenings/{screening_id}` |
+| `get_person` | Read a person's report: every account and leaked row as a record with its source, and the findings. Needs the `groups` scope. | `GET .../people/{person_id}` |
+| `start_search` | Search again on a value of one of the person's records. Needs the `groups` scope. | `POST .../people/{person_id}/searches` |
+| `review_person` | Record your team's decision on a person: `cleared`, `watch` or `escalated`. Needs the `groups` scope. | `POST .../people/{person_id}/review` |
 | `create_assessment` | Assess identifiers (email, phone, username, name, IP) for an `account_creation`, `login` or `purchase` flow. Sends a fresh Idempotency-Key when you give none. | `POST /v1/assessments` |
 | `get_assessment` | Read the latest version of one assessment. | `GET /v1/assessments/{assessment_id}` |
 | `wait_for_assessment` | Poll a pending assessment, at the interval Retry-After asks for, until it settles or `timeout_seconds` (default 25, at most 55) pass. | `GET /v1/assessments/{assessment_id}` |
@@ -41,7 +48,7 @@ The server uses the API key you give it and stores nothing. API key rotation and
 | `create_list_entry` | Add an email or email domain to the block or allow list; the accounts it matches are decided again. Needs the `management` scope. | `POST /v1/workspaces/{workspace_id}/lists/{environment}` |
 | `delete_list_entry` | Delete an entry; the accounts it matched go back to their scored decision. Needs the `management` scope. | `DELETE /v1/workspaces/{workspace_id}/lists/{environment}/{list_entry_id}` |
 
-The table shows the most used tools. [Connect an agent](https://docs.noresponse.org/guides/agents) lists every tool with its required scope, including the review, evaluation and event tools.
+The table shows the most used tools. [Connect an agent](https://docs.noresponse.org/guides/agents) lists every tool with its required scope, including the other group, review and evaluation tools.
 
 Act on `account.risk.decision` (`allow`, `step_up`, `review`, `block`, or `held` while a held flow waits for its investigation), the account's current decision for the assessment's flow. `detail` holds the assessment's own risk, recommendation and `assessment_version`. While the account's first assessment is pending, `account` is absent, so apply your own fallback for that, 429, 503 or a timeout.
 
