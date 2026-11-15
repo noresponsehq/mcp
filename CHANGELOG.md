@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.34
+
+No changes detected.
+
 ## 0.13.33
 
 * `SDK.settings.get()`:  `response.refused_sources[]` **Changed** (Breaking ⚠️)
