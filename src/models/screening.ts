@@ -3,7 +3,6 @@ import {
   AuditSettingsEnvironment,
   AuditSettingsEnvironment$zodSchema,
 } from "./auditsettingsenvironment.js";
-import { HandlePlatform, HandlePlatform$zodSchema } from "./handleplatform.js";
 import { ScreeningDepth, ScreeningDepth$zodSchema } from "./screeningdepth.js";
 import { ScreeningSpend, ScreeningSpend$zodSchema } from "./screeningspend.js";
 import {
@@ -20,7 +19,7 @@ export type Screening = {
   environment: AuditSettingsEnvironment;
   status: ScreeningStatus;
   depth: ScreeningDepth;
-  platforms: Array<HandlePlatform>;
+  platforms: Array<string>;
   requested_by: string;
   created_at: string;
   started_at?: string | undefined;
@@ -62,7 +61,7 @@ export const Screening$zodSchema: z.ZodType<Screening> = z.object({
     "People screened with some requested platform not covered; their coverage names which.",
   ),
   people_total: z.int().describe("People selected when the screening started."),
-  platforms: z.array(HandlePlatform$zodSchema),
+  platforms: z.array(z.string()),
   requested_by: z.string(),
   spend: ScreeningSpend$zodSchema.describe(
     "What screening cost, in US cents, in total and per implementation.",

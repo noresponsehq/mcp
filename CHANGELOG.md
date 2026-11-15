@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.13.38
+
+* `SDK.settings.get()`:  `response.refused_sources[]` **Changed** (Breaking ⚠️)
+* `SDK.settings.update()`: 
+  *  `request.body.refused_sources[]` **Changed** (Breaking ⚠️)
+  *  `response.refused_sources[]` **Changed** (Breaking ⚠️)
+* `SDK.settings.listHistory()`:  `response.items[].settings.refused_sources[]` **Changed** (Breaking ⚠️)
+* `SDK.settings.restore()`:  `response.refused_sources[]` **Changed** (Breaking ⚠️)
+* `SDK.evaluations.publish()`:  `response.refused_sources[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.listPeople()`:  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.addPeople()`: 
+  *  `request.body.people[].handles[].platform` **Changed** (Breaking ⚠️)
+* `SDK.groups.getPerson()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.groups.reviewPerson()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.groups.listScreenings()`:  `response.items[].platforms[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.startScreening()`: 
+  *  `request.body.platforms[]` **Changed** (Breaking ⚠️)
+  *  `response.platforms[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.getScreening()`:  `response.platforms[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.cancelScreening()`:  `response.platforms[]` **Changed** (Breaking ⚠️)
+
 ## 0.13.37
 
 * `SDK.groups.listPeople()`:  `response.items[].coverage.items_frame_only` **Added**

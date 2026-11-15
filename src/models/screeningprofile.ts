@@ -1,6 +1,5 @@
 import * as z from "zod";
 import { Access, Access$zodSchema } from "./access.js";
-import { HandlePlatform, HandlePlatform$zodSchema } from "./handleplatform.js";
 import { PostsStopped, PostsStopped$zodSchema } from "./postsstopped.js";
 import { RecordT, RecordT$zodSchema } from "./record.js";
 import { ScreeningMatch, ScreeningMatch$zodSchema } from "./screeningmatch.js";
@@ -10,7 +9,7 @@ import { ScreeningMatch, ScreeningMatch$zodSchema } from "./screeningmatch.js";
  */
 export type ScreeningProfile = {
   id: string;
-  platform: HandlePlatform;
+  platform: string;
   handle: string;
   url: string;
   display_name?: string | undefined;
@@ -51,8 +50,8 @@ export const ScreeningProfile$zodSchema: z.ZodType<ScreeningProfile> = z.object(
     ),
     period_from: z.string().optional().describe("The oldest item read."),
     period_to: z.string().optional().describe("The newest item read."),
-    platform: HandlePlatform$zodSchema.describe(
-      "A platform a screening can cover. github and scratch through flickr are each one read of the public profile a handle names, with no posts; chesscom also reads the profile's stats, clubs and last two months of games, for its activity and contacts, and through a signed-in session up to 100 of the player's friends, each a contact with the date the friendship began. synthetic is the deterministic connector's own platform, for exercising the product end to end with no network.",
+    platform: z.string().describe(
+      "A platform a screening can cover, such as instagram, x, bluesky, youtube, tiktok or github. The screening registry owns the set: a request that names a platform it does not cover answers 422. A new platform adds an id without changing this contract, so read a platform you do not know in a response as one you have not seen before, not as an error. synthetic is the deterministic connector's own platform, for exercising the product end to end with no network.",
     ),
     posts_stopped: PostsStopped$zodSchema.optional().describe(
       "Why fewer posts were read than the screening's depth asks for while the account holds more. platform_limit: the platform shows the screening no more of them. page_limit: the pages a screening reads ran out first. rate_limited or unavailable: a later page was held back or failed; the posts before it are kept and the person is partial. Absent when the account was read to its end or to the depth.",

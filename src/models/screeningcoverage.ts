@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { HandlePlatform, HandlePlatform$zodSchema } from "./handleplatform.js";
 import {
   ScreeningNotAnalysedCount,
   ScreeningNotAnalysedCount$zodSchema,
@@ -22,7 +21,7 @@ export type ScreeningCoverage = {
   period_from?: string | undefined;
   period_to?: string | undefined;
   platforms: Array<ScreeningPlatformCoverage>;
-  not_searched?: Array<HandlePlatform> | undefined;
+  not_searched?: Array<string> | undefined;
 };
 
 export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
@@ -40,7 +39,7 @@ export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
       .optional().describe(
         "items_not_analysed split by reason, each reason once with at least one item.",
       ),
-    not_searched: z.array(HandlePlatform$zodSchema).optional().describe(
+    not_searched: z.array(z.string()).optional().describe(
       "Requested platforms where the person gave the screening nothing to look up, such as no handle for a platform that reads supplied handles only. Nothing looked and nothing failed: such a platform is not in platforms, is not none_found and does not make the person partial.",
     ),
     period_from: z.string().optional().describe(

@@ -1,7 +1,6 @@
 import * as z from "zod";
 import { KeyEnvironment, KeyEnvironment$zodSchema } from "./keyenvironment.js";
 import { SettingsFlows, SettingsFlows$zodSchema } from "./settingsflows.js";
-import { SourceId, SourceId$zodSchema } from "./sourceid.js";
 
 /**
  * One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, the sources it refuses, and the daily cap on screening spend. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.
@@ -14,7 +13,7 @@ export type Settings = {
   updated_by?: string | undefined;
   updated_at?: string | undefined;
   flows: SettingsFlows;
-  refused_sources: Array<SourceId>;
+  refused_sources: Array<string>;
   screening_daily_cap: number | null;
 };
 
@@ -26,7 +25,7 @@ export const Settings$zodSchema: z.ZodType<Settings> = z.object({
   policy_version: z.int().describe(
     "The monotonic settings configuration epoch, including retention changes. Zero while defaults apply. Historical assessments keep their frozen policy version; the active version reaches new assessments within a minute.",
   ),
-  refused_sources: z.array(SourceId$zodSchema).describe(
+  refused_sources: z.array(z.string()).describe(
     "The sources this environment refuses, sorted; empty, the default, refuses none. An assessment leaves a refused source out: its coverage is missing (an identifier with no other source lists coverage-unavailable as unavailable) rather than not_found, and a stored result of a refused source is not reused.",
   ),
   retention_days: z.int().describe(

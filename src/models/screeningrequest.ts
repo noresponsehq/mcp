@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { HandlePlatform, HandlePlatform$zodSchema } from "./handleplatform.js";
 import { ScreeningDepth, ScreeningDepth$zodSchema } from "./screeningdepth.js";
 
 /**
@@ -7,13 +6,13 @@ import { ScreeningDepth, ScreeningDepth$zodSchema } from "./screeningdepth.js";
  */
 export type ScreeningRequest = {
   depth: ScreeningDepth;
-  platforms: Array<HandlePlatform>;
+  platforms: Array<string>;
 };
 
 export const ScreeningRequest$zodSchema: z.ZodType<ScreeningRequest> = z.object(
   {
     depth: ScreeningDepth$zodSchema,
-    platforms: z.array(HandlePlatform$zodSchema),
+    platforms: z.array(z.string()),
   },
 ).describe(
   "Screens the group's people no screening has reached and everyone on watch or escalated.",
