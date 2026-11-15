@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.17
+
+No changes detected.
+
 ## 0.13.16
 
 * `SDK.settings.get()`:  `response.refused_sources[].enum(whatsapp)` **Added** (Breaking ⚠️)
