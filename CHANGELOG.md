@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.13.36
+
+* `SDK.settings.get()`:  `response.refused_sources[].enum(chesscom_email)` **Added** (Breaking ⚠️)
+* `SDK.settings.update()`: 
+  *  `request.body.refused_sources[].enum(chesscom_email)` **Added**
+  *  `response.refused_sources[].enum(chesscom_email)` **Added** (Breaking ⚠️)
+* `SDK.settings.listHistory()`:  `response.items[].settings.refused_sources[].enum(chesscom_email)` **Added** (Breaking ⚠️)
+* `SDK.settings.restore()`:  `response.refused_sources[].enum(chesscom_email)` **Added** (Breaking ⚠️)
+* `SDK.evaluations.publish()`:  `response.refused_sources[].enum(chesscom_email)` **Added** (Breaking ⚠️)
+
 ## 0.13.35
 
 No changes detected.
