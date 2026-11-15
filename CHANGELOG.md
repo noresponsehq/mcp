@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.42
+
+No changes detected.
+
 ## 0.13.41
 
 * `SDK.keys.list()`:  `response.items[]` **Changed** (Breaking ⚠️)
