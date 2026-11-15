@@ -2,7 +2,7 @@ import * as z from "zod";
 import { Rating, Rating$zodSchema } from "./rating.js";
 
 /**
- * How distinctive a searchable value is: an email, phone, username, password, hash, person name or IP. Absent for other values, and when its rating could not be worked out, such as when a count failed.
+ * How distinctive a searchable value is: an email, phone, username, password, hash, person name or IP. Absent for other values, for a field with no value, and when its rating could not be worked out, such as when a count failed.
  */
 export type RecordDistinctive = { rating: Rating; reason: string };
 
@@ -15,5 +15,5 @@ export const RecordDistinctive$zodSchema: z.ZodType<RecordDistinctive> = z
       "Why, in plain words, such as \"seen 3,861,493 times in breach data\", \"in 4 breach rows\" or \"38 bits, about one in 430 billion usernames\".",
     ),
   }).describe(
-    "How distinctive a searchable value is: an email, phone, username, password, hash, person name or IP. Absent for other values, and when its rating could not be worked out, such as when a count failed.",
+    "How distinctive a searchable value is: an email, phone, username, password, hash, person name or IP. Absent for other values, for a field with no value, and when its rating could not be worked out, such as when a count failed.",
   );

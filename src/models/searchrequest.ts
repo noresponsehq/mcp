@@ -11,7 +11,7 @@ export type SearchRequest = {
 
 export const SearchRequest$zodSchema: z.ZodType<SearchRequest> = z.object({
   field: z.string().describe(
-    "The name of the record's field whose value to search. Its kind must be email, phone, username, person_name, password, hash or ip.",
+    "The name of the record's field whose value to search. Its kind must be email, phone, username, person_name, password, hash, ip or domain, and it must have a value: a field the source masked or that could not be cleaned is not searched.",
   ),
   record_id: z.string().describe(
     "One of the person's records: a lookup's, a profile's or one an earlier search found.",
