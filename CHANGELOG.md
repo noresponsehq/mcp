@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.32
+
+* `SDK.audit.list()`:  `response.items[].actor.union(service)` **Added** (Breaking ⚠️)
+
 ## 0.13.31
 
 * `SDK.groups.getPerson()`:  `response.lookup.checks[].unanswered` **Added**

@@ -13,11 +13,13 @@ import {
 } from "./customerexportrequestfilteroutcome.js";
 import { Environment, Environment$zodSchema } from "./environment.js";
 import { KeyActor, KeyActor$zodSchema } from "./keyactor.js";
+import { ServiceActor, ServiceActor$zodSchema } from "./serviceactor.js";
 import { UserActor, UserActor$zodSchema } from "./useractor.js";
 
 export type Actor =
   | (UserActor & { type: "user" })
-  | (KeyActor & { type: "api_key" });
+  | (KeyActor & { type: "api_key" })
+  | (ServiceActor & { type: "service" });
 
 export const Actor$zodSchema: z.ZodType<Actor> = z.union([
   UserActor$zodSchema.and(
@@ -28,6 +30,11 @@ export const Actor$zodSchema: z.ZodType<Actor> = z.union([
   KeyActor$zodSchema.and(
     z.object({
       type: z.literal("api_key"),
+    }).transform((v) => ({ type: v.type })),
+  ),
+  ServiceActor$zodSchema.and(
+    z.object({
+      type: z.literal("service"),
     }).transform((v) => ({ type: v.type })),
   ),
 ]);
@@ -41,7 +48,10 @@ export type AuditEvent = {
   environment: AuditSettingsEnvironment;
   action: string;
   outcome: CustomerExportRequestFilterOutcome;
-  actor: (UserActor & { type: "user" }) | (KeyActor & { type: "api_key" });
+  actor:
+    | (UserActor & { type: "user" })
+    | (KeyActor & { type: "api_key" })
+    | (ServiceActor & { type: "service" });
   target: AuditEventTarget;
   detail?: { [k: string]: string } | undefined;
   created_at: string;
@@ -62,6 +72,11 @@ export const AuditEvent$zodSchema: z.ZodType<AuditEvent> = z.object({
     KeyActor$zodSchema.and(
       z.object({
         type: z.literal("api_key"),
+      }).transform((v) => ({ type: v.type })),
+    ),
+    ServiceActor$zodSchema.and(
+      z.object({
+        type: z.literal("service"),
       }).transform((v) => ({ type: v.type })),
     ),
   ]),
