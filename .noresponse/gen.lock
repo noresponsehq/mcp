@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 45754cae690d9d411edf13d29bd75425
+  docChecksum: cf14098c52893e112373d46e267bc877
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.13.25
-  configChecksum: 932c09607849f1c7ea28edc8d468143a
+  releaseVersion: 0.13.26
+  configChecksum: 96c4406715e51df2975a9517e98e3800
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -36,11 +36,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:eeccf5981ea85a5bce150cc4ba18010faf3124b7
+    last_write_checksum: sha1:a41bffde45ab62120c248d948c7b08b73df0614c
   package.json:
-    last_write_checksum: sha1:4654aaad0cf622696bbf160992a2954c0c96d91e
+    last_write_checksum: sha1:867808155ae203662a19e65f020cb209e9a84e9f
   server.json:
-    last_write_checksum: sha1:62da2fa217b9851b70978d5ea2ec4f87b47059eb
+    last_write_checksum: sha1:d8501c5733632d020e9628601b395f12aca20e22
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -288,7 +288,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:d5f864432236b0e623d435d5a9e48a87dda1c3dd
+    last_write_checksum: sha1:7cd06fbcacc7bdd5fd334b6689f7f9f30c7580f0
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -332,7 +332,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:bd3fc7cca73fd29936fe048aa9fcc71bebfae6b6
+    last_write_checksum: sha1:8e7bf84046594e47de584b0b4f547a5de12d9a7d
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -340,7 +340,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:c2378b88b876813b073a00ab8046a6605dd55989
+    last_write_checksum: sha1:8a321a64c4931d38432ed49a21ea6fc562ea0fc1
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -994,9 +994,9 @@ trackedFiles:
   src/models/groupupdate.ts:
     last_write_checksum: sha1:94d5fc5f57b1b4f4d2369394e960ad0d3b44bb70
   src/models/handle.ts:
-    last_write_checksum: sha1:a73ff6b272cd29e9fc7e0d49b299fec47768d4b6
+    last_write_checksum: sha1:d94b597abf391834260a0e8edda4fbbaad4b88b4
   src/models/handleplatform.ts:
-    last_write_checksum: sha1:0fc7310d7858d32642966002d4967b0b37072882
+    last_write_checksum: sha1:e54261b7a97f0a943b4c82e5ff7ba19c7dd02266
   src/models/highestband.ts:
     last_write_checksum: sha1:4b2bb7b12b7eafaa495d78d2f5f88fae4b98afe0
   src/models/hookpoint.ts:
@@ -1372,7 +1372,7 @@ trackedFiles:
   src/models/recordremaining.ts:
     last_write_checksum: sha1:7304377a7c0e7f3bfa48694417b00c16dc9d832d
   src/models/recordrole.ts:
-    last_write_checksum: sha1:2295ef3aa6c52b91c86e577b53820cda0d400a06
+    last_write_checksum: sha1:61624520a0c7904c3d6d87c890d0fb90b50a8ed4
   src/models/recordsource.ts:
     last_write_checksum: sha1:992ba184aa37ce1ce448f4997f27d6b9906f9774
   src/models/recordverdict.ts:
@@ -1546,13 +1546,13 @@ trackedFiles:
   src/models/screeningnotanalysedreason.ts:
     last_write_checksum: sha1:c947bd5548ab32e7d591f761c2bca09e95d7c633
   src/models/screeningplatformcoverage.ts:
-    last_write_checksum: sha1:e002d248f85f7a32707cbac6b62d214a46e0204b
+    last_write_checksum: sha1:5ffa92c94955860659f154aceff4f34426ccf64b
   src/models/screeningplatformcoveragestatus.ts:
     last_write_checksum: sha1:0102b31ce4cb2dbf4922a9519e0ea25f14ccce48
   src/models/screeningpost.ts:
     last_write_checksum: sha1:72fc85ce897c7184165c4be63af49fa7e0731093
   src/models/screeningprofile.ts:
-    last_write_checksum: sha1:9f2d1adafea9d93b480173703ac9e8b783f6f433
+    last_write_checksum: sha1:5ef61eaa7ae18b01a8f44a73ed165e71dcc565ef
   src/models/screeningrequest.ts:
     last_write_checksum: sha1:3d2564ca6f419654025d3b0788e478a0599a5801
   src/models/screeningspend.ts:
@@ -1602,7 +1602,7 @@ trackedFiles:
   src/models/source.ts:
     last_write_checksum: sha1:e2ef5dc51b5399434ae62ebf02493f3445ee059f
   src/models/sourceid.ts:
-    last_write_checksum: sha1:4be9b0c13c265828d9dbab09c1b06566972aac55
+    last_write_checksum: sha1:dc9806c934a716eaad417e1bff9977eb7d995db0
   src/models/startscreeningop.ts:
     last_write_checksum: sha1:1509566d6e52d75a8ed359d1be3c4b27979601e3
   src/models/startsearchop.ts:
@@ -4383,7 +4383,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"id": "scn_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "group_id": "grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "environment": "test", "status": "partial", "depth": "standard", "platforms": ["threads"], "requested_by": "user_2abc", "created_at": "2026-01-01T00:00:00Z", "started_at": "2026-01-01T00:00:00Z", "finished_at": "2026-01-02T00:00:00Z", "expires_at": "2026-01-02T00:00:00Z", "people_total": 438718, "people_done": 951747, "people_flagged": 942514, "people_failed": 682715, "people_partial": 283813, "estimated_spend": 375895, "spent": 990898, "spend": {"total_minor": 51134, "by_implementation": []}, "error_code": "user_cancelled"}
+          application/json: {"id": "scn_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "group_id": "grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "environment": "test", "status": "partial", "depth": "standard", "platforms": ["reddit"], "requested_by": "user_2abc", "created_at": "2026-01-01T00:00:00Z", "started_at": "2026-01-01T00:00:00Z", "finished_at": "2026-01-02T00:00:00Z", "expires_at": "2026-01-02T00:00:00Z", "people_total": 438718, "people_done": 951747, "people_flagged": 942514, "people_failed": 682715, "people_partial": 283813, "estimated_spend": 375895, "spent": 990898, "spend": {"total_minor": 51134, "by_implementation": []}, "error_code": "user_cancelled"}
         "400":
           application/problem+json: {"type": "https://docs.noresponse.org/errors/invalid_request", "title": "Invalid request", "status": 400, "detail": "identifiers: at least one of email, username or phone is required.", "instance": "/v1/assessments", "code": "invalid_request", "request_id": "9f2c4b7a1d3e4f5a8b6c0d1e2f3a4b5c", "invalid_params": [{"field": "identifiers", "reason": "at least one of email, username or phone is required", "example": "new.user@example.com"}]}
         "401":

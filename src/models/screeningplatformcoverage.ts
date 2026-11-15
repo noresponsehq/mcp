@@ -21,7 +21,7 @@ export const ScreeningPlatformCoverage$zodSchema: z.ZodType<
   accounts_found: z.int(),
   items_read: z.int(),
   platform: HandlePlatform$zodSchema.describe(
-    "A platform a screening can cover. github and scratch through flickr are each one read of the public profile a handle names, with no posts. synthetic is the deterministic connector's own platform, for exercising the product end to end with no network.",
+    "A platform a screening can cover. github and scratch through flickr are each one read of the public profile a handle names, with no posts; chesscom also reads the profile's stats, clubs and last two months of games, for its activity and contacts. synthetic is the deterministic connector's own platform, for exercising the product end to end with no network.",
   ),
   status: ScreeningPlatformCoverageStatus$zodSchema.describe(
     "covered read at least one profile; none_found looked and found no account; inaccessible found accounts that are private or locked; failed could not finish looking; unavailable has no resolver or collector enabled.",

@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.13.26
+
+* `SDK.groups.listScreenings()`:  `response.items[].platforms[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.settings.update()`: 
+  *  `request.body.refused_sources[].enum(chesscom)` **Added**
+  *  `response.refused_sources[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.settings.listHistory()`:  `response.items[].settings.refused_sources[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.settings.restore()`:  `response.refused_sources[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.evaluations.publish()`:  `response.refused_sources[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.groups.listPeople()`:  `response.items[].handles[].platform.enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.groups.getPerson()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.groups.reviewPerson()`:  `response.handles[].platform.enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.settings.get()`:  `response.refused_sources[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.groups.startScreening()`: 
+  *  `request.body.platforms[].enum(chesscom)` **Added**
+  *  `response.platforms[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.groups.getScreening()`:  `response.platforms[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.groups.cancelScreening()`:  `response.platforms[].enum(chesscom)` **Added** (Breaking ⚠️)
+* `SDK.groups.addPeople()`: 
+  *  `request.body.people[].handles[].platform.enum(chesscom)` **Added**
+
 ## 0.13.25
 
 No changes detected.
