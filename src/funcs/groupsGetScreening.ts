@@ -30,7 +30,7 @@ export enum GetScreeningAcceptEnum {
  * Read a screening.
  *
  * @remarks
- * Read a screening's status and progress.
+ * The screening's status and progress. The people scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations.
  */
 export function groupsGetScreening(
   client$: NoResponseCore,

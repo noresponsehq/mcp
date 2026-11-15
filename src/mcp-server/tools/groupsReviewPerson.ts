@@ -10,7 +10,7 @@ export const tool$groupsReviewPerson: ToolDefinition<typeof args> = {
   name: "review_person",
   description: `Record a decision on a person.
 
-Record a cleared, watch or escalated decision with a note. The latest decision is the person's; the next screening refreshes everyone on watch or escalated.`,
+Marks the person cleared, watch or escalated with a note. Decisions are kept in order; the latest is the person's. The next screening refreshes everyone on watch or escalated. The decisions scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations.`,
   annotations: {
     "title": "Mark a person cleared, watch or escalated with a note",
     "destructiveHint": false,

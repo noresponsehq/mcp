@@ -22,6 +22,10 @@ export const KeyRequestScope = {
   Members: "members",
   MembersManage: "members_manage",
   Groups: "groups",
+  People: "people",
+  PeopleWrite: "people_write",
+  Investigations: "investigations",
+  Decisions: "decisions",
 } as const;
 export type KeyRequestScope = ClosedEnum<typeof KeyRequestScope>;
 
@@ -44,6 +48,23 @@ export const KeyRequestScope$zodSchema = z.enum([
   "members",
   "members_manage",
   "groups",
+  "people",
+  "people_write",
+  "investigations",
+  "decisions",
+]);
+
+export const KeyRequestDeniedAction = {
+  EvidenceRead: "evidence.read",
+  ExportsRead: "exports.read",
+  PolicyPublish: "policy.publish",
+} as const;
+export type KeyRequestDeniedAction = ClosedEnum<typeof KeyRequestDeniedAction>;
+
+export const KeyRequestDeniedAction$zodSchema = z.enum([
+  "evidence.read",
+  "exports.read",
+  "policy.publish",
 ]);
 
 /**
@@ -57,9 +78,13 @@ export type KeyRequest = {
   kind?: KeyKind | undefined;
   expires_at?: string | undefined;
   request_id?: string | undefined;
+  denied_actions?: Array<KeyRequestDeniedAction> | undefined;
 };
 
 export const KeyRequest$zodSchema: z.ZodType<KeyRequest> = z.object({
+  denied_actions: z.array(KeyRequestDeniedAction$zodSchema).optional().describe(
+    "Explicit restrictions that override scope grants. An empty list restores the access supplied by the scopes. Rotation preserves these restrictions.",
+  ),
   environment: KeyEnvironment$zodSchema.describe(
     "The environment the key belongs to. A live key assesses with live sources; a test key answers from the deterministic simulator.",
   ),

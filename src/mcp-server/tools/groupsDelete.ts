@@ -10,7 +10,7 @@ export const tool$groupsDelete: ToolDefinition<typeof args> = {
   name: "delete_group",
   description: `Erase a group.
 
-Erase a group with its people, their decisions and its screenings, and stop any screening still running.`,
+Erases the group with its people, their reviews and its screenings, and stops any screening still running. The delete scope is required; group read, write, investigation and review access do not grant deletion.`,
   annotations: {
     "title": "Delete a group with its people, decisions and screenings",
     "destructiveHint": true,

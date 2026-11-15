@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.13.41
+
+* `SDK.keys.list()`:  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.keys.create()`: 
+  *  `request.body` **Changed**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.keys.revoke()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.audit.list()`:  `response.items[].target.type` **Changed** (Breaking ⚠️)
+* `SDK.keys.updateAccess()`: **Added**
+* `SDK.groups.exportPeople()`: **Added**
+* `SDK.groups.getPerson()`:  `response.evidence_restricted` **Added**
+
 ## 0.13.40
 
 * `SDK.groups.create()`: 

@@ -23,6 +23,10 @@ export const KeyScope = {
   Members: "members",
   MembersManage: "members_manage",
   Groups: "groups",
+  People: "people",
+  PeopleWrite: "people_write",
+  Investigations: "investigations",
+  Decisions: "decisions",
 } as const;
 export type KeyScope = ClosedEnum<typeof KeyScope>;
 
@@ -45,6 +49,23 @@ export const KeyScope$zodSchema = z.enum([
   "members",
   "members_manage",
   "groups",
+  "people",
+  "people_write",
+  "investigations",
+  "decisions",
+]);
+
+export const KeyDeniedAction = {
+  EvidenceRead: "evidence.read",
+  ExportsRead: "exports.read",
+  PolicyPublish: "policy.publish",
+} as const;
+export type KeyDeniedAction = ClosedEnum<typeof KeyDeniedAction>;
+
+export const KeyDeniedAction$zodSchema = z.enum([
+  "evidence.read",
+  "exports.read",
+  "policy.publish",
 ]);
 
 /**
@@ -69,12 +90,16 @@ export type Key = {
   owner_user_id?: string | undefined;
   rotated_to?: string | undefined;
   last_used_at?: string | undefined;
+  denied_actions?: Array<KeyDeniedAction> | undefined;
 };
 
 export const Key$zodSchema: z.ZodType<Key> = z.object({
   created_at: z.string(),
   created_by: z.string().optional().describe(
     "The external user id of the member who created the key through the console, or the prefix (nrk_<environment>_<key id>) of the management key that created it. Absent for a key NoResponse issued or a rotation made.",
+  ),
+  denied_actions: z.array(KeyDeniedAction$zodSchema).optional().describe(
+    "Explicit restrictions that override scope grants. An empty list restores the access supplied by the scopes. Rotation preserves these restrictions.",
   ),
   environment: KeyEnvironment$zodSchema.describe(
     "The environment the key belongs to. A live key assesses with live sources; a test key answers from the deterministic simulator.",

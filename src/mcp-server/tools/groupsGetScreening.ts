@@ -10,7 +10,7 @@ export const tool$groupsGetScreening: ToolDefinition<typeof args> = {
   name: "get_screening",
   description: `Read a screening.
 
-Read a screening's status and progress.`,
+The screening's status and progress. The people scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations.`,
   annotations: {
     "title": "Read a screening's status and progress",
     "destructiveHint": false,

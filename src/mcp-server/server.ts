@@ -64,6 +64,7 @@ import { tool$groupsAddPeople } from "./tools/groupsAddPeople.js";
 import { tool$groupsCancelScreening } from "./tools/groupsCancelScreening.js";
 import { tool$groupsCreate } from "./tools/groupsCreate.js";
 import { tool$groupsDelete } from "./tools/groupsDelete.js";
+import { tool$groupsExportPeople } from "./tools/groupsExportPeople.js";
 import { tool$groupsGet } from "./tools/groupsGet.js";
 import { tool$groupsGetPerson } from "./tools/groupsGetPerson.js";
 import { tool$groupsGetScreening } from "./tools/groupsGetScreening.js";
@@ -141,7 +142,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.13.40",
+    version: "0.13.41",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -298,6 +299,7 @@ export function createMCPServer(deps: {
   tool(tool$groupsStartScreening);
   tool(tool$groupsGetScreening);
   tool(tool$groupsCancelScreening);
+  tool(tool$groupsExportPeople);
 
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);

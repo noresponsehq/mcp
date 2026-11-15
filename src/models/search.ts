@@ -64,7 +64,7 @@ export const Search$zodSchema: z.ZodType<Search> = z.object({
     "The one breach table searched, when the search was of one table.",
   ),
   value: z.string().describe(
-    "The value searched: the field's cleaned value, else as the source wrote it.",
+    "The searched value. Empty in person reports when evidence.read is denied.",
   ),
 }).describe(
   "One search a person started on a value of one of a person's records. Nothing searches again by itself.",

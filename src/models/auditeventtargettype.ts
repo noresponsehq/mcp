@@ -14,6 +14,8 @@ export const AuditEventTargetType = {
   Integration: "integration",
   Billing: "billing",
   Review: "review",
+  Person: "person",
+  Group: "group",
 } as const;
 /**
  * The kind of resource the change acted on.
@@ -30,4 +32,6 @@ export const AuditEventTargetType$zodSchema = z.enum([
   "integration",
   "billing",
   "review",
+  "person",
+  "group",
 ]).describe("The kind of resource the change acted on.");

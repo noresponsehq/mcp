@@ -615,6 +615,12 @@
     "idempotentHint": true
   },
   {
+    "name": "export_people",
+    "title": "Export a group roster with access audits",
+    "readOnlyHint": true,
+    "idempotentHint": true
+  },
+  {
     "name": "add_people",
     "title": "Add or update up to 500 people with an idempotency key",
     "readOnlyHint": false,

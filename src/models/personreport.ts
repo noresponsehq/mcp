@@ -31,9 +31,13 @@ export type PersonReport = {
   lookup?: ScreeningLookup | undefined;
   searches?: Array<Search> | undefined;
   other_groups: OtherGroups;
+  evidence_restricted?: boolean | undefined;
 };
 
 export const PersonReport$zodSchema: z.ZodType<PersonReport> = z.object({
+  evidence_restricted: z.boolean().optional().describe(
+    "True when evidence.read is explicitly denied. Submitted details, coverage, job status and decisions remain available. Collected records, profiles, findings, posts, media, discovered values and free-text decision notes are withheld.",
+  ),
   findings: z.array(ScreeningFinding$zodSchema).describe(
     "What the latest screening flagged, most severe first, each citing its evidence.",
   ),
