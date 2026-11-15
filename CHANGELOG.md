@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.13.20
+
+* `SDK.settings.get()`:  `response.refused_sources[].enum(youtube)` **Added** (Breaking ⚠️)
+* `SDK.settings.update()`: 
+  *  `request.body.refused_sources[].enum(youtube)` **Added**
+  *  `response.refused_sources[].enum(youtube)` **Added** (Breaking ⚠️)
+* `SDK.settings.listHistory()`:  `response.items[].settings.refused_sources[].enum(youtube)` **Added** (Breaking ⚠️)
+* `SDK.settings.restore()`:  `response.refused_sources[].enum(youtube)` **Added** (Breaking ⚠️)
+* `SDK.evaluations.publish()`:  `response.refused_sources[].enum(youtube)` **Added** (Breaking ⚠️)
+
 ## 0.13.19
 
 No changes detected.
