@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.13.19
+
+No changes detected.
+
 ## 0.13.18
 
 * `SDK.settings.get()`:  `response.refused_sources[].enum(duolingo_email)` **Added** (Breaking ⚠️)
