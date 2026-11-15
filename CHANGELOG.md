@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.13.15
+
+* `SDK.groups.listPeople()`:  `response.items[].handles[].platform` **Changed** (Breaking ⚠️)
+* `SDK.groups.getPerson()`:  `response.person.handles[].platform` **Changed** (Breaking ⚠️)
+* `SDK.groups.reviewPerson()`:  `response.handles[].platform` **Changed** (Breaking ⚠️)
+* `SDK.groups.listScreenings()`:  `response.items[].platforms[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.startScreening()`: 
+  *  `request.body.platforms[]` **Changed**
+  *  `response.platforms[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.getScreening()`:  `response.platforms[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.cancelScreening()`:  `response.platforms[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.addPeople()`: 
+  *  `request.body.people[].handles[].platform` **Changed**
+
 ## 0.13.14
 
 * `SDK.settings.get()`:  `response.refused_sources[]` **Changed** (Breaking ⚠️)

@@ -52,7 +52,7 @@ export const ScreeningProfile$zodSchema: z.ZodType<ScreeningProfile> = z.object(
     period_from: z.string().optional().describe("The oldest item read."),
     period_to: z.string().optional().describe("The newest item read."),
     platform: HandlePlatform$zodSchema.describe(
-      "A platform a screening can cover. synthetic is the deterministic connector's own platform, for exercising the product end to end with no network.",
+      "A platform a screening can cover. github and scratch through flickr are each one read of the public profile a handle names, with no posts. synthetic is the deterministic connector's own platform, for exercising the product end to end with no network.",
     ),
     posts_stopped: PostsStopped$zodSchema.optional().describe(
       "Why fewer posts were read than the screening's depth asks for while the account holds more. platform_limit: the platform shows the screening no more of them. page_limit: the pages a screening reads ran out first. rate_limited or unavailable: a later page was held back or failed; the posts before it are kept and the person is partial. Absent when the account was read to its end or to the depth.",
