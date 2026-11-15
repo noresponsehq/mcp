@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 873a39713bccae430537dfad1a1f7db6
+  docChecksum: df9d46860b33557f4e2e1a60145b4912
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.13.38
-  configChecksum: 3a1b0de6bf5ced301bbee2ded5f487d4
+  releaseVersion: 0.13.39
+  configChecksum: 22445ed60a399cb36fae907f6af90ad4
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -36,11 +36,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:95e8bfa2ad3c78d487b06442385e600f2d956a99
+    last_write_checksum: sha1:ceb1516ee850a8e43ef00df33753fdab1094a3a0
   package.json:
-    last_write_checksum: sha1:e7010ca73d633dc323c1bce4a13f29d46e8c15c0
+    last_write_checksum: sha1:947ee655a950baad08d312b79927b862a9462c46
   server.json:
-    last_write_checksum: sha1:79e0eb0380a1ee0952b2c86ae246a9209c59595c
+    last_write_checksum: sha1:eb93dc8ca99149474ff326e9812bd0fd130f2008
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -288,7 +288,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:6d4bcf7fca1d0b32cd338a27a0a1d4b973e4a927
+    last_write_checksum: sha1:e9f64c3b7244a6ec0367d01da2eae8deb209bb15
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -332,7 +332,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:837d94de4c70804c813a42bb631afc5e88e70f70
+    last_write_checksum: sha1:a34aaab0905bd693499541f98b6669419507a910
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -340,7 +340,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:f40bb69f192d57de6d40a43d768bf5422f04f934
+    last_write_checksum: sha1:ca74854fd3ca617f81eb7b9d16ff21822d3da2e7
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -1350,7 +1350,7 @@ trackedFiles:
   src/models/recommendation.ts:
     last_write_checksum: sha1:7a8a1774caf30aa3c4ead8b629799fd9bd0058bb
   src/models/record.ts:
-    last_write_checksum: sha1:d4f1657222006513ef36c9319568657e567190fb
+    last_write_checksum: sha1:c654d62cfd3adbc31eb499281b3a0fd470230731
   src/models/recordaccountoutcomeop.ts:
     last_write_checksum: sha1:94264965c8558282ea0df7236e95603883122d04
   src/models/recordassessmentoutcomeop.ts:
