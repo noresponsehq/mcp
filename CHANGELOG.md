@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.14.1
+
+No changes detected.
+
 ## 0.14.0
 
 * `SDK.settings.update()`:  `response.code.enum(person_reference_conflict)` **Added** (Breaking ⚠️)
