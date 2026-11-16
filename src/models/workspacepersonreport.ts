@@ -15,6 +15,7 @@ import {
   ScreeningProfile,
   ScreeningProfile$zodSchema,
 } from "./screeningprofile.js";
+import { Search, Search$zodSchema } from "./search.js";
 import { WrittenProfile, WrittenProfile$zodSchema } from "./writtenprofile.js";
 
 /**
@@ -37,6 +38,7 @@ export type WorkspacePersonReport = {
   posts: Array<ScreeningPost>;
   media: Array<ScreeningMedia>;
   lookup?: ScreeningLookup | undefined;
+  searches?: Array<Search> | undefined;
   evidence_restricted?: boolean | undefined;
   evidence_investigation: Investigation | null;
   written_profile: WrittenProfile | null;
@@ -80,6 +82,9 @@ export const WorkspacePersonReport$zodSchema: z.ZodType<WorkspacePersonReport> =
     ),
     profiles: z.array(ScreeningProfile$zodSchema).describe(
       "The accounts this result matched, with how each was matched.",
+    ),
+    searches: z.array(Search$zodSchema).optional().describe(
+      "Every search on this person's values, newest first, whether a person started it or enrichment did: each names the value, the record and field it came from, and the search that found that record. Absent when nothing was searched.",
     ),
     updated_at: z.string(),
     written_profile: WrittenProfile$zodSchema.nullable().describe(

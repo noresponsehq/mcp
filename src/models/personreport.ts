@@ -63,7 +63,7 @@ export const PersonReport$zodSchema: z.ZodType<PersonReport> = z.object({
     "Every recorded decision, oldest first.",
   ),
   searches: z.array(Search$zodSchema).optional().describe(
-    "The searches people started on this person's values, newest first: each names the value, and the record and field it came from. Absent when nobody searched.",
+    "The searches on this person's values in this group, newest first: each names the value, the record and field it came from, and the search that found that record. Absent when nothing was searched.",
   ),
 }).describe(
   "Everything known about one person, and where else in the environment they appear.",

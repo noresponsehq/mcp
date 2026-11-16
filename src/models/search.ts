@@ -4,7 +4,7 @@ import { SearchKind, SearchKind$zodSchema } from "./searchkind.js";
 import { SearchStatus, SearchStatus$zodSchema } from "./searchstatus.js";
 
 /**
- * One search a person started on a value of one of a person's records. Nothing searches again by itself.
+ * One search on a value of one of a person's records, started by a person or by enrichment.
  */
 export type Search = {
   search_id: string;
@@ -22,6 +22,8 @@ export type Search = {
   spent: number;
   error_code?: ErrorCode | undefined;
   requested_by: string;
+  parent_search_id?: string | undefined;
+  depth?: number | undefined;
   created_at: string;
   finished_at?: string | undefined;
 };
@@ -31,6 +33,9 @@ export const Search$zodSchema: z.ZodType<Search> = z.object({
     "How many of them gave a definite answer, found or not found.",
   ),
   created_at: z.string(),
+  depth: z.int().optional().describe(
+    "How many searches lie between the person's investigation and this one, this one included: 1 for a value of a record the investigation found, 2 for a value of a record a depth-1 search found, and so on.",
+  ),
   error_code: ErrorCode$zodSchema.optional().describe(
     "Why a failed search found nothing: its sources did not answer, none could be asked, or it could not run before its attempts were spent.",
   ),
@@ -45,8 +50,13 @@ export const Search$zodSchema: z.ZodType<Search> = z.object({
   kind: SearchKind$zodSchema.describe(
     "The kind of the value searched. A domain search finds the leaked rows of every email address at the domain.",
   ),
+  parent_search_id: z.string().optional().describe(
+    "The search that found the record this value came from. Absent when the record came from the person's investigation.",
+  ),
   record_id: z.string().describe("The record whose value led to the search."),
-  requested_by: z.string().describe("Who started the search."),
+  requested_by: z.string().describe(
+    "Who started the search: the member or key, or enrichment when the engine started it on a value an earlier result showed.",
+  ),
   rows: z.int().optional().describe(
     "How many breach rows hold the password or hash, counted before the search runs.",
   ),
@@ -67,5 +77,5 @@ export const Search$zodSchema: z.ZodType<Search> = z.object({
     "The searched value. Empty in person reports when evidence.read is denied.",
   ),
 }).describe(
-  "One search a person started on a value of one of a person's records. Nothing searches again by itself.",
+  "One search on a value of one of a person's records, started by a person or by enrichment.",
 );
