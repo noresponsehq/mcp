@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.4
+
+No changes detected.
+
 ## 0.15.3
 
 * `SDK.groups.getPerson()`:  `response.searches[]` **Changed**
