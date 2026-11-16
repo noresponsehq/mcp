@@ -15,6 +15,7 @@ import {
   ScreeningProfile,
   ScreeningProfile$zodSchema,
 } from "./screeningprofile.js";
+import { WrittenProfile, WrittenProfile$zodSchema } from "./writtenprofile.js";
 
 /**
  * Read a workspace person.
@@ -38,6 +39,7 @@ export type WorkspacePersonReport = {
   lookup?: ScreeningLookup | undefined;
   evidence_restricted?: boolean | undefined;
   evidence_investigation: Investigation | null;
+  written_profile: WrittenProfile | null;
 };
 
 export const WorkspacePersonReport$zodSchema: z.ZodType<WorkspacePersonReport> =
@@ -80,4 +82,7 @@ export const WorkspacePersonReport$zodSchema: z.ZodType<WorkspacePersonReport> =
       "The accounts this result matched, with how each was matched.",
     ),
     updated_at: z.string(),
+    written_profile: WrittenProfile$zodSchema.nullable().describe(
+      "An investigator's profile of this person, written from the evidence of a settled investigation. Null until an investigation completes or partially completes, and null when evidence.read is denied.",
+    ),
   }).describe("Read a workspace person.");

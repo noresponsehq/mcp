@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.1
+
+* `SDK.people.get()`:  `response.written_profile` **Added**
+
 ## 0.15.0
 
 * `SDK.groups.list()`:  `response.items[]` **Changed** (Breaking ⚠️)
