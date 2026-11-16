@@ -2,12 +2,12 @@ import * as z from "zod";
 import { Principal, Principal$zodSchema } from "./principal.js";
 
 /**
- * Changes the fields it names; at least one besides expected_version.
+ * Updates a group. Dates describe an optional event and do not control person retention.
  */
 export type GroupUpdate = {
   name?: string | undefined;
-  starts_at?: string | undefined;
-  ends_at?: string | undefined;
+  starts_at?: string | null | undefined;
+  ends_at?: string | null | undefined;
   venue?: string | undefined;
   host?: string | undefined;
   principals?: Array<Principal> | undefined;
@@ -16,8 +16,8 @@ export type GroupUpdate = {
 };
 
 export const GroupUpdate$zodSchema: z.ZodType<GroupUpdate> = z.object({
-  ends_at: z.string().optional().describe(
-    "When the group ends, at or after its start; the start when omitted.",
+  ends_at: z.string().nullable().optional().describe(
+    "Optional event end; requires starts_at and must be at or after it. Null when no end is set. Omit to keep the current value; send null to clear it.",
   ),
   expected_version: z.int().optional().describe(
     "When present, the change applies only if the group is still at this version (409 group_conflict otherwise).",
@@ -27,11 +27,13 @@ export const GroupUpdate$zodSchema: z.ZodType<GroupUpdate> = z.object({
   principals: z.array(Principal$zodSchema).optional().describe(
     "The people the group protects, at most 20.",
   ),
-  starts_at: z.string().optional().describe("When the group starts."),
+  starts_at: z.string().nullable().optional().describe(
+    "Optional event start; null for an ongoing group. Omit to keep the current value; send null to clear it.",
+  ),
   topics: z.array(z.string()).optional().describe(
     "Sensitive topics the screening reads posts against, at most 50.",
   ),
   venue: z.string().optional().describe("Where the group is held."),
 }).describe(
-  "Changes the fields it names; at least one besides expected_version.",
+  "Updates a group. Dates describe an optional event and do not control person retention.",
 );

@@ -6,14 +6,14 @@ import {
 import { Principal, Principal$zodSchema } from "./principal.js";
 
 /**
- * A group and its screening context.
+ * A workspace group for a building, organization or event. Dates are optional and do not control person retention.
  */
 export type Group = {
   id: string;
   environment: AuditSettingsEnvironment;
   name: string;
-  starts_at: string;
-  ends_at: string;
+  starts_at: string | null;
+  ends_at: string | null;
   venue?: string | undefined;
   host?: string | undefined;
   principals: Array<Principal>;
@@ -30,8 +30,8 @@ export const Group$zodSchema: z.ZodType<Group> = z.object({
   created_by: z.string().describe(
     "The member or key label that created the group.",
   ),
-  ends_at: z.string().describe(
-    "When the group ends, at or after its start; the start when omitted.",
+  ends_at: z.string().nullable().describe(
+    "Optional event end; requires starts_at and must be at or after it. Null when no end is set.",
   ),
   environment: AuditSettingsEnvironment$zodSchema,
   host: z.string().optional().describe("The organisation hosting the group."),
@@ -41,9 +41,13 @@ export const Group$zodSchema: z.ZodType<Group> = z.object({
   principals: z.array(Principal$zodSchema).describe(
     "The people the group protects.",
   ),
-  starts_at: z.string().describe("When the group starts."),
+  starts_at: z.string().nullable().describe(
+    "Optional event start; null for an ongoing group.",
+  ),
   topics: z.array(z.string()).describe("Sensitive topics."),
   updated_at: z.string(),
   venue: z.string().optional().describe("Where the group is held."),
   version: z.int().describe("Goes up by one with every change."),
-}).describe("A group and its screening context.");
+}).describe(
+  "A workspace group for a building, organization or event. Dates are optional and do not control person retention.",
+);

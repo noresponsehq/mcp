@@ -19,7 +19,7 @@ export const OtherGroupMatchedOn$zodSchema = z.enum([
 export type OtherGroup = {
   group_id: string;
   group_name: string;
-  group_starts_at: string;
+  group_starts_at: string | null;
   person_id: string;
   matched_on: Array<OtherGroupMatchedOn>;
   match_state: MatchState;
@@ -38,7 +38,9 @@ export const OtherGroup$zodSchema: z.ZodType<OtherGroup> = z.object({
   ),
   group_id: z.string(),
   group_name: z.string(),
-  group_starts_at: z.string(),
+  group_starts_at: z.string().nullable().describe(
+    "The other group's optional event start; null for an ongoing group.",
+  ),
   highest_band: HighestBand$zodSchema.nullable().describe(
     "That person's most severe band in that group, or null.",
   ),

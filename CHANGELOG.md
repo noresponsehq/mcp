@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.15.0
+
+* `SDK.groups.list()`:  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.create()`: 
+  *  `request.body` **Changed**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.groups.get()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.groups.update()`: 
+  *  `request.body` **Changed**
+  *  `response` **Changed** (Breaking ⚠️)
+* `SDK.groups.getPerson()`:  `response.other_groups.items[].group_starts_at` **Changed** (Breaking ⚠️)
+
 ## 0.14.1
 
 No changes detected.
