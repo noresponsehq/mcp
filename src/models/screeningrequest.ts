@@ -6,13 +6,15 @@ import { ScreeningDepth, ScreeningDepth$zodSchema } from "./screeningdepth.js";
  */
 export type ScreeningRequest = {
   depth: ScreeningDepth;
-  platforms: Array<string>;
+  platforms?: Array<string> | undefined;
 };
 
 export const ScreeningRequest$zodSchema: z.ZodType<ScreeningRequest> = z.object(
   {
     depth: ScreeningDepth$zodSchema,
-    platforms: z.array(z.string()),
+    platforms: z.array(z.string()).optional().describe(
+      "The platforms to search. Leave it out for a full search: every platform a connector serves in the environment when the screening starts, which the screening then lists.",
+    ),
   },
 ).describe(
   "Screens the group's people no screening has reached and everyone on watch or escalated.",

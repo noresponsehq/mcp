@@ -10,7 +10,7 @@ import { ScreeningDepth, ScreeningDepth$zodSchema } from "./screeningdepth.js";
  */
 export type InvestigationRequest = {
   depth: ScreeningDepth;
-  platforms: Array<string>;
+  platforms?: Array<string> | undefined;
   person_id: string;
   enrichment?: EnrichmentChange | undefined;
 };
@@ -22,7 +22,9 @@ export const InvestigationRequest$zodSchema: z.ZodType<InvestigationRequest> = z
       "A change to enrichment. A field left out keeps the value in force; max_spend or deadline null removes the bound.",
     ),
     person_id: z.string(),
-    platforms: z.array(z.string()),
+    platforms: z.array(z.string()).optional().describe(
+      "The platforms to search. Leave it out for a full search: every platform a connector serves in the environment when the investigation starts, which the investigation then lists.",
+    ),
   }).describe(
     "Runs a new investigation against one retained workspace person.",
   );

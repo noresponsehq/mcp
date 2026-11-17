@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.15.12
+
+* `SDK.groups.startScreening()`: 
+  *  `request.body.platforms` **Changed**
+* `SDK.investigations.create()`: 
+  *  `request.body.platforms` **Changed**
+
 ## 0.15.11
 
 No changes detected.
