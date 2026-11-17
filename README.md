@@ -16,6 +16,7 @@ Keep a stored idempotency key for each deliberate investigation. `create_investi
 | `list_workspace_people` | List people in the key's workspace and environment. Needs `people`. | `GET /v1/people` |
 | `get_workspace_person` | Read submitted details, retention expiry and permitted source evidence. Needs `people`. | `GET /v1/people/{person_id}` |
 | `delete_workspace_person` | Delete a person and their investigation history. Needs `delete`; marked destructive. | `DELETE /v1/people/{person_id}` |
+| `judge_workspace_person_record` | Mark one of a person's records as theirs (`joined`) or someone else's (`rejected`). Enrichment follows it. Needs `decisions` and evidence access. | `POST /v1/people/{person_id}/records` |
 | `create_investigation` | Start work against a person, with an optional group review context. Needs `investigations`. | `POST /v1/investigations` |
 | `list_investigations` | List retained investigation history. Needs `people`. | `GET /v1/investigations` |
 | `get_investigation` | Read a specific job's status, coverage, evidence and review history. Needs `people`. | `GET /v1/investigations/{investigation_id}` |

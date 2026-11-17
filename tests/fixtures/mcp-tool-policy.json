@@ -66,6 +66,13 @@
     "destructiveHint": true
   },
   {
+    "name": "judge_workspace_person_record",
+    "title": "Join one of a workspace person's records to them, or reject it",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
     "name": "create_assessment",
     "title": "Assess an account creation, login or purchase",
     "idempotentHint": false

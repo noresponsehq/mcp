@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.6
+
+* `SDK.people.judgeRecord()`: **Added**
+
 ## 0.15.5
 
 * `SDK.settings.get()`:  `response.enrichment` **Added**

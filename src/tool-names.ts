@@ -473,6 +473,10 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Delete a workspace person.\n\nDeletes a person and their retained evidence, investigation history and group memberships. Requires the separate delete permission. The audit retains only the person id and deletion metadata."
   },
   {
+    "name": "judge_workspace_person_record",
+    "description": "Join one of a workspace person's records to them, or reject it.\n\nRecords a verdict on one of the records the person report holds: joined makes the record the person's whatever its likelihood, and rejected keeps it a lead that leads nowhere. The verdict belongs to the person on their own: the person report and enrichment follow it, and each group keeps its own verdicts. It sticks for as long as the person's evidence holds the same record, and a later verdict on the same record replaces it. After each verdict, enrichment reads the person again under the environment's enrichment setting: it starts no search from a rejected record or from what a search of it found, and a joined record's values lead on. A record the person report does not hold answers 404. Each verdict is audited as person.record_judged. The decisions scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment."
+  },
+  {
     "name": "list_investigations",
     "description": "List investigation history.\n\nList investigation history. The API key determines the workspace and environment."
   },

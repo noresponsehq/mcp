@@ -104,6 +104,7 @@ import { tool$operationsSummarize } from "./tools/operationsSummarize.js";
 import { tool$peopleCreate } from "./tools/peopleCreate.js";
 import { tool$peopleDelete } from "./tools/peopleDelete.js";
 import { tool$peopleGet } from "./tools/peopleGet.js";
+import { tool$peopleJudgeRecord } from "./tools/peopleJudgeRecord.js";
 import { tool$peopleList } from "./tools/peopleList.js";
 import { tool$requestsAggregate } from "./tools/requestsAggregate.js";
 import { tool$requestsList } from "./tools/requestsList.js";
@@ -152,7 +153,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.15.5",
+    version: "0.15.6",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -315,6 +316,7 @@ export function createMCPServer(deps: {
   tool(tool$peopleCreate);
   tool(tool$peopleGet);
   tool(tool$peopleDelete);
+  tool(tool$peopleJudgeRecord);
   tool(tool$investigationsList);
   tool(tool$investigationsCreate);
   tool(tool$investigationsGet);
