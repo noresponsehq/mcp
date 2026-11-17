@@ -458,7 +458,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "list_workspace_people",
-    "description": "List workspace people.\n\nLists retained people in the key workspace and environment, including people in no group. Each returned person records a person.viewed audit event. Expired people are excluded before background deletion."
+    "description": "List workspace people.\n\nLists retained people in the key workspace and environment, including people in no group. Each returned person records a person.viewed audit event. Expired people are excluded before background deletion. email and phone narrow the list to people holding that exact address or number, so a client can open the person it already has instead of adding a duplicate."
   },
   {
     "name": "create_workspace_person",

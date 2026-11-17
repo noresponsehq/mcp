@@ -32,6 +32,7 @@ export type WorkspacePersonReport = {
   phone?: string | undefined;
   company?: string | undefined;
   city?: string | undefined;
+  username?: string | undefined;
   handles?: Array<Handle> | undefined;
   id: string;
   created_at: string;
@@ -95,6 +96,9 @@ export const WorkspacePersonReport$zodSchema: z.ZodType<WorkspacePersonReport> =
       "The searches enrichment would start on this person, likeliest record first, under the environment's enrichment setting for a person's own investigation. In off mode the list is empty. In suggest mode enrichment starts none of them by itself; in automatic mode it starts them as its limits allow. Empty when evidence.read is denied.",
     ),
     updated_at: z.string(),
+    username: z.string().optional().describe(
+      "A username the person uses, with no platform. A search looks it up on every platform that finds accounts by username.",
+    ),
     written_profile: WrittenProfile$zodSchema.nullable().describe(
       "An investigator's profile of this person, written from the evidence of a settled investigation. Null until an investigation completes or partially completes, and null when evidence.read is denied.",
     ),

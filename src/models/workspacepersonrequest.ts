@@ -8,6 +8,7 @@ export type WorkspacePersonRequest = {
   phone?: string | undefined;
   company?: string | undefined;
   city?: string | undefined;
+  username?: string | undefined;
   handles?: Array<Handle> | undefined;
   person_id?: string | undefined;
 };
@@ -25,4 +26,7 @@ export const WorkspacePersonRequest$zodSchema: z.ZodType<
   name: z.string().optional().describe("The person's full name."),
   person_id: z.string().optional(),
   phone: z.string().optional().describe("The person's phone in E.164 form."),
+  username: z.string().optional().describe(
+    "A username the person uses, with no platform. A search looks it up on every platform that finds accounts by username.",
+  ),
 });

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.15.13
+
+* `SDK.people.list()`: 
+  *  `request` **Changed**
+  *  `response.items[].username` **Added**
+* `SDK.people.create()`: 
+  *  `request.body.username` **Added**
+  *  `response.person.username` **Added**
+* `SDK.people.get()`:  `response.username` **Added**
+* `SDK.investigations.get()`:  `response.person.username` **Added**
+
 ## 0.15.12
 
 * `SDK.groups.startScreening()`: 

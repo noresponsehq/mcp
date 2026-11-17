@@ -22,6 +22,8 @@ import {
 export type ListWorkspacePeopleRequest = {
   limit?: number | undefined;
   after?: string | undefined;
+  email?: string | undefined;
+  phone?: string | undefined;
 };
 
 export const ListWorkspacePeopleRequest$zodSchema: z.ZodType<
@@ -29,7 +31,13 @@ export const ListWorkspacePeopleRequest$zodSchema: z.ZodType<
 > = z.object({
   after: z.string().describe("Pass next_cursor from the prior page.")
     .optional(),
+  email: z.string().describe(
+    "Return only people whose email is this address, compared without case or surrounding spaces.",
+  ).optional(),
   limit: z.int().default(100),
+  phone: z.string().describe(
+    "Return only people whose phone is this number, compared without surrounding spaces.",
+  ).optional(),
 });
 
 export type ListWorkspacePeopleResponseResult =

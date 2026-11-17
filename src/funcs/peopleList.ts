@@ -30,7 +30,7 @@ export enum ListAcceptEnum {
  * List workspace people.
  *
  * @remarks
- * Lists retained people in the key workspace and environment, including people in no group. Each returned person records a person.viewed audit event. Expired people are excluded before background deletion.
+ * Lists retained people in the key workspace and environment, including people in no group. Each returned person records a person.viewed audit event. Expired people are excluded before background deletion. email and phone narrow the list to people holding that exact address or number, so a client can open the person it already has instead of adding a duplicate.
  */
 export function peopleList(
   client$: NoResponseCore,
@@ -87,7 +87,9 @@ async function $do(
   const path$ = pathToFunc("/v1/people")();
   const query$ = encodeFormQuery({
     "after": payload$?.after,
+    "email": payload$?.email,
     "limit": payload$?.limit,
+    "phone": payload$?.phone,
   });
 
   const headers$ = new Headers(compactMap({
