@@ -1,14 +1,14 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "org.noresponse/mcp",
-  "version": "0.15.9",
+  "version": "0.15.10",
   "description": "NoResponse API: Workspace people, source-grounded investigations, group screening and signup assessm",
   "title": "NoResponse API: Workspace people, source-grounded investigations, group screening and signup assessm",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@noresponse/mcp",
-      "version": "0.15.9",
+      "version": "0.15.10",
       "registryBaseUrl": "https://registry.npmjs.org",
       "runtimeHint": "npx",
       "transport": {

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.10
+
+No changes detected.
+
 ## 0.15.9
 
 * `SDK.people.startSearch()`: **Added**
