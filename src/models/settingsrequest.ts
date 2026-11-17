@@ -1,5 +1,9 @@
 import * as z from "zod";
 import {
+  EnrichmentChange,
+  EnrichmentChange$zodSchema,
+} from "./enrichmentchange.js";
+import {
   SettingsRequestFlows,
   SettingsRequestFlows$zodSchema,
 } from "./settingsrequestflows.js";
@@ -11,6 +15,7 @@ export type SettingsRequest = {
   retention_days?: number | undefined;
   refused_sources?: Array<string> | undefined;
   screening_daily_cap?: number | null | undefined;
+  enrichment?: EnrichmentChange | undefined;
   flows?: SettingsRequestFlows | undefined;
   expected_policy_version?: number | undefined;
   change_reason?: string | undefined;
@@ -18,6 +23,9 @@ export type SettingsRequest = {
 
 export const SettingsRequest$zodSchema: z.ZodType<SettingsRequest> = z.object({
   change_reason: z.string().optional(),
+  enrichment: EnrichmentChange$zodSchema.optional().describe(
+    "A change to enrichment. A field left out keeps the value in force; max_spend or deadline null removes the bound.",
+  ),
   expected_policy_version: z.int().optional().describe(
     "Compare-and-set guard. A stale version returns 409 policy_version_conflict before any change; every settings write including retention advances the version.",
   ),

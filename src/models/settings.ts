@@ -1,9 +1,10 @@
 import * as z from "zod";
+import { Enrichment, Enrichment$zodSchema } from "./enrichment.js";
 import { KeyEnvironment, KeyEnvironment$zodSchema } from "./keyenvironment.js";
 import { SettingsFlows, SettingsFlows$zodSchema } from "./settingsflows.js";
 
 /**
- * One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, the sources it refuses, and the daily cap on screening spend. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.
+ * One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, the sources it refuses, the daily cap on screening spend, and how enrichment searches what an investigation finds. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.
  */
 export type Settings = {
   workspace_id: string;
@@ -15,9 +16,13 @@ export type Settings = {
   flows: SettingsFlows;
   refused_sources: Array<string>;
   screening_daily_cap: number | null;
+  enrichment: Enrichment;
 };
 
 export const Settings$zodSchema: z.ZodType<Settings> = z.object({
+  enrichment: Enrichment$zodSchema.describe(
+    "How enrichment searches the values a standalone investigation of a workspace person finds (POST /v1/investigations); group screening only suggests. Defaults: mode automatic, min_likelihood 0.5, kinds username, max_spend null and deadline null. An investigation request may override each field for that investigation. A change applies to the next search enrichment starts, investigations already run included. Enrichment also keeps to limits of its own: each value once per person (once more if that search failed), at most 5 searches from one search's records, 20 per person and 6 searches deep.",
+  ),
   environment: KeyEnvironment$zodSchema.describe(
     "The environment the key belongs to. A live key assesses with live sources; a test key answers from the deterministic simulator.",
   ),
@@ -44,5 +49,5 @@ export const Settings$zodSchema: z.ZodType<Settings> = z.object({
     "The workspace id, which is also its live environment's workspace id; the test environment's is the same id with :test appended. A workspace created through the API is tnt_ and a 26-character ULID.",
   ),
 }).describe(
-  "One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, the sources it refuses, and the daily cap on screening spend. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.",
+  "One environment's settings: how long its assessments are kept, and for each flow the risk thresholds that decide it and the depth a request that names none is served at, the sources it refuses, the daily cap on screening spend, and how enrichment searches what an investigation finds. Live and test each have their own. A flow without thresholds of its own uses account_creation's (inherits_account_creation). Every change is recorded in the audit log as settings.updated, with who made it.",
 );
