@@ -17,6 +17,10 @@ import {
   ScreeningProfile$zodSchema,
 } from "./screeningprofile.js";
 import { Search, Search$zodSchema } from "./search.js";
+import {
+  SuggestedSearch,
+  SuggestedSearch$zodSchema,
+} from "./suggestedsearch.js";
 
 /**
  * Everything known about one person, and where else in the environment they appear.
@@ -30,6 +34,7 @@ export type PersonReport = {
   reviews: Array<PersonReview>;
   lookup?: ScreeningLookup | undefined;
   searches?: Array<Search> | undefined;
+  suggested_searches: Array<SuggestedSearch>;
   other_groups: OtherGroups;
   evidence_restricted?: boolean | undefined;
 };
@@ -64,6 +69,9 @@ export const PersonReport$zodSchema: z.ZodType<PersonReport> = z.object({
   ),
   searches: z.array(Search$zodSchema).optional().describe(
     "The searches on this person's values in this group, newest first: each names the value, the record and field it came from, and the search that found that record. Absent when nothing was searched.",
+  ),
+  suggested_searches: z.array(SuggestedSearch$zodSchema).describe(
+    "The searches enrichment would start on this person in this group, likeliest record first. Group screening follows the environment's enrichment setting, with suggest as its mode while the workspace has not set one. In off mode the list is empty. In suggest mode enrichment starts none of them by itself; in automatic mode it starts them as its limits allow. Empty when evidence.read is denied.",
   ),
 }).describe(
   "Everything known about one person, and where else in the environment they appear.",

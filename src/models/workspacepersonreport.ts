@@ -16,6 +16,10 @@ import {
   ScreeningProfile$zodSchema,
 } from "./screeningprofile.js";
 import { Search, Search$zodSchema } from "./search.js";
+import {
+  SuggestedSearch,
+  SuggestedSearch$zodSchema,
+} from "./suggestedsearch.js";
 import { WrittenProfile, WrittenProfile$zodSchema } from "./writtenprofile.js";
 
 /**
@@ -39,6 +43,7 @@ export type WorkspacePersonReport = {
   media: Array<ScreeningMedia>;
   lookup?: ScreeningLookup | undefined;
   searches?: Array<Search> | undefined;
+  suggested_searches: Array<SuggestedSearch>;
   evidence_restricted?: boolean | undefined;
   evidence_investigation: Investigation | null;
   written_profile: WrittenProfile | null;
@@ -85,6 +90,9 @@ export const WorkspacePersonReport$zodSchema: z.ZodType<WorkspacePersonReport> =
     ),
     searches: z.array(Search$zodSchema).optional().describe(
       "Every search on this person's values, newest first, whether a person started it or enrichment did: each names the value, the record and field it came from, and the search that found that record. Absent when nothing was searched.",
+    ),
+    suggested_searches: z.array(SuggestedSearch$zodSchema).describe(
+      "The searches enrichment would start on this person, likeliest record first, under the environment's enrichment setting for a person's own investigation. In off mode the list is empty. In suggest mode enrichment starts none of them by itself; in automatic mode it starts them as its limits allow. Empty when evidence.read is denied.",
     ),
     updated_at: z.string(),
     written_profile: WrittenProfile$zodSchema.nullable().describe(

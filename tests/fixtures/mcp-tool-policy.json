@@ -73,6 +73,20 @@
     "destructiveHint": false
   },
   {
+    "name": "start_workspace_person_search",
+    "title": "Search again on a value of one of a workspace person's records",
+    "readOnlyHint": false,
+    "idempotentHint": false,
+    "destructiveHint": false
+  },
+  {
+    "name": "run_workspace_person_search",
+    "title": "Run a counted password or hash search on a workspace person",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
     "name": "create_assessment",
     "title": "Assess an account creation, login or purchase",
     "idempotentHint": false
