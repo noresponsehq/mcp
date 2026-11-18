@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.15.15
+
+* `SDK.groups.getPerson()`:  `response.profiles[].match.evidence[].kind.enum(supplied_username)` **Added** (Breaking ⚠️)
+* `SDK.people.get()`:  `response.profiles[].match.evidence[].kind.enum(supplied_username)` **Added** (Breaking ⚠️)
+* `SDK.investigations.get()`:  `response.profiles[].match.evidence[].kind.enum(supplied_username)` **Added** (Breaking ⚠️)
+
 ## 0.15.14
 
 No changes detected.
