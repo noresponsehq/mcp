@@ -17,6 +17,7 @@ export type RecordField = {
   value?: string | undefined;
   detail?: string | undefined;
   distinctive?: RecordDistinctive | undefined;
+  noise?: boolean | undefined;
 };
 
 export const RecordField$zodSchema: z.ZodType<RecordField> = z.object({
@@ -31,6 +32,9 @@ export const RecordField$zodSchema: z.ZodType<RecordField> = z.object({
   ),
   kind: RecordKind$zodSchema.optional().describe(
     "What sort of value a field holds, which decides how it is cleaned, compared and searched again. It comes from the source where the source declares it, as a connector does for the fields it states, else from the value itself where its shape is certain (an email, an IP, a URL, an international phone number), else from the answer committed for the source's column, else from the answer stored for it, else text. A value of any kind is returned. Each kind's description says what it holds and the form value takes.",
+  ),
+  noise: z.boolean().optional().describe(
+    "True when the value tells an investigator nothing on its own: a setting flag, a zero count, a bare number or a value with no letter or digit, in a field with no role. A field with a role is not noise. Investigation views hide noise by default; the field is still returned in full.",
   ),
   original: z.string().describe(
     "The value as the source wrote it. A count is written in decimal and a time in RFC 3339; a breach column's value is as the leak holds it.",
