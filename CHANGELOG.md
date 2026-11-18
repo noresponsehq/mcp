@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.15.14
+
+No changes detected.
+
 ## 0.15.13
 
 * `SDK.people.list()`: 
