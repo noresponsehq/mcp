@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.15.18
+
+* `SDK.groups.listPeople()`:  `response.items[].coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.groups.getPerson()`:  `response.person.coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.groups.reviewPerson()`:  `response.coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.groups.exportPeople()`:  `response.items[].coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.people.get()`:  `response.evidence_investigation.coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.investigations.list()`:  `response.items[].coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.investigations.create()`:  `response.coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.investigations.get()`:  `response.investigation.coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.investigations.review()`:  `response.coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+* `SDK.investigations.cancel()`:  `response.coverage.not_analysed_by_reason[].reason.enum(analysis_off)` **Added** (Breaking ⚠️)
+
 ## 0.15.17
 
 No changes detected.
