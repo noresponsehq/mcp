@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.18.1
+
+No changes detected.
+
 ## 0.18.0
 
 * `SDK.groups.listPeople()`: 
