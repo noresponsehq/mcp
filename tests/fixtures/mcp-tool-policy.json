@@ -87,6 +87,13 @@
     "destructiveHint": false
   },
   {
+    "name": "review_workspace_person_change",
+    "title": "Mark a change between a workspace person's investigations reviewed",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
     "name": "create_assessment",
     "title": "Assess an account creation, login or purchase",
     "idempotentHint": false

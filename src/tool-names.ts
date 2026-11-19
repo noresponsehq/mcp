@@ -485,6 +485,10 @@ export const toolNames: Array<{ name: string; description: string }>= [
     "description": "Run a counted password or hash search on a workspace person.\n\nRuns a counted search that was started on the person alone (POST /v1/people/{person_id}/searches), as the group route does. Runs a password or hash search once a person has seen its count. A search still counting answers 409 group_conflict; one already queued, running or finished answers as it is. The body is an empty object. Its estimate counts against the environment's screening_daily_cap. Each run is audited as person.search_run. The investigations scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment."
   },
   {
+    "name": "review_workspace_person_change",
+    "description": "Mark a change on a workspace person reviewed.\n\nMarks one change between a person's investigations reviewed, so it sorts below the unreviewed ones. Reviewing again keeps the first reviewer and time. Reviewing a change is not a decision on the person. The body is an empty object. Each review is audited as person.change_reviewed. The decisions scope grants this operation. Explicit evidence.read restrictions withhold before and after. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment."
+  },
+  {
     "name": "list_investigations",
     "description": "List investigation history.\n\nList investigation history. The API key determines the workspace and environment."
   },

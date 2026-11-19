@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { Handle, Handle$zodSchema } from "./handle.js";
 import { Investigation, Investigation$zodSchema } from "./investigation.js";
+import { PersonChange, PersonChange$zodSchema } from "./personchange.js";
 import {
   ScreeningFinding,
   ScreeningFinding$zodSchema,
@@ -48,10 +49,14 @@ export type WorkspacePersonReport = {
   evidence_restricted?: boolean | undefined;
   evidence_investigation: Investigation | null;
   written_profile: WrittenProfile | null;
+  changes: Array<PersonChange>;
 };
 
 export const WorkspacePersonReport$zodSchema: z.ZodType<WorkspacePersonReport> =
   z.object({
+    changes: z.array(PersonChange$zodSchema).describe(
+      "What changed between each settled investigation of this person and the one before it, unreviewed first, then most significant, then newest. The first investigation records no changes. When evidence.read is denied, before and after are withheld.",
+    ),
     city: z.string().optional().describe("Where the person lives."),
     company: z.string().optional().describe("Where the person works."),
     created_at: z.string(),
