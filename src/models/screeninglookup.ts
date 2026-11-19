@@ -7,6 +7,10 @@ import {
 import { RiskDetails, RiskDetails$zodSchema } from "./riskdetails.js";
 import { RiskSummary, RiskSummary$zodSchema } from "./risksummary.js";
 import {
+  ScreeningLookupAnswer,
+  ScreeningLookupAnswer$zodSchema,
+} from "./screeninglookupanswer.js";
+import {
   ScreeningLookupCheck,
   ScreeningLookupCheck$zodSchema,
 } from "./screeninglookupcheck.js";
@@ -16,6 +20,7 @@ import {
  */
 export type ScreeningLookup = {
   checks: Array<ScreeningLookupCheck>;
+  answers?: Array<ScreeningLookupAnswer> | undefined;
   summary?: RiskSummary | undefined;
   details?: RiskDetails | undefined;
   records?: Array<RecordT> | undefined;
@@ -24,6 +29,9 @@ export type ScreeningLookup = {
 };
 
 export const ScreeningLookup$zodSchema: z.ZodType<ScreeningLookup> = z.object({
+  answers: z.array(ScreeningLookupAnswer$zodSchema).optional().describe(
+    "Each source asked, with what it answered and when. answered_at is absent while the source has not answered.",
+  ),
   checks: z.array(ScreeningLookupCheck$zodSchema).describe(
     "Each lane each identifier was looked up in, identifiers in the order email, phone, username and lanes in the order accounts, phone, breach, domain. Every lane the person's identifiers are looked up in is listed: one that no source answered, or that no source could be asked in, is not_covered. Empty when the person has no email, phone or handle to look up.",
   ),

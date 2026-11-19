@@ -2,7 +2,10 @@ import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 import { AccountType, AccountType$zodSchema } from "./accounttype.js";
 import { FailureReason, FailureReason$zodSchema } from "./failurereason.js";
-import { Identifier, Identifier$zodSchema } from "./identifier.js";
+import {
+  RiskDetailsEventIdentifier,
+  RiskDetailsEventIdentifier$zodSchema,
+} from "./riskdetailseventidentifier.js";
 import { SignalOutcome, SignalOutcome$zodSchema } from "./signaloutcome.js";
 
 export const SignIn = {
@@ -32,7 +35,7 @@ export const SignIn$zodSchema = z.enum([
 export type OnlineAccount = {
   name: string;
   domain: string;
-  identifier: Identifier;
+  identifier: RiskDetailsEventIdentifier;
   outcome: SignalOutcome;
   reason?: FailureReason | undefined;
   sign_in?: Array<SignIn> | undefined;
@@ -62,7 +65,7 @@ export const OnlineAccount$zodSchema: z.ZodType<OnlineAccount> = z.object({
   has_avatar: z.boolean().optional().describe(
     "Whether the account has its own profile picture rather than the platform's default. The picture is not returned.",
   ),
-  identifier: Identifier$zodSchema,
+  identifier: RiskDetailsEventIdentifier$zodSchema,
   name: z.string().describe("The platform's name, such as Adobe or GitHub."),
   outcome: SignalOutcome$zodSchema.describe(
     "Per-signal outcome. A source that timed out, was blocked or errored reports blocked, unavailable or inconclusive with a reason and is listed in incomplete_sources; not_found is a definite absence.",
