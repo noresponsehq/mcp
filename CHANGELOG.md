@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.19.2
+
+No changes detected.
+
 ## 0.19.1
 
 * `SDK.groups.getPerson()`:  `response` **Changed**
