@@ -6,6 +6,7 @@ export const EnrichmentChangeKind = {
   Username: "username",
   Email: "email",
   Phone: "phone",
+  PersonName: "person_name",
 } as const;
 export type EnrichmentChangeKind = ClosedEnum<typeof EnrichmentChangeKind>;
 
@@ -13,6 +14,7 @@ export const EnrichmentChangeKind$zodSchema = z.enum([
   "username",
   "email",
   "phone",
+  "person_name",
 ]);
 
 /**
@@ -32,7 +34,7 @@ export const EnrichmentChange$zodSchema: z.ZodType<EnrichmentChange> = z.object(
       "How long enrichment may start searches after an investigation starts, 60 to 2592000 seconds. null: no deadline.",
     ),
     kinds: z.array(EnrichmentChangeKind$zodSchema).optional().describe(
-      "The kinds of value enrichment searches: distinctive usernames, and email addresses and phone numbers, which belong to one person each.",
+      "The kinds of value enrichment searches: distinctive usernames, email addresses and phone numbers, which belong to one person each, and distinctive person names, searched in the breach data.",
     ),
     max_spend: z.int().nullable().optional().describe(
       "The most enrichment may spend on a person from one investigation, in minor units of USD (cents): each search it started after that investigation started counts its estimate or what it spent, whichever is more. At the bound enrichment starts nothing more for that investigation. null: only the environment's screening_daily_cap bounds it.",

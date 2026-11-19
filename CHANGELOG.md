@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.17.3
+
+* `SDK.settings.get()`:  `response.enrichment.kinds[].enum(person_name)` **Added** (Breaking ⚠️)
+* `SDK.settings.update()`: 
+  *  `request.body.enrichment.kinds[].enum(person_name)` **Added**
+  *  `response.enrichment.kinds[].enum(person_name)` **Added** (Breaking ⚠️)
+* `SDK.settings.listHistory()`:  `response.items[].settings.enrichment.kinds[].enum(person_name)` **Added** (Breaking ⚠️)
+* `SDK.settings.restore()`:  `response.enrichment.kinds[].enum(person_name)` **Added** (Breaking ⚠️)
+* `SDK.evaluations.publish()`:  `response.enrichment.kinds[].enum(person_name)` **Added** (Breaking ⚠️)
+* `SDK.groups.getPerson()`:  `response.lookup.checks[].identifier.enum(name)` **Added** (Breaking ⚠️)
+* `SDK.people.get()`:  `response.lookup.checks[].identifier.enum(name)` **Added** (Breaking ⚠️)
+* `SDK.investigations.get()`:  `response.lookup.checks[].identifier.enum(name)` **Added** (Breaking ⚠️)
+* `SDK.investigations.create()`: 
+  *  `request.body.enrichment.kinds[].enum(person_name)` **Added**
+
 ## 0.17.2
 
 * `SDK.people.schedule()`: **Added**

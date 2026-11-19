@@ -1,9 +1,6 @@
 import * as z from "zod";
 import { FailureReason, FailureReason$zodSchema } from "./failurereason.js";
-import {
-  IdentifierSearchKind,
-  IdentifierSearchKind$zodSchema,
-} from "./identifiersearchkind.js";
+import { Identifier, Identifier$zodSchema } from "./identifier.js";
 import { Lane, Lane$zodSchema } from "./lane.js";
 import {
   ScreeningLookupCheckStatus,
@@ -18,7 +15,7 @@ import {
  * What came of one lane of the lookups for one identifier.
  */
 export type ScreeningLookupCheck = {
-  identifier: IdentifierSearchKind;
+  identifier: Identifier;
   lane: Lane;
   status: ScreeningLookupCheckStatus;
   sources: number;
@@ -32,7 +29,7 @@ export const ScreeningLookupCheck$zodSchema: z.ZodType<ScreeningLookupCheck> = z
   .object({
     answered: z.int().describe("Sources that gave a definite answer."),
     found: z.int().describe("Sources that found the identifier."),
-    identifier: IdentifierSearchKind$zodSchema,
+    identifier: Identifier$zodSchema,
     lane: Lane$zodSchema.describe(
       "An evidence lane: accounts (account presence for email and username), phone, breach, domain (the email domain's registration) and ip.",
     ),
