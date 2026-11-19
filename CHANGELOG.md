@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.16.1
+
+No changes detected.
+
 ## 0.16.0
 
 * `SDK.erasures.get()`:  `response.targets[].name` **Changed** (Breaking ⚠️)
