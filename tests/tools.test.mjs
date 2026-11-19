@@ -162,9 +162,9 @@ describe("stdio server (npx @noresponse/mcp start)", () => {
   test("outcome, bulk list and evaluation tools supply and preserve idempotency keys", async () => {
     const workspace = { workspace_id: WORKSPACE, environment: "live" };
     const cases = [
-      ["create_investigation", "/v1/investigations", { body: { person_id: "per_01JA2Z8K6Q4V7W9XBCDEFGHJKM", depth: "standard", platforms: ["x"] } }],
+      ["create_investigation", "/v1/investigations", { body: { person_id: "per_01JA2Z8K6Q4V7W9XBCDEFGHJKM", depth: "standard" } }],
       ["add_people", "/v1/groups/grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM/people", { group_id: "grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM", body: { people: [{ name: "Jordan Example" }] } }],
-      ["start_screening", "/v1/groups/grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM/screenings", { group_id: "grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM", body: { depth: "standard", platforms: ["x"] } }],
+      ["start_screening", "/v1/groups/grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM/screenings", { group_id: "grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM", body: { depth: "standard" } }],
       ["record_account_outcome", "/v1/accounts/acct_7f3a9c/outcomes", {
         account_id: "acct_7f3a9c", body: { outcome: "confirmed_abuse" },
       }],

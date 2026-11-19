@@ -3,7 +3,7 @@ import { LastError, LastError$zodSchema } from "./lasterror.js";
 import { SchedulePeriod, SchedulePeriod$zodSchema } from "./scheduleperiod.js";
 
 /**
- * The person's rerun schedule. Each due run starts a full investigation of the person, as POST /v1/investigations with no platforms does, and its changes are stored as changes. The schedule lives in the database and the worker runs it, so it survives restarts and releases; each due run starts exactly one investigation.
+ * The person's rerun schedule. Each due run starts a full investigation of the person, as POST /v1/investigations does, and its changes are stored as changes. The schedule lives in the database and the worker runs it, so it survives restarts and releases; each due run starts exactly one investigation.
  */
 export type PersonSchedule = {
   period: SchedulePeriod;
@@ -30,5 +30,5 @@ export const PersonSchedule$zodSchema: z.ZodType<PersonSchedule> = z.object({
   updated_at: z.string().nullable(),
   updated_by: z.string().nullable().describe("Who last set the schedule."),
 }).describe(
-  "The person's rerun schedule. Each due run starts a full investigation of the person, as POST /v1/investigations with no platforms does, and its changes are stored as changes. The schedule lives in the database and the worker runs it, so it survives restarts and releases; each due run starts exactly one investigation.",
+  "The person's rerun schedule. Each due run starts a full investigation of the person, as POST /v1/investigations does, and its changes are stored as changes. The schedule lives in the database and the worker runs it, so it survives restarts and releases; each due run starts exactly one investigation.",
 );

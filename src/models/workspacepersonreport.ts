@@ -92,7 +92,7 @@ export const WorkspacePersonReport$zodSchema: z.ZodType<WorkspacePersonReport> =
       "The accounts this result matched, with how each was matched.",
     ),
     schedule: PersonSchedule$zodSchema.describe(
-      "The person's rerun schedule. Each due run starts a full investigation of the person, as POST /v1/investigations with no platforms does, and its changes are stored as changes. The schedule lives in the database and the worker runs it, so it survives restarts and releases; each due run starts exactly one investigation.",
+      "The person's rerun schedule. Each due run starts a full investigation of the person, as POST /v1/investigations does, and its changes are stored as changes. The schedule lives in the database and the worker runs it, so it survives restarts and releases; each due run starts exactly one investigation.",
     ),
     searches: z.array(Search$zodSchema).optional().describe(
       "Every search on this person's values, newest first, whether a person started it or enrichment did: each names the value, the record and field it came from, and the search that found that record. Absent when nothing was searched.",
