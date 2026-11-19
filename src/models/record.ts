@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { RecordEvidence, RecordEvidence$zodSchema } from "./recordevidence.js";
 import { RecordField, RecordField$zodSchema } from "./recordfield.js";
 import { RecordMatch, RecordMatch$zodSchema } from "./recordmatch.js";
 import { RecordSource, RecordSource$zodSchema } from "./recordsource.js";
@@ -18,6 +19,8 @@ export type RecordT = {
   clashed?: Array<string> | undefined;
   joined?: boolean | undefined;
   verdict?: Verdict | undefined;
+  evidence?: Array<RecordEvidence> | undefined;
+  path?: Array<string> | undefined;
 };
 
 export const RecordT$zodSchema: z.ZodType<RecordT> = z.object({
@@ -26,6 +29,9 @@ export const RecordT$zodSchema: z.ZodType<RecordT> = z.object({
   ),
   clashed: z.array(z.string()).optional().describe(
     "The fields of this record that clashed with what is known of the person: a birth date or a full name that differs from the person's.",
+  ),
+  evidence: z.array(RecordEvidence$zodSchema).optional().describe(
+    "Why the record has its likelihood, as the items that make it up: what found it and each value it agrees or clashes with, each with its weight in bits. The bits add up to the likelihood before rounding: likelihood = 1 / (1 + 2^-sum). Only the strongest agreement of each kind counts, and a place counts once however many of its city, region, country and address agree. Present on a person's lookup records that have any such item.",
   ),
   fields: z.array(RecordField$zodSchema).describe(
     "Every field the source returned, in the order the source's connector lists them; a breach row's columns in name order. Nothing is withheld: a breach row's passwords, hashes and salts are fields like any other.",
@@ -43,6 +49,9 @@ export const RecordT$zodSchema: z.ZodType<RecordT> = z.object({
     "Each kind of searched value that found the record.",
   ),
   observed_at: z.string().describe("When the source last gave this answer."),
+  path: z.array(z.string()).optional().describe(
+    "How the record connects to what the investigator gave: given first, then the ids of the joined records it reached the person through, nearest last. Each step follows what found the record before the strongest agreement. A record with no link to the person has no path.",
+  ),
   source: RecordSource$zodSchema.describe("Where a record came from."),
   verdict: Verdict$zodSchema.optional().describe(
     "A reviewer's overrule (POST .../people/{person_id}/records), which decides joined whatever the likelihood and sticks for as long as a lookup finds the same record. Absent when nobody overruled it.",
