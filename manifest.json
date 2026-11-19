@@ -40,7 +40,7 @@
       "type": "string"
     }
   },
-  "version": "0.17.1",
+  "version": "0.17.2",
   "tools": [
     {
       "name": "create_assessment",
@@ -529,6 +529,10 @@
     {
       "name": "review_workspace_person_change",
       "description": "Mark a change on a workspace person reviewed.\n\nMarks one change between a person's investigations reviewed, so it sorts below the unreviewed ones. Reviewing again keeps the first reviewer and time. Reviewing a change is not a decision on the person. The body is an empty object. Each review is audited as person.change_reviewed. The decisions scope grants this operation. Explicit evidence.read restrictions withhold before and after. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment."
+    },
+    {
+      "name": "schedule_workspace_person",
+      "description": "Schedule a workspace person's reruns.\n\nSets how often the person is investigated again: daily, weekly or monthly, counted from now, or off. Each due run starts one full investigation of the person, which the person's investigations list and whose changes the person report stores. Setting the period the schedule already has keeps its next run. The schedule lives in the database and the worker runs it, so a restart or a release neither skips nor repeats a run. Each change is audited as person.schedule_changed. The investigations scope grants this operation. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment."
     },
     {
       "name": "list_investigations",

@@ -108,6 +108,7 @@ import { tool$peopleJudgeRecord } from "./tools/peopleJudgeRecord.js";
 import { tool$peopleList } from "./tools/peopleList.js";
 import { tool$peopleReviewChange } from "./tools/peopleReviewChange.js";
 import { tool$peopleRunSearch } from "./tools/peopleRunSearch.js";
+import { tool$peopleSchedule } from "./tools/peopleSchedule.js";
 import { tool$peopleStartSearch } from "./tools/peopleStartSearch.js";
 import { tool$requestsAggregate } from "./tools/requestsAggregate.js";
 import { tool$requestsList } from "./tools/requestsList.js";
@@ -156,7 +157,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.17.1",
+    version: "0.17.2",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -323,6 +324,7 @@ export function createMCPServer(deps: {
   tool(tool$peopleStartSearch);
   tool(tool$peopleRunSearch);
   tool(tool$peopleReviewChange);
+  tool(tool$peopleSchedule);
   tool(tool$investigationsList);
   tool(tool$investigationsCreate);
   tool(tool$investigationsGet);

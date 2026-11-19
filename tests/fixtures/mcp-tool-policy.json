@@ -94,6 +94,13 @@
     "destructiveHint": false
   },
   {
+    "name": "schedule_workspace_person",
+    "title": "Schedule a workspace person's reruns",
+    "readOnlyHint": false,
+    "idempotentHint": true,
+    "destructiveHint": false
+  },
+  {
     "name": "create_assessment",
     "title": "Assess an account creation, login or purchase",
     "idempotentHint": false
