@@ -21,6 +21,7 @@ export type RecordT = {
   verdict?: Verdict | undefined;
   evidence?: Array<RecordEvidence> | undefined;
   path?: Array<string> | undefined;
+  other_person?: number | undefined;
 };
 
 export const RecordT$zodSchema: z.ZodType<RecordT> = z.object({
@@ -49,6 +50,9 @@ export const RecordT$zodSchema: z.ZodType<RecordT> = z.object({
     "Each kind of searched value that found the record.",
   ),
   observed_at: z.string().describe("When the source last gave this answer."),
+  other_person: z.int().optional().describe(
+    "For a record that is not the person's, the other person it belongs with: records that share this number share strong values, such as an email or a full name with a phone, and score as one person against each other. Absent on the person's own records and on a record that matches nobody else. A value that more than 20 strangers hold groups nobody.",
+  ),
   path: z.array(z.string()).optional().describe(
     "How the record connects to what the investigator gave: given first, then the ids of the joined records it reached the person through, nearest last. Each step follows what found the record before the strongest agreement. A record with no link to the person has no path.",
   ),

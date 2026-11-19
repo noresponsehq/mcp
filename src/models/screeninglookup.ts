@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { RecordT, RecordT$zodSchema } from "./record.js";
+import { RecordConflict, RecordConflict$zodSchema } from "./recordconflict.js";
 import {
   RecordRemaining,
   RecordRemaining$zodSchema,
@@ -21,6 +22,7 @@ export type ScreeningLookup = {
   answers?: Array<ScreeningLookupAnswer> | undefined;
   records?: Array<RecordT> | undefined;
   remaining?: Array<RecordRemaining> | undefined;
+  conflicts?: Array<RecordConflict> | undefined;
   looked_at: string;
 };
 
@@ -30,6 +32,9 @@ export const ScreeningLookup$zodSchema: z.ZodType<ScreeningLookup> = z.object({
   ),
   checks: z.array(ScreeningLookupCheck$zodSchema).describe(
     "Each lane each identifier was looked up in, identifiers in the order email, phone, username and lanes in the order accounts, phone, breach, domain. Every lane the person's identifiers are looked up in is listed: one that no source answered, or that no source could be asked in, is not_covered. Empty when the person has no email, phone or handle to look up.",
+  ),
+  conflicts: z.array(RecordConflict$zodSchema).optional().describe(
+    "Identifiers you gave that lead to different people. Absent when they agree.",
   ),
   looked_at: z.string().describe("When the lookups ran."),
   records: z.array(RecordT$zodSchema).optional().describe(

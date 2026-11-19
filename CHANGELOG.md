@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.19.1
+
+* `SDK.groups.getPerson()`:  `response` **Changed**
+* `SDK.people.get()`:  `response` **Changed**
+* `SDK.investigations.get()`:  `response` **Changed**
+
 ## 0.19.0
 
 * `SDK.groups.startScreening()`: 
