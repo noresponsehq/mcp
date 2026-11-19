@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.16.2
+
+* `SDK.groups.listPeople()`:  `response.items[].coverage` **Changed**
+* `SDK.groups.getPerson()`:  `response.person.coverage` **Changed**
+* `SDK.groups.reviewPerson()`:  `response.coverage` **Changed**
+* `SDK.groups.exportPeople()`:  `response.items[].coverage` **Changed**
+* `SDK.people.get()`:  `response.evidence_investigation.coverage` **Changed**
+* `SDK.investigations.list()`:  `response.items[].coverage` **Changed**
+* `SDK.investigations.create()`:  `response.coverage` **Changed**
+* `SDK.investigations.get()`:  `response.investigation.coverage` **Changed**
+* `SDK.investigations.review()`:  `response.coverage` **Changed**
+* `SDK.investigations.cancel()`:  `response.coverage` **Changed**
+
 ## 0.16.1
 
 No changes detected.
