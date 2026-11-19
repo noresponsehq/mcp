@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.16.6
+
+No changes detected.
+
 ## 0.16.5
 
 * `SDK.groups.getPerson()`:  `response.lookup.answers` **Added**

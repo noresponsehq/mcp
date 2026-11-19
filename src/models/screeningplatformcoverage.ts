@@ -17,7 +17,9 @@ export type ScreeningPlatformCoverage = {
 export const ScreeningPlatformCoverage$zodSchema: z.ZodType<
   ScreeningPlatformCoverage
 > = z.object({
-  accounts_found: z.int(),
+  accounts_found: z.int().describe(
+    "Accounts found on the platform: at most 5, the best candidates the search kept.",
+  ),
   items_read: z.int(),
   platform: z.string().describe(
     "A platform a screening can cover, such as instagram, x, bluesky, youtube, tiktok or github. The screening registry owns the set: a request that names a platform it does not cover answers 422. A new platform adds an id without changing this contract, so read a platform you do not know in a response as one you have not seen before, not as an error. synthetic is the deterministic connector's own platform, for exercising the product end to end with no network.",
