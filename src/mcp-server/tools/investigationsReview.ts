@@ -10,7 +10,7 @@ export const tool$investigationsReview: ToolDefinition<typeof args> = {
   name: "review_investigation",
   description: `Record an investigation decision.
 
-Record an investigation decision. The API key determines the workspace and environment.`,
+Record an investigation decision. Deprecated: decisions are leaving people and groups. The console no longer records them and no screening reads them. This route is removed in the next contract release; stop calling it. The API key determines the workspace and environment.`,
   annotations: {
     "title": "Record a decision in this investigation's context",
     "destructiveHint": false,

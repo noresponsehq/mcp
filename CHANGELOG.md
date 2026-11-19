@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.16.3
+
+No changes detected.
+
 ## 0.16.2
 
 * `SDK.groups.listPeople()`:  `response.items[].coverage` **Changed**
