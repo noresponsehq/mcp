@@ -2,6 +2,7 @@ import * as z from "zod";
 import { Handle, Handle$zodSchema } from "./handle.js";
 import { Investigation, Investigation$zodSchema } from "./investigation.js";
 import { PersonChange, PersonChange$zodSchema } from "./personchange.js";
+import { PersonGroup, PersonGroup$zodSchema } from "./persongroup.js";
 import {
   ScreeningFinding,
   ScreeningFinding$zodSchema,
@@ -39,6 +40,7 @@ export type WorkspacePersonReport = {
   created_at: string;
   updated_at: string;
   expires_at: string;
+  groups: Array<PersonGroup>;
   profiles: Array<ScreeningProfile>;
   findings: Array<ScreeningFinding>;
   posts: Array<ScreeningPost>;
@@ -75,6 +77,9 @@ export const WorkspacePersonReport$zodSchema: z.ZodType<WorkspacePersonReport> =
     ),
     findings: z.array(ScreeningFinding$zodSchema).describe(
       "What this result flagged, most severe first, each citing its evidence.",
+    ),
+    groups: z.array(PersonGroup$zodSchema).describe(
+      "Every group this person belongs to in this environment, most recently added first, with their role in each. A person can belong to any number of groups; removing them from a group or deleting the group removes it here.",
     ),
     handles: z.array(Handle$zodSchema).optional().describe(
       "Accounts the person is known to hold, at most 20.",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.16.9
+
+* `SDK.people.get()`:  `response.groups` **Added**
+
 ## 0.16.8
 
 No changes detected.
