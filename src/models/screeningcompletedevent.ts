@@ -22,7 +22,7 @@ export const ScreeningCompletedEvent$zodSchema: z.ZodType<
     "When the event was created. Equal across redeliveries; the signing timestamp header is per delivery.",
   ),
   data: ScreeningCompleted$zodSchema.describe(
-    "A screening of a group finished. It counts only the people this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/groups/{environment}/{group_id}/people, filtered by band, to act on them. people_screened + partial_coverage = people_total, people_flagged is the sum of by_band, no_footprint counts screened people with no flag whose accounts were not found, and no_profile_to_check those the screening had nothing to look up for on any requested platform. A cancelled screening sends no event.",
+    "A screening of a group finished. It counts only the people this screening set out to reach, not who they are: read the roster with GET /v1/workspaces/{workspace_id}/groups/{environment}/{group_id}/people to act on them. people_screened + partial_coverage = people_total, no_footprint counts screened people whose accounts were not found, and no_profile_to_check those the screening had nothing to look up for on any requested platform. A cancelled screening sends no event.",
   ),
   id: z.string().describe(
     "The event id, equal to the NR-Webhook-Id header and across redeliveries and every endpoint the event fans out to.",

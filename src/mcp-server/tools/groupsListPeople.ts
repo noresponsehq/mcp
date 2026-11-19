@@ -10,9 +10,9 @@ export const tool$groupsListPeople: ToolDefinition<typeof args> = {
   name: "list_people",
   description: `List a group's people.
 
-The roster in upload order, with each person's role, match state, highest finding band and decision. Filter by band (or none), decision (or undecided) and role (or unstated). The people scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment.`,
+The roster in upload order, with each person's role, match state and decision. Filter by decision (or undecided) and role (or unstated). The people scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment.`,
   annotations: {
-    "title": "Read a group's roster with match states, bands and decisions",
+    "title": "Read a group's roster with match states and decisions",
     "destructiveHint": false,
     "idempotentHint": true,
     "openWorldHint": false,

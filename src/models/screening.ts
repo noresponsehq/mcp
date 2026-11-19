@@ -27,7 +27,6 @@ export type Screening = {
   expires_at: string;
   people_total: number;
   people_done: number;
-  people_flagged: number;
   people_failed: number;
   people_partial: number;
   estimated_spend: number;
@@ -56,7 +55,6 @@ export const Screening$zodSchema: z.ZodType<Screening> = z.object({
     "People screened so far, failed ones included.",
   ),
   people_failed: z.int(),
-  people_flagged: z.int(),
   people_partial: z.int().describe(
     "People screened with some requested platform not covered; their coverage names which.",
   ),

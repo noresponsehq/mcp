@@ -1,6 +1,5 @@
 import * as z from "zod";
 import { Handle, Handle$zodSchema } from "./handle.js";
-import { HighestBand, HighestBand$zodSchema } from "./highestband.js";
 import { MatchState, MatchState$zodSchema } from "./matchstate.js";
 import { PersonDecision, PersonDecision$zodSchema } from "./persondecision.js";
 import { PersonRole, PersonRole$zodSchema } from "./personrole.js";
@@ -26,7 +25,6 @@ export type Person = {
   role?: PersonRole | undefined;
   match_state: MatchState;
   no_profile_to_check?: boolean | undefined;
-  highest_band: HighestBand | null;
   decision: PersonDecision | null;
   decision_note?: string | undefined;
   decided_by?: string | undefined;
@@ -63,9 +61,6 @@ export const Person$zodSchema: z.ZodType<Person> = z.object({
   group_id: z.string(),
   handles: z.array(Handle$zodSchema).optional().describe(
     "Accounts the person is known to hold, at most 20.",
-  ),
-  highest_band: HighestBand$zodSchema.nullable().describe(
-    "The most severe finding's band, or null when nothing was flagged.",
   ),
   id: z.string(),
   last_screening_id: z.string().optional(),

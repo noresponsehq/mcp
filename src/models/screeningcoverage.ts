@@ -8,10 +8,6 @@ import {
   ScreeningCoverageTiming$zodSchema,
 } from "./screeningcoveragetiming.js";
 import {
-  ScreeningNotAnalysedCount,
-  ScreeningNotAnalysedCount$zodSchema,
-} from "./screeningnotanalysedcount.js";
-import {
   ScreeningPlatformCoverage,
   ScreeningPlatformCoverage$zodSchema,
 } from "./screeningplatformcoverage.js";
@@ -23,9 +19,6 @@ export type ScreeningCoverage = {
   accounts_found: number;
   accounts_accessible: number;
   items_read: number;
-  items_not_analysed?: number | undefined;
-  not_analysed_by_reason?: Array<ScreeningNotAnalysedCount> | undefined;
-  items_frame_only?: number | undefined;
   period_from?: string | undefined;
   period_to?: string | undefined;
   platforms: Array<ScreeningPlatformCoverage>;
@@ -38,17 +31,7 @@ export const ScreeningCoverage$zodSchema: z.ZodType<ScreeningCoverage> = z
   .object({
     accounts_accessible: z.int(),
     accounts_found: z.int(),
-    items_frame_only: z.int().optional().describe(
-      "Videos the analyser read from their cover frame and caption alone, without their sound or later frames. They count as analysed and do not make the person partial. Left out when none.",
-    ),
-    items_not_analysed: z.int().optional().describe(
-      "Items read that the analyser could not analyse. Above zero, the person is partial: a finding may be missing from them.",
-    ),
     items_read: z.int(),
-    not_analysed_by_reason: z.array(ScreeningNotAnalysedCount$zodSchema)
-      .optional().describe(
-        "items_not_analysed split by reason, each reason once with at least one item.",
-      ),
     not_searched: z.array(z.string()).optional().describe(
       "Requested platforms where the person gave the screening nothing to look up, such as no handle for a platform that reads supplied handles only. Nothing looked and nothing failed: such a platform is not in platforms, is not none_found and does not make the person partial.",
     ),

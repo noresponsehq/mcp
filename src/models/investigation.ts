@@ -1,5 +1,4 @@
 import * as z from "zod";
-import { HighestBand, HighestBand$zodSchema } from "./highestband.js";
 import {
   InvestigationStatus,
   InvestigationStatus$zodSchema,
@@ -14,7 +13,6 @@ import { ScreeningDepth, ScreeningDepth$zodSchema } from "./screeningdepth.js";
 import { ScreeningSpend, ScreeningSpend$zodSchema } from "./screeningspend.js";
 
 export type Investigation = {
-  highest_band: HighestBand | null;
   coverage: ScreeningCoverage;
   spend: ScreeningSpend;
   decision: PersonDecision | null;
@@ -53,9 +51,6 @@ export const Investigation$zodSchema: z.ZodType<Investigation> = z.object({
   expires_at: z.string(),
   finished_at: z.string().optional(),
   group_id: z.string().nullable(),
-  highest_band: HighestBand$zodSchema.nullable().describe(
-    "The most severe finding's band, or null when nothing was flagged.",
-  ),
   id: z.string(),
   match_state: MatchState$zodSchema.nullable(),
   person_id: z.string(),

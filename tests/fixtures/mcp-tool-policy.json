@@ -711,7 +711,7 @@
   },
   {
     "name": "list_people",
-    "title": "Read a group's roster with match states, bands and decisions",
+    "title": "Read a group's roster with match states and decisions",
     "readOnlyHint": true,
     "idempotentHint": true
   },
@@ -730,7 +730,7 @@
   },
   {
     "name": "get_person",
-    "title": "Read a person's profiles, findings, decisions and other groups",
+    "title": "Read a person's profiles, decisions and other groups",
     "readOnlyHint": true,
     "idempotentHint": true
   },

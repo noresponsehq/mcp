@@ -1,6 +1,9 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
 
+/**
+ * ai_typing and analysis appear only on searches recorded before the engine stopped analysing results.
+ */
 export const Stage = {
   Lookup: "lookup",
   LookupTyping: "lookup_typing",
@@ -12,6 +15,9 @@ export const Stage = {
   Analysis: "analysis",
   Rating: "rating",
 } as const;
+/**
+ * ai_typing and analysis appear only on searches recorded before the engine stopped analysing results.
+ */
 export type Stage = ClosedEnum<typeof Stage>;
 
 export const Stage$zodSchema = z.enum([
@@ -24,4 +30,6 @@ export const Stage$zodSchema = z.enum([
   "ai_typing",
   "analysis",
   "rating",
-]);
+]).describe(
+  "ai_typing and analysis appear only on searches recorded before the engine stopped analysing results.",
+);

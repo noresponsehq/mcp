@@ -23,6 +23,6 @@ export const ScreeningMatchEvidence$zodSchema: z.ZodType<
     "What matched. email, phone, supplied_handle and source_fact are hard identifiers; company, city and school are soft. supplied_handle is a handle on the person row; supplied_username is an account at the person's platform-free username, which alone makes a possible match; source_fact is an account a profile found by the person's lookups lists.",
   ),
   resolver: z.string().describe(
-    "The resolver, collector or analyser that produced a record, by its catalogue name.",
+    "The resolver or collector that produced a record, by its catalogue name.",
   ),
 }).describe("One identifier that ties a profile to the person.");

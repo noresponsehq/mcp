@@ -11,7 +11,6 @@ export type ScreeningMedia = {
   media_type: MediaType;
   media_url: string;
   cover_of?: string | undefined;
-  frame_only?: boolean | undefined;
   text?: string | undefined;
   profile_id: string;
   permalink: string;
@@ -24,9 +23,6 @@ export const ScreeningMedia$zodSchema: z.ZodType<ScreeningMedia> = z.object({
   captured_at: z.string().optional().describe("When the screenshot was taken."),
   cover_of: z.string().optional().describe(
     "For an image that is a video's cover frame, the id of that video's media item.",
-  ),
-  frame_only: z.boolean().optional().describe(
-    "true on a video the analyser read from its cover frame (the image whose cover_of names it) and its caption alone. Left out otherwise.",
   ),
   id: z.string(),
   kind: z.literal("media").default("media").optional(),

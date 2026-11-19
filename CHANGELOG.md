@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.18.0
+
+* `SDK.groups.listPeople()`: 
+  *  `request.band` **Removed** (Breaking ⚠️)
+  *  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.groups.getPerson()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.groups.reviewPerson()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.groups.listScreenings()`:  `response.items[].people_flagged` **Removed** (Breaking ⚠️)
+* `SDK.groups.startScreening()`:  `response.people_flagged` **Removed** (Breaking ⚠️)
+* `SDK.groups.getScreening()`:  `response.people_flagged` **Removed** (Breaking ⚠️)
+* `SDK.groups.cancelScreening()`:  `response.people_flagged` **Removed** (Breaking ⚠️)
+* `SDK.groups.exportPeople()`: 
+  *  `request.band` **Removed** (Breaking ⚠️)
+  *  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.people.get()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.people.reviewChange()`:  `response.kind.enum(finding_added)` **Removed** (Breaking ⚠️)
+* `SDK.investigations.list()`:  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.investigations.create()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.investigations.get()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.investigations.review()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.investigations.cancel()`:  `response` **Changed** (Breaking ⚠️)
+
 ## 0.17.3
 
 * `SDK.settings.get()`:  `response.enrichment.kinds[].enum(person_name)` **Added** (Breaking ⚠️)

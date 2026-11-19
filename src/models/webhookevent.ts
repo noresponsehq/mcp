@@ -28,10 +28,6 @@ import {
   PersonDecidedEvent$zodSchema,
 } from "./persondecidedevent.js";
 import {
-  PersonFlaggedEvent,
-  PersonFlaggedEvent$zodSchema,
-} from "./personflaggedevent.js";
-import {
   ScreeningCompletedEvent,
   ScreeningCompletedEvent$zodSchema,
 } from "./screeningcompletedevent.js";
@@ -56,7 +52,6 @@ export type WebhookEvent =
   | (AccountRiskChangedEvent & { type: "account.risk_changed" })
   | (AuditEventEvent & { type: "audit.event" })
   | (ScreeningCompletedEvent & { type: "screening.completed" })
-  | (PersonFlaggedEvent & { type: "person.flagged" })
   | (PersonDecidedEvent & { type: "person.decided" })
   | (InvestigationCompletedEvent & { type: "investigation.completed" });
 
@@ -99,11 +94,6 @@ export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
   ScreeningCompletedEvent$zodSchema.and(
     z.object({
       type: z.literal("screening.completed"),
-    }).transform((v) => ({ type: v.type })),
-  ),
-  PersonFlaggedEvent$zodSchema.and(
-    z.object({
-      type: z.literal("person.flagged"),
     }).transform((v) => ({ type: v.type })),
   ),
   PersonDecidedEvent$zodSchema.and(

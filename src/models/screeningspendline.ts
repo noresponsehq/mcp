@@ -16,8 +16,10 @@ export type ScreeningSpendLine = {
 export const ScreeningSpendLine$zodSchema: z.ZodType<ScreeningSpendLine> = z
   .object({
     implementation: z.string().describe(
-      "The resolver, collector or analyser that produced a record, by its catalogue name.",
+      "The resolver or collector that produced a record, by its catalogue name.",
     ),
-    role: ScreeningSpendLineRole$zodSchema,
+    role: ScreeningSpendLineRole$zodSchema.describe(
+      "What the implementation did. analyser appears only on spend recorded before the engine stopped analysing posts.",
+    ),
     spend_minor: z.int(),
   }).describe("What one implementation cost.");

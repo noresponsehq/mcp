@@ -38,7 +38,7 @@ export const ScreeningProfile$zodSchema: z.ZodType<ScreeningProfile> = z.object(
     bio: z.string().optional(),
     collected_at: z.string(),
     collector: z.string().describe(
-      "The resolver, collector or analyser that produced a record, by its catalogue name.",
+      "The resolver or collector that produced a record, by its catalogue name.",
     ),
     display_name: z.string().optional(),
     followers: z.int().optional(),

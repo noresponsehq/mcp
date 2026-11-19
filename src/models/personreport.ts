@@ -3,10 +3,6 @@ import { OtherGroups, OtherGroups$zodSchema } from "./othergroups.js";
 import { Person, Person$zodSchema } from "./person.js";
 import { PersonReview, PersonReview$zodSchema } from "./personreview.js";
 import {
-  ScreeningFinding,
-  ScreeningFinding$zodSchema,
-} from "./screeningfinding.js";
-import {
   ScreeningLookup,
   ScreeningLookup$zodSchema,
 } from "./screeninglookup.js";
@@ -28,7 +24,6 @@ import {
 export type PersonReport = {
   person: Person;
   profiles: Array<ScreeningProfile>;
-  findings: Array<ScreeningFinding>;
   posts: Array<ScreeningPost>;
   media: Array<ScreeningMedia>;
   reviews: Array<PersonReview>;
@@ -41,16 +36,13 @@ export type PersonReport = {
 
 export const PersonReport$zodSchema: z.ZodType<PersonReport> = z.object({
   evidence_restricted: z.boolean().optional().describe(
-    "True when evidence.read is explicitly denied. Submitted details, coverage, job status and decisions remain available. Collected records, profiles, findings, posts, media, discovered values and free-text decision notes are withheld.",
-  ),
-  findings: z.array(ScreeningFinding$zodSchema).describe(
-    "What this result flagged, most severe first, each citing its evidence.",
+    "True when evidence.read is explicitly denied. Submitted details, coverage, job status and decisions remain available. Collected records, profiles, posts, media, discovered values and free-text decision notes are withheld.",
   ),
   lookup: ScreeningLookup$zodSchema.optional().describe(
-    "What the signup check's lookups found for a person: account presence for the email, phone and usernames (the person's handles), the phone lookup, the email domain's registration and the breach search. Context and coverage for the reviewer, not a finding: nothing here sets a band or a match state.",
+    "What the signup check's lookups found for a person: account presence for the email, phone and usernames (the person's handles), the phone lookup, the email domain's registration and the breach search. Nothing here sets a match state.",
   ),
   media: z.array(ScreeningMedia$zodSchema).describe(
-    "All images and videos retained for this result, including media that no finding cites.",
+    "All images and videos retained for this result.",
   ),
   other_groups: OtherGroups$zodSchema.describe(
     "Where else in the environment the person appears, read live from those groups: deleting one removes it here.",
@@ -59,7 +51,7 @@ export const PersonReport$zodSchema: z.ZodType<PersonReport> = z.object({
     "A person and where their screening and review stand.",
   ),
   posts: z.array(ScreeningPost$zodSchema).describe(
-    "All posts retained for this result, including posts that no finding cites.",
+    "All posts retained for this result.",
   ),
   profiles: z.array(ScreeningProfile$zodSchema).describe(
     "The accounts this result matched, with how each was matched.",

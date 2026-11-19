@@ -1,6 +1,5 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
-import { HighestBand, HighestBand$zodSchema } from "./highestband.js";
 import { MatchState, MatchState$zodSchema } from "./matchstate.js";
 import { PersonDecision, PersonDecision$zodSchema } from "./persondecision.js";
 
@@ -24,7 +23,6 @@ export type OtherGroup = {
   matched_on: Array<OtherGroupMatchedOn>;
   match_state: MatchState;
   no_profile_to_check?: boolean | undefined;
-  highest_band: HighestBand | null;
   decision: PersonDecision | null;
   decided_by?: string | undefined;
   decided_at?: string | undefined;
@@ -40,9 +38,6 @@ export const OtherGroup$zodSchema: z.ZodType<OtherGroup> = z.object({
   group_name: z.string(),
   group_starts_at: z.string().nullable().describe(
     "The other group's optional event start; null for an ongoing group.",
-  ),
-  highest_band: HighestBand$zodSchema.nullable().describe(
-    "That person's most severe band in that group, or null.",
   ),
   match_state: MatchState$zodSchema.describe(
     "How sure the latest screening is that it found the person's accounts. unscreened until a screening reaches the person, and after one that had no profile to check (no_profile_to_check).",

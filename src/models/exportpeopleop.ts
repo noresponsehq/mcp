@@ -8,7 +8,6 @@ import {
   BadRequestError$zodSchema,
 } from "./badrequesterror.js";
 import { ConflictError, ConflictError$zodSchema } from "./conflicterror.js";
-import { ListPeopleBand, ListPeopleBand$zodSchema } from "./listpeopleband.js";
 import {
   ListPeopleDecision,
   ListPeopleDecision$zodSchema,
@@ -26,7 +25,6 @@ export type ExportPeopleRequest = {
   group_id: string;
   limit?: number | undefined;
   after?: string | undefined;
-  band?: ListPeopleBand | undefined;
   decision?: ListPeopleDecision | undefined;
   role?: ListPeopleRole | undefined;
 };
@@ -34,9 +32,6 @@ export type ExportPeopleRequest = {
 export const ExportPeopleRequest$zodSchema: z.ZodType<ExportPeopleRequest> = z
   .object({
     after: z.string().describe("Read people after this one.").optional(),
-    band: ListPeopleBand$zodSchema.optional().describe(
-      "Only people whose highest finding has this band; none for people with no finding.",
-    ),
     decision: ListPeopleDecision$zodSchema.optional().describe(
       "Only people with this decision; undecided for none yet.",
     ),
