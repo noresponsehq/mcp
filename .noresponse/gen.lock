@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: dc30d4f3-f8ce-4512-bfa4-2d99f2b6fa18
 management:
-  docChecksum: 70f7354657f2aeea4d4fafbbc2bf6230
+  docChecksum: 8d1b972b668c9ecc14d78ee6e5fc1293
   docVersion: "1"
   speakeasyVersion: internal
   generationVersion: internal
-  releaseVersion: 0.16.6
-  configChecksum: b878b285196c8053f1f4ffcc2fe2c937
+  releaseVersion: 0.16.7
+  configChecksum: 8dba72825b76324be6d3c4440a536339
 features:
   mcp-typescript:
     acceptHeaders: 0.1.0
@@ -36,11 +36,11 @@ trackedFiles:
   eslint.config.mjs:
     last_write_checksum: sha1:576025302d3d8650f37276bc9075f6ade3842cc7
   manifest.json:
-    last_write_checksum: sha1:b4e7c81957bef192acfc928b3721337a293f2ad6
+    last_write_checksum: sha1:75089fb441a23b86e08bb6ecca4315dcb1f645e4
   package.json:
-    last_write_checksum: sha1:347c9a859953461415d78b4d6f21403c6a188bd6
+    last_write_checksum: sha1:91293710b311c67c1f113cb4b2793fc90878baf3
   server.json:
-    last_write_checksum: sha1:607adb841c2ee9c2073f6f14143c8fb18a954cd2
+    last_write_checksum: sha1:53a8ddaabd9726f229befe8e2959da3948c0ba43
   src/cloudflare-worker/cloudflare-worker.ts:
     last_write_checksum: sha1:75e015ffd0e346f8a1a627527a5d07b389aeeb25
   src/core.ts:
@@ -320,7 +320,7 @@ trackedFiles:
   src/lib/base64.ts:
     last_write_checksum: sha1:0501dbbf4a7b1f7bd2e35bbfdecd2d6e3a3c6d3d
   src/lib/config.ts:
-    last_write_checksum: sha1:750c87d2c804eae24bfda2c4046c22de0ebd9b80
+    last_write_checksum: sha1:c3524fc2331dc73499e0ccc5122073d0cc488f4f
   src/lib/encodings.ts:
     last_write_checksum: sha1:c7e27219bd29e5bbfd5c808357046f840e0dc148
   src/lib/env.ts:
@@ -364,7 +364,7 @@ trackedFiles:
   src/mcp-server/flags.ts:
     last_write_checksum: sha1:345cfaceaa2674cd663ca4535e98179b85d0e1cf
   src/mcp-server/mcp-server.ts:
-    last_write_checksum: sha1:dabfba2389f25ff1cc29d43f47d436c07c467f8c
+    last_write_checksum: sha1:63a8435241bcd59eaa06c43f50d687cf6d9a0326
   src/mcp-server/prompts.ts:
     last_write_checksum: sha1:2d1b27ca8b9f8231e93a1fa7df297d75ad9f9f1f
   src/mcp-server/resources.ts:
@@ -372,7 +372,7 @@ trackedFiles:
   src/mcp-server/scopes.ts:
     last_write_checksum: sha1:9a3d8c15f311c6dd7d539a1bf992d79eec043898
   src/mcp-server/server.ts:
-    last_write_checksum: sha1:2232bba6590cf1ab76b8a115768be7747b517df8
+    last_write_checksum: sha1:abf6fd41b44da786e6f4685407d67fb5f5b0fef4
   src/mcp-server/shared.ts:
     last_write_checksum: sha1:f8a5527cda1df34dae62705784208fec2f5a045e
   src/mcp-server/tools.ts:
@@ -1138,7 +1138,7 @@ trackedFiles:
   src/models/investigationreport.ts:
     last_write_checksum: sha1:13f883804b935ff5e87471e5504128a75d90f933
   src/models/investigationrequest.ts:
-    last_write_checksum: sha1:336b3952ece5e69f3ff6a4f0304659995fdcb830
+    last_write_checksum: sha1:1fac5cd5c51a356e342a6ff94c1140d93a876b07
   src/models/investigationslist.ts:
     last_write_checksum: sha1:056a14791aed3e7fbebc0c8cfe180e6a8ab74ec0
   src/models/investigationstatus.ts:
@@ -1694,7 +1694,7 @@ trackedFiles:
   src/models/screeningprofile.ts:
     last_write_checksum: sha1:d83b2a12787f1e4abbd70bf9e470ba5ecb6b1d89
   src/models/screeningrequest.ts:
-    last_write_checksum: sha1:710abf47e99667045c1f91a2117dce60a3254263
+    last_write_checksum: sha1:b1d6bf293607f2d05eb4d5ed82540a2762b80a27
   src/models/screeningspend.ts:
     last_write_checksum: sha1:4ed234e49fe1f5ca4013cd32803ec671b40b6c31
   src/models/screeningspendline.ts:
@@ -4522,7 +4522,7 @@ examples:
         header:
           Idempotency-Key: "account-acct_7f3a9c"
       requestBody:
-        application/json: {"depth": "standard", "platforms": ["bluesky"]}
+        application/json: {"depth": "standard"}
       responses:
         "202":
           application/json: {"id": "scn_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "group_id": "grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "environment": "live", "status": "running", "depth": "standard", "platforms": ["bluesky"], "requested_by": "user_2abc", "created_at": "2026-01-01T00:00:00Z", "started_at": "2026-01-01T00:00:00Z", "finished_at": "2026-01-02T00:00:00Z", "expires_at": "2026-01-02T00:00:00Z", "people_total": 592267, "people_done": 173751, "people_flagged": 250584, "people_failed": 772063, "people_partial": 825999, "estimated_spend": 343791, "spent": 379997, "spend": {"total_minor": 816908, "by_implementation": [{"implementation": "synthetic", "role": "collector", "spend_minor": 861627}]}, "error_code": "user_cancelled"}
@@ -4802,7 +4802,7 @@ examples:
         header:
           Idempotency-Key: "investigation-case-1042-first"
       requestBody:
-        application/json: {"depth": "standard", "platforms": ["x"], "person_id": "per_01JA2Z8K6Q4V7W9XBCDEFGHJKM"}
+        application/json: {"depth": "standard", "person_id": "per_01JA2Z8K6Q4V7W9XBCDEFGHJKM"}
       responses:
         "202":
           application/json: {"highest_band": null, "coverage": {"accounts_found": 353004, "accounts_accessible": 190010, "items_read": 392044, "period_from": "2026-01-01T00:00:00Z", "period_to": "2026-01-02T00:00:00Z", "platforms": [{"platform": "bluesky", "status": "inaccessible", "accounts_found": 63025, "items_read": 718618}], "not_searched": ["instagram"], "timing": {"started_at": "2026-01-01T00:00:00Z", "total_ms": 335147, "stages": [{"stage": "late_lookup", "ms": 496778}]}}, "spend": {"total_minor": 810936, "by_implementation": []}, "decision": "cleared", "decision_note": "Source records reviewed.", "decided_by": "user_investigator", "decided_at": "2026-01-01T00:00:00Z", "id": "inv_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "person_id": "per_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "group_id": "grp_01JA2Z8K6Q4V7W9XBCDEFGHJKM", "status": "partial", "depth": "standard", "platforms": ["x"], "match_state": "confirmed", "error_code": "expired", "created_at": "2026-01-01T00:00:00Z", "started_at": "2026-01-01T00:00:00Z", "finished_at": "2026-01-01T00:00:00Z", "expires_at": "2026-02-01T00:00:00Z", "deadline_at": "2026-01-01T00:00:00Z"}

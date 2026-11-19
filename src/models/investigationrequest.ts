@@ -23,7 +23,7 @@ export const InvestigationRequest$zodSchema: z.ZodType<InvestigationRequest> = z
     ),
     person_id: z.string(),
     platforms: z.array(z.string()).optional().describe(
-      "The platforms to search. Leave it out for a full search: every platform a connector serves in the environment when the investigation starts, which the investigation then lists.",
+      "Deprecated: leave it out. Without it the investigation is a full search: every platform a connector serves in the environment when the investigation starts, which the investigation then lists, each searched only with the identifiers its connector takes. A list sent here still limits the investigation until a later contract release removes the field.",
     ),
   }).describe(
     "Runs a new investigation against one retained workspace person.",
