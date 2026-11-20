@@ -10,7 +10,7 @@ export const tool$peopleSchedule: ToolDefinition<typeof args> = {
   name: "schedule_workspace_person",
   description: `Schedule a workspace person's reruns.
 
-Sets how often the person is investigated again: daily, weekly or monthly, counted from now, or off. Each due run starts one full investigation of the person, which the person's investigations list and whose changes the person report stores. Setting the period the schedule already has keeps its next run. The schedule lives in the database and the worker runs it, so a restart or a release neither skips nor repeats a run. Each change is audited as person.schedule_changed. The investigations scope grants this operation. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment.`,
+Sets how often the person is investigated again: daily, weekly or monthly, counted from now, or off. Each due run starts one full investigation of the person, which the person's investigations list and whose changes the person report stores. Setting the period the schedule already has keeps its next run. The schedule lives in the database and the worker runs it, so a restart or a release neither skips nor repeats a run. Each change is audited as person.schedule_changed. The investigations scope grants this operation. The API key selects the workspace and environment.`,
   annotations: {
     "title": "Schedule a workspace person's reruns",
     "destructiveHint": false,

@@ -68,7 +68,7 @@ export const KeyRequestDeniedAction$zodSchema = z.enum([
 ]);
 
 /**
- * Creates a key whose scopes are bounded by the issuer capabilities in this environment. Delete is owner-only. A service key outlives its creator; a personal key belongs to the authenticated member and is revoked on membership or authority changes. request_id deduplicates creation: retry returns 200 metadata without the secret; changed parameters answer 409. Team scopes members and members_manage are explicitly workspace-wide, live-only, and delegated by a current full owner. Personal credentials cannot hold management or members_manage. Legacy management includes policy publication; use settings without policy_publish for configuration preparation and retention-only edits.
+ * Creates a key whose scopes are bounded by the issuer capabilities in this environment. Existing group keys retain access to group routes. To issue a new key, choose the individual scopes needed for its operations. Delete is owner-only. A service key outlives its creator; a personal key belongs to the authenticated member and is revoked on membership or authority changes. request_id deduplicates creation: retry returns 200 metadata without the secret; changed parameters answer 409. Team scopes members and members_manage are explicitly workspace-wide, live-only, and delegated by a current full owner. Personal credentials cannot hold management or members_manage. Legacy management includes policy publication; use settings without policy_publish for configuration preparation and retention-only edits.
  */
 export type KeyRequest = {
   environment: KeyEnvironment;
@@ -102,8 +102,8 @@ export const KeyRequest$zodSchema: z.ZodType<KeyRequest> = z.object({
     "Caller-chosen identifier for one creation attempt, scoped to the issuing actor and environment. Use 1 to 256 printable ASCII characters without spaces. A retry with the same parameters returns the original key metadata with status 200 and no secret; changed parameters return 409.",
   ),
   scopes: z.array(KeyRequestScope$zodSchema).describe(
-    "The key's scopes, each at most once.",
+    "Scopes for the new key. The legacy groups scope is reserved for existing keys.",
   ),
 }).describe(
-  "Creates a key whose scopes are bounded by the issuer capabilities in this environment. Delete is owner-only. A service key outlives its creator; a personal key belongs to the authenticated member and is revoked on membership or authority changes. request_id deduplicates creation: retry returns 200 metadata without the secret; changed parameters answer 409. Team scopes members and members_manage are explicitly workspace-wide, live-only, and delegated by a current full owner. Personal credentials cannot hold management or members_manage. Legacy management includes policy publication; use settings without policy_publish for configuration preparation and retention-only edits.",
+  "Creates a key whose scopes are bounded by the issuer capabilities in this environment. Existing group keys retain access to group routes. To issue a new key, choose the individual scopes needed for its operations. Delete is owner-only. A service key outlives its creator; a personal key belongs to the authenticated member and is revoked on membership or authority changes. request_id deduplicates creation: retry returns 200 metadata without the secret; changed parameters answer 409. Team scopes members and members_manage are explicitly workspace-wide, live-only, and delegated by a current full owner. Personal credentials cannot hold management or members_manage. Legacy management includes policy publication; use settings without policy_publish for configuration preparation and retention-only edits.",
 );

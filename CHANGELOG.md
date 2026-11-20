@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.19.6
+
+No changes detected.
+
 ## 0.19.5
 
 No changes detected.
