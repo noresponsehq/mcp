@@ -4,7 +4,7 @@ import { CALLER_KEY, httpClient, json, recordingAPI, stdioClient, workerServer }
 
 for (const transport of ["stdio", "worker"]) {
   test(`${transport}: ongoing groups decode null dates and retain explicit PATCH nulls`, async () => {
-    const group = { id: "grp_example", environment: "test", name: "Harbour building", starts_at: null, ends_at: null, principals: [], topics: [], people: 0, version: 1, created_by: "test", created_at: "2026-11-15T10:00:00Z", updated_at: "2026-11-15T10:00:00Z" };
+    const group = { id: "grp_example", environment: "test", name: "Harbour building", type: "event", attribute: "", starts_at: null, ends_at: null, principals: [], topics: [], people: 0, version: 1, created_by: "test", created_at: "2026-11-15T10:00:00Z", updated_at: "2026-11-15T10:00:00Z" };
     const api = await recordingAPI({ respond: req => ({ status: req.method === "POST" ? 201 : 200, body: group }) });
     let client, worker;
     try {

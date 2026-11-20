@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { GroupType, GroupType$zodSchema } from "./grouptype.js";
 import { Principal, Principal$zodSchema } from "./principal.js";
 
 /**
@@ -6,6 +7,8 @@ import { Principal, Principal$zodSchema } from "./principal.js";
  */
 export type GroupRequest = {
   name: string;
+  type?: GroupType | undefined;
+  attribute?: string | undefined;
   starts_at?: string | null | undefined;
   ends_at?: string | null | undefined;
   venue?: string | undefined;
@@ -15,6 +18,9 @@ export type GroupRequest = {
 };
 
 export const GroupRequest$zodSchema: z.ZodType<GroupRequest> = z.object({
+  attribute: z.string().optional().describe(
+    "The attribute its people share, such as the employer's or the place's name.",
+  ),
   ends_at: z.string().nullable().optional().describe(
     "Optional event end; requires starts_at and must be at or after it. Null when no end is set.",
   ),
@@ -28,6 +34,9 @@ export const GroupRequest$zodSchema: z.ZodType<GroupRequest> = z.object({
   ),
   topics: z.array(z.string()).optional().describe(
     "Sensitive topics the screening reads posts against, at most 50.",
+  ),
+  type: GroupType$zodSchema.optional().describe(
+    "What the group's people share: an event, an organisation, a place or another attribute.",
   ),
   venue: z.string().optional().describe("Where the group is held."),
 }).describe("Creates an ongoing group or an event with optional dates.");

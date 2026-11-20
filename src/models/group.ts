@@ -3,6 +3,7 @@ import {
   AuditSettingsEnvironment,
   AuditSettingsEnvironment$zodSchema,
 } from "./auditsettingsenvironment.js";
+import { GroupType, GroupType$zodSchema } from "./grouptype.js";
 import { Principal, Principal$zodSchema } from "./principal.js";
 
 /**
@@ -12,6 +13,8 @@ export type Group = {
   id: string;
   environment: AuditSettingsEnvironment;
   name: string;
+  type: GroupType;
+  attribute: string;
   starts_at: string | null;
   ends_at: string | null;
   venue?: string | undefined;
@@ -26,6 +29,9 @@ export type Group = {
 };
 
 export const Group$zodSchema: z.ZodType<Group> = z.object({
+  attribute: z.string().describe(
+    "The attribute its people share. Empty when none was given.",
+  ),
   created_at: z.string(),
   created_by: z.string().describe(
     "The member or key label that created the group.",
@@ -45,6 +51,9 @@ export const Group$zodSchema: z.ZodType<Group> = z.object({
     "Optional event start; null for an ongoing group.",
   ),
   topics: z.array(z.string()).describe("Sensitive topics."),
+  type: GroupType$zodSchema.describe(
+    "What the group's people share: an event, an organisation, a place or another attribute.",
+  ),
   updated_at: z.string(),
   venue: z.string().optional().describe("Where the group is held."),
   version: z.int().describe("Goes up by one with every change."),

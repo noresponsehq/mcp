@@ -6,6 +6,7 @@ import { Principal, Principal$zodSchema } from "./principal.js";
  */
 export type GroupUpdate = {
   name?: string | undefined;
+  attribute?: string | undefined;
   starts_at?: string | null | undefined;
   ends_at?: string | null | undefined;
   venue?: string | undefined;
@@ -16,6 +17,9 @@ export type GroupUpdate = {
 };
 
 export const GroupUpdate$zodSchema: z.ZodType<GroupUpdate> = z.object({
+  attribute: z.string().optional().describe(
+    "The attribute its people share. Omit to keep the current value.",
+  ),
   ends_at: z.string().nullable().optional().describe(
     "Optional event end; requires starts_at and must be at or after it. Null when no end is set. Omit to keep the current value; send null to clear it.",
   ),
