@@ -1,6 +1,0 @@
-{
-  "hook_point": "post_login",
-  "user": {
-    "user_id": "auth0|64abc"
-  }
-}

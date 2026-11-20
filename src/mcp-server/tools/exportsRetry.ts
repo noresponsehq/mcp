@@ -1,6 +1,6 @@
 import { exportsRetry } from "../../funcs/exportsRetry.js";
 import { RetryCustomerExportRequest$zodSchema } from "../../models/retrycustomerexportop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: RetryCustomerExportRequest$zodSchema,
@@ -29,7 +29,7 @@ Start a new generation of a failed export before its original expiry, up to ten 
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

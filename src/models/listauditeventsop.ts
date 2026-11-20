@@ -9,12 +9,9 @@ import {
   BadRequestError$zodSchema,
 } from "./badrequesterror.js";
 import { ConflictError, ConflictError$zodSchema } from "./conflicterror.js";
-import {
-  CustomerExportRequestFilterOutcome,
-  CustomerExportRequestFilterOutcome$zodSchema,
-} from "./customerexportrequestfilteroutcome.js";
 import { Environment, Environment$zodSchema } from "./environment.js";
 import { NotFoundError, NotFoundError$zodSchema } from "./notfounderror.js";
+import { Outcome, Outcome$zodSchema } from "./outcome.js";
 import {
   PermissionDeniedError,
   PermissionDeniedError$zodSchema,
@@ -30,7 +27,7 @@ export type ListAuditEventsRequest = {
   actor?: string | undefined;
   target_type?: string | undefined;
   target_id?: string | undefined;
-  outcome?: CustomerExportRequestFilterOutcome | undefined;
+  outcome?: Outcome | undefined;
   since?: string | undefined;
   until?: string | undefined;
 };
@@ -39,7 +36,7 @@ export const ListAuditEventsRequest$zodSchema: z.ZodType<
   ListAuditEventsRequest
 > = z.object({
   action: z.string().describe(
-    "Exact action, such as key.created or account.deleted.",
+    "Exact action, such as key.created or webhook_endpoint.deleted.",
   ).optional(),
   actor: z.string().describe(
     "Exact external user id, public API key id or console credential id.",
@@ -51,9 +48,7 @@ export const ListAuditEventsRequest$zodSchema: z.ZodType<
     "Affected scope. API keys can request only their own environment. Omit to read the scopes the caller is allowed.",
   ),
   limit: z.int().default(20).describe("Events per page."),
-  outcome: CustomerExportRequestFilterOutcome$zodSchema.optional().describe(
-    "Exact outcome.",
-  ),
+  outcome: Outcome$zodSchema.optional().describe("Exact outcome."),
   since: z.string().describe("Inclusive creation timestamp in RFC3339 format.")
     .optional(),
   target_id: z.string().describe(

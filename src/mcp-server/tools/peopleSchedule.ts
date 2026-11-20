@@ -1,6 +1,6 @@
 import { peopleSchedule } from "../../funcs/peopleSchedule.js";
 import { ScheduleWorkspacePersonRequest$zodSchema } from "../../models/scheduleworkspacepersonop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ScheduleWorkspacePersonRequest$zodSchema,
@@ -28,7 +28,7 @@ Sets how often the person is investigated again: daily, weekly or monthly, count
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

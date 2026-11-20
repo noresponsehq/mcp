@@ -1,6 +1,6 @@
 import { exportsCancel } from "../../funcs/exportsCancel.js";
 import { CancelCustomerExportRequest$zodSchema } from "../../models/cancelcustomerexportop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: CancelCustomerExportRequest$zodSchema,
@@ -28,7 +28,7 @@ Cancel an export and remove its stored chunks. Repeating cancellation is safe. A
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

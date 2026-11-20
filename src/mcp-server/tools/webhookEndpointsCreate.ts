@@ -1,6 +1,6 @@
 import { webhookEndpointsCreate } from "../../funcs/webhookEndpointsCreate.js";
 import { WebhookEndpointRequest$zodSchema } from "../../models/webhookendpointrequest.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: WebhookEndpointRequest$zodSchema,
@@ -28,7 +28,7 @@ Registers a webhook endpoint and returns it with its first signing secret, shown
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

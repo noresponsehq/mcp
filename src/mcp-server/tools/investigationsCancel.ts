@@ -1,6 +1,6 @@
 import { investigationsCancel } from "../../funcs/investigationsCancel.js";
 import { CancelInvestigationRequest$zodSchema } from "../../models/cancelinvestigationop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: CancelInvestigationRequest$zodSchema,
@@ -28,7 +28,7 @@ Stops this investigation. A completed or already cancelled investigation keeps i
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

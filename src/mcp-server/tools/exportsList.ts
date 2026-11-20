@@ -1,6 +1,6 @@
 import { exportsList } from "../../funcs/exportsList.js";
 import { ListCustomerExportsRequest$zodSchema } from "../../models/listcustomerexportsop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListCustomerExportsRequest$zodSchema,
@@ -28,7 +28,7 @@ List authorised jobs for one kind and environment. Detailed jobs require current
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

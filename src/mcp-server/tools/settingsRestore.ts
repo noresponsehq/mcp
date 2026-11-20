@@ -1,6 +1,6 @@
 import { settingsRestore } from "../../funcs/settingsRestore.js";
 import { RestorePolicyRequest$zodSchema } from "../../models/restorepolicyop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: RestorePolicyRequest$zodSchema,
@@ -28,7 +28,7 @@ Restore a retained configuration as a fresh version with the expected current ve
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

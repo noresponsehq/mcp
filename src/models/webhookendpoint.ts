@@ -35,13 +35,13 @@ export const WebhookEndpoint$zodSchema: z.ZodType<WebhookEndpoint> = z.object({
     "The latest failed delivery attempt of the current failure streak; present exactly when failing_since is. A failure more than 2 hours after it starts a new streak.",
   ),
   response_mode: ResponseMode$zodSchema.describe(
-    "standard returns the consolidated risk response; detailed adds merged provider-neutral facts when the key has detailed scope. There is no raw mode.",
+    "The response mode recorded for the endpoint: standard (the default) or detailed, which needs an API key with the detailed scope as well. No event the API sends today differs by mode.",
   ),
   signing_keys: z.array(SigningKey$zodSchema).describe(
     "The keys a receiver may see in NR-Webhook-Key-Id, oldest first. The last one signs every new delivery; an older one keeps verifying until its expires_at.",
   ),
   state: WebhookEndpointState$zodSchema.describe(
-    "unverified until the endpoint echoes an endpoint.verification challenge (send one with POST /v1/webhooks/{endpoint_id}/test); verified receives assessment.updated events; disabled after 72 hours of continuous delivery failure, and verified again by the same challenge.",
+    "unverified until the endpoint echoes an endpoint.verification challenge (send one with POST /v1/webhooks/{endpoint_id}/test); verified receives events; disabled after 72 hours of continuous delivery failure, and verified again by the same challenge.",
   ),
   url: z.string().describe("The destination URL, as registered."),
   verified_at: z.string().optional().describe(

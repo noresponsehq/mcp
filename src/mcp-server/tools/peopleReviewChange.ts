@@ -1,6 +1,6 @@
 import { peopleReviewChange } from "../../funcs/peopleReviewChange.js";
 import { ReviewWorkspacePersonChangeRequest$zodSchema } from "../../models/reviewworkspacepersonchangeop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ReviewWorkspacePersonChangeRequest$zodSchema,
@@ -29,7 +29,7 @@ Marks one change between a person's investigations reviewed, so it sorts below t
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

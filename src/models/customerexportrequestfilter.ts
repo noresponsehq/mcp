@@ -1,9 +1,6 @@
 import * as z from "zod";
-import {
-  CustomerExportRequestFilterOutcome,
-  CustomerExportRequestFilterOutcome$zodSchema,
-} from "./customerexportrequestfilteroutcome.js";
 import { Environment, Environment$zodSchema } from "./environment.js";
+import { Outcome, Outcome$zodSchema } from "./outcome.js";
 
 export type CustomerExportRequestFilter = {
   action?: string | undefined;
@@ -11,7 +8,7 @@ export type CustomerExportRequestFilter = {
   target_type?: string | undefined;
   target_id?: string | undefined;
   environment?: Environment | undefined;
-  outcome?: CustomerExportRequestFilterOutcome | undefined;
+  outcome?: Outcome | undefined;
   since?: string | undefined;
   until?: string | undefined;
 };
@@ -22,7 +19,7 @@ export const CustomerExportRequestFilter$zodSchema: z.ZodType<
   action: z.string().optional(),
   actor: z.string().optional(),
   environment: Environment$zodSchema.optional(),
-  outcome: CustomerExportRequestFilterOutcome$zodSchema.optional(),
+  outcome: Outcome$zodSchema.optional(),
   since: z.string().optional(),
   target_id: z.string().optional(),
   target_type: z.string().optional(),

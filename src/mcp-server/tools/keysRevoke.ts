@@ -1,6 +1,6 @@
 import { keysRevoke } from "../../funcs/keysRevoke.js";
 import { RevokeKeyRequest$zodSchema } from "../../models/revokekeyop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: RevokeKeyRequest$zodSchema,
@@ -28,7 +28,7 @@ Revokes a key of the signing key's environment at once: its next request answers
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

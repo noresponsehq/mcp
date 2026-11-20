@@ -8,8 +8,6 @@ import {
 export type WebhookDeliveryAttempt = {
   event_id: string;
   event_type: string;
-  assessment_id?: string | undefined;
-  account_id?: string | undefined;
   attempt: number;
   replay: boolean;
   status: WebhookDeliveryAttemptStatus;
@@ -22,12 +20,6 @@ export type WebhookDeliveryAttempt = {
 export const WebhookDeliveryAttempt$zodSchema: z.ZodType<
   WebhookDeliveryAttempt
 > = z.object({
-  account_id: z.string().optional().describe(
-    "The account an account.risk_changed event reported. Absent on every other event.",
-  ),
-  assessment_id: z.string().optional().describe(
-    "The assessment an assessment.updated event reported, while that assessment is held. Absent on every other event, on a test event and on a notice that the assessment was erased or expired.",
-  ),
   attempt: z.int().describe(
     "Which attempt of this delivery this was: 1 for the first send, up to 9 with retries. A replay counts its own attempts from 1.",
   ),
@@ -38,7 +30,7 @@ export const WebhookDeliveryAttempt$zodSchema: z.ZodType<
     "The event id the receiver saw as NR-Webhook-Id and as the body's id. Replay it with POST /v1/webhooks/{endpoint_id}/deliveries/{event_id}/replay.",
   ),
   event_type: z.string().describe(
-    "The event's type, as its body's type: assessment.updated, endpoint.verification, account.deleted, workspace.deleted, webhook_endpoint.disabled, account.risk_changed, audit.event, screening.completed, person.decided, investigation.completed, or a type added later.",
+    "The event's type, as its body's type: endpoint.verification, workspace.deleted, webhook_endpoint.disabled, audit.event, investigation.completed, or a type added later.",
   ),
   failure: Failure$zodSchema.optional().describe(
     "Why the attempt failed: the URL is no longer valid, the host did not resolve, it resolved to an address that is not public, no answer within 5 seconds, the connection failed, a 3xx (redirects are not followed) or another non-2xx status. Absent for a delivered attempt.",

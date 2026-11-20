@@ -1,6 +1,6 @@
 import { webhookEndpointsAggregate } from "../../funcs/webhookEndpointsAggregate.js";
 import { WebhookAggregateRequest$zodSchema } from "../../models/webhookaggregaterequest.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: WebhookAggregateRequest$zodSchema,
@@ -28,7 +28,7 @@ Count retained webhook delivery attempts within thirty days and report current r
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

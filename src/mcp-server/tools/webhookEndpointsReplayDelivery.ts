@@ -1,6 +1,6 @@
 import { webhookEndpointsReplayDelivery } from "../../funcs/webhookEndpointsReplayDelivery.js";
 import { ReplayWebhookDeliveryRequest$zodSchema } from "../../models/replaywebhookdeliveryop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ReplayWebhookDeliveryRequest$zodSchema,
@@ -29,7 +29,10 @@ Queues the event for the endpoint again: the same event id and body it received,
 
       if (!result.ok) {
         return {
-          content: [{ type: "text", text: result.error.message }],
+          content: [{
+            type: "text",
+            text: boundToolText(result.error.message),
+          }],
           isError: true,
         };
       }

@@ -3,7 +3,7 @@
   "items": [
     {
       "event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2",
-      "event_type": "assessment.updated",
+      "event_type": "investigation.completed",
       "attempt": 1,
       "replay": false,
       "status": "failed",

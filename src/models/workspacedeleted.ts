@@ -5,7 +5,7 @@ import {
 } from "./auditsettingsenvironment.js";
 
 /**
- * Terminal for the receiving endpoint's environment: its workspace was deleted. Every key of the environment already answers 401, its assessments and accounts are gone, and no further event follows. The workspace id is not reused, so a later event naming it cannot arrive.
+ * Terminal for the receiving endpoint's environment: its workspace was deleted. Every key of the environment already answers 401, its data is gone, and no further event follows. The workspace id is not reused, so a later event naming it cannot arrive.
  */
 export type WorkspaceDeleted = {
   workspace_id: string;
@@ -24,5 +24,5 @@ export const WorkspaceDeleted$zodSchema: z.ZodType<WorkspaceDeleted> = z.object(
     ),
   },
 ).describe(
-  "Terminal for the receiving endpoint's environment: its workspace was deleted. Every key of the environment already answers 401, its assessments and accounts are gone, and no further event follows. The workspace id is not reused, so a later event naming it cannot arrive.",
+  "Terminal for the receiving endpoint's environment: its workspace was deleted. Every key of the environment already answers 401, its data is gone, and no further event follows. The workspace id is not reused, so a later event naming it cannot arrive.",
 );

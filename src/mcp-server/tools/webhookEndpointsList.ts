@@ -1,5 +1,5 @@
 import { webhookEndpointsList } from "../../funcs/webhookEndpointsList.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 export const tool$webhookEndpointsList: ToolDefinition = {
   name: "list_webhook_endpoints",
@@ -21,7 +21,7 @@ Lists your webhook endpoints in every state, ordered by endpoint_id, with the id
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

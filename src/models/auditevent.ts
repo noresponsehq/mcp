@@ -7,12 +7,9 @@ import {
   AuditSettingsEnvironment,
   AuditSettingsEnvironment$zodSchema,
 } from "./auditsettingsenvironment.js";
-import {
-  CustomerExportRequestFilterOutcome,
-  CustomerExportRequestFilterOutcome$zodSchema,
-} from "./customerexportrequestfilteroutcome.js";
 import { Environment, Environment$zodSchema } from "./environment.js";
 import { KeyActor, KeyActor$zodSchema } from "./keyactor.js";
+import { Outcome, Outcome$zodSchema } from "./outcome.js";
 import { ServiceActor, ServiceActor$zodSchema } from "./serviceactor.js";
 import { UserActor, UserActor$zodSchema } from "./useractor.js";
 
@@ -47,7 +44,7 @@ export type AuditEvent = {
   workspace_id: string;
   environment: AuditSettingsEnvironment;
   action: string;
-  outcome: CustomerExportRequestFilterOutcome;
+  outcome: Outcome;
   actor:
     | (UserActor & { type: "user" })
     | (KeyActor & { type: "api_key" })
@@ -89,7 +86,7 @@ export const AuditEvent$zodSchema: z.ZodType<AuditEvent> = z.object({
   id: z.string().describe(
     "Opaque, server-assigned event id: aud_ and a 26-character ULID.",
   ),
-  outcome: CustomerExportRequestFilterOutcome$zodSchema,
+  outcome: Outcome$zodSchema,
   request_id: z.string().optional().describe(
     "Validated request correlation id, also returned in X-Request-ID, linking this event to request diagnostics. Absent on historical events without correlation.",
   ),

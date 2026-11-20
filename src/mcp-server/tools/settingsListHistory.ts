@@ -1,6 +1,6 @@
 import { settingsListHistory } from "../../funcs/settingsListHistory.js";
 import { ListPolicyHistoryRequest$zodSchema } from "../../models/listpolicyhistoryop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListPolicyHistoryRequest$zodSchema,
@@ -28,7 +28,7 @@ Read immutable configuration versions in one environment with settings or manage
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

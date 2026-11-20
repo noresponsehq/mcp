@@ -1,6 +1,6 @@
 import { auditRemoveStream } from "../../funcs/auditRemoveStream.js";
 import { RemoveAuditStreamRequest$zodSchema } from "../../models/removeauditstreamop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: RemoveAuditStreamRequest$zodSchema,
@@ -28,7 +28,7 @@ Remove an audit subscription and cancel queued deliveries. Requires audit_manage
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

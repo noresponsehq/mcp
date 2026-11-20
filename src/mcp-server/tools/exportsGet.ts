@@ -1,6 +1,6 @@
 import { exportsGet } from "../../funcs/exportsGet.js";
 import { GetCustomerExportRequest$zodSchema } from "../../models/getcustomerexportop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: GetCustomerExportRequest$zodSchema,
@@ -28,7 +28,7 @@ Read the status of an authorised export. Records and bytes describe committed pr
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

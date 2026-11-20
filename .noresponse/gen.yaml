@@ -29,7 +29,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 mcp-typescript:
-  version: 0.20.0
+  version: 0.22.0
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -75,7 +75,7 @@ mcp-typescript:
   maxMethodParams: 0
   mcpName: org.noresponse/mcp
   mcpbManifestOverlay:
-    description: Investigate people. Create groups, add people, screen them, read every account and leaked row the lookups found, and search again on a value. Also assess signups and record outcomes.
+    description: Investigate a person. Add them, start an investigation, read the records the lookups found, and search again on a value.
     display_name: NoResponse
     homepage: https://docs.noresponse.org
     license: Apache-2.0

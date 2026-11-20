@@ -20,7 +20,7 @@ export const AuditStream$zodSchema: z.ZodType<AuditStream> = z.object({
   created_at: z.string(),
   endpoint_id: z.string(),
   endpoint_state: WebhookEndpointState$zodSchema.describe(
-    "unverified until the endpoint echoes an endpoint.verification challenge (send one with POST /v1/webhooks/{endpoint_id}/test); verified receives assessment.updated events; disabled after 72 hours of continuous delivery failure, and verified again by the same challenge.",
+    "unverified until the endpoint echoes an endpoint.verification challenge (send one with POST /v1/webhooks/{endpoint_id}/test); verified receives events; disabled after 72 hours of continuous delivery failure, and verified again by the same challenge.",
   ),
   environment: Environment$zodSchema,
   last_attempt_at: z.string().optional(),

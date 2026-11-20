@@ -1,6 +1,6 @@
 import { membersUpdate } from "../../funcs/membersUpdate.js";
 import { UpdateMemberRequest$zodSchema } from "../../models/updatememberop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: UpdateMemberRequest$zodSchema,
@@ -28,7 +28,7 @@ Update a non-owner member role, environment access or sensitive permission exclu
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

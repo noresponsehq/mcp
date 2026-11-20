@@ -1,8 +1,5 @@
 import * as z from "zod";
-import {
-  RequestAggregateRequestBucket,
-  RequestAggregateRequestBucket$zodSchema,
-} from "./requestaggregaterequestbucket.js";
+import { Bucket, Bucket$zodSchema } from "./bucket.js";
 
 /**
  * Count every retained matching attempt in [from,to). Capture is best effort; missing attempts cannot be inferred. UTC buckets may be partial at the edges. The window is at most 7 days.
@@ -10,7 +7,7 @@ import {
 export type RequestAggregateRequest = {
   from: string;
   to: string;
-  bucket?: RequestAggregateRequestBucket | undefined;
+  bucket?: Bucket | undefined;
   status?: number | undefined;
   route?: string | undefined;
   api_key_id?: string | undefined;
@@ -20,7 +17,7 @@ export const RequestAggregateRequest$zodSchema: z.ZodType<
   RequestAggregateRequest
 > = z.object({
   api_key_id: z.string().optional(),
-  bucket: RequestAggregateRequestBucket$zodSchema.optional(),
+  bucket: Bucket$zodSchema.optional(),
   from: z.string(),
   route: z.string().optional(),
   status: z.int().optional(),

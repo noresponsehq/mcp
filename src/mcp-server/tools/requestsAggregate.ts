@@ -1,6 +1,6 @@
 import { requestsAggregate } from "../../funcs/requestsAggregate.js";
 import { RequestAggregateRequest$zodSchema } from "../../models/requestaggregaterequest.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: RequestAggregateRequest$zodSchema,
@@ -28,7 +28,7 @@ Count all retained matching request attempts and latency samples within seven da
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

@@ -3,8 +3,7 @@
   "items": [
     {
       "event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2",
-      "event_type": "assessment.updated",
-      "assessment_id": "asm_01JA2ZD3K4M5N6P7Q8R9S0T1V3",
+      "event_type": "investigation.completed",
       "attempt": 1,
       "replay": true,
       "status": "delivered",
@@ -14,7 +13,7 @@
     },
     {
       "event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2",
-      "event_type": "assessment.updated",
+      "event_type": "investigation.completed",
       "attempt": 2,
       "replay": false,
       "status": "failed",
@@ -25,7 +24,7 @@
     },
     {
       "event_id": "evt_01JA2ZD3K4M5N6P7Q8R9S0T1V2",
-      "event_type": "assessment.updated",
+      "event_type": "investigation.completed",
       "attempt": 1,
       "replay": false,
       "status": "failed",

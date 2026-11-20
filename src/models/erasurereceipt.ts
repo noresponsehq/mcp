@@ -4,13 +4,13 @@ import {
   ErasureReceiptKind$zodSchema,
 } from "./erasurereceiptkind.js";
 import {
+  ErasureReceiptStatus,
+  ErasureReceiptStatus$zodSchema,
+} from "./erasurereceiptstatus.js";
+import {
   ErasureReceiptTarget,
   ErasureReceiptTarget$zodSchema,
 } from "./erasurereceipttarget.js";
-import {
-  ListChangeState,
-  ListChangeState$zodSchema,
-} from "./listchangestate.js";
 
 /**
  * Acknowledged propagation of a retained erasure record in the calling environment. Pending means the target has not acknowledged completion. Completion covers these serving-system targets only; backup and point-in-time recovery copies expire according to their own retention policy. This receipt contains no subject id or digest. Workspace teardown revokes customer credentials, so obtain required receipts before teardown.
@@ -18,7 +18,7 @@ import {
 export type ErasureReceipt = {
   id: string;
   kind: ErasureReceiptKind;
-  status: ListChangeState;
+  status: ErasureReceiptStatus;
   assessments_deleted: number;
   requested_at: string;
   completed_at?: string | undefined;
@@ -35,7 +35,7 @@ export const ErasureReceipt$zodSchema: z.ZodType<ErasureReceipt> = z.object({
   ),
   kind: ErasureReceiptKind$zodSchema,
   requested_at: z.string(),
-  status: ListChangeState$zodSchema,
+  status: ErasureReceiptStatus$zodSchema,
   targets: z.array(ErasureReceiptTarget$zodSchema),
 }).describe(
   "Acknowledged propagation of a retained erasure record in the calling environment. Pending means the target has not acknowledged completion. Completion covers these serving-system targets only; backup and point-in-time recovery copies expire according to their own retention policy. This receipt contains no subject id or digest. Workspace teardown revokes customer credentials, so obtain required receipts before teardown.",
