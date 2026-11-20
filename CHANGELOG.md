@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.20.0
+
+* `SDK.people.get()`:  `response.evidence_investigation` **Changed** (Breaking ⚠️)
+* `SDK.investigations.list()`:  `response.items[]` **Changed** (Breaking ⚠️)
+* `SDK.investigations.create()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.investigations.get()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.investigations.cancel()`:  `response` **Changed** (Breaking ⚠️)
+* `SDK.investigations.review()`: **Removed** (Breaking ⚠️)
+
 ## 0.19.6
 
 No changes detected.

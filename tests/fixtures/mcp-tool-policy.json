@@ -19,13 +19,6 @@
     "idempotentHint": true
   },
   {
-    "name": "review_investigation",
-    "title": "Record a decision in this investigation's context",
-    "readOnlyHint": false,
-    "idempotentHint": false,
-    "destructiveHint": false
-  },
-  {
     "name": "cancel_investigation",
     "title": "Cancel a queued or running investigation",
     "readOnlyHint": false,

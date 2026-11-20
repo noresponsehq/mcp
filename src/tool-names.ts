@@ -422,7 +422,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "review_person",
-    "description": "Record a decision on a person.\n\nMarks the person's latest finished investigation cleared, watch or escalated with a note, as POST /v1/investigations/{investigation_id}/reviews does; a person with no finished investigation answers 409 group_conflict. Decisions are kept in order; the latest is the person's until a newer investigation finishes. A decision changes nothing else: no screening reads it. Deprecated: decisions are leaving people and groups. The console no longer records them and no screening reads them. This route is removed in the next contract release; stop calling it. The decisions scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment."
+    "description": "Record a decision on a person.\n\nMarks the person's latest finished investigation cleared, watch or escalated with a note; a person with no finished investigation answers 409 group_conflict. Decisions are kept in order; the latest is the person's until a newer investigation finishes. A decision changes nothing else: no screening reads it. Deprecated: decisions are leaving people and groups. The console no longer records them and no screening reads them. This route is removed in the next contract release; stop calling it. The decisions scope grants this operation. Explicit evidence.read restrictions override default evidence access. The groups scope is also accepted for existing integrations. The API key selects the workspace and environment."
   },
   {
     "name": "judge_record",
@@ -502,11 +502,7 @@ export const toolNames: Array<{ name: string; description: string }>= [
   },
   {
     "name": "get_investigation",
-    "description": "Read an investigation and its evidence.\n\nReturns this investigation's status, coverage, source records, posts, media and contextual review history. Full evidence is returned by default; explicit evidence.read denial keeps submitted person details, status, coverage and decision summaries and hides collected evidence and free-text notes. The read is durably audited as person.viewed. The API key selects the workspace and environment. Missing, foreign or expired results answer 404."
-  },
-  {
-    "name": "review_investigation",
-    "description": "Record an investigation decision.\n\nRecord an investigation decision. Deprecated: decisions are leaving people and groups. The console no longer records them and no screening reads them. This route is removed in the next contract release; stop calling it. The API key determines the workspace and environment."
+    "description": "Read an investigation and its evidence.\n\nReturns this investigation's status, coverage, source records, posts and media. Full evidence is returned by default; explicit evidence.read denial keeps submitted person details, status and coverage, and hides collected evidence. The read is durably audited as person.viewed. The API key selects the workspace and environment. Missing, foreign or expired results answer 404."
   },
   {
     "name": "cancel_investigation",

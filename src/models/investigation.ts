@@ -4,7 +4,6 @@ import {
   InvestigationStatus$zodSchema,
 } from "./investigationstatus.js";
 import { MatchState, MatchState$zodSchema } from "./matchstate.js";
-import { PersonDecision, PersonDecision$zodSchema } from "./persondecision.js";
 import {
   ScreeningCoverage,
   ScreeningCoverage$zodSchema,
@@ -15,10 +14,6 @@ import { ScreeningSpend, ScreeningSpend$zodSchema } from "./screeningspend.js";
 export type Investigation = {
   coverage: ScreeningCoverage;
   spend: ScreeningSpend;
-  decision: PersonDecision | null;
-  decision_note?: string | undefined;
-  decided_by?: string | undefined;
-  decided_at?: string | undefined;
   id: string;
   person_id: string;
   group_id: string | null;
@@ -40,12 +35,6 @@ export const Investigation$zodSchema: z.ZodType<Investigation> = z.object({
   ),
   created_at: z.string(),
   deadline_at: z.string(),
-  decided_at: z.string().optional(),
-  decided_by: z.string().optional(),
-  decision: PersonDecision$zodSchema.nullable().describe(
-    "The latest reviewer decision, or null before any.",
-  ),
-  decision_note: z.string().optional(),
   depth: ScreeningDepth$zodSchema,
   error_code: z.string().optional(),
   expires_at: z.string(),

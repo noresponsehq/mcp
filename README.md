@@ -2,7 +2,7 @@
 
 # NoResponse MCP server
 
-An [MCP](https://modelcontextprotocol.io) server for the NoResponse identity engine. An agent can create a workspace person, start an investigation, read source records and review a result. Groups organize people for shared screening. Signup assessment uses the same engine. The server is generated from the same OpenAPI document as the SDKs.
+An [MCP](https://modelcontextprotocol.io) server for the NoResponse identity engine. An agent can create a workspace person, start an investigation, and read source records. Groups organize people for shared screening. Signup assessment uses the same engine. The server is generated from the same OpenAPI document as the SDKs.
 
 The server uses the API key you give it and stores nothing. That key selects the workspace and environment. Give it only the scopes needed: `people` for reads, `people_write` for submitted people and group changes, `investigations` for new work, `decisions` for reviews, `exports` for exports and `delete` for deletion. Explicit evidence restrictions still apply. Integration tools use `integrations`, and settings, lists and key administration use `management`. API key creation and rotation stay in your backend.
 
@@ -18,10 +18,9 @@ Keep a stored idempotency key for each deliberate investigation. `create_investi
 | `delete_workspace_person` | Delete a person and their investigation history. Needs `delete`; marked destructive. | `DELETE /v1/people/{person_id}` |
 | `judge_workspace_person_record` | Mark one of a person's records as theirs (`joined`) or someone else's (`rejected`). Enrichment follows it. Needs `decisions` and evidence access. | `POST /v1/people/{person_id}/records` |
 | `start_workspace_person_search` | Search a value in a person's collected records, outside any group, such as one the report's `suggested_searches` names. Needs `investigations` and evidence access. | `POST /v1/people/{person_id}/searches` |
-| `create_investigation` | Start work against a person, with an optional group review context. Needs `investigations`. | `POST /v1/investigations` |
+| `create_investigation` | Start work against a person, with a stable request key. Needs `investigations`. | `POST /v1/investigations` |
 | `list_investigations` | List retained investigation history. Needs `people`. | `GET /v1/investigations` |
-| `get_investigation` | Read a specific job's status, coverage, evidence and review history. Needs `people`. | `GET /v1/investigations/{investigation_id}` |
-| `review_investigation` | Record a decision within this investigation. Needs `decisions`. | `POST /v1/investigations/{investigation_id}/reviews` |
+| `get_investigation` | Read a specific job's status, coverage and evidence. Needs `people`. | `GET /v1/investigations/{investigation_id}` |
 | `cancel_investigation` | Cancel an unfinished investigation. Needs `investigations`. | `POST /v1/investigations/{investigation_id}/cancel` |
 | `create_group` | Create a group for people to screen together. Needs `people_write`. | `POST /v1/groups` |
 | `add_people` | Add or explicitly reuse up to 500 people. Needs `people_write`. | `POST /v1/groups/{group_id}/people` |

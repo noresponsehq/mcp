@@ -1,6 +1,5 @@
 import * as z from "zod";
 import { Investigation, Investigation$zodSchema } from "./investigation.js";
-import { PersonReview, PersonReview$zodSchema } from "./personreview.js";
 import {
   ScreeningLookup,
   ScreeningLookup$zodSchema,
@@ -23,7 +22,6 @@ export type InvestigationReport = {
   profiles: Array<ScreeningProfile>;
   posts: Array<ScreeningPost>;
   media: Array<ScreeningMedia>;
-  reviews: Array<PersonReview>;
   lookup?: ScreeningLookup | undefined;
   evidence_restricted?: boolean | undefined;
   person: WorkspacePerson;
@@ -33,7 +31,7 @@ export type InvestigationReport = {
 export const InvestigationReport$zodSchema: z.ZodType<InvestigationReport> = z
   .object({
     evidence_restricted: z.boolean().optional().describe(
-      "True when evidence.read is explicitly denied. Submitted details, coverage, job status and decisions remain available. Collected records, profiles, posts, media, discovered values and free-text decision notes are withheld.",
+      "True when evidence.read is explicitly denied. Submitted details, coverage and job status remain available. Collected records, profiles, posts, media and discovered values are withheld.",
     ),
     investigation: Investigation$zodSchema,
     lookup: ScreeningLookup$zodSchema.optional().describe(
@@ -48,8 +46,5 @@ export const InvestigationReport$zodSchema: z.ZodType<InvestigationReport> = z
     ),
     profiles: z.array(ScreeningProfile$zodSchema).describe(
       "The accounts this result matched, with how each was matched.",
-    ),
-    reviews: z.array(PersonReview$zodSchema).describe(
-      "Every recorded decision, oldest first.",
     ),
   }).describe("Read an investigation and its evidence.");

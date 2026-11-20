@@ -86,7 +86,6 @@ import { tool$investigationsCancel } from "./tools/investigationsCancel.js";
 import { tool$investigationsCreate } from "./tools/investigationsCreate.js";
 import { tool$investigationsGet } from "./tools/investigationsGet.js";
 import { tool$investigationsList } from "./tools/investigationsList.js";
-import { tool$investigationsReview } from "./tools/investigationsReview.js";
 import { tool$invitesList } from "./tools/invitesList.js";
 import { tool$invitesRevoke } from "./tools/invitesRevoke.js";
 import { tool$keysList } from "./tools/keysList.js";
@@ -157,7 +156,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.19.6",
+    version: "0.20.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -328,7 +327,6 @@ export function createMCPServer(deps: {
   tool(tool$investigationsList);
   tool(tool$investigationsCreate);
   tool(tool$investigationsGet);
-  tool(tool$investigationsReview);
   tool(tool$investigationsCancel);
 
   if (deps.dynamic) {

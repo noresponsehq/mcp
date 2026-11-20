@@ -28,36 +28,36 @@ export const GetInvestigationRequest$zodSchema: z.ZodType<
 });
 
 export type GetInvestigationResponseResult =
-  | InvestigationReport
   | BadRequestError
   | AuthenticationError
   | PermissionDeniedError
   | NotFoundError
   | ConflictError
-  | RateLimitError;
+  | RateLimitError
+  | InvestigationReport;
 
 export const GetInvestigationResponseResult$zodSchema: z.ZodType<
   GetInvestigationResponseResult
 > = z.union([
-  InvestigationReport$zodSchema,
   BadRequestError$zodSchema,
   AuthenticationError$zodSchema,
   PermissionDeniedError$zodSchema,
   NotFoundError$zodSchema,
   ConflictError$zodSchema,
   RateLimitError$zodSchema,
+  InvestigationReport$zodSchema,
 ]);
 
 export type GetInvestigationResponse = {
   Headers: { [k: string]: Array<string> };
   Result:
-    | InvestigationReport
     | BadRequestError
     | AuthenticationError
     | PermissionDeniedError
     | NotFoundError
     | ConflictError
-    | RateLimitError;
+    | RateLimitError
+    | InvestigationReport;
 };
 
 export const GetInvestigationResponse$zodSchema: z.ZodType<
@@ -65,12 +65,12 @@ export const GetInvestigationResponse$zodSchema: z.ZodType<
 > = z.object({
   Headers: z.record(z.string(), z.array(z.string())).default({}),
   Result: z.union([
-    InvestigationReport$zodSchema,
     BadRequestError$zodSchema,
     AuthenticationError$zodSchema,
     PermissionDeniedError$zodSchema,
     NotFoundError$zodSchema,
     ConflictError$zodSchema,
     RateLimitError$zodSchema,
+    InvestigationReport$zodSchema,
   ]),
 });
