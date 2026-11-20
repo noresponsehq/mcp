@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.19.5
+
+No changes detected.
+
 ## 0.19.4
 
 * `SDK.groups.list()`:  `response.items[]` **Changed**
