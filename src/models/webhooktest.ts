@@ -25,10 +25,10 @@ export const WebhookTest$zodSchema: z.ZodType<WebhookTest> = z.object({
   ),
   endpoint_id: z.string().describe("Opaque id of the endpoint registration."),
   event: WebhookTestRequestEvent$zodSchema.describe(
-    "endpoint.verification sends a fresh challenge now, in this call, and the endpoint is verified if it echoes it. assessment.updated queues an event whose data is a fixed example assessment, with test true, delivered and retried like any other; the endpoint must be verified.",
+    "endpoint.verification sends a fresh challenge now, in this call, and the endpoint is verified if it echoes it. investigation.completed queues an event whose data is a fixed example investigation, with test true, delivered and retried like any other; the endpoint must be verified.",
   ),
   state: WebhookEndpointState$zodSchema.describe(
-    "unverified until the endpoint echoes an endpoint.verification challenge (send one with POST /v1/webhooks/{endpoint_id}/test); verified receives assessment.updated events; disabled after 72 hours of continuous delivery failure, and verified again by the same challenge.",
+    "unverified until the endpoint echoes an endpoint.verification challenge (send one with POST /v1/webhooks/{endpoint_id}/test); verified receives events; disabled after 72 hours of continuous delivery failure, and verified again by the same challenge.",
   ),
   verified: z.boolean().optional().describe(
     "endpoint.verification only: true when the endpoint echoed the challenge within 5 seconds. A false answer leaves the endpoint's state as it was.",

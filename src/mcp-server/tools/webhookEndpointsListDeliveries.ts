@@ -1,6 +1,6 @@
 import { webhookEndpointsListDeliveries } from "../../funcs/webhookEndpointsListDeliveries.js";
 import { ListWebhookDeliveriesRequest$zodSchema } from "../../models/listwebhookdeliveriesop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListWebhookDeliveriesRequest$zodSchema,
@@ -29,7 +29,10 @@ Every POST the endpoint received, newest first: the event id and type, which att
 
       if (!result.ok) {
         return {
-          content: [{ type: "text", text: result.error.message }],
+          content: [{
+            type: "text",
+            text: boundToolText(result.error.message),
+          }],
           isError: true,
         };
       }

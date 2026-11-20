@@ -1,6 +1,6 @@
 import { investigationsList } from "../../funcs/investigationsList.js";
 import { ListInvestigationsRequest$zodSchema } from "../../models/listinvestigationsop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListInvestigationsRequest$zodSchema.optional(),
@@ -28,7 +28,7 @@ List investigation history. The API key determines the workspace and environment
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

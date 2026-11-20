@@ -1,6 +1,6 @@
 import { keysList } from "../../funcs/keysList.js";
 import { ListKeysRequest$zodSchema } from "../../models/listkeysop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListKeysRequest$zodSchema,
@@ -28,7 +28,7 @@ Lists the keys of the signing key's environment, newest first, at most 200, revo
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

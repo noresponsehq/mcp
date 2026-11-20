@@ -27,6 +27,6 @@ export const CustomerExportRequest$zodSchema: z.ZodType<CustomerExportRequest> =
     filter: CustomerExportRequestFilter$zodSchema.optional(),
     kind: CustomerExportRequestKind$zodSchema,
     response_mode: ResponseMode$zodSchema.optional().describe(
-      "standard returns the consolidated risk response; detailed adds merged provider-neutral facts when the key has detailed scope. There is no raw mode.",
+      "The response mode recorded for the endpoint: standard (the default) or detailed, which needs an API key with the detailed scope as well. No event the API sends today differs by mode.",
     ),
   });

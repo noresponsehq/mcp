@@ -1,6 +1,6 @@
 import { settingsUpdate } from "../../funcs/settingsUpdate.js";
 import { UpdateSettingsRequest$zodSchema } from "../../models/updatesettingsop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: UpdateSettingsRequest$zodSchema,
@@ -28,7 +28,7 @@ Change named retention, screening cap, source or flow settings in one transactio
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

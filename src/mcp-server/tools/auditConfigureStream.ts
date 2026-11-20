@@ -1,6 +1,6 @@
 import { auditConfigureStream } from "../../funcs/auditConfigureStream.js";
 import { ConfigureAuditStreamRequest$zodSchema } from "../../models/configureauditstreamop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ConfigureAuditStreamRequest$zodSchema,
@@ -29,7 +29,7 @@ Configure the action filter for one verified webhook endpoint. Requires audit_ma
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

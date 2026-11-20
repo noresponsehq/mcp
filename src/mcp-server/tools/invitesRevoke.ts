@@ -1,6 +1,6 @@
 import { invitesRevoke } from "../../funcs/invitesRevoke.js";
 import { RevokeInviteRequest$zodSchema } from "../../models/revokeinviteop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: RevokeInviteRequest$zodSchema,
@@ -28,7 +28,7 @@ Revoke a pending invitation with a live members_manage key. A revoked token cann
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

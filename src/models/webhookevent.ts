@@ -1,17 +1,5 @@
 import * as z from "zod";
 import {
-  AccountDeletedEvent,
-  AccountDeletedEvent$zodSchema,
-} from "./accountdeletedevent.js";
-import {
-  AccountRiskChangedEvent,
-  AccountRiskChangedEvent$zodSchema,
-} from "./accountriskchangedevent.js";
-import {
-  AssessmentUpdatedEvent,
-  AssessmentUpdatedEvent$zodSchema,
-} from "./assessmentupdatedevent.js";
-import {
   AuditEventEvent,
   AuditEventEvent$zodSchema,
 } from "./auditeventevent.js";
@@ -23,14 +11,6 @@ import {
   InvestigationCompletedEvent,
   InvestigationCompletedEvent$zodSchema,
 } from "./investigationcompletedevent.js";
-import {
-  PersonDecidedEvent,
-  PersonDecidedEvent$zodSchema,
-} from "./persondecidedevent.js";
-import {
-  ScreeningCompletedEvent,
-  ScreeningCompletedEvent$zodSchema,
-} from "./screeningcompletedevent.js";
 import {
   WebhookEndpointDisabledEvent,
   WebhookEndpointDisabledEvent$zodSchema,
@@ -44,31 +24,16 @@ import {
  * The body of every webhook delivery: {id, type, created_at, data}, where type chooses the shape of data. Deliveries are at least once and unordered: deduplicate on id, and keep an assessment only when its detail.assessment_version is newer than the one you hold. GET /v1/assessments/{assessment_id} stays authoritative.
  */
 export type WebhookEvent =
-  | (AssessmentUpdatedEvent & { type: "assessment.updated" })
   | (EndpointVerificationEvent & { type: "endpoint.verification" })
-  | (AccountDeletedEvent & { type: "account.deleted" })
   | (WorkspaceDeletedEvent & { type: "workspace.deleted" })
   | (WebhookEndpointDisabledEvent & { type: "webhook_endpoint.disabled" })
-  | (AccountRiskChangedEvent & { type: "account.risk_changed" })
   | (AuditEventEvent & { type: "audit.event" })
-  | (ScreeningCompletedEvent & { type: "screening.completed" })
-  | (PersonDecidedEvent & { type: "person.decided" })
   | (InvestigationCompletedEvent & { type: "investigation.completed" });
 
 export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
-  AssessmentUpdatedEvent$zodSchema.and(
-    z.object({
-      type: z.literal("assessment.updated"),
-    }).transform((v) => ({ type: v.type })),
-  ),
   EndpointVerificationEvent$zodSchema.and(
     z.object({
       type: z.literal("endpoint.verification"),
-    }).transform((v) => ({ type: v.type })),
-  ),
-  AccountDeletedEvent$zodSchema.and(
-    z.object({
-      type: z.literal("account.deleted"),
     }).transform((v) => ({ type: v.type })),
   ),
   WorkspaceDeletedEvent$zodSchema.and(
@@ -81,24 +46,9 @@ export const WebhookEvent$zodSchema: z.ZodType<WebhookEvent> = z.union([
       type: z.literal("webhook_endpoint.disabled"),
     }).transform((v) => ({ type: v.type })),
   ),
-  AccountRiskChangedEvent$zodSchema.and(
-    z.object({
-      type: z.literal("account.risk_changed"),
-    }).transform((v) => ({ type: v.type })),
-  ),
   AuditEventEvent$zodSchema.and(
     z.object({
       type: z.literal("audit.event"),
-    }).transform((v) => ({ type: v.type })),
-  ),
-  ScreeningCompletedEvent$zodSchema.and(
-    z.object({
-      type: z.literal("screening.completed"),
-    }).transform((v) => ({ type: v.type })),
-  ),
-  PersonDecidedEvent$zodSchema.and(
-    z.object({
-      type: z.literal("person.decided"),
     }).transform((v) => ({ type: v.type })),
   ),
   InvestigationCompletedEvent$zodSchema.and(

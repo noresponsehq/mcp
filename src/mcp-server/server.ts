@@ -2,44 +2,17 @@ import { McpServer } from "@modelcontextprotocol/server";
 import { NoResponseCore } from "../core.js";
 import { SDKOptions } from "../lib/config.js";
 import type { ConsoleLogger } from "./console-logger.js";
-import { Register } from "./extensions.js";
 import { createRegisterPrompt } from "./prompts.js";
 import {
   createRegisterResource,
   createRegisterResourceTemplate,
 } from "./resources.js";
 import { MCPScope } from "./scopes.js";
-import { registerMCPExtensions } from "./server.extensions.js";
 import {
   createRegisterTool,
   MCPToolAnnotationFilter,
   registerDynamicTools,
 } from "./tools.js";
-import { tool$accountsAssociateCredential } from "./tools/accountsAssociateCredential.js";
-import { tool$accountsDelete } from "./tools/accountsDelete.js";
-import { tool$accountsExport } from "./tools/accountsExport.js";
-import { tool$accountsGet } from "./tools/accountsGet.js";
-import { tool$accountsListAssessments } from "./tools/accountsListAssessments.js";
-import { tool$accountsListChanged } from "./tools/accountsListChanged.js";
-import { tool$accountsListCredentials } from "./tools/accountsListCredentials.js";
-import { tool$accountsListDecisions } from "./tools/accountsListDecisions.js";
-import { tool$accountsListEnforcements } from "./tools/accountsListEnforcements.js";
-import { tool$accountsListLinked } from "./tools/accountsListLinked.js";
-import { tool$accountsListOutcomes } from "./tools/accountsListOutcomes.js";
-import { tool$accountsRecordEnforcement } from "./tools/accountsRecordEnforcement.js";
-import { tool$accountsRecordOutcome } from "./tools/accountsRecordOutcome.js";
-import { tool$accountsRetireCredential } from "./tools/accountsRetireCredential.js";
-import { tool$accountsRetrieveDecision } from "./tools/accountsRetrieveDecision.js";
-import { tool$accountsSearch } from "./tools/accountsSearch.js";
-import { tool$assessmentsAggregate } from "./tools/assessmentsAggregate.js";
-import { tool$assessmentsBindAccount } from "./tools/assessmentsBindAccount.js";
-import { tool$assessmentsCreate } from "./tools/assessmentsCreate.js";
-import { tool$assessmentsDelete } from "./tools/assessmentsDelete.js";
-import { tool$assessmentsGet } from "./tools/assessmentsGet.js";
-import { tool$assessmentsQuery } from "./tools/assessmentsQuery.js";
-import { tool$assessmentsRecordOutcome } from "./tools/assessmentsRecordOutcome.js";
-import { tool$assessmentsRetrieveVersion } from "./tools/assessmentsRetrieveVersion.js";
-import { tool$assessmentsSearch } from "./tools/assessmentsSearch.js";
 import { tool$auditConfigureStream } from "./tools/auditConfigureStream.js";
 import { tool$auditGetRetention } from "./tools/auditGetRetention.js";
 import { tool$auditList } from "./tools/auditList.js";
@@ -48,40 +21,12 @@ import { tool$auditRemoveStream } from "./tools/auditRemoveStream.js";
 import { tool$auditReplayStream } from "./tools/auditReplayStream.js";
 import { tool$auditUpdateRetention } from "./tools/auditUpdateRetention.js";
 import { tool$erasuresGet } from "./tools/erasuresGet.js";
-import { tool$evaluationsCancel } from "./tools/evaluationsCancel.js";
-import { tool$evaluationsCreate } from "./tools/evaluationsCreate.js";
-import { tool$evaluationsGet } from "./tools/evaluationsGet.js";
-import { tool$evaluationsGetResult } from "./tools/evaluationsGetResult.js";
-import { tool$evaluationsList } from "./tools/evaluationsList.js";
-import { tool$evaluationsPublish } from "./tools/evaluationsPublish.js";
 import { tool$exportsCancel } from "./tools/exportsCancel.js";
 import { tool$exportsCreate } from "./tools/exportsCreate.js";
 import { tool$exportsDownloadChunk } from "./tools/exportsDownloadChunk.js";
 import { tool$exportsGet } from "./tools/exportsGet.js";
 import { tool$exportsList } from "./tools/exportsList.js";
 import { tool$exportsRetry } from "./tools/exportsRetry.js";
-import { tool$groupsAddPeople } from "./tools/groupsAddPeople.js";
-import { tool$groupsCancelScreening } from "./tools/groupsCancelScreening.js";
-import { tool$groupsCreate } from "./tools/groupsCreate.js";
-import { tool$groupsDelete } from "./tools/groupsDelete.js";
-import { tool$groupsExportPeople } from "./tools/groupsExportPeople.js";
-import { tool$groupsGet } from "./tools/groupsGet.js";
-import { tool$groupsGetPerson } from "./tools/groupsGetPerson.js";
-import { tool$groupsGetScreening } from "./tools/groupsGetScreening.js";
-import { tool$groupsJudgeRecord } from "./tools/groupsJudgeRecord.js";
-import { tool$groupsList } from "./tools/groupsList.js";
-import { tool$groupsListPeople } from "./tools/groupsListPeople.js";
-import { tool$groupsListScreenings } from "./tools/groupsListScreenings.js";
-import { tool$groupsRemovePerson } from "./tools/groupsRemovePerson.js";
-import { tool$groupsReviewPerson } from "./tools/groupsReviewPerson.js";
-import { tool$groupsRunSearch } from "./tools/groupsRunSearch.js";
-import { tool$groupsStartScreening } from "./tools/groupsStartScreening.js";
-import { tool$groupsStartSearch } from "./tools/groupsStartSearch.js";
-import { tool$groupsUpdate } from "./tools/groupsUpdate.js";
-import { tool$integrationsCreate } from "./tools/integrationsCreate.js";
-import { tool$integrationsDelete } from "./tools/integrationsDelete.js";
-import { tool$integrationsList } from "./tools/integrationsList.js";
-import { tool$integrationsRotate } from "./tools/integrationsRotate.js";
 import { tool$investigationsCancel } from "./tools/investigationsCancel.js";
 import { tool$investigationsCreate } from "./tools/investigationsCreate.js";
 import { tool$investigationsGet } from "./tools/investigationsGet.js";
@@ -90,16 +35,9 @@ import { tool$invitesList } from "./tools/invitesList.js";
 import { tool$invitesRevoke } from "./tools/invitesRevoke.js";
 import { tool$keysList } from "./tools/keysList.js";
 import { tool$keysRevoke } from "./tools/keysRevoke.js";
-import { tool$listsChange } from "./tools/listsChange.js";
-import { tool$listsCreate } from "./tools/listsCreate.js";
-import { tool$listsDelete } from "./tools/listsDelete.js";
-import { tool$listsGetChange } from "./tools/listsGetChange.js";
-import { tool$listsList } from "./tools/listsList.js";
-import { tool$listsPreview } from "./tools/listsPreview.js";
 import { tool$membersList } from "./tools/membersList.js";
 import { tool$membersRemove } from "./tools/membersRemove.js";
 import { tool$membersUpdate } from "./tools/membersUpdate.js";
-import { tool$operationsSummarize } from "./tools/operationsSummarize.js";
 import { tool$peopleCreate } from "./tools/peopleCreate.js";
 import { tool$peopleDelete } from "./tools/peopleDelete.js";
 import { tool$peopleGet } from "./tools/peopleGet.js";
@@ -111,26 +49,8 @@ import { tool$peopleSchedule } from "./tools/peopleSchedule.js";
 import { tool$peopleStartSearch } from "./tools/peopleStartSearch.js";
 import { tool$requestsAggregate } from "./tools/requestsAggregate.js";
 import { tool$requestsList } from "./tools/requestsList.js";
-import { tool$reviewsAddSubject } from "./tools/reviewsAddSubject.js";
-import { tool$reviewsComment } from "./tools/reviewsComment.js";
-import { tool$reviewsCreate } from "./tools/reviewsCreate.js";
-import { tool$reviewsCreateView } from "./tools/reviewsCreateView.js";
-import { tool$reviewsDeleteSubject } from "./tools/reviewsDeleteSubject.js";
-import { tool$reviewsDeleteView } from "./tools/reviewsDeleteView.js";
-import { tool$reviewsExport } from "./tools/reviewsExport.js";
-import { tool$reviewsGet } from "./tools/reviewsGet.js";
-import { tool$reviewsList } from "./tools/reviewsList.js";
-import { tool$reviewsListComments } from "./tools/reviewsListComments.js";
-import { tool$reviewsListResolutions } from "./tools/reviewsListResolutions.js";
-import { tool$reviewsListSubjects } from "./tools/reviewsListSubjects.js";
-import { tool$reviewsListViews } from "./tools/reviewsListViews.js";
-import { tool$reviewsQuery } from "./tools/reviewsQuery.js";
-import { tool$reviewsResolve } from "./tools/reviewsResolve.js";
-import { tool$reviewsUpdate } from "./tools/reviewsUpdate.js";
-import { tool$reviewsUpdateView } from "./tools/reviewsUpdateView.js";
 import { tool$settingsGet } from "./tools/settingsGet.js";
 import { tool$settingsListHistory } from "./tools/settingsListHistory.js";
-import { tool$settingsPreview } from "./tools/settingsPreview.js";
 import { tool$settingsRestore } from "./tools/settingsRestore.js";
 import { tool$settingsUpdate } from "./tools/settingsUpdate.js";
 import { tool$usageGet } from "./tools/usageGet.js";
@@ -156,7 +76,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "NoResponse",
-    version: "0.20.0",
+    version: "0.22.0",
   });
 
   const getClient = deps.getSDK || (() =>
@@ -201,37 +121,8 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
-  tool(tool$assessmentsCreate);
-  tool(tool$assessmentsGet);
-  tool(tool$assessmentsDelete);
-  tool(tool$assessmentsRecordOutcome);
-  tool(tool$assessmentsQuery);
-  tool(tool$assessmentsAggregate);
-  tool(tool$assessmentsSearch);
-  tool(tool$assessmentsRetrieveVersion);
-  tool(tool$assessmentsBindAccount);
-  tool(tool$accountsListChanged);
-  tool(tool$accountsGet);
-  tool(tool$accountsDelete);
-  tool(tool$accountsListAssessments);
-  tool(tool$accountsListLinked);
-  tool(tool$accountsRecordEnforcement);
-  tool(tool$accountsListEnforcements);
-  tool(tool$accountsRecordOutcome);
-  tool(tool$accountsListOutcomes);
-  tool(tool$accountsRetrieveDecision);
-  tool(tool$accountsAssociateCredential);
-  tool(tool$accountsListCredentials);
-  tool(tool$accountsRetireCredential);
-  tool(tool$accountsExport);
-  tool(tool$accountsListDecisions);
-  tool(tool$accountsSearch);
   tool(tool$keysList);
   tool(tool$keysRevoke);
-  tool(tool$integrationsCreate);
-  tool(tool$integrationsList);
-  tool(tool$integrationsDelete);
-  tool(tool$integrationsRotate);
   tool(tool$webhookEndpointsList);
   tool(tool$webhookEndpointsCreate);
   tool(tool$webhookEndpointsDelete);
@@ -257,32 +148,8 @@ export function createMCPServer(deps: {
   tool(tool$settingsUpdate);
   tool(tool$settingsListHistory);
   tool(tool$settingsRestore);
-  tool(tool$settingsPreview);
   tool(tool$requestsList);
   tool(tool$requestsAggregate);
-  tool(tool$listsList);
-  tool(tool$listsCreate);
-  tool(tool$listsDelete);
-  tool(tool$listsPreview);
-  tool(tool$listsChange);
-  tool(tool$listsGetChange);
-  tool(tool$reviewsList);
-  tool(tool$reviewsCreate);
-  tool(tool$reviewsGet);
-  tool(tool$reviewsUpdate);
-  tool(tool$reviewsResolve);
-  tool(tool$reviewsListComments);
-  tool(tool$reviewsComment);
-  tool(tool$reviewsListResolutions);
-  tool(tool$reviewsListViews);
-  tool(tool$reviewsCreateView);
-  tool(tool$reviewsUpdateView);
-  tool(tool$reviewsDeleteView);
-  tool(tool$reviewsExport);
-  tool(tool$reviewsListSubjects);
-  tool(tool$reviewsAddSubject);
-  tool(tool$reviewsDeleteSubject);
-  tool(tool$reviewsQuery);
   tool(tool$erasuresGet);
   tool(tool$exportsCreate);
   tool(tool$exportsList);
@@ -290,31 +157,6 @@ export function createMCPServer(deps: {
   tool(tool$exportsCancel);
   tool(tool$exportsRetry);
   tool(tool$exportsDownloadChunk);
-  tool(tool$evaluationsList);
-  tool(tool$evaluationsCreate);
-  tool(tool$evaluationsGet);
-  tool(tool$evaluationsGetResult);
-  tool(tool$evaluationsCancel);
-  tool(tool$evaluationsPublish);
-  tool(tool$operationsSummarize);
-  tool(tool$groupsList);
-  tool(tool$groupsCreate);
-  tool(tool$groupsGet);
-  tool(tool$groupsUpdate);
-  tool(tool$groupsDelete);
-  tool(tool$groupsListPeople);
-  tool(tool$groupsAddPeople);
-  tool(tool$groupsGetPerson);
-  tool(tool$groupsRemovePerson);
-  tool(tool$groupsReviewPerson);
-  tool(tool$groupsJudgeRecord);
-  tool(tool$groupsStartSearch);
-  tool(tool$groupsRunSearch);
-  tool(tool$groupsListScreenings);
-  tool(tool$groupsStartScreening);
-  tool(tool$groupsGetScreening);
-  tool(tool$groupsCancelScreening);
-  tool(tool$groupsExportPeople);
   tool(tool$peopleList);
   tool(tool$peopleCreate);
   tool(tool$peopleGet);
@@ -332,8 +174,6 @@ export function createMCPServer(deps: {
   if (deps.dynamic) {
     registerDynamicTools(deps.logger, server, getClient, toolMap, scopes);
   }
-
-  registerMCPExtensions(register satisfies Register);
 
   return { server, tools };
 }

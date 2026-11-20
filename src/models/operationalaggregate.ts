@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { Bucket, Bucket$zodSchema } from "./bucket.js";
 import {
   OperationalAggregateBucket,
   OperationalAggregateBucket$zodSchema,
@@ -11,10 +12,6 @@ import {
   OperationalAggregateTotals,
   OperationalAggregateTotals$zodSchema,
 } from "./operationalaggregatetotals.js";
-import {
-  RequestAggregateRequestBucket,
-  RequestAggregateRequestBucket$zodSchema,
-} from "./requestaggregaterequestbucket.js";
 import { Source, Source$zodSchema } from "./source.js";
 
 /**
@@ -28,7 +25,7 @@ export type OperationalAggregate = {
   as_of: string;
   retained_from: string;
   retention_days: number;
-  bucket: RequestAggregateRequestBucket;
+  bucket: Bucket;
   capture?: "best_effort" | undefined;
   population?: "retained_attempts" | undefined;
   totals: OperationalAggregateTotals;
@@ -39,7 +36,7 @@ export type OperationalAggregate = {
 export const OperationalAggregate$zodSchema: z.ZodType<OperationalAggregate> = z
   .object({
     as_of: z.string(),
-    bucket: RequestAggregateRequestBucket$zodSchema,
+    bucket: Bucket$zodSchema,
     buckets: z.array(OperationalAggregateBucket$zodSchema).describe(
       "Nonempty UTC buckets in ascending order. Counts include all retained matching attempts, without the log page limit.",
     ),

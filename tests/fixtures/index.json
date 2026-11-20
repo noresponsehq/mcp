@@ -84,94 +84,9 @@
       "why": "NOR-458 a held flow answers held until its investigation ends"
     },
     {
-      "file": "valid/account-deletion.json",
-      "schema": "account-deletion.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/account-deletion-repeat.json",
-      "schema": "account-deletion.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/account-list.json",
-      "schema": "account-list.schema.json",
-      "expect": "valid",
-      "why": "NOR-457 changed accounts, oldest change first, each as GET /v1/accounts/{account_id} answers it"
-    },
-    {
-      "file": "valid/account-list-empty.json",
-      "schema": "account-list.schema.json",
-      "expect": "valid",
-      "why": "NOR-457 nothing changed after changed_since: empty items and the cursor that was sent"
-    },
-    {
-      "file": "valid/enforcement-request.json",
-      "schema": "enforcement-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/enforcement-request-failed.json",
-      "schema": "enforcement-request.schema.json",
-      "expect": "valid",
-      "why": "NOR-457 error_code travels with status failed"
-    },
-    {
-      "file": "valid/enforcement.json",
-      "schema": "enforcement.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/enforcement-failed.json",
-      "schema": "enforcement.schema.json",
-      "expect": "valid",
-      "why": "NOR-457 a failed record, which a later applied report replaces"
-    },
-    {
       "file": "valid/problem-risk-version-ahead.json",
       "schema": "problem-details.schema.json",
       "expect": "valid"
-    },
-    {
-      "file": "valid/assessment-deletion.json",
-      "schema": "assessment-deletion.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/assessment-deletion-last.json",
-      "schema": "assessment-deletion.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/webhook-assessment-updated.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/webhook-assessment-updated-detailed.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/webhook-assessment-expired.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/webhook-account-deleted.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/webhook-account-risk-changed.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/webhook-account-risk-changed-held.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "valid",
-      "why": "NOR-458 the hold ends in one announced change away from held"
     },
     {
       "file": "valid/webhook-workspace-deleted.json",
@@ -182,18 +97,6 @@
       "file": "valid/webhook-endpoint-disabled.json",
       "schema": "webhook-event.schema.json",
       "expect": "valid"
-    },
-    {
-      "file": "valid/webhook-screening-completed.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "valid",
-      "why": "NOR-793 a screening's counts of no footprint and partial coverage"
-    },
-    {
-      "file": "valid/webhook-person-decided.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "valid",
-      "why": "NOR-793 a reviewer's decision without its note"
     },
     {
       "file": "valid/webhook-endpoint-verification.json",
@@ -318,11 +221,6 @@
     {
       "file": "valid/assessment-auth-context-hook.json",
       "schema": "assessment-detail.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/problem-workspace-forbidden-scope.json",
-      "schema": "identity.openapi.json#/components/responses/WorkspaceForbidden/content/application~1problem+json/schema",
       "expect": "valid"
     },
     {
@@ -1041,22 +939,6 @@
       "why": "II-004 trailing line feed refused"
     },
     {
-      "file": "invalid/webhook-update-names-source.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          "/data/detail/incomplete_sources/0"
-        ],
-        [
-          "required",
-          "/data/detail/incomplete_sources/0"
-        ]
-      ],
-      "why": "\u00a75.1 incomplete_sources names a lane, never a source"
-    },
-    {
       "file": "invalid/webhook-tenant-id.json",
       "schema": "webhook-event.schema.json",
       "expect": "invalid",
@@ -1069,18 +951,6 @@
       "why": "II-006"
     },
     {
-      "file": "invalid/webhook-identifier-leak.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          "/data"
-        ]
-      ],
-      "why": "II-007 no identifier member in the assessment"
-    },
-    {
       "file": "invalid/webhook-unknown-event-type.json",
       "schema": "webhook-event.schema.json",
       "expect": "invalid",
@@ -1091,50 +961,6 @@
         ]
       ],
       "why": "II-005 closed event types"
-    },
-    {
-      "file": "invalid/webhook-update-pointer-only.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          "/data"
-        ],
-        [
-          "required",
-          "/data"
-        ]
-      ],
-      "why": "\u00a75.3 an update carries the full assessment, not a pointer"
-    },
-    {
-      "file": "invalid/webhook-expired-with-assessment-url.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          "/data"
-        ]
-      ],
-      "why": "II-005 nothing to fetch after expiry"
-    },
-    {
-      "file": "invalid/webhook-update-with-expired-status.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          "/data"
-        ],
-        [
-          "required",
-          "/data"
-        ]
-      ],
-      "why": "II-005 only the minimal expiry carries status expired"
     },
     {
       "file": "invalid/webhook-verification-without-challenge.json",
@@ -1278,18 +1104,6 @@
       "expect": "semantic_invalid",
       "rule": "expiry_beyond_retention:0",
       "why": "CR-06 after a tenant shortens retention every record expires at created_at + min(at creation, current)"
-    },
-    {
-      "file": "invalid/problem-idempotency-key-in-flight.json",
-      "schema": "identity.openapi.json#/components/responses/IdempotencyConflict/content/application~1problem+json/schema",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/code"
-        ]
-      ],
-      "why": "CR-07 a same-body reuse replays the latest assessment; there is no in-flight 409"
     },
     {
       "file": "invalid/response-deferred-not-unavailable.json",
@@ -1995,81 +1809,6 @@
       "why": "hook_point is a closed list"
     },
     {
-      "file": "valid/assessment-outcome-request.json",
-      "schema": "assessment-outcome-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/assessment-outcome-request-minimal.json",
-      "schema": "assessment-outcome-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/assessment-outcome.json",
-      "schema": "assessment-outcome.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "invalid/outcome-unknown-value.json",
-      "schema": "assessment-outcome-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/outcome"
-        ]
-      ],
-      "why": "closed outcome vocabulary"
-    },
-    {
-      "file": "invalid/outcome-tenant-id.json",
-      "schema": "assessment-outcome-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          ""
-        ]
-      ],
-      "why": "II-006"
-    },
-    {
-      "file": "invalid/outcome-notes-too-long.json",
-      "schema": "assessment-outcome-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "maxLength",
-          "/notes"
-        ]
-      ],
-      "why": "notes are bounded"
-    },
-    {
-      "file": "invalid/outcome-notes-control-character.json",
-      "schema": "assessment-outcome-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "not",
-          "/notes"
-        ]
-      ],
-      "why": "control characters refused"
-    },
-    {
-      "file": "invalid/outcome-observed-at-not-a-time.json",
-      "schema": "assessment-outcome-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "format",
-          "/observed_at"
-        ]
-      ],
-      "why": "observed_at is an RFC 3339 time"
-    },
-    {
       "file": "valid/key-rotation-request.json",
       "schema": "key-rotation-request.schema.json",
       "expect": "valid"
@@ -2198,7 +1937,7 @@
       "expect": "valid"
     },
     {
-      "file": "valid/webhook-test-request-assessment-updated.json",
+      "file": "valid/webhook-test-request-investigation-completed.json",
       "schema": "webhook-test-request.schema.json",
       "expect": "valid"
     },
@@ -2208,12 +1947,12 @@
       "expect": "valid"
     },
     {
-      "file": "valid/webhook-test-assessment-updated.json",
+      "file": "valid/webhook-test-investigation-completed.json",
       "schema": "webhook-test.schema.json",
       "expect": "valid"
     },
     {
-      "file": "valid/webhook-assessment-updated-test.json",
+      "file": "valid/webhook-investigation-completed-test.json",
       "schema": "webhook-event.schema.json",
       "expect": "valid"
     },
@@ -2329,61 +2068,6 @@
       "why": "a signing key's overlap is fixed at 7 days"
     },
     {
-      "file": "valid/integration-request-auth0.json",
-      "schema": "integration-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-request-workos.json",
-      "schema": "integration-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-request-one-hook.json",
-      "schema": "integration-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-request-supabase.json",
-      "schema": "integration-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-auth0.json",
-      "schema": "integration.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-workos.json",
-      "schema": "integration.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-auth0-rotated.json",
-      "schema": "integration.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-list.json",
-      "schema": "integration-list.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-list-empty.json",
-      "schema": "integration-list.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-rotation-request-empty.json",
-      "schema": "integration-rotation-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/integration-rotation-request-workos.json",
-      "schema": "integration-rotation-request.schema.json",
-      "expect": "valid"
-    },
-    {
       "file": "valid/problem-too-many-integrations.json",
       "schema": "problem-details.schema.json",
       "expect": "valid"
@@ -2391,36 +2075,6 @@
     {
       "file": "valid/problem-invalid-hook-signature.json",
       "schema": "problem-details.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/hook-request-pre-registration.json",
-      "schema": "hook-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/hook-request-post-login.json",
-      "schema": "hook-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/hook-response-allow.json",
-      "schema": "hook-response.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/hook-response-deny.json",
-      "schema": "hook-response.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/hook-response-step-up.json",
-      "schema": "hook-response.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/hook-response-fail-open.json",
-      "schema": "hook-response.schema.json",
       "expect": "valid"
     },
     {
@@ -2460,138 +2114,6 @@
       "why": "II-006"
     },
     {
-      "file": "invalid/account-deletion-not-deleted.json",
-      "schema": "account-deletion.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "const",
-          "/deleted"
-        ]
-      ],
-      "why": "NOR-364 a deletion receipt always says deleted"
-    },
-    {
-      "file": "invalid/enforcement-request-applied-error-code.json",
-      "schema": "enforcement-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "not",
-          ""
-        ]
-      ],
-      "why": "NOR-457 error_code only with status failed"
-    },
-    {
-      "file": "invalid/enforcement-request-unknown-action.json",
-      "schema": "enforcement-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/action"
-        ]
-      ],
-      "why": "NOR-457 an action is one of the listed actions"
-    },
-    {
-      "file": "invalid/enforcement-request-zero-risk-version.json",
-      "schema": "enforcement-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "minimum",
-          "/risk_version"
-        ]
-      ],
-      "why": "NOR-457 risk_version starts at 1"
-    },
-    {
-      "file": "invalid/account-list-no-cursor.json",
-      "schema": "account-list.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "required",
-          ""
-        ]
-      ],
-      "why": "NOR-457 next_cursor is on every page"
-    },
-    {
-      "file": "invalid/assessment-deletion-no-account.json",
-      "schema": "assessment-deletion.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "required",
-          ""
-        ]
-      ],
-      "why": "NOR-366 the answer names the account and its current assessment"
-    },
-    {
-      "file": "invalid/webhook-account-deleted-assessment-id.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          "/data"
-        ]
-      ],
-      "why": "NOR-364 account.deleted names no assessment"
-    },
-    {
-      "file": "invalid/webhook-account-deleted-none.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "minimum",
-          "/data/assessments_deleted"
-        ]
-      ],
-      "why": "NOR-364 account.deleted fires only when an assessment went"
-    },
-    {
-      "file": "invalid/webhook-account-risk-changed-no-previous.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "required",
-          "/data"
-        ]
-      ],
-      "why": "NOR-352 account.risk_changed names the decisions it replaced"
-    },
-    {
-      "file": "invalid/webhook-account-risk-changed-previous-version-zero.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "minimum",
-          "/data/previous_risk_version"
-        ]
-      ],
-      "why": "NOR-627 the first event leaves previous_risk_version out, never 0"
-    },
-    {
-      "file": "invalid/webhook-account-risk-changed-deny.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/data/previous_decisions_by_flow/login"
-        ]
-      ],
-      "why": "NOR-352 the decisions are the account decisions"
-    },
-    {
       "file": "invalid/webhook-workspace-deleted-test-suffix.json",
       "schema": "webhook-event.schema.json",
       "expect": "invalid",
@@ -2614,18 +2136,6 @@
         ]
       ],
       "why": "NOR-143 a workspace has a live and a test environment only"
-    },
-    {
-      "file": "invalid/webhook-screening-completed-cancelled.json",
-      "schema": "webhook-event.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/data/status"
-        ]
-      ],
-      "why": "NOR-793 a cancelled screening sends no screening.completed"
     },
     {
       "file": "invalid/webhook-endpoint-disabled-url.json",
@@ -2686,195 +2196,6 @@
         ]
       ],
       "why": "NOR-143 each environment is listed once"
-    },
-    {
-      "file": "invalid/integration-request-workos-no-secret.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "required",
-          ""
-        ]
-      ],
-      "why": "WorkOS needs the Actions signing secret"
-    },
-    {
-      "file": "invalid/integration-request-auth0-secret.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "not",
-          ""
-        ]
-      ],
-      "why": "NoResponse generates the Auth0 secret"
-    },
-    {
-      "file": "invalid/integration-request-supabase-no-secret.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "required",
-          ""
-        ]
-      ],
-      "why": "Supabase needs its hook secret"
-    },
-    {
-      "file": "invalid/integration-request-supabase-secret-form.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "pattern",
-          "/signing_secret"
-        ]
-      ],
-      "why": "a Supabase hook secret is v1,whsec_ and base64"
-    },
-    {
-      "file": "invalid/integration-request-supabase-post-login.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "const",
-          "/hook_points/1"
-        ]
-      ],
-      "why": "Supabase has only the Before User Created hook"
-    },
-    {
-      "file": "invalid/integration-request-unknown-platform.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/platform"
-        ]
-      ],
-      "why": "only WorkOS, Auth0 and Supabase have hosted endpoints"
-    },
-    {
-      "file": "invalid/integration-request-tenant-id.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          ""
-        ]
-      ],
-      "why": "II-006"
-    },
-    {
-      "file": "invalid/integration-request-unknown-hook.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/hook_points/0"
-        ]
-      ],
-      "why": "only pre_registration and post_login are hosted"
-    },
-    {
-      "file": "invalid/integration-request-no-hooks.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "minItems",
-          "/hook_points"
-        ]
-      ],
-      "why": "an integration answers at least one hook point"
-    },
-    {
-      "file": "invalid/integration-request-short-secret.json",
-      "schema": "integration-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "minLength",
-          "/signing_secret"
-        ],
-        [
-          "pattern",
-          "/signing_secret"
-        ]
-      ],
-      "why": "the signing secret is at least 16 characters"
-    },
-    {
-      "file": "invalid/integration-list-with-secret.json",
-      "schema": "integration-list.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "not",
-          "/items/0"
-        ]
-      ],
-      "why": "a listing never carries a secret"
-    },
-    {
-      "file": "invalid/integration-bad-url.json",
-      "schema": "integration.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "pattern",
-          "/url"
-        ]
-      ],
-      "why": "the hosted endpoint is https"
-    },
-    {
-      "file": "invalid/hook-request-no-event-id.json",
-      "schema": "hook-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "required",
-          ""
-        ]
-      ],
-      "why": "retries deduplicate on event_id"
-    },
-    {
-      "file": "invalid/hook-request-unknown-member.json",
-      "schema": "hook-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          ""
-        ]
-      ],
-      "why": "the tenant is the integration's, never the body's"
-    },
-    {
-      "file": "invalid/hook-response-block-decision.json",
-      "schema": "hook-response.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/decision"
-        ]
-      ],
-      "why": "the decision is allow or deny"
-    },
-    {
-      "file": "valid/hook-request-pre-registration-sparse.json",
-      "schema": "hook-request.schema.json",
-      "expect": "valid"
     },
     {
       "file": "valid/workspace-request.json",
@@ -3207,56 +2528,6 @@
       "expect": "valid"
     },
     {
-      "file": "valid/list-entry-list.json",
-      "schema": "list-entry-list.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/list-entry-request.json",
-      "schema": "list-entry-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "invalid/list-entry-request-kind.json",
-      "schema": "list-entry-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "enum",
-          "/kind"
-        ]
-      ]
-    },
-    {
-      "file": "valid/list-entry-request-domain.json",
-      "schema": "list-entry-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "invalid/list-entry-request-email-value.json",
-      "schema": "list-entry-request.schema.json",
-      "expect": "invalid",
-      "why": "NOR-635 an email entry carries an address, as the server checks",
-      "errors": [
-        [
-          "pattern",
-          "/value"
-        ]
-      ]
-    },
-    {
-      "file": "invalid/list-entry-request-domain-value.json",
-      "schema": "list-entry-request.schema.json",
-      "expect": "invalid",
-      "why": "NOR-635 a domain entry carries a domain, not an address",
-      "errors": [
-        [
-          "pattern",
-          "/value"
-        ]
-      ]
-    },
-    {
       "file": "invalid/key-list-with-secret.json",
       "schema": "key-list.schema.json",
       "expect": "invalid",
@@ -3555,76 +2826,6 @@
         ]
       ],
       "why": "an active signup's answer is the only place its live key is shown"
-    },
-    {
-      "file": "valid/key-usage-batch-request.json",
-      "schema": "key-usage-batch-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/key-usage-batch.json",
-      "schema": "key-usage-batch.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "invalid/key-usage-no-events.json",
-      "schema": "key-usage-batch-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "minItems",
-          "/events"
-        ]
-      ],
-      "why": "NOR-353 a batch holds 1 to 500 events"
-    },
-    {
-      "file": "invalid/key-usage-raw-key.json",
-      "schema": "key-usage-batch-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "pattern",
-          "/events/0/key_sha256"
-        ]
-      ],
-      "why": "NOR-353 only the SHA-256 of an issued key, never the key"
-    },
-    {
-      "file": "invalid/key-usage-tenant-id.json",
-      "schema": "key-usage-batch-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          ""
-        ]
-      ],
-      "why": "II-006"
-    },
-    {
-      "file": "invalid/key-usage-zero-sample-rate.json",
-      "schema": "key-usage-batch-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "exclusiveMinimum",
-          "/events/0/sample_rate"
-        ]
-      ],
-      "why": "NOR-353 a sample rate is above 0"
-    },
-    {
-      "file": "invalid/key-usage-no-ip.json",
-      "schema": "key-usage-batch-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "required",
-          "/events/0"
-        ]
-      ],
-      "why": "NOR-353 every event names its IP"
     },
     {
       "file": "valid/settings.json",
@@ -3993,95 +3194,6 @@
       "why": "NOR-846 a proxy list serves a proxy network, never direct"
     },
     {
-      "file": "valid/assessment-aggregate-request.json",
-      "schema": "assessment-aggregate-request.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/assessment-aggregate.json",
-      "schema": "assessment-aggregate.schema.json",
-      "expect": "valid",
-      "why": "NOR-640 a group leaves out a dimension with no value; empty buckets are listed"
-    },
-    {
-      "file": "valid/assessment-search-request-email-changed.json",
-      "schema": "assessment-search-request.schema.json",
-      "expect": "valid",
-      "why": "NOR-725 search by a mailbox in any spelling, for answers a later revision changed"
-    },
-    {
-      "file": "invalid/assessment-search-request-changed-first.json",
-      "schema": "assessment-search-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "not",
-          ""
-        ]
-      ],
-      "why": "NOR-725 changed compares with the latest revision, so revision first is refused"
-    },
-    {
-      "file": "invalid/assessment-search-request-email-newline.json",
-      "schema": "assessment-search-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "not",
-          "/email"
-        ]
-      ],
-      "why": "NOR-725 II-004 trailing line feed refused"
-    },
-    {
-      "file": "invalid/assessment-aggregate-request-three-groups.json",
-      "schema": "assessment-aggregate-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "maxItems",
-          "/group_by"
-        ]
-      ],
-      "why": "NOR-640 at most two group_by dimensions"
-    },
-    {
-      "file": "invalid/assessment-aggregate-request-account-id.json",
-      "schema": "assessment-aggregate-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "additionalProperties",
-          ""
-        ]
-      ],
-      "why": "NOR-640 rollups hold no identifier, so the aggregate takes no account_id"
-    },
-    {
-      "file": "valid/assessment-aggregate-request-time-zone.json",
-      "schema": "assessment-aggregate-request.schema.json",
-      "expect": "valid",
-      "why": "NOR-726 day buckets start at local midnight in time_zone, so from and to are those instants"
-    },
-    {
-      "file": "valid/assessment-aggregate-time-zone.json",
-      "schema": "assessment-aggregate.schema.json",
-      "expect": "valid",
-      "why": "NOR-726 the answer names its time zone; the local day the clocks go forward is 23 hours long"
-    },
-    {
-      "file": "invalid/assessment-aggregate-request-offset-time-zone.json",
-      "schema": "assessment-aggregate-request.schema.json",
-      "expect": "invalid",
-      "errors": [
-        [
-          "pattern",
-          "/time_zone"
-        ]
-      ],
-      "why": "NOR-726 time_zone is an IANA name, never a fixed offset"
-    },
-    {
       "file": "valid/assessment-identifiers.json",
       "schema": "assessment-detail.schema.json",
       "expect": "valid",
@@ -4110,16 +3222,6 @@
         ]
       ],
       "why": "NOR-642 an assessment that kept no identifiers leaves the member out"
-    },
-    {
-      "file": "valid/account-decision-list.json",
-      "schema": "account-decision-list.schema.json",
-      "expect": "valid"
-    },
-    {
-      "file": "valid/account-enforcement-list.json",
-      "schema": "account-enforcement-list.schema.json",
-      "expect": "valid"
     },
     {
       "file": "valid/erasure-receipt.json",
@@ -4283,12 +3385,6 @@
       "why": "NOR-865 a customer workspace's owner invite is never answered with its token"
     },
     {
-      "file": "valid/person-report-records.json",
-      "schema": "groups.schema.json#/$defs/person_report",
-      "expect": "valid",
-      "why": "NOR-900 a person report whose lookup carries a platform account and a leaked row as records, with every member of a record"
-    },
-    {
       "file": "valid/record-every-account-member.json",
       "schema": "record.schema.json#/$defs/record",
       "expect": "valid",
@@ -4361,6 +3457,23 @@
       "file": "valid/webhook-investigation-completed.json",
       "schema": "webhook-event.schema.json",
       "expect": "valid"
+    },
+    {
+      "file": "valid/problem-workspace-forbidden-scope.json",
+      "schema": "identity.openapi.json#/components/responses/MemberForbidden/content/application~1problem+json/schema",
+      "expect": "valid"
+    },
+    {
+      "file": "valid/person-report-records.json",
+      "schema": "people.schema.json#/$defs/report",
+      "expect": "valid",
+      "why": "NOR-2219 a workspace person report with lookup records, a follow-up search and a suggested search, as the Maltego transforms read it"
+    },
+    {
+      "file": "valid/investigation-report-records.json",
+      "schema": "investigations.schema.json#/$defs/report",
+      "expect": "valid",
+      "why": "NOR-900 an investigation report whose lookup carries a platform account and a leaked row as records, with every member of a record"
     }
   ]
 }

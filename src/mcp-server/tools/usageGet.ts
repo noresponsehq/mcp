@@ -1,6 +1,6 @@
 import { usageGet } from "../../funcs/usageGet.js";
 import { GetUsageRequest$zodSchema } from "../../models/getusageop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: GetUsageRequest$zodSchema,
@@ -28,7 +28,7 @@ Read daily usage units, screenings included, for the environments you can access
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

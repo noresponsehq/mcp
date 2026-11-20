@@ -1,8 +1,4 @@
 import * as z from "zod";
-import {
-  DecisionReceipt,
-  DecisionReceipt$zodSchema,
-} from "./decisionreceipt.js";
 
 /**
  * One authenticated HTTP attempt. An attempt id is independent of the caller correlation id. No raw body, path parameter, credential or source payload is retained. write_complete means the server wrote/flushed its response, not proof the client processed it. Collection is bounded best effort; ii_signup_request_diagnostic_failures_total exposes gaps. Retained for seven days or the shorter environment retention.
@@ -19,7 +15,6 @@ export type RequestDiagnostic = {
   error_code?: string | undefined;
   idempotent_replayed: boolean;
   write_complete: boolean;
-  decision?: DecisionReceipt | undefined;
   api_key_id?: string | undefined;
 };
 
@@ -29,9 +24,6 @@ export const RequestDiagnostic$zodSchema: z.ZodType<RequestDiagnostic> = z
       "Public authenticated API key identifier. Absent for member requests and older unattributed diagnostics.",
     ),
     completed_at: z.string(),
-    decision: DecisionReceipt$zodSchema.optional().describe(
-      "The decision prepared for one HTTP attempt. Its account field preserves the account decision returned for that attempt, even after subsequent changes.",
-    ),
     duration_ms: z.int(),
     error_code: z.string().optional(),
     expires_at: z.string(),

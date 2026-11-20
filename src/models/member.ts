@@ -1,7 +1,7 @@
 import * as z from "zod";
 import { ClosedEnum } from "../types/enums.js";
-import { MemberStatus, MemberStatus$zodSchema } from "./memberstatus.js";
 import { Role, Role$zodSchema } from "./role.js";
+import { Status, Status$zodSchema } from "./status.js";
 
 export const MemberEnvironment = {
   Live: "live",
@@ -35,7 +35,7 @@ export type Member = {
   workspace_id: string;
   external_user_id: string;
   role: Role;
-  status: MemberStatus;
+  status: Status;
   created_at: string;
   updated_at: string;
   environments?: Array<MemberEnvironment> | undefined;
@@ -68,9 +68,7 @@ export const Member$zodSchema: z.ZodType<Member> = z.object({
   role: Role$zodSchema.describe(
     "A built-in capability set. Specialist roles are independent; effective access is returned by GET /v1/workspaces/{workspace_id}/capabilities.",
   ),
-  status: MemberStatus$zodSchema.describe(
-    "Listed and returned members are active.",
-  ),
+  status: Status$zodSchema.describe("Listed and returned members are active."),
   unverified_email: z.string().optional().describe(
     "Unverified contact address for display. Empty clears it; a supplied value must be an address. Identity linking uses the verified provider subject.",
   ),

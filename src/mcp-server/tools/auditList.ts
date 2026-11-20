@@ -1,6 +1,6 @@
 import { auditList } from "../../funcs/auditList.js";
 import { ListAuditEventsRequest$zodSchema } from "../../models/listauditeventsop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListAuditEventsRequest$zodSchema,
@@ -28,7 +28,7 @@ Read audit events within your current environment permissions. Filters apply bef
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

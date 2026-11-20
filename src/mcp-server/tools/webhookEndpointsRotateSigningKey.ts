@@ -1,6 +1,6 @@
 import { webhookEndpointsRotateSigningKey } from "../../funcs/webhookEndpointsRotateSigningKey.js";
 import { RotateWebhookSigningKeyRequest$zodSchema } from "../../models/rotatewebhooksigningkeyop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: RotateWebhookSigningKeyRequest$zodSchema,
@@ -30,7 +30,7 @@ Issues a new signing key for the endpoint and returns its secret once. Every del
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

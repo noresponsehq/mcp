@@ -23,7 +23,7 @@ export const AuditEventEvent$zodSchema: z.ZodType<AuditEventEvent> = z.object({
     "The event id, equal to the NR-Webhook-Id header and across redeliveries and every endpoint the event fans out to.",
   ),
   test: z.boolean().optional().describe(
-    "Present, and true, only on an event sent by POST /v1/webhooks/{endpoint_id}/test: its data is a fixed example assessment, not one of the workspace's, so a receiver acknowledges it and applies nothing. Real events have no test member.",
+    "Present, and true, only on an event sent by POST /v1/webhooks/{endpoint_id}/test: its data is a fixed example investigation, not one of the workspace's, so a receiver acknowledges it and applies nothing. Real events have no test member.",
   ),
   type: z.literal("audit.event").default("audit.event").optional().describe(
     "Always audit.event.",

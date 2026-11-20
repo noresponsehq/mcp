@@ -1,6 +1,6 @@
 import { invitesList } from "../../funcs/invitesList.js";
 import { ListInvitesRequest$zodSchema } from "../../models/listinvitesop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListInvitesRequest$zodSchema,
@@ -28,7 +28,7 @@ Read pending workspace invitations with a live members_manage key. Tokens are ex
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

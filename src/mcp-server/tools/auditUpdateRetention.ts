@@ -1,6 +1,6 @@
 import { auditUpdateRetention } from "../../funcs/auditUpdateRetention.js";
 import { UpdateAuditRetentionRequest$zodSchema } from "../../models/updateauditretentionop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: UpdateAuditRetentionRequest$zodSchema,
@@ -29,7 +29,7 @@ Set test-environment audit retention from 1 to 365 days with audit_manage scope.
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

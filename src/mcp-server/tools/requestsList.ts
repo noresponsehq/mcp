@@ -1,6 +1,6 @@
 import { requestsList } from "../../funcs/requestsList.js";
 import { ListRequestDiagnosticsRequest$zodSchema } from "../../models/listrequestdiagnosticsop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListRequestDiagnosticsRequest$zodSchema,
@@ -28,7 +28,7 @@ Search authenticated request attempts by time, route, status or request correlat
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

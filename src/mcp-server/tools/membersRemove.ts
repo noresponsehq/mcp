@@ -1,6 +1,6 @@
 import { membersRemove } from "../../funcs/membersRemove.js";
 import { RemoveMemberRequest$zodSchema } from "../../models/removememberop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: RemoveMemberRequest$zodSchema,
@@ -28,7 +28,7 @@ Remove a non-owner member with a live members_manage key. Subsequent access is r
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

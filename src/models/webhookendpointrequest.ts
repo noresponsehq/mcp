@@ -13,7 +13,7 @@ export const WebhookEndpointRequest$zodSchema: z.ZodType<
   WebhookEndpointRequest
 > = z.object({
   response_mode: ResponseMode$zodSchema.optional().describe(
-    "standard returns the consolidated risk response; detailed adds merged provider-neutral facts when the key has detailed scope. There is no raw mode.",
+    "The response mode recorded for the endpoint: standard (the default) or detailed, which needs an API key with the detailed scope as well. No event the API sends today differs by mode.",
   ),
   url: z.string().describe(
     "Where deliveries are sent: an https URL on port 443 or 8443, with a DNS host and no userinfo or fragment, at most 2048 characters.",

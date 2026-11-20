@@ -1,6 +1,6 @@
 import { membersList } from "../../funcs/membersList.js";
 import { ListMembersRequest$zodSchema } from "../../models/listmembersop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListMembersRequest$zodSchema,
@@ -28,7 +28,7 @@ Read the workspace directory with a live key carrying members or members_manage.
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

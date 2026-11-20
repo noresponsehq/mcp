@@ -25,7 +25,7 @@ import { Result } from "../types/fp.js";
  * Delete a workspace person.
  *
  * @remarks
- * Deletes a person and their retained evidence, investigation history and group memberships. Requires the separate delete permission. The audit retains only the person id and deletion metadata.
+ * Deletes a person and their retained evidence, and investigation history. Requires the separate delete permission. The audit retains only the person id and deletion metadata.
  */
 export function peopleDelete(
   client$: NoResponseCore,

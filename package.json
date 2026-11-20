@@ -1,6 +1,6 @@
 {
   "name": "@noresponse/mcp",
-  "version": "0.20.0",
+  "version": "0.22.0",
   "mcpName": "org.noresponse/mcp",
   "author": "NoResponse",
   "type": "module",
@@ -46,10 +46,10 @@
     "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
-    "@modelcontextprotocol/node": "2.1.1",
-    "@modelcontextprotocol/sdk": "^1.32.1",
-    "@modelcontextprotocol/server": "2.3.1",
-    "@modelcontextprotocol/server-legacy": "2.3.1",
+    "@modelcontextprotocol/node": "2.1.2",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@modelcontextprotocol/server": "2.4.0",
+    "@modelcontextprotocol/server-legacy": "2.4.0",
     "@stricli/core": "^1.1.2",
     "express": "^5.1.0",
     "zod": "^4.2.0"

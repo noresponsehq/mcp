@@ -1,6 +1,6 @@
 import { exportsCreate } from "../../funcs/exportsCreate.js";
 import { CreateCustomerExportRequest$zodSchema } from "../../models/createcustomerexportop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: CreateCustomerExportRequest$zodSchema,
@@ -28,7 +28,7 @@ Request an encrypted JSON Lines snapshot of retained account or audit records. R
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

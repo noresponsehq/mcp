@@ -1,6 +1,6 @@
 import { erasuresGet } from "../../funcs/erasuresGet.js";
 import { GetErasureReceiptRequest$zodSchema } from "../../models/geterasurereceiptop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: GetErasureReceiptRequest$zodSchema,
@@ -28,7 +28,7 @@ Read retained erasure progress and downstream acknowledgements. Completion does 
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

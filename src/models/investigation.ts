@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { Depth, Depth$zodSchema } from "./depth.js";
 import {
   InvestigationStatus,
   InvestigationStatus$zodSchema,
@@ -8,7 +9,6 @@ import {
   ScreeningCoverage,
   ScreeningCoverage$zodSchema,
 } from "./screeningcoverage.js";
-import { ScreeningDepth, ScreeningDepth$zodSchema } from "./screeningdepth.js";
 import { ScreeningSpend, ScreeningSpend$zodSchema } from "./screeningspend.js";
 
 export type Investigation = {
@@ -16,9 +16,8 @@ export type Investigation = {
   spend: ScreeningSpend;
   id: string;
   person_id: string;
-  group_id: string | null;
   status: InvestigationStatus;
-  depth: ScreeningDepth;
+  depth: Depth;
   platforms: Array<string>;
   match_state: MatchState | null;
   error_code?: string | undefined;
@@ -35,11 +34,12 @@ export const Investigation$zodSchema: z.ZodType<Investigation> = z.object({
   ),
   created_at: z.string(),
   deadline_at: z.string(),
-  depth: ScreeningDepth$zodSchema,
+  depth: Depth$zodSchema.describe(
+    "standard reads the bio and the last 100 posts of each profile.",
+  ),
   error_code: z.string().optional(),
   expires_at: z.string(),
   finished_at: z.string().optional(),
-  group_id: z.string().nullable(),
   id: z.string(),
   match_state: MatchState$zodSchema.nullable(),
   person_id: z.string(),

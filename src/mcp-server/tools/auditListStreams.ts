@@ -1,6 +1,6 @@
 import { auditListStreams } from "../../funcs/auditListStreams.js";
 import { ListAuditStreamsRequest$zodSchema } from "../../models/listauditstreamsop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ListAuditStreamsRequest$zodSchema,
@@ -28,7 +28,7 @@ List audit subscriptions and their endpoint state and latest delivery attempt. S
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

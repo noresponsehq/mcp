@@ -1,6 +1,6 @@
 import { settingsGet } from "../../funcs/settingsGet.js";
 import { GetSettingsRequest$zodSchema } from "../../models/getsettingsop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: GetSettingsRequest$zodSchema,
@@ -28,7 +28,7 @@ Read this environment retention, source selection, daily screening cap and effec
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

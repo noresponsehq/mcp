@@ -1,6 +1,6 @@
 import { exportsDownloadChunk } from "../../funcs/exportsDownloadChunk.js";
 import { DownloadCustomerExportChunkRequest$zodSchema } from "../../models/downloadcustomerexportchunkop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: DownloadCustomerExportChunkRequest$zodSchema,
@@ -28,7 +28,7 @@ Download one chunk of a completed, unexpired export after a fresh permission and
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

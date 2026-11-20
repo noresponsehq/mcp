@@ -1,6 +1,6 @@
 import { webhookEndpointsDelete } from "../../funcs/webhookEndpointsDelete.js";
 import { DeleteWebhookEndpointRequest$zodSchema } from "../../models/deletewebhookendpointop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: DeleteWebhookEndpointRequest$zodSchema,
@@ -28,7 +28,7 @@ Deletes the endpoint and its signing keys. Deliveries still queued for it are dr
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

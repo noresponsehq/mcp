@@ -98,6 +98,32 @@ export type ToolDefinition<
     ) => CallToolResult | Promise<CallToolResult>;
   };
 
+const MAX_TOOL_TEXT_CHARS = 24_000;
+
+export function boundToolText(text: string): string {
+  if (text.length <= MAX_TOOL_TEXT_CHARS) return text;
+  const omitted = text.length - MAX_TOOL_TEXT_CHARS;
+  return text.slice(0, MAX_TOOL_TEXT_CHARS)
+    + `\n\n[truncated ${omitted} characters. Page with the returned cursor, or read one id, so the rest fits.]`;
+}
+
+function toolErrorText(response: Response, body: string): string {
+  const status = response.status;
+  let hint = "";
+  if (status === 401 || status === 403) {
+    hint = " Check the API key and that it has the scope this tool requires.";
+  } else if (status === 404) {
+    hint = " That id is not in this key's environment.";
+  } else if (status === 429) {
+    hint = " Retry after the Retry-After interval.";
+  } else if (status >= 500) {
+    hint = " The API failed this request. Retry once, then read the status.";
+  }
+  return boundToolText(
+    `HTTP ${status} ${response.statusText}.${hint}\n${body}`,
+  );
+}
+
 // Optional function to assist with formatting tool results
 export async function formatResult(
   response: Response,
@@ -117,7 +143,10 @@ export async function formatResult(
       : [{ type: "audio", data, mimeType: contentType }];
   } else {
     const text = await response.text();
-    content = [{ type: "text", text }];
+    content = [{
+      type: "text",
+      text: response.ok ? boundToolText(text) : toolErrorText(response, text),
+    }];
   }
 
   return response.ok ? { content } : { content, isError: true };
@@ -293,7 +322,10 @@ export function registerDynamicTools(
       });
     }
     return {
-      content: [{ type: "text", text: JSON.stringify(tools, null, 2) }],
+      content: [{
+        type: "text",
+        text: boundToolText(JSON.stringify(tools, null, 2)),
+      }],
     };
   });
   logger.debug("Registered dynamic meta-tool", { name: "list_tools" });
@@ -319,7 +351,12 @@ export function registerDynamicTools(
     const unknown: string[] = [];
 
     if (args.tool_names.length === 0) {
-      return { content: [{ type: "text", text: "No tool names provided." }] };
+      return {
+        content: [{
+          type: "text",
+          text: boundToolText("No tool names provided."),
+        }],
+      };
     }
 
     for (const toolName of args.tool_names) {
@@ -345,7 +382,9 @@ export function registerDynamicTools(
       parts.push(`Unknown tools: ${unknown.join(", ")}`);
     }
 
-    return { content: [{ type: "text", text: parts.join("\n\n") }] };
+    return {
+      content: [{ type: "text", text: boundToolText(parts.join("\n\n")) }],
+    };
   });
   logger.debug("Registered dynamic meta-tool", { name: "describe_tool_input" });
 
@@ -370,7 +409,10 @@ export function registerDynamicTools(
     const def = toolMap.get(args.name);
     if (!def) {
       return {
-        content: [{ type: "text", text: `Unknown tool: ${args.name}` }],
+        content: [{
+          type: "text",
+          text: boundToolText(`Unknown tool: ${args.name}`),
+        }],
         isError: true,
       };
     }
@@ -388,8 +430,9 @@ export function registerDynamicTools(
         return {
           content: [{
             type: "text",
-            text:
+            text: boundToolText(
               `Invalid input for tool ${args.name}:\n<issues>\n${issues}\n</issues>`,
+            ),
           }],
           isError: true,
         };
@@ -407,7 +450,7 @@ export function registerDynamicTools(
       return {
         content: [{
           type: "text",
-          text: `Error executing tool ${args.name}: ${message}`,
+          text: boundToolText(`Error executing tool ${args.name}: ${message}`),
         }],
         isError: true,
       };
@@ -436,7 +479,9 @@ export function registerDynamicTools(
       },
     }, async () => {
       const lines = scopes.map((s) => `- ${s}`);
-      return { content: [{ type: "text", text: lines.join("\n") }] };
+      return {
+        content: [{ type: "text", text: boundToolText(lines.join("\n")) }],
+      };
     });
     logger.debug("Registered dynamic meta-tool", { name: "list_scopes" });
   }

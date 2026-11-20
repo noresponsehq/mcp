@@ -1,6 +1,6 @@
 import { auditReplayStream } from "../../funcs/auditReplayStream.js";
 import { ReplayAuditStreamRequest$zodSchema } from "../../models/replayauditstreamop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: ReplayAuditStreamRequest$zodSchema,
@@ -29,7 +29,7 @@ Replay a recorded delivery for the current audit subscription. Requires audit_ma
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }

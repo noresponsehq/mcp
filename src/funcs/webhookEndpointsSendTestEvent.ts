@@ -30,7 +30,7 @@ export enum SendTestEventAcceptEnum {
  * Send a test event to an endpoint.
  *
  * @remarks
- * endpoint.verification sends a signed challenge now and answers whether the endpoint echoed it within 5 seconds; an echo verifies the endpoint, including a disabled one. assessment.updated queues one signed event with test: true and a fixed example assessment in the endpoint's response mode, delivered and retried like any other event; the endpoint must be verified. Both use the endpoint's current signing key. Requires the webhooks scope.
+ * endpoint.verification sends a signed challenge now and answers whether the endpoint echoed it within 5 seconds; an echo verifies the endpoint, including a disabled one. investigation.completed queues one signed event with test: true and a fixed example investigation, delivered and retried like any other event; the endpoint must be verified. Both use the endpoint's current signing key. Requires the webhooks scope.
  */
 export function webhookEndpointsSendTestEvent(
   client$: NoResponseCore,

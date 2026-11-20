@@ -1,6 +1,6 @@
 import { auditGetRetention } from "../../funcs/auditGetRetention.js";
 import { GetAuditRetentionRequest$zodSchema } from "../../models/getauditretentionop.js";
-import { formatResult, ToolDefinition } from "../tools.js";
+import { boundToolText, formatResult, ToolDefinition } from "../tools.js";
 
 const args = {
   request: GetAuditRetentionRequest$zodSchema,
@@ -28,7 +28,7 @@ Read audit retention for the environment. The default is 365 days. Oldest availa
 
     if (!result.ok) {
       return {
-        content: [{ type: "text", text: result.error.message }],
+        content: [{ type: "text", text: boundToolText(result.error.message) }],
         isError: true,
       };
     }
